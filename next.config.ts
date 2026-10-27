@@ -5,9 +5,13 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.cache = false;
+    config.infrastructureLogging = { level: 'error' };
     return config;
+  },
+  experimental: {
+    webpackBuildWorker: false,
   },
   async headers() {
     return [
