@@ -2,15 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  output: 'export',
   images: {
-    unoptimized: true,
     remotePatterns: [{ protocol: "https", hostname: "**" }],
-  },
-  webpack: (config, { isServer }) => {
-    config.cache = false;
-    config.infrastructureLogging = { level: 'error' };
-    return config;
   },
   async headers() {
     return [
