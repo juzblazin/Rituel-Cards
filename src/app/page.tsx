@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -181,32 +182,9 @@ export default async function HomePage({
             </div>
 
             <h1 className="text-balance text-[2.125rem]/[1.1] font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              <span className="sr-only">Find the crypto card that actually pays you.</span>
-              <span aria-hidden="true" className="block">
-                <BlurText
-                  text="Find the crypto card"
-                  className="justify-center"
-                  animateBy="words"
-                  direction="top"
-                  delay={80}
-                  stepDuration={0.5}
-                  trigger="load"
-                />
-              </span>
-              <span
-                aria-hidden="true"
-                className="text-gradient-brand block"
-              >
-                <BlurText
-                  text="that actually pays you."
-                  className="justify-center"
-                  animateBy="words"
-                  direction="top"
-                  delay={140}
-                  stepDuration={0.5}
-                  trigger="load"
-                />
-              </span>
+              Find the crypto card
+              <br />
+              that actually pays you.
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl">
@@ -589,7 +567,33 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
               borderGlow={0.45}
               className="group flex flex-col rounded-xl border border-border/80 p-5 transition-colors hover:border-brand/40"
             >
-              <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
+              {card.slug === "etherfi-cash" ? (
+                <Image
+                  src="/logos/etherfi.png"
+                  alt={card.name}
+                  width={512}
+                  height={320}
+                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                />
+              ) : card.slug === "gnosis-pay" ? (
+                <Image
+                  src="/logos/gnosispay-card.png"
+                  alt={card.name}
+                  width={512}
+                  height={320}
+                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                />
+              ) : card.slug === "redotpay" ? (
+                <Image
+                  src="/logos/redotpay-card.jpg"
+                  alt={card.name}
+                  width={512}
+                  height={320}
+                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                />
+              ) : (
+                <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
+              )}
 
               <div className="mt-5 flex items-start justify-between gap-3">
                 <div className="min-w-0">

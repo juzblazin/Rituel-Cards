@@ -10,9 +10,10 @@ export function LogoMark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "relative grid size-8 shrink-0 place-items-center overflow-hidden rounded-[9px] bg-white shadow-[0_0_22px_-8px_var(--brand)] ring-1 ring-black/10 dark:ring-white/15",
+        "relative grid shrink-0 place-items-center overflow-hidden",
         className,
       )}
+      style={{ width: "52px", height: "52px" }}
       aria-hidden
     >
       <Image
@@ -20,8 +21,16 @@ export function LogoMark({ className }: { className?: string }) {
         alt=""
         width={512}
         height={512}
-        className="size-full object-cover"
-        sizes="32px"
+        className="size-full object-cover dark:hidden"
+        sizes="52px"
+      />
+      <Image
+        src="/icon-dark.png"
+        alt=""
+        width={512}
+        height={512}
+        className="hidden size-full object-cover dark:block"
+        sizes="52px"
       />
     </span>
   );
@@ -29,11 +38,8 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("group flex items-center gap-2.5", className)} aria-label="RItuel home">
+    <Link href="/" className={cn("group flex items-center", className)} aria-label="RItuel home">
       <LogoMark />
-      <span className="text-[15px] font-semibold tracking-tight text-foreground">
-        RItuel
-      </span>
     </Link>
   );
 }
