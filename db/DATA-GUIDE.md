@@ -4,8 +4,8 @@ Four tables. Two hold the card catalog (you fill these), two are written by the 
 
 | Table | Rows today | Who writes it | Purpose |
 | --- | --- | --- | --- |
-| `cards` | 63 | you | one row per card; the directory, card pages and comparisons all read this |
-| `card_tiers` | 28 | you | 0..n tiers per card (optional; 10 of the 63 cards have any) |
+| `cards` | 82 | you | one row per card; the directory, card pages and comparisons all read this |
+| `card_tiers` | 0 | `npm run db:split-tiers` | tier definitions awaiting split; empty because every tier is now its own card (see §2) |
 | `card_benefits` | 0 | you | 0..n structured benefits per card or tier (lounge, insurance, rebates…) |
 | `card_submissions` | 2 | `POST /api/submit-card` | issuer leads from the submission form |
 | `affiliate_clicks` | 6 | `POST /api/track` | outbound click events on "Get card" |
@@ -174,9 +174,21 @@ Ordering in the directory is `sponsor_priority asc, rating_score desc, name asc`
 
 ---
 
-## 2. `card_tiers` — optional, 0..n rows per card
+## 2. `card_tiers` — staging table for tier definitions
 
-Linked to `cards.id` (`on delete cascade`). Optional: 10 of 63 cards have tiers today, 28 rows in total.
+Linked to `cards.id` (`on delete cascade`). **Empty by design:** on 2026-10-28 the 29 tier rows were split into separate cards, because each tier is a distinct product with its own cashback, fees and perks.
+
+`npm run db:split-tiers` performs the split:
+
+- one card per tier, named `<product> - <tier> Card` (e.g. `Bybit - Standard Card`);
+- everything is copied from the parent row, then cashback, annual/monthly fee, FX, stake, ATM allowance, caps and perks are overridden from the tier;
+- the lowest tier keeps the parent `slug` so existing `/card`, `/compare` and logo references stay valid; later tiers get `<parent-slug>-<slugified-tier>`;
+- `parent_slug` on every variant points at the original product, so variants can be grouped;
+- the parent's `card_tiers` rows are deleted; no card rows are removed.
+
+Dry run by default; `--write` applies in one transaction after writing `db/backup/catalog-before-split-<date>.json`. Running it again with no tiers is a no-op. New tier sets can be staged here with `npm run db:backfill` and then split.
+
+Columns the splitter reads:
 
 | Column | Type | Req | Example | Notes |
 | --- | --- | --- | --- | --- |

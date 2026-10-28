@@ -1,0 +1,178 @@
+[
+  {
+    "parent_slug": "etherfi-cash",
+    "parent_name": "ether.fi Cash",
+    "variants": [
+      {
+        "slug": "etherfi-cash",
+        "name": "ether.fi Cash - Cash Card"
+      },
+      {
+        "slug": "etherfi-cash-luxe",
+        "name": "ether.fi Cash - Luxe Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "kast",
+    "parent_name": "KAST",
+    "variants": [
+      {
+        "slug": "kast",
+        "name": "KAST - Standard Card"
+      },
+      {
+        "slug": "kast-premium",
+        "name": "KAST - Premium Card"
+      },
+      {
+        "slug": "kast-private",
+        "name": "KAST - Private Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "bybit-card",
+    "parent_name": "Bybit Card",
+    "variants": [
+      {
+        "slug": "bybit-card",
+        "name": "Bybit - Standard Card"
+      },
+      {
+        "slug": "bybit-card-vip",
+        "name": "Bybit - VIP Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "redotpay",
+    "parent_name": "RedotPay",
+    "variants": [
+      {
+        "slug": "redotpay",
+        "name": "RedotPay - Virtual Card"
+      },
+      {
+        "slug": "redotpay-physical",
+        "name": "RedotPay - Physical Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "gnosis-pay",
+    "parent_name": "Gnosis Pay",
+    "variants": [
+      {
+        "slug": "gnosis-pay",
+        "name": "Gnosis Pay - Standard Card"
+      },
+      {
+        "slug": "gnosis-pay-prime",
+        "name": "Gnosis Pay - Prime Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "nexo-card",
+    "parent_name": "Nexo Card",
+    "variants": [
+      {
+        "slug": "nexo-card",
+        "name": "Nexo - Base Card"
+      },
+      {
+        "slug": "nexo-card-silver",
+        "name": "Nexo - Silver Card"
+      },
+      {
+        "slug": "nexo-card-gold",
+        "name": "Nexo - Gold Card"
+      },
+      {
+        "slug": "nexo-card-platinum",
+        "name": "Nexo - Platinum Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "crypto-com-visa",
+    "parent_name": "Crypto.com Visa",
+    "variants": [
+      {
+        "slug": "crypto-com-visa",
+        "name": "Crypto.com Visa - Ruby Steel Card"
+      },
+      {
+        "slug": "crypto-com-visa-royal-indigo",
+        "name": "Crypto.com Visa - Royal Indigo Card"
+      },
+      {
+        "slug": "crypto-com-visa-jade-green",
+        "name": "Crypto.com Visa - Jade Green Card"
+      },
+      {
+        "slug": "crypto-com-visa-icy-white",
+        "name": "Crypto.com Visa - Icy White Card"
+      },
+      {
+        "slug": "crypto-com-visa-obsidian",
+        "name": "Crypto.com Visa - Obsidian Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "bitget-card",
+    "parent_name": "Bitget Card",
+    "variants": [
+      {
+        "slug": "bitget-card",
+        "name": "Bitget - Standard Card"
+      },
+      {
+        "slug": "bitget-card-vip",
+        "name": "Bitget - VIP Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "wirex-card",
+    "parent_name": "Wirex Card",
+    "variants": [
+      {
+        "slug": "wirex-card",
+        "name": "Wirex - Standard Card"
+      },
+      {
+        "slug": "wirex-card-premium",
+        "name": "Wirex - Premium Card"
+      },
+      {
+        "slug": "wirex-card-elite",
+        "name": "Wirex - Elite Card"
+      }
+    ]
+  },
+  {
+    "parent_slug": "plutus-card",
+    "parent_name": "Plutus Card",
+    "variants": [
+      {
+        "slug": "plutus-card",
+        "name": "Plutus - Starter Card"
+      },
+      {
+        "slug": "plutus-card-everyday",
+        "name": "Plutus - Everyday Card"
+      },
+      {
+        "slug": "plutus-card-plus",
+        "name": "Plutus - Plus Card"
+      },
+      {
+        "slug": "plutus-card-pro",
+        "name": "Plutus - Pro Card"
+      }
+    ]
+  }
+]

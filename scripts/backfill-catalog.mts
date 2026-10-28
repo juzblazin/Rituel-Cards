@@ -82,6 +82,11 @@ type TierInput = {
   monthly_fee_usd?: number;
   fx_fee_pct?: number;
   tier_perks?: string[];
+  cashback_cap_monthly_usd?: number | null;
+  travel_reward_pct?: number;
+  atm_monthly_cap_usd?: number | null;
+  topup_cap_monthly_usd?: number | null;
+  lounge_visits_per_year?: number | null;
 };
 
 /** Postgres array literal, so the driver never has to infer the element type. */
@@ -179,8 +184,10 @@ try {
         await client.query(
           `insert into card_tiers
              (card_id, tier_name, tier_order, stake_or_portfolio_req,
-              cashback_pct, annual_fee_usd, monthly_fee_usd, fx_fee_pct, tier_perks)
-           values ($1, $2, $3, $4, $5, $6, $7, $8, $9::text[])`,
+              cashback_pct, annual_fee_usd, monthly_fee_usd, fx_fee_pct,
+              cashback_cap_monthly_usd, travel_reward_pct, atm_monthly_cap_usd,
+              topup_cap_monthly_usd, lounge_visits_per_year, tier_perks)
+           values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14::text[])`,
           [
             cardId,
             tier.tier_name,
@@ -190,6 +197,11 @@ try {
             tier.annual_fee_usd ?? 0,
             tier.monthly_fee_usd ?? 0,
             tier.fx_fee_pct ?? 0,
+            tier.cashback_cap_monthly_usd ?? null,
+            tier.travel_reward_pct ?? 0,
+            tier.atm_monthly_cap_usd ?? null,
+            tier.topup_cap_monthly_usd ?? null,
+            tier.lounge_visits_per_year ?? null,
             arrayLiteral((tier.tier_perks ?? []).map(String)),
           ],
         );

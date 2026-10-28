@@ -12,7 +12,8 @@
     "db:sync": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/sync-cards.mts",
     "db:seed": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/seed-cards.mts",
     "db:import": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-cards.mts",
-    "db:backfill": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/backfill-catalog.mts"
+    "db:backfill": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/backfill-catalog.mts",
+    "db:split-tiers": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/split-tier-cards.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
