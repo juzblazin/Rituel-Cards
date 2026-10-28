@@ -16,7 +16,7 @@ const apiKey = process.env.RESEND_API_KEY?.trim() || "";
 /** `onboarding@resend.dev` only delivers to the address on the Resend account; verify a domain to send anywhere. */
 const fromAddress = process.env.EMAIL_FROM?.trim() || "RItuel <onboarding@resend.dev>";
 
-const notifyRecipients = (process.env.EMAIL_NOTIFY_TO?.trim() || "hello@rituel.io")
+const notifyRecipients = (process.env.EMAIL_NOTIFY_TO?.trim() || "hello@rituel.xyz")
   .split(",")
   .map((address) => address.trim())
   .filter(Boolean);

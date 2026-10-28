@@ -128,6 +128,8 @@ export type Card = {
   appRequired?: boolean;
   platforms?: string[];
   officialUrl?: string;
+  /** Site-relative path to a real card-face render; empty falls back to `CardArt`. */
+  cardImageUrl?: string;
   affiliateNetwork?: string;
   parentSlug?: string;
   benefits?: CardBenefit[];
@@ -181,6 +183,43 @@ const US_EEA_UK = ["US", ...EEA, ...UK];
 export const cards: Card[] = cardsFromDb as unknown as Card[];
 
 export const cardBySlug = new Map(cards.map((c) => [c.slug, c]));
+
+/* ------------------------------------------------------------------ */
+/* Product families                                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Brand token of a display name: "Bybit - VIP Card" -> "bybit",
+ * "Crypto.com Visa - Ruby Steel Card" -> "crypto.com".
+ */
+function brandToken(name: string) {
+  return name.split(" - ")[0]?.trim().split(/\s+/)[0]?.toLowerCase() ?? "";
+}
+
+/** Slug the tier-split left on the parent row; siblings share it. */
+function familyId(card: Card) {
+  return card.parentSlug || card.slug;
+}
+
+/** Display brand, e.g. "Bybit" from "Bybit - VIP Card" or "Crypto.com Visa - Ruby Steel Card". */
+export function brandName(card: Card) {
+  return card.name.split(" - ")[0]?.trim().split(/\s+/)[0] ?? card.name;
+}
+
+/**
+ * Cards from the same company/product line — the tiers that used to live in
+ * `card_tiers` before they became their own cards, plus anything else whose
+ * name starts with the same brand. Ordered cheapest-first so it reads as a tier
+ * ladder. Returns [] for a product with no siblings, so pages can hide it.
+ */
+export function relatedFamilyCards(card: Card, limit = 8): Card[] {
+  const token = brandToken(card.name);
+  return cards
+    .filter((item) => item.slug !== card.slug)
+    .filter((item) => familyId(item) === familyId(card) || brandToken(item.name) === token)
+    .sort((a, b) => a.annualFeeUsd - b.annualFeeUsd || b.cashbackMaxPct - a.cashbackMaxPct)
+    .slice(0, limit);
+}
 
 export const cryptoOptions = [
   { symbol: "USDT", name: "Tether", color: "#26a17b" },

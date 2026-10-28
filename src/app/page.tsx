@@ -691,33 +691,7 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
                 borderGlow={0.45}
                 className="group flex flex-col rounded-xl border border-border/80 p-5 transition-colors hover:border-brand/40"
               >
-                {card.slug === "etherfi-cash" ? (
-                  <Image
-                    src="/logos/etherfi.png"
-                    alt={card.name}
-                    width={512}
-                    height={320}
-                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                  />
-                ) : card.slug === "gnosis-pay" ? (
-                  <Image
-                    src="/logos/gnosispay-card.png"
-                    alt={card.name}
-                    width={512}
-                    height={320}
-                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                  />
-                ) : card.slug === "redotpay" ? (
-                  <Image
-                    src="/logos/redotpay-card.jpg"
-                    alt={card.name}
-                    width={512}
-                    height={320}
-                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                  />
-                ) : (
-                  <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
-                )}
+                <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
 
                 <div className="mt-5 flex items-start justify-between gap-3">
                   <div className="min-w-0">

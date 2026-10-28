@@ -36,6 +36,17 @@ const chains = [
   ["Bitcoin cards", "/crypto/bitcoin"],
 ];
 
+/** Footer comparisons are labelled by brand, not brand + card variant. */
+function pairLabel(pair: { a: { name: string }; b: { name: string } }): string {
+  const brand = (name: string) => {
+    const trimmed = name.split(" - ")[0].replace(/\s+(?:credit\s+)?card$/i, "").trim();
+    return trimmed || name;
+  };
+  const a = brand(pair.a.name);
+  const b = brand(pair.b.name);
+  return a === b ? `${pair.a.name} vs ${pair.b.name}` : `${a} vs ${b}`;
+}
+
 const stats = [
   [`${cards.length}`, "cards tracked"],
   ["250", "countries searchable"],
@@ -93,7 +104,7 @@ export function SiteFooter() {
             <FooterColumn
               title="Compare"
               links={featuredPairs.slice(0, 6).map((pair) => [
-                `${pair.a.name} vs ${pair.b.name}`,
+                pairLabel(pair),
                 `/compare/${pair.slug}`,
               ])}
             />
@@ -111,7 +122,7 @@ export function SiteFooter() {
                   href={`/compare/${pair.slug}`}
                   className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  {pair.a.name} vs {pair.b.name}
+                  {pairLabel(pair)}
                 </Link>
               </li>
             ))}

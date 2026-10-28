@@ -12,7 +12,7 @@ import {
   Star,
   X,
 } from "lucide-react";
-import { cardBySlug, cards, custodyLabel, kycLabel, networkLabel, type Card } from "@/lib/data";
+import { brandName, cardBySlug, cards, custodyLabel, kycLabel, networkLabel, relatedFamilyCards, type Card } from "@/lib/data";
 import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge } from "@/lib/format";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd } from "@/lib/seo";
 import { countryByCode } from "@/lib/countries";
@@ -53,8 +53,9 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
   const availableInGeo = geo ? card.supportedCountries.includes(geo.code) : null;
 
   const faqs = buildCardFaqs(card, geo?.name, availableInGeo);
+  const family = relatedFamilyCards(card);
   const related = cards
-    .filter((item) => item.slug !== card.slug)
+    .filter((item) => item.slug !== card.slug && !family.some((f) => f.slug === item.slug))
     .sort((a, b) => {
       const score = (candidate: Card) =>
         (candidate.custodyModel === card.custodyModel ? 2 : 0) +
@@ -304,6 +305,38 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             </section>
           )}
 
+          {family.length > 0 && (
+            <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
+              <SectionTitle eyebrow="Same product" title="Related crypto cards" />
+              <p className="mt-1 text-xs text-muted-foreground">
+                Other {brandName(card)} cards, each priced on its own. Fees, cashback and perks differ per card.
+              </p>
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                {family.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/card/${item.slug}`}
+                    className="group flex items-center gap-3 rounded-xl border border-border p-3 transition-colors hover:border-brand/50 hover:bg-muted/50"
+                  >
+                    <CardArt card={item} className="h-11 w-16 shrink-0" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-semibold text-foreground">{item.name}</span>
+                      <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+                        {pct(item.cashbackMaxPct)} back · {pct(item.fxFeePct)} FX · {feeLabel(item.annualFeeUsd, "No annual fee")}
+                      </span>
+                      <span className="mt-1 flex items-center gap-2">
+                        <Rating score={item.ratingScore} className="text-xs" />
+                        <Badge tone="neutral">{item.cardType}</Badge>
+                        {item.hasMetal ? <Badge tone="neutral">metal</Badge> : null}
+                      </span>
+                    </span>
+                    <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
             <SectionTitle eyebrow="Funding" title="Supported crypto & networks" />
             <div className="mt-3 grid gap-4 sm:grid-cols-2">
@@ -472,7 +505,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
           </div>
 
           <div className="rounded-xl border border-border bg-card p-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Related cards</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Similar cards</h2>
             <div className="mt-2 space-y-1">
               {related.map((item) => (
                 <Link

@@ -45,9 +45,17 @@ In the tables below, **Req** means: ✔ required (defaults exist, but a card wit
 | `website` | text | ○ | `ether.fi` | shown in the card page links |
 | `issuer_bank` | text | – | `Third National` | program manager, shown as issuer |
 
-`logo_url` and `card_image_url` exist but no page renders them yet — the tile is drawn from `logo_text` + `brand_*` instead. Leave blank unless you plan to use them.
+`logo_url` exists but no page renders it yet.
 
-### Card tile (the generated graphic in the directory)
+### Card tile
+
+| Column | Type | Req | Example | Notes |
+| --- | --- | --- | --- | --- |
+| `card_image_url` | text | ○ | `/card-art/nexo/nexo-card.webp` | real card-face render; when set the tile shows it instead of the generated graphic below |
+
+Assign it through [card-images.json](card-images.json) with `npm run db:card-images` (dry run) and `npm run db:card-images -- --write`, then `npm run db:sync` — never with a bare `update`. The file is declarative: dropping a slug clears that card back to the generated tile. Keep the path site-relative and the artwork within 1.51–1.67 aspect, because the tile slot is 1.586 and off-ratio renders get visibly cropped.
+
+The generated graphic is the fallback:
 
 | Column | Type | Req | Example | Notes |
 | --- | --- | --- | --- | --- |

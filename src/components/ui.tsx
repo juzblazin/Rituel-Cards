@@ -8,29 +8,20 @@ import { Badge as ShadBadge, type BadgeProps } from "@/components/ui/badge";
 
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <span
-      className={cn(
-        "relative grid shrink-0 place-items-center overflow-hidden",
-        className,
-      )}
-      style={{ width: "52px", height: "52px" }}
-      aria-hidden
-    >
-      <Image
-        src="/icon.png"
+    <span className={cn("inline-flex h-8 shrink-0 items-center", className)} aria-hidden>
+      <img
+        src="/logo.svg"
         alt=""
-        width={512}
-        height={512}
-        className="size-full object-cover dark:hidden"
-        sizes="52px"
+        width={1298}
+        height={386}
+        className="h-full w-auto object-contain dark:hidden"
       />
-      <Image
-        src="/icon-dark.png"
+      <img
+        src="/logo-dark.svg"
         alt=""
-        width={512}
-        height={512}
-        className="hidden size-full object-cover dark:block"
-        sizes="52px"
+        width={1298}
+        height={386}
+        className="hidden h-full w-auto object-contain dark:block"
       />
     </span>
   );
@@ -101,10 +92,28 @@ export function CardArt({
   className,
   size = "sm",
 }: {
-  card: Pick<Card, "name" | "logoText" | "brand" | "network" | "isSponsored">;
+  card: Pick<Card, "name" | "logoText" | "brand" | "network" | "isSponsored" | "cardImageUrl">;
   className?: string;
   size?: "sm" | "lg";
 }) {
+  if (card.cardImageUrl) {
+    return (
+      <div
+        className={cn("relative isolate overflow-hidden rounded-lg ring-1 ring-foreground/10", className)}
+        role="img"
+        aria-label={card.name}
+      >
+        <Image
+          src={card.cardImageUrl}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 90vw, 340px"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn("tile-shine relative isolate overflow-hidden rounded-lg ring-1 ring-foreground/10", className)}

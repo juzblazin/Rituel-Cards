@@ -115,7 +115,7 @@ A card submission emails the team inbox, with the submitter's address as `Reply-
 | --- | --- | --- |
 | `RESEND_API_KEY` | Resend API key | unset |
 | `EMAIL_FROM` | Sender, as `Name <you@yourdomain.com>` | `RItuel <onboarding@resend.dev>` |
-| `EMAIL_NOTIFY_TO` | Comma-separated notification recipients | `hello@rituel.io` |
+| `EMAIL_NOTIFY_TO` | Comma-separated notification recipients | `hello@rituel.xyz` |
 
 Create a key at [resend.com/api-keys](https://resend.com/api-keys) and verify your domain under **Domains**. Until a domain is verified, `onboarding@resend.dev` can only deliver to the address on your own Resend account — fine for a first test, not for production. The free tier allows 3,000 emails per month, 100 per day.
 

@@ -102,7 +102,7 @@ export function SubmitCardForm() {
       const body = (await response.json()) as { ok?: boolean; id?: string; error?: string };
       if (!response.ok || !body.ok) {
         setStatus("error");
-        setError(body.error || "Something went wrong. Email hello@rituel.io and we'll sort it.");
+        setError(body.error || "Something went wrong. Email hello@rituel.xyz and we'll sort it.");
         return;
       }
       setSubmissionId(body.id ?? "");
@@ -110,7 +110,7 @@ export function SubmitCardForm() {
       form.reset();
     } catch {
       setStatus("error");
-      setError("Network error. Email hello@rituel.io and we'll pick it up manually.");
+      setError("Network error. Email hello@rituel.xyz and we'll pick it up manually.");
     }
   }
 

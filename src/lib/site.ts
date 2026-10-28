@@ -5,7 +5,7 @@ export const site = {
   description:
     "Compare 24 crypto debit, credit and prepaid cards on real fees, cashback, KYC and country availability. Independent data, zero fluff.",
   url: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000",
-  email: "hello@rituel.io",
+  email: "hello@rituel.xyz",
   twitter: "@rituel",
 };
 

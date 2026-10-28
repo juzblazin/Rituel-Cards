@@ -235,6 +235,7 @@ function toCard(
     appRequired: Boolean(row.app_required),
     platforms: list(row.platforms),
     officialUrl: text(row.official_url),
+    cardImageUrl: text(row.card_image_url),
     affiliateNetwork: text(row.affiliate_network),
     parentSlug: text(row.parent_slug),
     benefits: benefits.map(toBenefit),

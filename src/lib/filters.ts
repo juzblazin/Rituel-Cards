@@ -40,6 +40,57 @@ export const defaultFilters: Filters = {
 
 const SORTS: SortKey[] = ["featured", "rating", "cashback", "fx", "annual", "newest"];
 
+/** Symbols backed 1:1 by a fiat currency — the basis of the "stablecoin" search term. */
+const STABLE_SYMBOLS = new Set([
+  "USDC",
+  "USDT",
+  "DAI",
+  "FDUSD",
+  "PYUSD",
+  "USDE",
+  "USDP",
+  "TUSD",
+  "MUSD",
+  "EURE",
+  "EURC",
+  "GBPE",
+  "EURS",
+]);
+
+/** Spoken-name aliases so "tether" or "usd coin" find the same cards as the ticker. */
+const TOKEN_ALIASES: Record<string, string[]> = {
+  USDC: ["usd coin", "usdcoin"],
+  USDT: ["tether"],
+  EURE: ["euro stablecoin", "monerium"],
+  EURC: ["euro stablecoin", "euro coin"],
+  GBPE: ["pound stablecoin", "pound sterling token"],
+  MUSD: ["metamask usd"],
+  PYUSD: ["paypal usd"],
+};
+
+/** Category terms that describe a card without appearing verbatim in its record. */
+function searchHints(card: Card): string[] {
+  const hints = ["card", "crypto card"];
+  let backsStablecoin = false;
+  for (const symbol of card.supportedCryptos) {
+    const upper = symbol.toUpperCase();
+    if (STABLE_SYMBOLS.has(upper)) backsStablecoin = true;
+    hints.push(...(TOKEN_ALIASES[upper] ?? []));
+  }
+  if (backsStablecoin) {
+    hints.push("stablecoin", "stablecoins", "stable coin", "stable coins", "fiat-backed");
+  }
+  if (card.custodyModel === "self_custody") {
+    hints.push("self-custody", "self custody", "self-custodial", "non-custodial");
+  } else {
+    hints.push("custodial", "custody");
+  }
+  if (card.kycLevel === "no_kyc") hints.push("no-kyc", "no kyc", "kyc-free");
+  else if (card.kycLevel === "light_kyc") hints.push("light-kyc", "light kyc");
+  else hints.push("full-kyc", "full kyc");
+  return hints;
+}
+
 function one(value: string | string[] | undefined): string {
   if (Array.isArray(value)) return value[0] ?? "";
   return value ?? "";
@@ -130,6 +181,7 @@ export function matchesFilters(card: Card, filters: Filters): boolean {
       ...card.supportedCryptos,
       ...card.supportedChains,
       card.regionLabel,
+      ...searchHints(card),
     ]
       .join(" ")
       .toLowerCase();
