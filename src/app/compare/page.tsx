@@ -56,11 +56,11 @@ export default function CompareIndexPage() {
               className="group rounded-xl border border-border bg-card p-3.5 transition hover:border-foreground/20 hover:shadow-lg"
             >
               <div className="flex items-center gap-2">
-                <CardArt card={pair.a} className="h-10 w-[64px]" />
+                <CardArt card={pair.a} className="h-20 w-[128px]" />
                 <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-border bg-card text-[10px] font-bold uppercase text-muted-foreground">
                   vs
                 </span>
-                <CardArt card={pair.b} className="h-10 w-[64px]" />
+                <CardArt card={pair.b} className="h-20 w-[128px]" />
                 <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground transition group-hover:text-foreground" />
               </div>
               <div className="mt-2 truncate text-sm font-semibold text-foreground">

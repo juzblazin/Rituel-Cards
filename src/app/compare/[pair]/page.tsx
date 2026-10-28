@@ -90,7 +90,7 @@ export default async function ComparePage({ params }: Props) {
 
       <div className="border-b border-border bg-background/60">
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">Directory</Link>
+          <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <Link href="/compare" className="hover:text-foreground">Compare</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />

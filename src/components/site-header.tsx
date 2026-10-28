@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/sheet";
 
 const nav = [
-  { href: "/", label: "Directory" },
+  { href: "/", label: "Crypto Card" },
   { href: "/cards", label: "Guides" },
   { href: "/countries", label: "Countries" },
   { href: "/crypto", label: "Tokens & chains" },

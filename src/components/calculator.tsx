@@ -185,8 +185,8 @@ export function NetReturnCalculator({ cards }: { cards: Card[] }) {
                   )}
                   <div className="flex items-start gap-3">
                     <div className="relative">
-                      <CardArt card={result.card} className="h-10 w-[62px] shrink-0" />
-                      <span className="absolute -left-1.5 -top-1.5 grid size-4 place-items-center rounded-full border bg-background text-[9px] font-medium">
+                      <CardArt card={result.card} className="h-20 w-[124px] shrink-0" />
+                      <span className="absolute -left-2 -top-2 grid size-5 place-items-center rounded-full border bg-background text-[10px] font-medium">
                         {index + 1}
                       </span>
                     </div>

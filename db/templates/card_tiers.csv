@@ -1,0 +1,3 @@
+card_slug,tier_name,tier_order,annual_fee_usd,monthly_fee_usd,stake_or_portfolio_req,cashback_pct,fx_fee_pct,balance_yield_apy_pct,atm_free_allowance_usd,atm_fee_notes,daily_spend_limit_usd,tier_perks
+bitget-card,Standard,1,0.00,0.00,$0,1.00,1.00,0.00,0.00,,,1% base cashback|Virtual card
+bitget-card,VIP,2,0.00,0.00,BGB stake / VIP status,8.00,1.00,0.00,0.00,,,Up to 8% cashback|Metal card|Higher limits

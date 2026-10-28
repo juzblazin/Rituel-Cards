@@ -15,6 +15,8 @@ export type AttributePage = {
   filter: (card: Card) => boolean;
 };
 
+const STABLECOIN_SYMBOLS = new Set(["USDC", "USDT", "EURe"]);
+
 export const attributePages: AttributePage[] = [
   {
     slug: "no-kyc",
@@ -81,6 +83,17 @@ export const attributePages: AttributePage[] = [
     intro:
       "Headline cashback rates usually hide a stake requirement, a monthly cap or a token that can fall in price. We show all three so you can judge the real return.",
     filter: (card) => card.cashbackMaxPct >= 3,
+  },
+  {
+    slug: "stablecoin",
+    eyebrow: "Stablecoin",
+    title: "Best Stablecoin Crypto Cards in 2026",
+    heading: "Stablecoin crypto cards",
+    description:
+      "Crypto cards that accept USDC, USDT, EURe and other dollar-pegged assets. Compare top-up fees, cashback and FX.",
+    intro:
+      "Stablecoin cards keep your spend balance pegged to a fiat currency, so a market move never changes what the card can buy. Almost every programme now funds from USDC or USDT; the differences are in top-up fees, chain support and how cashback is paid.",
+    filter: (card) => card.supportedCryptos.some((symbol) => STABLECOIN_SYMBOLS.has(symbol)),
   },
   {
     slug: "no-fx",

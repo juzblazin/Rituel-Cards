@@ -375,8 +375,7 @@ export function TableView({
 
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-muted/40 px-3 py-2.5 text-[10px] text-muted-foreground">
         <span className="inline-flex items-center gap-1">
-          <Sparkles className="h-3 w-3 text-muted-foreground" /> Sponsored cards are pinned in grid view; this table
-          sorts on raw metrics only.
+          <Sparkles className="h-3 w-3 text-muted-foreground" /> This table sorts on raw metrics only.
         </span>
         <span className="font-mono uppercase tracking-wider">Data · Oct 2026</span>
       </div>
@@ -427,7 +426,6 @@ function Row({
                 <Link href={`/card/${card.slug}`} className="max-w-[132px] truncate text-xs font-semibold text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
-                {card.isSponsored && <span className="text-[9px] font-medium uppercase tracking-wide text-muted-foreground">Ad</span>}
               </div>
               <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
                 <span>{networkLabel[card.network]}</span>

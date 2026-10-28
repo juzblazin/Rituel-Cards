@@ -221,8 +221,8 @@ export function FilterSidebar({
 
         <div className="mt-4 rounded-lg bg-muted p-3">
           <p className="text-xs leading-5 text-muted-foreground">
-            <strong className="font-medium text-foreground">How we rank:</strong> sponsored cards are pinned first, but
-            every fee comparison and calculator uses the raw numbers. No pay-to-win scoring.
+            <strong className="font-medium text-foreground">How we rank:</strong> every fee comparison and calculator
+            uses the raw numbers. No pay-to-win scoring.
           </p>
         </div>
       </div>

@@ -189,31 +189,34 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
 
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[640px] border-collapse text-left">
+      <table className="w-full min-w-[800px] border-collapse text-left">
         <thead>
           <tr>
-            <th className="sticky left-0 z-10 w-[148px] border-b border-border bg-card p-3 align-bottom">
+            <th className="sticky left-0 z-10 w-[160px] border-b border-border bg-card p-4 align-bottom">
               <span className="text-xs font-medium text-muted-foreground">Metric</span>
             </th>
             {cards.map((card) => (
-              <th key={card.slug} className="min-w-[190px] border-b border-l border-border p-3 align-top">
-                <div className="flex items-start justify-between gap-2">
-                  <CardArt card={card} className="h-10 w-[62px]" />
-                  {card.isSponsored && <Badge>Sponsored</Badge>}
+              <th key={card.slug} className="min-w-[240px] border-b border-l border-border p-4 align-top">
+                <div className="relative inline-block">
+                  <CardArt card={card} className="h-[216px] w-[337.5px]" />
+                  {card.isSponsored && (
+                    <Badge className="absolute right-2 top-2">Sponsored</Badge>
+                  )}
                 </div>
-                <Link href={`/card/${card.slug}`} className="mt-2 block text-sm font-medium leading-5 text-foreground hover:text-foreground">
+                <Link href={`/card/${card.slug}`} className="mt-3 block text-base font-semibold leading-5 text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
-                <div className="mt-1">
+                <div className="mt-1 text-xs text-muted-foreground">{card.issuerName}</div>
+                <div className="mt-2">
                   <Rating score={card.ratingScore} />
                 </div>
                 <AffiliateLink
                   slug={card.slug}
                   cardName={card.name}
                   source="compare-matrix"
-                  className="mt-2.5 inline-flex w-full items-center justify-center gap-1 rounded-lg bg-primary px-2 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/80"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/80"
                 >
-                  Get card <ArrowUpRight className="h-3 w-3" />
+                  Get card <ArrowUpRight className="h-4 w-4" />
                 </AffiliateLink>
               </th>
             ))}
@@ -225,7 +228,7 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
               <tr>
                 <td
                   colSpan={cards.length + 1}
-                  className="sticky left-0 border-b border-border bg-muted/60 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  className="sticky left-0 border-b border-border bg-muted/60 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                   {group}
                 </td>
@@ -236,9 +239,9 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
                   const winners = bestSet(metric, cards);
                   return (
                     <tr key={metric.label} className="border-b border-border/80">
-                      <th scope="row" className="sticky left-0 z-10 border-r border-border bg-card px-3 py-3 align-top">
+                      <th scope="row" className="sticky left-0 z-10 border-r border-border bg-card px-4 py-3.5 align-top">
                         <span className="text-xs font-medium text-muted-foreground">{metric.label}</span>
-                        {metric.hint && <span className="mt-0.5 block text-[9px] leading-3 text-muted-foreground">{metric.hint}</span>}
+                        {metric.hint && <span className="mt-0.5 block text-[10px] leading-3 text-muted-foreground">{metric.hint}</span>}
                       </th>
                       {cards.map((card, index) => {
                         const isWinner = winners.has(index);
@@ -246,13 +249,13 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
                           <td
                             key={card.slug}
                             className={cn(
-                              "border-l border-border/70 px-3 py-3 align-top text-xs",
+                              "border-l border-border/70 px-4 py-3.5 align-top text-sm",
                               isWinner && "bg-muted/40",
                             )}
                           >
-                            <div className="flex items-start gap-1.5">
+                            <div className="flex items-start gap-2">
                               {isWinner && (
-                                <span className="mt-0.5 rounded bg-success px-1 py-px text-[8px] font-bold uppercase tracking-wide text-success-foreground">
+                                <span className="mt-0.5 rounded bg-success px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-success-foreground">
                                   Best
                                 </span>
                               )}

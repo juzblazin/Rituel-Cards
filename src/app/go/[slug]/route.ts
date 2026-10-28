@@ -27,6 +27,10 @@ export async function GET(
   target.searchParams.set("utm_campaign", card.slug);
   target.searchParams.set("utm_content", request.nextUrl.searchParams.get("source") || "listing");
 
+  // Replace any issuer-provided ref so every outbound click carries our tag.
+  target.searchParams.delete("ref");
+  target.searchParams.set("ref", "rituel.xyz");
+
   const event = {
     type: "affiliate_click",
     slug: card.slug,
@@ -49,8 +53,12 @@ export async function GET(
     }).catch(() => undefined);
   }
 
-  const response = Response.redirect(target.toString(), 302);
-  response.headers.set("Cache-Control", "no-store, max-age=0");
-  response.headers.set("X-Robots-Tag", "noindex, nofollow");
-  return response;
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: target.toString(),
+      "Cache-Control": "no-store, max-age=0",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
 }

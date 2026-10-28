@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Banknote, Building2, CreditCard, Globe2, ShieldCheck, Smartphone, Sparkles, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, Building2, Coins, CreditCard, Globe2, ShieldCheck, Smartphone, Sparkles, Wallet } from "lucide-react";
 import { cards } from "@/lib/data";
 import { buildMetadata } from "@/lib/seo";
 import { attributePages } from "@/lib/taxonomy";
@@ -25,6 +25,7 @@ const ICONS: Record<string, typeof ShieldCheck> = {
   "physical-cards": CreditCard,
   "light-kyc": BadgeCheck,
   "zero-annual-fee": Sparkles,
+  stablecoin: Coins,
 };
 
 export default function GuidesIndexPage() {

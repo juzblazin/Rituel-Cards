@@ -100,7 +100,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
 
       <div className="border-b border-border bg-background/60">
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">Directory</Link>
+          <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="size-3 shrink-0" />
           <Link href="/cards" className="hover:text-foreground">Cards</Link>
           <ChevronRight className="size-3 shrink-0" />

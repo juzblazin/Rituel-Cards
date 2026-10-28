@@ -1,0 +1,1288 @@
+{
+  "meta": {
+    "generated_at": "2026-10-28T06:43:29.497Z",
+    "sources": "live issuer pages fetched 2026-10-28 via treg.web.extract / tinyfish.web.fetch",
+    "guide": "db/DATA-GUIDE.md"
+  },
+  "cards": [
+    {
+      "slug": "metamask-card",
+      "source_url": "https://metamask.com/card",
+      "confidence": "medium",
+      "note": "No-FX/ATM-free claims attach to Metal in the copy ('Metal ... no foreign fees'), so base FX left unconfirmed. ATM limits given per day ($1k/$5k); no monthly ATM cap.",
+      "changes": [
+        {
+          "field": "payout_token",
+          "from": "USDC",
+          "to": "mUSD",
+          "evidence": "Get mUSD back from every purchase",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "USDC",
+            "USDT",
+            "ETH",
+            "EURe"
+          ],
+          "to": [
+            "mUSD",
+            "wETH",
+            "EURe",
+            "GBPe",
+            "USDC",
+            "USDT"
+          ],
+          "evidence": "Tap to pay with mUSD, wETH, EURe, GBPe, USDC, and USDT",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "kast",
+      "source_url": "https://www.kast.xyz/",
+      "confidence": "medium",
+      "note": "12% is Reserve yield, not cashback. No card_type/custody label ('account sits with KAST'); KYC only 'uses identity verification'. 170+ countries not enumerated. Coins: +PENGU, '25+ other coins'.",
+      "changes": [
+        {
+          "field": "cashback_max_pct",
+          "from": 12,
+          "to": 3,
+          "evidence": "Up to 3% cashback on eligible spend",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "payout_token",
+          "from": "SOL",
+          "to": "USD",
+          "evidence": "Pay in dollars, earn back in dollars",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "tiers",
+          "from": [
+            {
+              "name": "Core",
+              "stake": "$0",
+              "cashbackPct": 0,
+              "annualFeeUsd": 0,
+              "fxFeePct": 1.2
+            },
+            {
+              "name": "Luxe",
+              "stake": "$10,000 balance",
+              "cashbackPct": 3,
+              "annualFeeUsd": 0,
+              "fxFeePct": 1.2
+            }
+          ],
+          "to": [
+            {
+              "name": "Standard",
+              "stake": "$0",
+              "cashbackPct": 1.5,
+              "annualFeeUsd": 0
+            },
+            {
+              "name": "Premium",
+              "stake": "$1,000/yr",
+              "cashbackPct": 2,
+              "annualFeeUsd": 1000
+            },
+            {
+              "name": "Private",
+              "stake": "$10,000/yr",
+              "cashbackPct": 3,
+              "annualFeeUsd": 10000
+            }
+          ],
+          "evidence": "Standard • Premium • Private ... $1,000 / year ... $10,000 / year",
+          "evidence_verified": false,
+          "status": "hold_unverified",
+          "reason": "quoted evidence not found on the fetched page"
+        }
+      ]
+    },
+    {
+      "slug": "bleap",
+      "source_url": "https://www.bleap.finance/",
+      "confidence": "high",
+      "note": "ATM cap stated as €400/mo, not converted to USD (current 440 left untouched). Europe scope not enumerated; page adds Mexico and Brazil. Card never labelled debit/credit.",
+      "changes": [
+        {
+          "field": "supported_chains",
+          "from": [
+            "Arbitrum",
+            "Polygon",
+            "Ethereum",
+            "Base"
+          ],
+          "to": [
+            "Solana",
+            "Arbitrum",
+            "Base"
+          ],
+          "evidence": "any token available on Solana, Base, or Arbitrum",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "bybit-card",
+      "source_url": "https://www.bybit.com/en/cards/",
+      "confidence": "low",
+      "note": "Marketing page: no network, card type, fees, limits or coins. EEA explicitly excluded (current row lists 15 EEA states). Cashback tiers mention 'Tier 3 (Alpha)' and VIPs but no table.",
+      "changes": [
+        {
+          "field": "supported_countries",
+          "from": [
+            "DE",
+            "FR",
+            "IT",
+            "ES",
+            "NL",
+            "BE",
+            "AT",
+            "PT",
+            "FI",
+            "GR",
+            "PL",
+            "SE",
+            "DK",
+            "NO",
+            "IE",
+            "AU",
+            "BR",
+            "AR",
+            "MX",
+            "CH",
+            "AE"
+          ],
+          "to": [],
+          "evidence": "This product is not meant for European Economic Area customers",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        },
+        {
+          "field": "regional_scope",
+          "from": "EEA, Switzerland, Australia, LATAM & APAC",
+          "to": "Rest of the World (excl. EEA)",
+          "evidence": "All European Economic Area customer participation is strictly prohibited",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "jupiter-card",
+      "source_url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+      "confidence": "high",
+      "note": "Fees/Limits live on a separate page. India/Indonesia/Hong Kong dropped; US only via 32 named states; BD/NG paused. Max cashback not on this page; other chains only 'other networks'.",
+      "changes": [
+        {
+          "field": "has_physical",
+          "from": false,
+          "to": true,
+          "evidence": "Physical cards are rolling out in phases",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "issuance_physical_fee_usd",
+          "from": 0,
+          "to": 13.13,
+          "evidence": "The card costs $13.13 plus shipping",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "custody_model",
+          "from": "self_custody",
+          "to": "custodial",
+          "evidence": "into their Spend account",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "USDC",
+            "USDT",
+            "SOL"
+          ],
+          "to": [
+            "USDC",
+            "USDT"
+          ],
+          "evidence": "USDC and USDT are the only assets the Spend deposit address accepts",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_countries",
+          "from": [
+            "US",
+            "BR",
+            "AR",
+            "MX",
+            "CO",
+            "CL",
+            "PE",
+            "SG",
+            "KR",
+            "JP",
+            "VN",
+            "MY",
+            "TW",
+            "AU",
+            "TH",
+            "PH",
+            "ID",
+            "IN",
+            "AE",
+            "ZA",
+            "NG",
+            "KE"
+          ],
+          "to": [
+            "AG",
+            "AR",
+            "AU",
+            "BS",
+            "BD",
+            "BB",
+            "BZ",
+            "BO",
+            "BR",
+            "KY",
+            "CO",
+            "CR",
+            "CI",
+            "DM",
+            "DO",
+            "EC",
+            "EG",
+            "SV",
+            "GH",
+            "GD",
+            "GT",
+            "GY",
+            "HN",
+            "JP",
+            "KE",
+            "MY",
+            "MX",
+            "MA",
+            "NZ",
+            "NG",
+            "PK",
+            "PA",
+            "PY",
+            "PE",
+            "PH",
+            "KN",
+            "LC",
+            "VC",
+            "SN",
+            "SG",
+            "ZA",
+            "KR",
+            "SR",
+            "TW",
+            "TH",
+            "TT",
+            "TC",
+            "UG",
+            "AE",
+            "UY",
+            "VN",
+            "ZM",
+            "US"
+          ],
+          "evidence": "Antigua & Barbuda, Argentina, Australia, Bahamas, Bangladesh ... Zambia",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "nocturne",
+      "source_url": "https://nocturne.cards",
+      "confidence": "high",
+      "note": "Network 'struck at issuing' (no brand). $29/mo spend keeps card active, no monthly fee. Also 0.49% deposit fee; 6 assets only (no SOL). Apple Pay only on $45 Aurora.",
+      "changes": [
+        {
+          "field": "issuance_physical_fee_usd",
+          "from": 0,
+          "to": 25,
+          "evidence": "Shadow $25 · Aurora $45 · Eclipse $10 · one-time",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "topup_fee_pct",
+          "from": 1.5,
+          "to": 5,
+          "evidence": "Loading a card costs 5%, easing to 3.5%",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "XMR",
+            "BTC",
+            "ETH",
+            "USDT",
+            "USDC",
+            "SOL"
+          ],
+          "to": [
+            "BTC",
+            "ETH",
+            "USDT",
+            "USDC",
+            "LTC",
+            "XMR"
+          ],
+          "evidence": "Send BTC, ETH, USDT, USDC, LTC or XMR to your balance",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "kraken-card",
+      "source_url": "https://www.kraken.com/app/crypto-card",
+      "confidence": "high",
+      "note": "Page names 4 tiers (not catalogued). \"600+ currencies\" with no asset/chain list; geo restrictions only, no country list; cashback also payable in EUR.",
+      "changes": [
+        {
+          "field": "cashback_min_pct",
+          "from": 1,
+          "to": 0.5,
+          "evidence": "Four tiers: Light (€200, 0.5%), Pro (€1,000, 1%), Elite (€10,000, 1.5%), Max (€50,000, 2%)",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "nexo-card",
+      "source_url": "https://nexo.com/crypto-card",
+      "confidence": "high",
+      "note": "Network unstated; EEA/UK scope only, no country list; \"100+ cryptocurrencies\" unlisted; ATM allowance in EUR; dual-mode credit/debit; \"10% NEXO ratio\" and \"2.9% APR\" not on page.",
+      "changes": [
+        {
+          "field": "tiers",
+          "from": [
+            {
+              "name": "Classic",
+              "stake": "$0 NEXO",
+              "cashbackPct": 0.5,
+              "annualFeeUsd": 0,
+              "fxFeePct": 0.5,
+              "perks": [
+                "0.5% NEXO cashback",
+                "Virtual card"
+              ]
+            },
+            {
+              "name": "Premium",
+              "stake": "$5,000 NEXO",
+              "cashbackPct": 1,
+              "annualFeeUsd": 0,
+              "fxFeePct": 0.5,
+              "perks": [
+                "1% NEXO cashback",
+                "Higher credit line"
+              ]
+            },
+            {
+              "name": "Platinum",
+              "stake": "$50,000 NEXO",
+              "cashbackPct": 2,
+              "annualFeeUsd": 0,
+              "fxFeePct": 0,
+              "perks": [
+                "2% NEXO cashback",
+                "0% FX",
+                "Metal card",
+                "Concierge"
+              ]
+            }
+          ],
+          "to": [
+            {
+              "tier_name": "Base",
+              "tier_order": 1,
+              "stake_or_portfolio_req": "$5,000+ portfolio; NEXO ratio",
+              "cashback_pct": 0.5,
+              "annual_fee_usd": 0
+            },
+            {
+              "tier_name": "Silver",
+              "tier_order": 2,
+              "stake_or_portfolio_req": "$5,000+ portfolio; NEXO ratio",
+              "cashback_pct": 0.7,
+              "annual_fee_usd": 0
+            },
+            {
+              "tier_name": "Gold",
+              "tier_order": 3,
+              "stake_or_portfolio_req": "$5,000+ portfolio; NEXO ratio",
+              "cashback_pct": 1,
+              "annual_fee_usd": 0
+            },
+            {
+              "tier_name": "Platinum",
+              "tier_order": 4,
+              "stake_or_portfolio_req": "$5,000+ portfolio; NEXO ratio",
+              "cashback_pct": 2,
+              "annual_fee_usd": 0
+            }
+          ],
+          "evidence": "Silver: 0.7% in NEXO Tokens or 0.2% in BTC",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "revolut-card",
+      "source_url": "https://www.revolut.com/",
+      "confidence": "low",
+      "note": "Generic UK banking homepage: no crypto card, fees, cashback, limits or country list. \"Debit cards\" refers to Revolut cards generally, not crypto.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "prepaid",
+          "to": "debit",
+          "evidence": "Earn points on your purchases with one of our debit cards",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "coinbase-one-card",
+      "source_url": "https://www.coinbase.com/one",
+      "confidence": "medium",
+      "note": "Network is American Express - outside the visa/mastercard/unionpay enum. 4% is a max that varies with Coinbase assets; no min. Country list is Coinbase One, not card.",
+      "changes": [
+        {
+          "field": "network",
+          "from": "visa",
+          "to": "amex",
+          "evidence": "American Express is a registered trademark of American Express and is used by the issuer pursuant to a license",
+          "evidence_verified": true,
+          "status": "rejected",
+          "reason": "value outside allowed enum network (guide: visa/mastercard/unionpay)"
+        }
+      ]
+    },
+    {
+      "slug": "coinbase-card",
+      "source_url": "https://www.coinbase.com/card",
+      "confidence": "medium",
+      "note": "Page calls it both \"prepaid debit\" and \"debit\". Rewards variable, no % or token; US-only (excl. Hawaii) vs 32 countries listed; no FX/ATM/limit figures.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "debit",
+          "to": "prepaid",
+          "evidence": "The Visa® prepaid debit card that turns your everyday purchases into crypto rewards",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_countries",
+          "from": [
+            "US",
+            "GB",
+            "DE",
+            "FR",
+            "IT",
+            "ES",
+            "NL",
+            "BE",
+            "AT",
+            "IE",
+            "PT",
+            "FI",
+            "GR",
+            "PL",
+            "SE",
+            "DK",
+            "NO",
+            "CH",
+            "HR",
+            "CY",
+            "CZ",
+            "EE",
+            "HU",
+            "LV",
+            "LT",
+            "LU",
+            "MT",
+            "RO",
+            "SK",
+            "SI",
+            "BG",
+            "IS"
+          ],
+          "to": [
+            "US"
+          ],
+          "evidence": "Coinbase Card is available for all Coinbase customers who live in the US (excluding Hawaii)",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "picnic-card",
+      "source_url": "https://usepicnic.com/en",
+      "confidence": "medium",
+      "note": "\"180+ countries\" only, no country list. No FX/top-up/ATM % and no cashback at all; no IOF and no Picnic fee. Bitcoin & Solana named only for withdrawals.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "prepaid",
+          "to": "debit",
+          "evidence": "Because Picnic issues a standard Visa debit card",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "has_physical",
+          "from": false,
+          "to": true,
+          "evidence": "You can request a physical card in the app and have it delivered to your registered address",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "solidyield",
+      "source_url": "https://www.solid.xyz/",
+      "confidence": "medium",
+      "note": "FAQ also calls the card \"upcoming\". Only \"up to 5%\" cashback, no min; no FX/ATM %, no countries; no Core/Prime/Ultra tiers named.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "debit",
+          "to": "credit",
+          "evidence": "The Solid Card is a Visa credit card issued by Rain",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "issuer_bank",
+          "from": "Wirex / BaaS Partner",
+          "to": "Rain",
+          "evidence": "The Solid Card is a Visa credit card issued by Rain",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "tuyo-card",
+      "source_url": "https://tuyo.com",
+      "confidence": "low",
+      "note": "Homepage: Apple/Google Pay, USDC deposits, 4.0% APY. Limit is 'can grow to' $200k (not a fixed cap); no fees, KYC or country list. Self-custody only claimed by a user quote.",
+      "changes": [
+        {
+          "field": "daily_spend_limit_usd",
+          "from": 10000,
+          "to": 200000,
+          "evidence": "Daily limits can grow to $200,000 as you spend",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "ruvo-card",
+      "source_url": "https://ruvo.com",
+      "confidence": "medium",
+      "note": "Page says self-custodial, contradicting row. 0.5% is the digital-dollar/reais conversion fee; card FX is 1% on non-USD. Only Brazil and US scoped; no network or card type.",
+      "changes": [
+        {
+          "field": "custody_model",
+          "from": "custodial",
+          "to": "self_custody",
+          "evidence": "Self-custodial account: no one can move it on your behalf, not even Ruvo",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "fx_fee_pct",
+          "from": 0.5,
+          "to": 1,
+          "evidence": "Card: no fee on dollar purchases, 1% in other currencies",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "solayer-card",
+      "source_url": "https://solayer.org",
+      "confidence": "low",
+      "note": "Solayer Pay block only: crypto-native Visa, spend stablecoins from wallet, virtual + physical. No debit/credit wording, fees, limits, KYC or countries.",
+      "changes": [
+        {
+          "field": "has_physical",
+          "from": false,
+          "to": true,
+          "evidence": "Virtual and physical cards · 45,000+ cardholders",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "solflare-card",
+      "source_url": "https://www.solflare.com/",
+      "confidence": "medium",
+      "note": "Card section says Mastercard, not Visa; 'First true self-custody debit card' spending $USDC on Solana. No fees, ATM, KYC, wallet or country details.",
+      "changes": [
+        {
+          "field": "network",
+          "from": "visa",
+          "to": "mastercard",
+          "evidence": "Powered by Mastercard and accepted at 100M+ merchants worldwide",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "tria",
+      "source_url": "https://www.tria.so/",
+      "confidence": "medium",
+      "note": "Marketing page: no fee table, KYC or crypto/chain list; '150+ countries'; ATM cap $750/day. Page names Lite/Pro/Max (catalog tiers empty). Cashback floor 0.5% after $1,000/mo.",
+      "changes": [
+        {
+          "field": "cashback_min_pct",
+          "from": 1.5,
+          "to": 0.5,
+          "evidence": "1.5% Cashback on first $1000/mo then 0.5% unlimited cashback on eligible spends",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "allscale",
+      "source_url": "https://www.allscale.io/",
+      "confidence": "low",
+      "note": "Marketing homepage for stablecoin business banking: no card, network, fees, KYC level or country list. Only self-custody framing and USDT/USDC payouts stated.",
+      "changes": [
+        {
+          "field": "custody_model",
+          "from": "custodial",
+          "to": "self_custody",
+          "evidence": "Self-Custody Neobank for Global Businesses",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "crypto-com-visa",
+      "source_url": "https://crypto.com/us/cards",
+      "confidence": "medium",
+      "note": "Fetched page is the US Visa Signature credit card (prepaid linked separately), so tier/fee figures may not describe the prepaid row. No FX, ATM, limits or country list.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "prepaid",
+          "to": "credit",
+          "evidence": "If you prefer a prepaid card, click here for the Crypto.com Prepaid Visa Card instead.",
+          "evidence_verified": true,
+          "status": "hold_manual",
+          "reason": "fetched page is the US credit-card variant; row is the prepaid Visa product — confirm product first"
+        },
+        {
+          "field": "cashback_min_pct",
+          "from": 1,
+          "to": 1.5,
+          "evidence": "1.5% (Earn unlimited CRO)",
+          "evidence_verified": false,
+          "status": "hold_unverified",
+          "reason": "quoted evidence not found on the fetched page"
+        },
+        {
+          "field": "cashback_max_pct",
+          "from": 5,
+          "to": 6,
+          "evidence": "Earn up to 6% back in BTC or CRO",
+          "evidence_verified": true,
+          "status": "hold_manual",
+          "reason": "fetched page is the US credit-card variant; row is the prepaid Visa product — confirm product first"
+        },
+        {
+          "field": "payout_token",
+          "from": "CRO",
+          "to": "BTC or CRO",
+          "evidence": "earn rewards in your choice of BTC or CRO",
+          "evidence_verified": true,
+          "status": "hold_manual",
+          "reason": "fetched page is the US credit-card variant; row is the prepaid Visa product — confirm product first"
+        }
+      ]
+    },
+    {
+      "slug": "hyperbeat",
+      "source_url": "https://hyperbeat.org",
+      "confidence": "low",
+      "note": "Homepage only: no fee, cashback, KYC or country data (8% is APY yield, not cashback). Chain is HyperEVM, which is not in the guide's chain list.",
+      "changes": [
+        {
+          "field": "card_type",
+          "from": "debit",
+          "to": "credit",
+          "evidence": "Spend by borrowing against your portfolio with your credit card",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        },
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "USDC",
+            "USDT"
+          ],
+          "to": [
+            "BTC",
+            "ETH",
+            "SOL",
+            "USDT"
+          ],
+          "evidence": "Send native BTC, ETH, or SOL directly into your Liquid Bank",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "avalanche-card",
+      "source_url": "https://www.avalanchecard.com/",
+      "confidence": "high",
+      "note": "Fee table explicit (FX 1%, $0 monthly/physical/virtual/shipping). Countries only as an exclusion list covering 'many U.S. states, Latin America, and the Caribbean'; no cashback or spend caps.",
+      "changes": [
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "USDC",
+            "USDT"
+          ],
+          "to": [
+            "USDC",
+            "USDT",
+            "AVAX",
+            "WAVAX"
+          ],
+          "evidence": "Currently supporting USDC, USDT, AVAX and WAVAX.",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "gokubu-pay",
+      "source_url": "https://www.gokubu.com/",
+      "confidence": "medium",
+      "note": "Marketing page: no KYC, ATM, limits, cryptos, chains or country list. Plaid US bank funding only. Premium $9.99/mo; cashback floor not stated.",
+      "changes": [
+        {
+          "field": "monthly_fee_usd",
+          "from": 0,
+          "to": 9.99,
+          "evidence": "Subscription Fee $9.99/mo (Premium) or Free (Basic)",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "staking_requirement",
+          "from": "Basic plan earns 2% GKU; Pro plan earns 6% GKU on first $2,000/mo then 2%",
+          "to": "No token staking required",
+          "evidence": "No Token Staking Required",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "kolo",
+      "source_url": "https://kolo.xyz/",
+      "confidence": "medium",
+      "note": "170+ countries unnamed; 'seven blockchain networks' unnamed; KYC level unspecified ('1-minute', Sumsub); network ambiguous ('Visa or Mastercard'); no ATM/limits/annual fee.",
+      "changes": [
+        {
+          "field": "topup_fee_pct",
+          "from": 1,
+          "to": 0,
+          "evidence": "automatically converted to the local currency at a great rate — for no extra fee",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "deblock",
+      "source_url": "https://deblock.com/en",
+      "confidence": "low",
+      "note": "Marketing homepage: no network, card type, fees, KYC, ATM, limits or country list; only BTC and USDC named. 4% APY is account yield, not cashback.",
+      "changes": [
+        {
+          "field": "custody_model",
+          "from": "hybrid",
+          "to": "self_custody",
+          "evidence": "self-custodied digital assets ... Your assets are safe. Your keys.",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "holyheld",
+      "source_url": "https://holyheld.com",
+      "confidence": "low",
+      "note": "Page is now Holyheld Business (companies only); no card, cashback, ATM or network list. CHF 500/yr membership (CHF 50/mo) is an account plan, not a card fee.",
+      "changes": [
+        {
+          "field": "audience",
+          "from": "personal",
+          "to": "business",
+          "evidence": "One account for global companies",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "shakepay-card",
+      "source_url": "https://shakepay.com/card",
+      "confidence": "medium",
+      "note": "No virtual/physical split, FX, ATM, top-up fee, KYC or cashback floor stated. Card spends a CAD balance; only BTC rewards (1.5%) named, so crypto/chain lists unconfirmed.",
+      "changes": [
+        {
+          "field": "cashback_max_pct",
+          "from": 2,
+          "to": 1.5,
+          "evidence": "Get up to 1.5% cashback in bitcoin",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "vaultleap",
+      "source_url": "https://vaultleap.com",
+      "confidence": "low",
+      "note": "'27 countries' only, no list; no cashback, issuance, ATM, limits, KYC or chains. 'Virtual' in title refers to accounts, not a virtual card.",
+      "changes": [
+        {
+          "field": "fx_fee_pct",
+          "from": 1,
+          "to": 0,
+          "evidence": "0% intl fees. Settles from your USDC in seconds.",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "bitget-card",
+      "source_url": "https://web3.bitget.com/card",
+      "confidence": "medium",
+      "note": "Page is Bitget Wallet Card (web3.bitget.com/card), not the exchange BGB card; no fee table; EEA/UK named but not enumerated; seed-phrase text implies self-custody.",
+      "changes": [
+        {
+          "field": "cashback_min_pct",
+          "from": 1,
+          "to": 2,
+          "evidence": "All cardholders earn 2% base assetback by default.",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "cashback_max_pct",
+          "from": 8,
+          "to": 3,
+          "evidence": "Earn up to 3% assetback",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "payout_token",
+          "from": "USDT",
+          "to": "BTC / USDC / gold / stocks (choice)",
+          "evidence": "choose one asset as your reward - BTC, gold, US stocks (NVIDIA, Google, Tesla, S&P 500), or USDC",
+          "evidence_verified": false,
+          "status": "hold_unverified",
+          "reason": "quoted evidence not found on the fetched page"
+        },
+        {
+          "field": "supported_cryptos",
+          "from": [
+            "BTC",
+            "ETH",
+            "USDT",
+            "USDC",
+            "BGB"
+          ],
+          "to": [
+            "USDT",
+            "USDC",
+            "ETH",
+            "SOL"
+          ],
+          "evidence": "top up your card with popular cryptocurrencies like USDT, USDC, ETH, and SOL",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "supported_countries",
+          "from": [
+            "US",
+            "CA",
+            "AT",
+            "BE",
+            "BG",
+            "HR",
+            "CY",
+            "CZ",
+            "DK",
+            "EE",
+            "FI",
+            "FR",
+            "DE",
+            "GR",
+            "HU",
+            "IE",
+            "IT",
+            "LV",
+            "LT",
+            "LU",
+            "MT",
+            "NL",
+            "NO",
+            "PL",
+            "PT",
+            "RO",
+            "SK",
+            "SI",
+            "ES",
+            "SE",
+            "IS",
+            "LI",
+            "GB",
+            "GI",
+            "IM",
+            "JE",
+            "SG",
+            "JP",
+            "KR",
+            "HK",
+            "TW",
+            "MY",
+            "TH",
+            "PH",
+            "VN",
+            "ID",
+            "IN",
+            "AU",
+            "NZ",
+            "MX",
+            "BR",
+            "AR",
+            "CO",
+            "CL",
+            "PE",
+            "EC",
+            "UY",
+            "PY",
+            "BO",
+            "CR",
+            "PA",
+            "DO",
+            "GT",
+            "SV",
+            "HN",
+            "CH",
+            "AE",
+            "SA",
+            "QA",
+            "KW",
+            "BH",
+            "OM",
+            "TR",
+            "IL",
+            "ZA",
+            "NG",
+            "KE",
+            "GH",
+            "EG",
+            "MA"
+          ],
+          "to": [
+            "AR",
+            "BR",
+            "CL",
+            "CO",
+            "EC",
+            "SV",
+            "GT",
+            "MX",
+            "PA",
+            "PE",
+            "KR",
+            "JP",
+            "VN",
+            "MY",
+            "CN",
+            "TW",
+            "AU",
+            "TH",
+            "PH",
+            "ZA",
+            "PK",
+            "BD"
+          ],
+          "evidence": "The card is currently available in: Europe: European Economic Area (EEA) and the UK; Latin America: Argentina, Brazil, Chile, Colombia",
+          "evidence_verified": false,
+          "status": "hold_unverified",
+          "reason": "quoted evidence not found on the fetched page"
+        },
+        {
+          "field": "regional_scope",
+          "from": "Global (180+ countries)",
+          "to": "50+ countries and regions",
+          "evidence": "available to users across 50+ countries and regions",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "plutus",
+      "source_url": "https://www.plutus.it/",
+      "confidence": "low",
+      "note": "Marketing homepage only: cashback and PLUS payout stated, no fee schedule, countries, assets or network. 'No fees' sits oddly with the 14-day trial.",
+      "changes": [
+        {
+          "field": "payout_token",
+          "from": "PLU",
+          "to": "PLUS",
+          "evidence": "Get PLUS rewards on your daily spend.",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "wirex-card",
+      "source_url": "https://www.wirexapp.com/post/wirex-card-benefits-everything-you-get-and-how-to-use-it",
+      "confidence": "low",
+      "note": "Blog guide, no fee figures; network is Visa or Mastercard by region; 200+ countries claimed without a list; rewards 'up to 8%' regionally, no minimum rate.",
+      "changes": [
+        {
+          "field": "cashback_max_pct",
+          "from": 2,
+          "to": 8,
+          "evidence": "Some regions can earn up to 8%",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        },
+        {
+          "field": "regional_scope",
+          "from": "EEA, UK & 30+ markets",
+          "to": "200+ countries and territories",
+          "evidence": "Works in 200+ countries and territories",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    },
+    {
+      "slug": "coinjar-card",
+      "source_url": "https://www.coinjar.com/au/card",
+      "confidence": "medium",
+      "note": "Clear fee table; the 1% purchase fee returned in points is not a top-up fee. Crypto list, KYC, limits and countries not stated (AU-locale page).",
+      "changes": [
+        {
+          "field": "fx_fee_pct",
+          "from": 2.5,
+          "to": 2.99,
+          "evidence": "Foreign transaction | 2.99%+",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "atm_local_fee_pct",
+          "from": 2,
+          "to": 1,
+          "evidence": "ATM withdrawal (physical card only) | 1%",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "payout_token",
+          "from": "BTC",
+          "to": "CoinJar Rewards points",
+          "evidence": "For each $1 you spend you'll earn 1 CoinJar Rewards point.",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "okx-card",
+      "source_url": "https://www.okx.com/en-us/card",
+      "confidence": "medium",
+      "note": "Waitlist / 'coming soon'; tiers qualify by pay balance, spend or VIP level; USDG cashback only. No country, ATM, fee or form-factor detail on this US-locale page.",
+      "changes": [
+        {
+          "field": "cashback_min_pct",
+          "from": 0,
+          "to": 2,
+          "evidence": "Cashback starts at 2%, up to 10% at the top tier.",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "cashback_max_pct",
+          "from": 2,
+          "to": 10,
+          "evidence": "up to 10% at the top tier",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "fx_fee_pct",
+          "from": 0.5,
+          "to": 0,
+          "evidence": "No FX fees. No transaction fees",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        },
+        {
+          "field": "payout_token",
+          "from": "USDC",
+          "to": "USDG",
+          "evidence": "Cashback RatePaid in USDG",
+          "evidence_verified": true,
+          "status": "apply",
+          "reason": "evidence verified on page"
+        }
+      ]
+    },
+    {
+      "slug": "plutus-card",
+      "source_url": "https://www.plutus.it/",
+      "confidence": "low",
+      "note": "Same homepage as the 'plutus' row (duplicate product). Only cashback and PLUS payout stated; the 4 named tier rows and PLU staking numbers are not on the page.",
+      "changes": [
+        {
+          "field": "cashback_min_pct",
+          "from": 1,
+          "to": 3,
+          "evidence": "Start with 3% back on daily purchases",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        },
+        {
+          "field": "cashback_max_pct",
+          "from": 8,
+          "to": 9,
+          "evidence": "Climb to 9% via loyalty tiers.",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        },
+        {
+          "field": "payout_token",
+          "from": "PLU",
+          "to": "PLUS",
+          "evidence": "Get PLUS rewards on your daily spend.",
+          "evidence_verified": true,
+          "status": "hold_low",
+          "reason": "agent confidence low"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "apply": 41,
+    "hold_unverified": 4,
+    "hold_low": 17,
+    "rejected": 1,
+    "hold_manual": 3
+  }
+}

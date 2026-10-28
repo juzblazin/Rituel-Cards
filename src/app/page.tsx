@@ -6,6 +6,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
+  Coins,
   Globe2,
   Megaphone,
   PiggyBank,
@@ -16,7 +17,7 @@ import {
 import { cards, kycLabel, type Card } from "@/lib/data";
 import { parseFilters, type ViewMode } from "@/lib/filters";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
-import { attributePages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
+import { attributePages, cryptoBySlug, featuredPairs, supportedCountries } from "@/lib/taxonomy";
 import { buildMetadata, faqJsonLd, itemListJsonLd } from "@/lib/seo";
 import { absoluteUrl, site } from "@/lib/site";
 import { countryByCode } from "@/lib/countries";
@@ -81,6 +82,40 @@ const NEEDS = [
   { slug: "virtual-ad-spend", label: "Ad spend", icon: Megaphone, blurb: "Virtual cards that work" },
 ];
 
+const CARD_LOGOS: Record<string, string> = {
+  "etherfi-cash": "/logos/etherfi-mark.jpeg",
+  "gnosis-pay": "/logos/gnosispay.png",
+  "crypto-com-visa": "/logos/cryptocom.png",
+  "nexo-card": "/logos/nexo.png",
+  "wirex-card": "/logos/wirex.png",
+  redotpay: "/logos/redotpay.png",
+  kast: "/logos/kast.png",
+};
+
+const STABLECOIN_ASSETS = [
+  {
+    slug: "usdc",
+    symbol: "USDC",
+    name: "USD Coin",
+    logo: "/crypto/tokens/usdc.png",
+    blurb: "DeFi-native top-ups on Base, Arbitrum and Solana.",
+  },
+  {
+    slug: "usdt",
+    symbol: "USDT",
+    name: "Tether",
+    logo: "/crypto/tokens/usdt.png",
+    blurb: "Widely accepted — cheapest on Tron and BNB Chain.",
+  },
+  {
+    slug: "eure",
+    symbol: "EURe",
+    name: "Monerium EURe",
+    logo: "/crypto/tokens/eure.jpg",
+    blurb: "Euro-pegged settlement for zero-FX spend in Europe.",
+  },
+];
+
 const ISSUERS = [
   { name: "ether.fi", logo: "/logos/etherfi.png" },
   { name: "Gnosis Pay", logo: "/logos/gnosispay.png" },
@@ -107,6 +142,13 @@ export default async function HomePage({
     .filter((card) => card.isSponsored)
     .sort((a, b) => a.sponsorPriority - b.sponsorPriority)
     .slice(0, 3);
+
+  const stablecoinGuide = attributePages.find((page) => page.slug === "stablecoin");
+  const stablecoinCount = stablecoinGuide ? cards.filter(stablecoinGuide.filter).length : 0;
+  const stablecoinAssets = STABLECOIN_ASSETS.map((asset) => {
+    const page = cryptoBySlug.get(asset.slug);
+    return { ...asset, count: page ? cards.filter(page.filter).length : 0 };
+  });
 
   const countryCounts = new Map<string, number>();
   for (const card of cards) {
@@ -279,7 +321,7 @@ export default async function HomePage({
       <section id="directory" className="scroll-mt-20 border-y bg-muted/30 py-16">
         <div className="container-page">
           <SectionHeader
-            eyebrow="The directory"
+            eyebrow="Crypto Card List"
             title="Every card, side by side"
             description="Toggle grid or table view. Filters, sort and country state stay in the URL, so every shortlist is shareable."
           />
@@ -379,18 +421,100 @@ export default async function HomePage({
               <Link
                 key={pair.slug}
                 href={`/compare/${pair.slug}`}
-                className="group flex items-center gap-2 rounded-xl border bg-card p-3 transition-colors hover:bg-accent"
+                className="group flex items-center gap-2.5 rounded-xl border bg-card px-2.5 py-2 transition-colors hover:bg-accent"
               >
-                <CardArt card={pair.a} className="h-9 w-14 shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-xs font-medium">{pair.a.name}</div>
-                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground">vs</div>
-                  <div className="truncate text-xs font-medium">{pair.b.name}</div>
+                <div className="flex shrink-0 items-center gap-1.5">
+                  {[pair.a, pair.b].map((card) => {
+                    const logo = CARD_LOGOS[card.slug];
+                    return logo ? (
+                      <Image
+                        key={card.slug}
+                        src={logo}
+                        alt={`${card.name} logo`}
+                        width={32}
+                        height={32}
+                        className="size-8 rounded-lg object-cover ring-1 ring-black/10"
+                      />
+                    ) : (
+                      <span
+                        key={card.slug}
+                        aria-label={card.name}
+                        className="grid size-8 place-items-center rounded-lg text-[11px] font-bold ring-1 ring-black/10"
+                        style={{ background: card.brand.from, color: card.brand.ink }}
+                      >
+                        {card.logoText}
+                      </span>
+                    );
+                  })}
                 </div>
-                <CardArt card={pair.b} className="h-9 w-14 shrink-0" />
+                <div className="line-clamp-2 min-w-0 flex-1 text-xs font-medium leading-tight">
+                  {pair.a.name}
+                  <span className="px-1.5 text-[10px] font-normal uppercase tracking-wider text-muted-foreground">
+                    vs
+                  </span>
+                  {pair.b.name}
+                </div>
                 <ArrowRight className="size-3.5 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="container-page">
+          <SectionHeader
+            eyebrow="Stablecoin"
+            title="Cards that run on stablecoins"
+            description="Top up from USDC, USDT or EURe and keep your balance pegged to fiat. Compare top-up costs, cashback and FX across every stablecoin-ready programme."
+            href="/cards/stablecoin"
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {stablecoinAssets.map((asset) => (
+              <Link
+                key={asset.slug}
+                href={`/crypto/${asset.slug}`}
+                className="group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-brand/35 hover:bg-brand/[0.04]"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5 dark:ring-white/15" aria-hidden>
+                    <Image src={asset.logo} alt="" width={24} height={24} className="size-6 object-contain" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-semibold">{asset.symbol}</span>
+                    <span className="block truncate text-[11px] text-muted-foreground">{asset.name}</span>
+                  </span>
+                  <span className="num text-xs font-semibold text-muted-foreground">{asset.count}</span>
+                </div>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">{asset.blurb}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-foreground">
+                  Compare cards
+                  <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+            <Link
+              href="/cards/stablecoin"
+              className="group flex flex-col rounded-xl border border-brand/25 bg-brand/[0.04] p-4 transition-colors hover:border-brand/45 hover:bg-brand/[0.08]"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand/15 text-brand ring-1 ring-brand/20" aria-hidden>
+                  <Coins className="size-4" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold">All stablecoin cards</span>
+                  <span className="block text-[11px] text-muted-foreground">USDC · USDT · EURe</span>
+                </span>
+                <span className="num text-xs font-semibold text-muted-foreground">{stablecoinCount}</span>
+              </div>
+              <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                The full guide to cards that accept stablecoins, ranked on fees and cashback.
+              </p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand">
+                Open guide
+                <ArrowRight className="size-3 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
           </div>
         </div>
       </section>
@@ -557,93 +681,95 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {sponsored.map((card) => (
-            <SpotlightCard
-              key={card.slug}
-              theme="auto"
-              spotlightColor="oklch(0.66 0.23 292)"
-              intensity={0.08}
-              spotlightSize={280}
-              softness={0.8}
-              borderGlow={0.45}
-              className="group flex flex-col rounded-xl border border-border/80 p-5 transition-colors hover:border-brand/40"
-            >
-              {card.slug === "etherfi-cash" ? (
-                <Image
-                  src="/logos/etherfi.png"
-                  alt={card.name}
-                  width={512}
-                  height={320}
-                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                />
-              ) : card.slug === "gnosis-pay" ? (
-                <Image
-                  src="/logos/gnosispay-card.png"
-                  alt={card.name}
-                  width={512}
-                  height={320}
-                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                />
-              ) : card.slug === "redotpay" ? (
-                <Image
-                  src="/logos/redotpay-card.jpg"
-                  alt={card.name}
-                  width={512}
-                  height={320}
-                  className="aspect-[1.58/1] w-full rounded-lg object-cover"
-                />
-              ) : (
-                <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
-              )}
+            <Link key={card.slug} href={`/card/${card.slug}`}>
+              <SpotlightCard
+                theme="auto"
+                spotlightColor="oklch(0.66 0.23 292)"
+                intensity={0.08}
+                spotlightSize={280}
+                softness={0.8}
+                borderGlow={0.45}
+                className="group flex flex-col rounded-xl border border-border/80 p-5 transition-colors hover:border-brand/40"
+              >
+                {card.slug === "etherfi-cash" ? (
+                  <Image
+                    src="/logos/etherfi.png"
+                    alt={card.name}
+                    width={512}
+                    height={320}
+                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                  />
+                ) : card.slug === "gnosis-pay" ? (
+                  <Image
+                    src="/logos/gnosispay-card.png"
+                    alt={card.name}
+                    width={512}
+                    height={320}
+                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                  />
+                ) : card.slug === "redotpay" ? (
+                  <Image
+                    src="/logos/redotpay-card.jpg"
+                    alt={card.name}
+                    width={512}
+                    height={320}
+                    className="aspect-[1.58/1] w-full rounded-lg object-cover"
+                  />
+                ) : (
+                  <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
+                )}
 
-              <div className="mt-5 flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3 className="flex items-center gap-1.5 text-lg font-semibold tracking-tight">
-                    <span className="truncate">{card.name}</span>
-                    <BadgeCheck className="size-4 shrink-0 text-success" />
-                  </h3>
-                  <p className="mt-0.5 text-sm text-muted-foreground">{card.issuerName}</p>
+                <div className="mt-5 flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="flex items-center gap-1.5 text-lg font-semibold tracking-tight">
+                      <span className="truncate">{card.name}</span>
+                      <BadgeCheck className="size-4 shrink-0 text-success" />
+                    </h3>
+                    <p className="mt-0.5 text-sm text-muted-foreground">{card.issuerName}</p>
+                  </div>
+                  <Rating score={card.ratingScore} className="text-sm" />
                 </div>
-                <Rating score={card.ratingScore} className="text-sm" />
-              </div>
 
-              <p className="mt-3 line-clamp-2 min-h-10 text-sm leading-5 text-muted-foreground">{card.tagline}</p>
+                <p className="mt-3 line-clamp-2 min-h-10 text-sm leading-5 text-muted-foreground">{card.tagline}</p>
 
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <ShadBadge variant="success" className="h-6 px-2.5 text-xs">{cashbackLabel(card)}</ShadBadge>
-                <span className="text-xs text-muted-foreground">FX {pct(card.fxFeePct)}</span>
-              </div>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <ShadBadge variant="success" className="h-6 px-2.5 text-xs">{cashbackLabel(card)}</ShadBadge>
+                  <span className="text-xs text-muted-foreground">FX {pct(card.fxFeePct)}</span>
+                </div>
 
-              <div className="mt-5 grid grid-cols-3 gap-3 border-t pt-4">
-                <div>
-                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Annual</p>
-                  <p className="mt-1 text-sm font-medium text-foreground">{feeLabel(card.annualFeeUsd, "None")}</p>
+                <div className="mt-5 grid grid-cols-3 gap-3 border-t pt-4">
+                  <div>
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Annual</p>
+                    <p className="mt-1 text-sm font-medium text-foreground">{feeLabel(card.annualFeeUsd, "None")}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">KYC</p>
+                    <p className="mt-1 text-sm font-medium text-foreground">{kycLabel[card.kycLevel]}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Score</p>
+                    <p className="mt-1 text-sm font-medium text-foreground">{card.ratingScore.toFixed(1)} / 10</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">KYC</p>
-                  <p className="mt-1 text-sm font-medium text-foreground">{kycLabel[card.kycLevel]}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Score</p>
-                  <p className="mt-1 text-sm font-medium text-foreground">{card.ratingScore.toFixed(1)} / 10</p>
-                </div>
-              </div>
 
-              <div className="mt-auto flex gap-2.5 pt-5">
-                <ButtonLink href={`/card/${card.slug}`} variant="outline" size="default" className="h-9 flex-1">
-                  Review
-                </ButtonLink>
-                <div className="flex-1">
-                  <AffiliateLink
-                    slug={card.slug}
-                    cardName={card.name}
-                    source="featured-partner"
-                    className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-brand px-3 text-sm font-medium text-brand-foreground shadow-[0_10px_30px_-14px_var(--brand)] transition hover:bg-brand/90"
-                  >
-                    Get card <ArrowUpRight className="size-4" />
-                  </AffiliateLink>
+                <div className="mt-auto flex gap-2.5 pt-5">
+                  <Button variant="outline" size="default" className="h-9 flex-1">
+                    Details
+                  </Button>
+                  <div className="flex-1">
+                    <AffiliateLink
+                      slug={card.slug}
+                      cardName={card.name}
+                      source="featured-partner"
+                      preventNested
+                      className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-brand px-3 text-sm font-medium text-brand-foreground shadow-[0_10px_30px_-14px_var(--brand)] transition hover:bg-brand/90"
+                    >
+                      Get card <ArrowUpRight className="size-4" />
+                    </AffiliateLink>
+                  </div>
                 </div>
-              </div>
-            </SpotlightCard>
+              </SpotlightCard>
+            </Link>
           ))}
         </div>
       </div>

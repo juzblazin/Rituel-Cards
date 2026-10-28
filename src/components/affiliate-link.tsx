@@ -1,12 +1,25 @@
 "use client";
 
-import Link from "next/link";
-import type { ComponentProps } from "react";
+import type { MouseEvent, MouseEventHandler, ReactNode } from "react";
 
-type Props = Omit<ComponentProps<typeof Link>, "href"> & {
+/**
+ * Affiliate outbound link.
+ *
+ * Renders an anchor, except when `preventNested` is set — then it renders a
+ * button, so it can sit inside another link (a card tile that is clickable as a
+ * whole) without nesting a second anchor.
+ *
+ * Props are the subset valid on both elements, so Link's own props and its
+ * anchor ref are deliberately not forwarded.
+ */
+type Props = {
   slug: string;
   cardName: string;
   source?: string;
+  preventNested?: boolean;
+  className?: string;
+  children?: ReactNode;
+  onClick?: MouseEventHandler<HTMLElement>;
 };
 
 declare global {
@@ -17,41 +30,75 @@ declare global {
   }
 }
 
-export function AffiliateLink({ slug, cardName, source = "listing", onClick, ...props }: Props) {
+export function AffiliateLink({
+  slug,
+  cardName,
+  source = "listing",
+  preventNested = false,
+  className,
+  children,
+  onClick,
+}: Props) {
+  const href = `/go/${slug}?source=${encodeURIComponent(source)}`;
+
+  const trackClick = (event: MouseEvent<HTMLElement>) => {
+    const payload = { slug, card: cardName, source, ts: Date.now() };
+    try {
+      const body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" }));
+      } else {
+        void fetch("/api/track", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body,
+          keepalive: true,
+        });
+      }
+    } catch {
+      /* tracking must never block the click */
+    }
+    window.gtag?.("event", "affiliate_click", {
+      card_slug: slug,
+      card_name: cardName,
+      placement: source,
+    });
+    window.posthog?.capture("affiliate_click", {
+      card_slug: slug,
+      card_name: cardName,
+      placement: source,
+    });
+  };
+
+  if (preventNested) {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          trackClick(event);
+          onClick?.(event);
+          window.location.href = href;
+        }}
+      >
+        {children}
+      </button>
+    );
+  }
+
   return (
-    <Link
-      {...props}
-      href={`/go/${slug}?source=${encodeURIComponent(source)}`}
+    <a
+      href={href}
       rel="nofollow sponsored noopener"
+      className={className}
       onClick={(event) => {
-        const payload = { slug, card: cardName, source, ts: Date.now() };
-        try {
-          const body = JSON.stringify(payload);
-          if (navigator.sendBeacon) {
-            navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" }));
-          } else {
-            void fetch("/api/track", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body,
-              keepalive: true,
-            });
-          }
-        } catch {
-          /* tracking must never block the click */
-        }
-        window.gtag?.("event", "affiliate_click", {
-          card_slug: slug,
-          card_name: cardName,
-          placement: source,
-        });
-        window.posthog?.capture("affiliate_click", {
-          card_slug: slug,
-          card_name: cardName,
-          placement: source,
-        });
+        trackClick(event);
         onClick?.(event);
       }}
-    />
+    >
+      {children}
+    </a>
   );
 }

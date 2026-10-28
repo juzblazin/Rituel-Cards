@@ -95,7 +95,7 @@ export default async function AttributePage({ params }: Props) {
     },
     {
       q: `How are these cards ranked?`,
-      a: "The default order pins sponsored cards first (clearly labelled), then sorts by editor score. Switch to table view to sort on raw fees, cashback or limits. Sponsorship never changes a fee value or a calculation.",
+      a: "The default order sorts by editor score. Switch to table view to sort on raw fees, cashback or limits. Fees and calculator outputs always use the raw numbers.",
     },
     ...(EXTRA_FAQS[page.slug] ?? []),
   ];
@@ -121,7 +121,7 @@ export default async function AttributePage({ params }: Props) {
 
       <div className="border-b border-border bg-background/60">
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">Directory</Link>
+          <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <Link href="/cards" className="hover:text-foreground">Guides</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
@@ -173,8 +173,8 @@ export default async function AttributePage({ params }: Props) {
               marked as such rather than assumed to be free.
             </p>
             <p className="mt-2 text-sm leading-5 text-muted-foreground">
-              Sponsored placement is applied after filtering, so a paid card never appears in a category it does not
-              qualify for. Read the full{" "}
+              Filtering is applied before ranking, so a card never appears in a category it does not qualify for. Read
+              the full{" "}
               <Link href="/methodology" className="font-medium text-foreground underline underline-offset-4">methodology</Link>.
             </p>
           </div>

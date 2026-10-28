@@ -1,9 +1,29 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Coins, Network } from "lucide-react";
+import { ArrowRight, Coins } from "lucide-react";
 import { cards } from "@/lib/data";
 import { buildMetadata } from "@/lib/seo";
 import { cryptoPages } from "@/lib/taxonomy";
+
+const LOGOS: Record<string, string> = {
+  usdt: "/crypto/tokens/usdt.png",
+  usdc: "/crypto/tokens/usdc.png",
+  btc: "/crypto/tokens/btc.png",
+  eth: "/crypto/tokens/eth.png",
+  sol: "/crypto/tokens/sol.png",
+  monero: "/crypto/tokens/xmr.png",
+  eure: "/crypto/tokens/eure.jpg",
+  ethereum: "/crypto/chains/ethereum.png",
+  solana: "/crypto/chains/solana.png",
+  arbitrum: "/crypto/chains/arbitrum.jpg",
+  base: "/crypto/chains/base.png",
+  polygon: "/crypto/chains/polygon.png",
+  tron: "/crypto/chains/tron.png",
+  bitcoin: "/crypto/chains/bitcoin.png",
+  gnosis: "/crypto/chains/gnosis.png",
+  "bnb-chain": "/crypto/chains/bnb-chain.png",
+};
 
 export const metadata: Metadata = buildMetadata({
   title: "Crypto Cards by Token & Chain — USDT, USDC, BTC, Solana & More",
@@ -60,8 +80,14 @@ function Section({ title, pages }: { title: string; pages: typeof cryptoPages })
               href={`/crypto/${page.slug}`}
               className="group flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 shadow-sm transition hover:bg-muted"
             >
-              <span className="grid size-7 shrink-0 place-items-center rounded-md bg-muted text-muted-foreground">
-                {page.kind === "token" ? <Coins className="size-3.5" /> : <Network className="size-3.5" />}
+              <span className="grid size-7 shrink-0 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5 dark:ring-white/15">
+                <Image
+                  src={LOGOS[page.slug]}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="size-5 object-contain"
+                />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block truncate text-sm font-medium text-foreground">{page.label}</span>

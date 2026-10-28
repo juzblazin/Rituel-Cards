@@ -136,14 +136,6 @@ export function CardTile({
 
         <p className="mt-1 truncate text-xs text-muted-foreground">
           by <span className="font-medium text-foreground/80">{card.issuerName}</span>
-          {card.isSponsored && (
-            <>
-              <span aria-hidden className="px-1 text-border">
-                •
-              </span>
-              <span className="font-medium text-brand">Sponsored</span>
-            </>
-          )}
           <span aria-hidden className="px-1 text-border">
             •
           </span>

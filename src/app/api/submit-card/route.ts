@@ -1,4 +1,6 @@
 import type { NextRequest } from "next/server";
+import { isDatabaseConfigured, saveSubmission, type PlanKey } from "@/lib/db";
+import { isEmailConfigured, sendSubmissionNotification } from "@/lib/email";
 
 type Submission = {
   company?: string;
@@ -23,16 +25,42 @@ export async function POST(request: NextRequest) {
     return Response.json({ ok: false, error: "Enter a valid work email." }, { status: 400 });
   }
 
+  const { company, email, cardName } = body;
+  const plan: PlanKey = PLANS.has(body.plan ?? "") ? (body.plan as PlanKey) : "free";
+
   const submission = {
-    ...body,
-    plan: PLANS.has(body.plan ?? "") ? body.plan : "free",
+    id: `sub_${Date.now().toString(36)}`,
+    company,
+    cardName,
+    email,
+    plan,
+    website: body.website,
+    contactName: body.contactName,
+    message: body.message,
     receivedAt: new Date().toISOString(),
     country: request.headers.get("x-geo-country") || "unknown",
-    id: `sub_${Date.now().toString(36)}`,
   };
 
-  // No CRM is configured in this build. Log the lead and forward to a webhook if one exists.
-  console.info("[card_submission]", JSON.stringify(submission));
+  if (isDatabaseConfigured()) {
+    try {
+      await saveSubmission(submission);
+    } catch (error) {
+      console.error("[card_submission] Postgres insert failed", error);
+      return Response.json(
+        { ok: false, error: "Could not save the submission. Email us instead." },
+        { status: 502 },
+      );
+    }
+  } else {
+    // No database configured (local development). Keep the lead in the log.
+    console.info("[card_submission]", JSON.stringify(submission));
+  }
+
+  // Best effort: the lead is already durable in Postgres, so a mail failure is logged, not fatal.
+  if (isEmailConfigured()) {
+    const notified = await sendSubmissionNotification(submission);
+    if (!notified.ok) console.error("[card_submission] notification email failed:", notified.error);
+  }
 
   const webhook = process.env.SUBMISSIONS_WEBHOOK_URL;
   if (webhook) {

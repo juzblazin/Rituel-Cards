@@ -1,7 +1,9 @@
 node_modules
 .next
 out
-.env*.local
+.env
+.env.*
+!.env.example
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
@@ -9,3 +11,4 @@ next-env.d.ts
 /freebuff-sites-build/
 /.open-next/
 /.wrangler/
+.neon

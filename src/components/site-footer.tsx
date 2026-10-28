@@ -10,6 +10,7 @@ const guides = [
   ["No-KYC cards", "/cards/no-kyc"],
   ["Self-custody cards", "/cards/self-custody"],
   ["High cashback", "/cards/high-cashback"],
+  ["Stablecoin cards", "/cards/stablecoin"],
   ["Zero FX fees", "/cards/no-fx"],
   ["Apple Pay cards", "/cards/apple-pay"],
   ["Cards for ad spend", "/cards/virtual-ad-spend"],
