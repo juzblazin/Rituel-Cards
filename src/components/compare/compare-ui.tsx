@@ -32,7 +32,11 @@ export function CompareModal({
     };
   }, [onClose]);
 
-  const compareUrl = `/compare/${cards.map((card) => card.slug).join("-vs-")}`;
+  // Sorted to match the canonical pair slug, so shared links are not redirects.
+  const compareUrl = `/compare/${cards
+    .map((card) => card.slug)
+    .sort()
+    .join("-vs-")}`;
 
   const copy = async () => {
     try {

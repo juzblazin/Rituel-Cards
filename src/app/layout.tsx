@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { site } from "@/lib/site";
+import { ogImage } from "@/lib/seo";
 import "./globals.css";
 
 const themeInitScript = `(function(){var m=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;var d=m;try{var s=localStorage.getItem("rituel-theme");if(s==="dark")d=true;else if(s==="light")d=false;}catch(e){}var r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light";r.dataset.theme=d?"dark":"light";})();`;
@@ -43,10 +44,12 @@ export const metadata: Metadata = {
     title: `${site.name} — Crypto Card Comparison & Directory`,
     description: site.description,
     url: site.url,
+    images: [{ url: ogImage.path, width: ogImage.width, height: ogImage.height, alt: ogImage.alt }],
   },
   twitter: {
     card: "summary_large_image",
     creator: site.twitter,
+    images: [ogImage.path],
   },
 };
 

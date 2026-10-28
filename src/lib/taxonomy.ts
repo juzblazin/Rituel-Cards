@@ -292,11 +292,19 @@ const featuredPairSeeds = [
   ["wirex-card", "deblock"],
 ];
 
+/**
+ * Canonical slug for a comparison. Slugs are sorted so `a-vs-b` and `b-vs-a`
+ * resolve to one URL instead of competing as duplicates.
+ */
+export function compareSlug(...slugs: string[]): string {
+  return [...slugs].sort().join("-vs-");
+}
+
 export const featuredPairs = featuredPairSeeds
   .map(([a, b]) => {
     const cardA = cards.find((card) => card.slug === a);
     const cardB = cards.find((card) => card.slug === b);
-    return cardA && cardB ? { a: cardA, b: cardB, slug: `${a}-vs-${b}` } : null;
+    return cardA && cardB ? { a: cardA, b: cardB, slug: compareSlug(a, b) } : null;
   })
   .filter((pair): pair is { a: Card; b: Card; slug: string } => Boolean(pair));
 

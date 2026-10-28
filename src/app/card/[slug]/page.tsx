@@ -16,7 +16,7 @@ import { brandName, cardBySlug, cards, custodyLabel, kycLabel, networkLabel, rel
 import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge } from "@/lib/format";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd } from "@/lib/seo";
 import { countryByCode } from "@/lib/countries";
-import { featuredPairs } from "@/lib/taxonomy";
+import { compareSlug, featuredPairs } from "@/lib/taxonomy";
 import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { CardEarnings } from "@/components/card-earnings";
@@ -72,7 +72,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
       : cards
           .filter((item) => item.slug !== card.slug)
           .slice(0, 3)
-          .map((item) => ({ a: card, b: item, slug: `${card.slug}-vs-${item.slug}` }));
+          .map((item) => ({ a: card, b: item, slug: compareSlug(card.slug, item.slug) }));
 
   const countryLinks = card.supportedCountries
     .map((code) => countryByCode.get(code))

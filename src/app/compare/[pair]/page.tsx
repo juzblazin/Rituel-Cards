@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight, Scale, Sparkles } from "lucide-react";
 import { cardBySlug } from "@/lib/data";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
-import { featuredPairs } from "@/lib/taxonomy";
+import { compareSlug, featuredPairs } from "@/lib/taxonomy";
 import { cn } from "@/lib/cn";
 import { ComparisonMatrix, WinnerSummary } from "@/components/compare/comparison-matrix";
 import { AffiliateLink } from "@/components/affiliate-link";
@@ -17,6 +17,11 @@ function resolvePair(pair: string) {
   const slugs = pair.split("-vs-");
   const resolved = slugs.map((slug) => cardBySlug.get(slug)).filter((card) => Boolean(card));
   return { slugs, cards: resolved };
+}
+
+/** Sorted so one ordering of the same cards is the only indexable URL. */
+function canonicalPair(pair: string) {
+  return compareSlug(...pair.split("-vs-"));
 }
 
 export async function generateStaticParams() {
@@ -31,13 +36,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: `${names} — Which Crypto Card Is Better? (2026)`,
     description: `Compare ${names} on fees, cashback, FX, KYC and country availability. See the winner for every metric.`,
-    path: `/compare/${pair}`,
+    path: `/compare/${canonicalPair(pair)}`,
     keywords: [`${matched[0]?.name} vs ${matched[1]?.name}`, "crypto card comparison"],
   });
 }
 
 export default async function ComparePage({ params }: Props) {
   const { pair } = await params;
+  const slugs = pair.split("-vs-");
+  // A card compared with itself (or a repeated slug) has no meaning.
+  if (new Set(slugs).size !== slugs.length) notFound();
+  if (canonicalPair(pair) !== pair) permanentRedirect(`/compare/${canonicalPair(pair)}`);
+
   const { cards: matched } = resolvePair(pair);
   if (matched.length < 2 || matched.length > 4) notFound();
 
