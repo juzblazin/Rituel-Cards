@@ -286,7 +286,7 @@ export function SubmitCardForm() {
                 <input type="checkbox" name="consent" required className="mt-0.5 h-3.5 w-3.5 accent-primary" />
                 <span className="text-xs leading-4 text-muted-foreground">
                   I&apos;m authorised to submit this listing and confirm the fee data is accurate to the best of my
-                  knowledge. I understand RItuel may verify the data independently.
+                  knowledge. I understand Rituel Cards may verify the data independently.
                 </span>
               </label>
 

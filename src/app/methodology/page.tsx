@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BarChart3, Database, RefreshCw, Scale, ShieldCheck } from "lucide-react";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { cards } from "@/lib/data";
 import { supportedCountries } from "@/lib/taxonomy";
 import { Badge } from "@/components/ui";
@@ -77,208 +77,216 @@ function totalWeight(key: WeightKey) {
   return pillars.reduce((sum, pillar) => sum + pillar.weights[key], 0);
 }
 
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Methodology", path: "/methodology" },
+]);
+
 export default function MethodologyPage() {
   return (
-    <div className="container-page py-12 sm:py-16">
-      <div className="max-w-3xl">
-        <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-          <Scale className="h-3 w-3" /> Methodology
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <div className="container-page py-12 sm:py-16">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
+            <Scale className="h-3 w-3" /> Methodology
+          </div>
+          <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+            How We Score a Crypto Card
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Rituel exists because crypto card marketing pages are unusually good at hiding the numbers that actually
+            matter. We collect, normalize, and weight real-world execution costs, counterparty risks, and on-chain
+            utility so you can evaluate cards objectively.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <Badge>{cards.length} cards tracked</Badge>
+            <Badge>{supportedCountries.length} country directories</Badge>
+            <Badge>Last reviewed October 2026</Badge>
+          </div>
         </div>
-        <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
-          How We Score a Crypto Card
-        </h1>
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">
-          Rituel exists because crypto card marketing pages are unusually good at hiding the numbers that actually
-          matter. We collect, normalize, and weight real-world execution costs, counterparty risks, and on-chain
-          utility so you can evaluate cards objectively.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Badge>{cards.length} cards tracked</Badge>
-          <Badge>{supportedCountries.length} country directories</Badge>
-          <Badge>Last reviewed October 2026</Badge>
-        </div>
-      </div>
 
-      <div className="mt-10 space-y-6">
-        <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-muted text-foreground">
-                <BarChart3 className="h-4 w-4" />
+        <div className="mt-10 space-y-6">
+          <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-lg bg-muted text-foreground">
+                  <BarChart3 className="h-4 w-4" />
+                </span>
+                <h2 className="text-lg font-semibold tracking-tight text-foreground">The Scoring Framework</h2>
+              </div>
+              <span className="rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+                0–100 composite score / 0.0–10.0 rating
               </span>
-              <h2 className="text-lg font-semibold tracking-tight text-foreground">The Scoring Framework</h2>
             </div>
-            <span className="rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
-              0–100 composite score / 0.0–10.0 rating
-            </span>
-          </div>
 
-          <div className="mt-3 max-w-3xl space-y-2 text-sm leading-6 text-muted-foreground">
-            <p>
-              The Rituel Editor Score is an audited composite index. It is not an unverified user rating, and
-              placement is never for sale.
-            </p>
-            <p>
-              Because an everyday fiat spender, a digital nomad, a Web3 self-custody purist, and a high-volume
-              trader have fundamentally different utility functions, we pair an objective{" "}
-              <strong className="font-semibold text-foreground">Baseline Universal Weighting</strong> with{" "}
-              <strong className="font-semibold text-foreground">Dynamic Persona Weight Profiles</strong>.
-            </p>
-          </div>
+            <div className="mt-3 max-w-3xl space-y-2 text-sm leading-6 text-muted-foreground">
+              <p>
+                The Rituel Editor Score is an audited composite index. It is not an unverified user rating, and
+                placement is never for sale.
+              </p>
+              <p>
+                Because an everyday fiat spender, a digital nomad, a Web3 self-custody purist, and a high-volume
+                trader have fundamentally different utility functions, we pair an objective{" "}
+                <strong className="font-semibold text-foreground">Baseline Universal Weighting</strong> with{" "}
+                <strong className="font-semibold text-foreground">Dynamic Persona Weight Profiles</strong>.
+              </p>
+            </div>
 
-          <div className="mt-5 overflow-x-auto rounded-lg border border-border">
-            <table className="w-full min-w-[1040px] border-collapse text-left align-top">
-              <caption className="sr-only">
-                Evaluation pillars, audited metrics, baseline weights and persona weight profiles for the Rituel
-                Editor Score.
-              </caption>
-              <thead>
-                <tr className="border-b border-border bg-muted/60">
-                  <th scope="col" className="w-10 px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    #
-                  </th>
-                  <th scope="col" className="w-[15%] px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Evaluation Pillar
-                  </th>
-                  <th scope="col" className="px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Core Audited Metrics
-                  </th>
-                  <th scope="col" className="w-20 px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-foreground">
-                    Baseline Weight
-                  </th>
-                  {personas.map((persona) => (
-                    <th
-                      key={persona.key}
-                      scope="col"
-                      className="w-[11%] px-3 py-3 text-center text-[11px] font-semibold leading-4 text-muted-foreground"
-                    >
-                      {persona.label}
+            <div className="mt-5 overflow-x-auto rounded-lg border border-border">
+              <table className="w-full min-w-[1040px] border-collapse text-left align-top">
+                <caption className="sr-only">
+                  Evaluation pillars, audited metrics, baseline weights and persona weight profiles for the Rituel
+                  Editor Score.
+                </caption>
+                <thead>
+                  <tr className="border-b border-border bg-muted/60">
+                    <th scope="col" className="w-10 px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      #
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {pillars.map((pillar, index) => (
-                  <tr key={pillar.name} className="border-b border-border/70 last:border-0">
-                    <td className="num px-3 py-3 text-xs font-semibold text-muted-foreground">{index + 1}</td>
-                    <th scope="row" className="px-3 py-3 text-left text-sm font-semibold leading-5 text-foreground">
-                      {pillar.name}
+                    <th scope="col" className="w-[15%] px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      Evaluation Pillar
                     </th>
-                    <td className="px-3 py-3 text-xs leading-5 text-muted-foreground">{pillar.metrics}</td>
-                    <td className="bg-muted/40 px-3 py-3 text-center">
-                      <span className="num inline-flex min-w-11 justify-center rounded-md bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
-                        {pillar.weights.baseline}%
-                      </span>
-                    </td>
+                    <th scope="col" className="px-3 py-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      Core Audited Metrics
+                    </th>
+                    <th scope="col" className="w-20 px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-foreground">
+                      Baseline Weight
+                    </th>
                     {personas.map((persona) => (
-                      <td key={persona.key} className="num px-3 py-3 text-center text-xs text-muted-foreground">
-                        {pillar.weights[persona.key]}%
+                      <th
+                        key={persona.key}
+                        scope="col"
+                        className="w-[11%] px-3 py-3 text-center text-[11px] font-semibold leading-4 text-muted-foreground"
+                      >
+                        {persona.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {pillars.map((pillar, index) => (
+                    <tr key={pillar.name} className="border-b border-border/70 last:border-0">
+                      <td className="num px-3 py-3 text-xs font-semibold text-muted-foreground">{index + 1}</td>
+                      <th scope="row" className="px-3 py-3 text-left text-sm font-semibold leading-5 text-foreground">
+                        {pillar.name}
+                      </th>
+                      <td className="px-3 py-3 text-xs leading-5 text-muted-foreground">{pillar.metrics}</td>
+                      <td className="bg-muted/40 px-3 py-3 text-center">
+                        <span className="num inline-flex min-w-11 justify-center rounded-md bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
+                          {pillar.weights.baseline}%
+                        </span>
+                      </td>
+                      {personas.map((persona) => (
+                        <td key={persona.key} className="num px-3 py-3 text-center text-xs text-muted-foreground">
+                          {pillar.weights[persona.key]}%
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="border-t border-border bg-muted/60">
+                    <td />
+                    <th scope="row" className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider text-foreground">
+                      Total Weighting
+                    </th>
+                    <td className="px-3 py-3 text-xs font-medium text-muted-foreground">100-Point Normalized Scale</td>
+                    {weightKeys.map((key) => (
+                      <td
+                        key={key}
+                        className={`num px-3 py-3 text-center text-xs font-semibold text-foreground ${
+                          key === "baseline" ? "bg-muted/40" : ""
+                        }`}
+                      >
+                        {totalWeight(key)}%
                       </td>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr className="border-t border-border bg-muted/60">
-                  <td />
-                  <th scope="row" className="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider text-foreground">
-                    Total Weighting
-                  </th>
-                  <td className="px-3 py-3 text-xs font-medium text-muted-foreground">100-Point Normalized Scale</td>
-                  {weightKeys.map((key) => (
-                    <td
-                      key={key}
-                      className={`num px-3 py-3 text-center text-xs font-semibold text-foreground ${
-                        key === "baseline" ? "bg-muted/40" : ""
-                      }`}
-                    >
-                      {totalWeight(key)}%
-                    </td>
-                  ))}
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-
-          <p className="mt-3 text-xs leading-5 text-muted-foreground">
-            Every weight profile sums to 100%. The baseline profile applies when no persona is selected; selecting a
-            persona re-weights the same seven pillars rather than changing the underlying audit data.
-          </p>
-        </section>
-
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Section icon={Database} title="Data Collection & Normalization Standard">
-            <p>Every data point originates from a verifiable primary source:</p>
-            <ul className="mt-2 space-y-1.5">
-              {[
-                "Issuer fee schedules and product disclosure statements (PDS)",
-                "Cardholder terms and conditions",
-                "Smart contract architectures and on-chain Proof of Reserves attestations",
-                "Live application onboarding flows and terminal payment testing",
-              ].map((item) => (
-                <li key={item} className="flex gap-2">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground/40" aria-hidden /> {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-3">
-              Secondary commentary is strictly used to locate primary documentation. If an issuer does not disclose
-              an exchange spread, fee tier, or limit, it is recorded as{" "}
-              <strong className="font-semibold text-foreground">Unknown</strong> and penalised within the transparency
-              sub-index rather than estimated.
-            </p>
-            <dl className="mt-4 space-y-3">
-              {[
-                [
-                  "Currency Normalization",
-                  "All fiat and token values are benchmarked to USD equivalent for uniform cross-comparison.",
-                ],
-                [
-                  "Basis Points Normalization",
-                  "Spreads, FX markups, and liquidation penalties are computed directly in basis points (bps, where 100 bps = 1.00%).",
-                ],
-                [
-                  "Country Standard",
-                  "Regional eligibility and sanctioned-market exclusions are mapped against ISO-3166 alpha-2 standards to feed our real-time geo-availability engine.",
-                ],
-              ].map(([term, detail]) => (
-                <div key={term} className="rounded-lg border border-border bg-background p-3">
-                  <dt className="text-xs font-semibold text-foreground">{term}</dt>
-                  <dd className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</dd>
-                </div>
-              ))}
-            </dl>
-          </Section>
-
-          <Section icon={ShieldCheck} title="Audit Cadence & Editorial Independence">
-            <div className="space-y-3">
-              {[
-                [
-                  "Scheduled Audits",
-                  "Card records undergo scheduled re-audits quarterly. Immediate re-scoring occurs upon verified changes to fee schedules, tokenomics, or custodial backing.",
-                ],
-                [
-                  "Verified Status",
-                  "A listing loses its verified check if an issuer's fee schedule or regulatory licensing disclosure is older than six months without explicit re-confirmation.",
-                ],
-                [
-                  "Commercial Separation",
-                  "Commercial partnerships and affiliate links never alter weighting coefficients, formula outputs, or composite rankings. Sponsored cards undergo the identical 7-pillar audit.",
-                ],
-              ].map(([term, detail]) => (
-                <div key={term} className="rounded-lg border border-border bg-background p-3">
-                  <div className="flex items-center gap-2">
-                    <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
-                    <h3 className="text-xs font-semibold text-foreground">{term}</h3>
-                  </div>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</p>
-                </div>
-              ))}
+                </tfoot>
+              </table>
             </div>
-          </Section>
+
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              Every weight profile sums to 100%. The baseline profile applies when no persona is selected; selecting a
+              persona re-weights the same seven pillars rather than changing the underlying audit data.
+            </p>
+          </section>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Section icon={Database} title="Data Collection & Normalization Standard">
+              <p>Every data point originates from a verifiable primary source:</p>
+              <ul className="mt-2 space-y-1.5">
+                {[
+                  "Issuer fee schedules and product disclosure statements (PDS)",
+                  "Cardholder terms and conditions",
+                  "Smart contract architectures and on-chain Proof of Reserves attestations",
+                  "Live application onboarding flows and terminal payment testing",
+                ].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-foreground/40" aria-hidden /> {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3">
+                Secondary commentary is strictly used to locate primary documentation. If an issuer does not disclose
+                an exchange spread, fee tier, or limit, it is recorded as{" "}
+                <strong className="font-semibold text-foreground">Unknown</strong> and penalised within the transparency
+                sub-index rather than estimated.
+              </p>
+              <dl className="mt-4 space-y-3">
+                {[
+                  [
+                    "Currency Normalization",
+                    "All fiat and token values are benchmarked to USD equivalent for uniform cross-comparison.",
+                  ],
+                  [
+                    "Basis Points Normalization",
+                    "Spreads, FX markups, and liquidation penalties are computed directly in basis points (bps, where 100 bps = 1.00%).",
+                  ],
+                  [
+                    "Country Standard",
+                    "Regional eligibility and sanctioned-market exclusions are mapped against ISO-3166 alpha-2 standards to feed our real-time geo-availability engine.",
+                  ],
+                ].map(([term, detail]) => (
+                  <div key={term} className="rounded-lg border border-border bg-background p-3">
+                    <dt className="text-xs font-semibold text-foreground">{term}</dt>
+                    <dd className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Section>
+
+            <Section icon={ShieldCheck} title="Audit Cadence & Editorial Independence">
+              <div className="space-y-3">
+                {[
+                  [
+                    "Scheduled Audits",
+                    "Card records undergo scheduled re-audits quarterly. Immediate re-scoring occurs upon verified changes to fee schedules, tokenomics, or custodial backing.",
+                  ],
+                  [
+                    "Verified Status",
+                    "A listing loses its verified check if an issuer's fee schedule or regulatory licensing disclosure is older than six months without explicit re-confirmation.",
+                  ],
+                  [
+                    "Commercial Separation",
+                    "Commercial partnerships and affiliate links never alter weighting coefficients, formula outputs, or composite rankings. Sponsored cards undergo the identical 7-pillar audit.",
+                  ],
+                ].map(([term, detail]) => (
+                  <div key={term} className="rounded-lg border border-border bg-background p-3">
+                    <div className="flex items-center gap-2">
+                      <RefreshCw className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+                      <h3 className="text-xs font-semibold text-foreground">{term}</h3>
+                    </div>
+                    <p className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</p>
+                  </div>
+                ))}
+              </div>
+            </Section>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

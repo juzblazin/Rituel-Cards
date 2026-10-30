@@ -9,7 +9,7 @@ const siteUrl =
   (process.env.NODE_ENV === "production" ? "https://rituel.xyz" : "http://localhost:3000");
 
 export const site = {
-  name: "RItuel",
+  name: "Rituel Cards",
   wordmark: "rituel",
   tagline: "Find the crypto card that actually pays you.",
   description:

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { cards } from "@/lib/data";
 import { supportedCountries } from "@/lib/taxonomy";
 
-export const alt = "RItuel — independent crypto card comparison";
+export const alt = "Rituel Cards — independent crypto card comparison";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

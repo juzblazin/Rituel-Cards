@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Terms of Use",
-  description: "Terms governing use of RItuel's crypto card directory, comparisons and calculators.",
+  description: "Terms governing use of Rituel Cards' crypto card directory, comparisons and calculators.",
   path: "/terms",
 });
 
@@ -23,7 +23,7 @@ export default function TermsPage() {
         <div className="mt-6 space-y-5 text-sm leading-6 text-muted-foreground">
           <Block title="1. Informational purpose">
             <p>
-              RItuel publishes information about crypto debit, credit and prepaid cards. Nothing on this site is
+              Rituel Cards publishes information about crypto debit, credit and prepaid cards. Nothing on this site is
               financial, legal, tax or investment advice, and nothing is an offer to sell a financial product. Card
               eligibility, fees and limits are determined solely by the issuer.
             </p>
@@ -58,7 +58,7 @@ export default function TermsPage() {
           <Block title="6. Intellectual property">
             <p>
               Card names, logos and trademarks belong to their respective owners and are used for identification
-              only. The RItuel name, editorial content, comparison structure and calculator logic are our
+              only. The Rituel Cards name, editorial content, comparison structure and calculator logic are our
               property. You may quote short excerpts with attribution and a link.
             </p>
           </Block>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight, Globe2, MapPin, ShieldCheck, Wallet } from "lucide-react";
 import { cards, kycLabel } from "@/lib/data";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd, itemListJsonLd } from "@/lib/seo";
+import { buildMetadata, titleWithCount, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
 import {
   cardsForCountry,
   countryFromSlug,
@@ -11,7 +11,7 @@ import {
   featuredPairs,
   supportedCountries,
 } from "@/lib/taxonomy";
-import { cashbackLabel, pct } from "@/lib/format";
+import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
@@ -30,9 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const available = cardsForCountry(country.code);
   if (available.length === 0) return {};
   return buildMetadata({
-    title: `${countryPageTitle(country.name)} — ${available.length} Cards Compared`,
-    description: `Compare ${available.length} crypto debit, credit and prepaid cards available in ${country.name}. Real FX fees, cashback, KYC levels and limits for 2026.`,
+    title: titleWithCount(countryPageTitle(country.name), available.length),
+    description: `Compare ${plural(available.length, "crypto card")} available in ${country.name}: debit, credit and prepaid. Real FX fees, cashback, KYC levels and limits for 2026.`,
     path: `/countries/${country.slug}`,
+    image: routeOgImage(`/countries/${country.slug}`, countryPageTitle(country.name)),
     keywords: [
       `crypto card ${country.name}`,
       `best crypto card ${country.name}`,

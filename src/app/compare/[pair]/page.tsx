@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight, Scale, Sparkles } from "lucide-react";
 import { cardBySlug } from "@/lib/data";
-import { cashbackLabel, feeLabel, pct } from "@/lib/format";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { cashbackLabel, feeLabel, pct, shortCardName } from "@/lib/format";
+import { buildMetadata, breadcrumbJsonLd, faqJsonLd, routeOgImage } from "@/lib/seo";
 import { compareSlug, featuredPairs } from "@/lib/taxonomy";
 import { cn } from "@/lib/cn";
 import { ComparisonMatrix, WinnerSummary } from "@/components/compare/comparison-matrix";
@@ -32,11 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pair } = await params;
   const { cards: matched } = resolvePair(pair);
   if (matched.length < 2) return {};
-  const names = matched.map((card) => card?.name).join(" vs ");
+  const names = matched.map((card) => shortCardName(card?.name ?? "")).join(" vs ");
   return buildMetadata({
-    title: `${names} — Which Crypto Card Is Better? (2026)`,
+    title: `${names} (2026): Which Card Is Better?`,
     description: `Compare ${names} on fees, cashback, FX, KYC and country availability. See the winner for every metric.`,
     path: `/compare/${canonicalPair(pair)}`,
+    image: routeOgImage(`/compare/${canonicalPair(pair)}`, `${names} crypto card comparison`),
     keywords: [`${matched[0]?.name} vs ${matched[1]?.name}`, "crypto card comparison"],
   });
 }

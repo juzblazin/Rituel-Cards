@@ -3,9 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Coins, Network, Sparkles } from "lucide-react";
 import { cards } from "@/lib/data";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd, itemListJsonLd } from "@/lib/seo";
+import { buildMetadata, titleWithCount, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
 import { cryptoBySlug, cryptoPages, featuredPairs } from "@/lib/taxonomy";
-import { cashbackLabel, pct } from "@/lib/format";
+import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
@@ -23,9 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
   const matched = cards.filter(page.filter);
   return buildMetadata({
-    title: `${page.title} — ${matched.length} Cards Compared`,
-    description: `${page.description} ${matched.length} cards tracked for 2026.`,
+    title: titleWithCount(page.title, matched.length),
+    description: `${page.description} ${plural(matched.length, "card")} tracked for 2026.`,
     path: `/crypto/${page.slug}`,
+    image: routeOgImage(`/crypto/${page.slug}`, page.title),
     keywords: [page.heading.toLowerCase(), `${page.label} crypto card`, "crypto card comparison"],
   });
 }
@@ -52,7 +53,7 @@ export default async function CryptoPage({ params }: Props) {
   const faqs = [
     {
       q: `Which crypto cards support ${page.label}?`,
-      a: `${matched.length} cards in our database accept ${page.label}: ${matched.map((card) => card.name).join(", ")}. Support can vary by region, so confirm the asset list for your country with the issuer.`,
+      a: `${plural(matched.length, "card")} in our database accept ${page.label}: ${matched.map((card) => card.name).join(", ")}. Support can vary by region, so confirm the asset list for your country with the issuer.`,
     },
     {
       q: `What is the cheapest way to spend ${page.label}?`,
@@ -115,7 +116,7 @@ export default async function CryptoPage({ params }: Props) {
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{page.intro}</p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Badge>{matched.length} cards</Badge>
+              <Badge>{plural(matched.length, "card")}</Badge>
               <Badge>Top cashback {pct(bestCashback.cashbackMaxPct)}</Badge>
               <Badge>{zeroFx} with 0% FX</Badge>
               <Badge>{noKyc} no-KYC option{noKyc === 1 ? "" : "s"}</Badge>
