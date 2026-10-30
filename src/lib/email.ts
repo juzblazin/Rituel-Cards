@@ -14,7 +14,11 @@ import { Resend } from "resend";
 const apiKey = process.env.RESEND_API_KEY?.trim() || "";
 
 /** `onboarding@resend.dev` only delivers to the address on the Resend account; verify a domain to send anywhere. */
-const fromAddress = process.env.EMAIL_FROM?.trim() || "RItuel <onboarding@resend.dev>";
+const SENDER_NAME = "Rituel Cards";
+
+/** A bare address in EMAIL_FROM gets the brand name, so inboxes show "Rituel Cards". */
+const configuredFrom = process.env.EMAIL_FROM?.trim() || "onboarding@resend.dev";
+const fromAddress = configuredFrom.includes("<") ? configuredFrom : `${SENDER_NAME} <${configuredFrom}>`;
 
 const notifyRecipients = (process.env.EMAIL_NOTIFY_TO?.trim() || "hello@rituel.xyz")
   .split(",")
@@ -112,7 +116,7 @@ export function buildSubmissionNotification(submission: SubmissionEmailInput): {
   ];
   const filled = rows.filter((row): row is [string, string] => Boolean(row[1]));
 
-  const subject = `[${submission.plan}] ${submission.company} — ${submission.cardName}`;
+  const subject = `[${SENDER_NAME}] New ${submission.plan} submission: ${submission.company} — ${submission.cardName}`;
   const html = [
     `<h2 style="margin:0 0 12px;font:600 16px system-ui">New card submission</h2>`,
     `<table cellpadding="0" cellspacing="0" style="font:14px system-ui;border-collapse:collapse">`,
@@ -156,21 +160,21 @@ export async function sendSubmissionConfirmation(submission: SubmissionEmailInpu
     return { ok: false, error: "EMAIL_FROM uses the resend.dev test sender; verify a domain to email submitters." };
   }
   const greeting = submission.contactName ? `Hi ${escapeHtml(submission.contactName)},` : "Hi,";
-  const subject = `We received ${submission.cardName} — RItuel`;
+  const subject = `We received ${submission.cardName} — ${SENDER_NAME}`;
   const html = [
     `<p style="font:14px system-ui">${greeting}</p>`,
-    `<p style="font:14px system-ui">Thanks for submitting <strong>${escapeHtml(submission.cardName)}</strong> to RItuel. We review every listing by hand and reply within two business days.</p>`,
+    `<p style="font:14px system-ui">Thanks for submitting <strong>${escapeHtml(submission.cardName)}</strong> to ${SENDER_NAME}. We review every listing by hand and reply within two business days.</p>`,
     `<p style="font:14px system-ui">Your reference is <code>${escapeHtml(submission.id)}</code>. Reply to this email if you want to add a fee schedule or country list.</p>`,
-    `<p style="font:14px system-ui">— The RItuel team</p>`,
+    `<p style="font:14px system-ui">— The ${SENDER_NAME} team</p>`,
   ].join("");
   const text = [
     submission.contactName ? `Hi ${submission.contactName},` : "Hi,",
     "",
-    `Thanks for submitting ${submission.cardName} to RItuel. We review every listing by hand and reply within two business days.`,
+    `Thanks for submitting ${submission.cardName} to ${SENDER_NAME}. We review every listing by hand and reply within two business days.`,
     "",
     `Your reference is ${submission.id}. Reply to this email if you want to add a fee schedule or country list.`,
     "",
-    "— The RItuel team",
+    `— The ${SENDER_NAME} team`,
   ].join("\n");
   return sendEmail({ to: submission.email, subject, html, text, replyTo: notifyRecipients[0] });
 }
