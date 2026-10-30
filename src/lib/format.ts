@@ -78,3 +78,29 @@ export function downloadCsv(filename: string, headers: string[], rows: (string |
   link.click();
   URL.revokeObjectURL(url);
 }
+
+/**
+ * Drops the "Brand - Tier Card" boilerplate so titles stay short:
+ * "ether.fi Cash - Cash Card" -> "ether.fi Cash", "KAST - Private Card" -> "KAST Private".
+ */
+export function shortCardName(name: string): string {
+  const [brand, ...rest] = name.split(" - ");
+  if (rest.length === 0) return name.trim();
+  const tier = rest.join(" ").replace(/\s+Card$/i, "").trim();
+  const brandWords = new Set(brand.toLowerCase().split(/\s+/));
+  const tierIsRepeat = tier.split(/\s+/).every((word) => brandWords.has(word.toLowerCase()));
+  return tier && !tierIsRepeat ? `${brand.trim()} ${tier}` : brand.trim();
+}
+
+export function plural(count: number, singular: string, pluralForm = `${singular}s`): string {
+  return `${count} ${count === 1 ? singular : pluralForm}`;
+}
+
+/** Joins sentences, adding the full stop a sentence is missing. */
+export function sentences(...parts: string[]): string {
+  return parts
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => (/[.!?]$/.test(part) ? part : `${part}.`))
+    .join(" ");
+}

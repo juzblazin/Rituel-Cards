@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui";
 export const metadata: Metadata = buildMetadata({
   title: "Submit or List Your Crypto Card — Verified & Sponsored Placement",
   description:
-    "List your crypto debit or credit card on RItuel. Free standard listing, $299 Verified Fast-Track and $999/mo Sponsored Partner placements.",
+    "List your crypto debit or credit card on Rituel Cards. Free standard listing, $299 Verified Fast-Track and $999/mo Sponsored Partner placements.",
   path: "/submit-card",
   keywords: ["submit crypto card", "list crypto card", "crypto card directory", "crypto card advertising"],
 });
@@ -58,7 +58,7 @@ export default function SubmitCardPage() {
                   <span className="bg-gradient-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent">people already comparing.</span>
                 </h1>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-                  RItuel readers are not browsing for news — they are choosing a card. Get a data-accurate profile,
+                  Rituel Cards readers are not browsing for news — they are choosing a card. Get a data-accurate profile,
                   country-level distribution and qualified outbound clicks. No display-network noise.
                 </p>
 
@@ -179,7 +179,7 @@ export default function SubmitCardPage() {
                 established issuers. Tell us what you need in the submission form.
               </p>
               <a
-                href={`mailto:${site.email}?subject=Custom%20placement%20on%20RItuel`}
+                href={`mailto:${site.email}?subject=Custom%20placement%20on%20Rituel%20Cards`}
                 className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-card px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted"
               >
                 <Mail className="h-3.5 w-3.5" /> {site.email}

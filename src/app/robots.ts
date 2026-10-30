@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/site";
 
 // Search and answer-engine crawlers are named explicitly so a blanket bot block
-// (or a future default) can't silently remove RItuel from AI answers.
+// (or a future default) can't silently remove Rituel Cards from AI answers.
 const aiCrawlers = [
   "OAI-SearchBot",
   "ChatGPT-User",

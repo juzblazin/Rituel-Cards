@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
-  description: "How RItuel collects, uses and protects personal data, including analytics and affiliate tracking.",
+  description: "How Rituel Cards collects, uses and protects personal data, including analytics and affiliate tracking.",
   path: "/privacy",
 });
 

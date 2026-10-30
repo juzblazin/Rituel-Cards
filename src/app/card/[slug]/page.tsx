@@ -13,8 +13,8 @@ import {
   X,
 } from "lucide-react";
 import { brandName, cardBySlug, cards, custodyLabel, kycLabel, networkLabel, relatedFamilyCards, type Card } from "@/lib/data";
-import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge } from "@/lib/format";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd } from "@/lib/seo";
+import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge, sentences, shortCardName } from "@/lib/format";
+import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd, routeOgImage } from "@/lib/seo";
 import { countryByCode } from "@/lib/countries";
 import { compareSlug, featuredPairs } from "@/lib/taxonomy";
 import { cn } from "@/lib/cn";
@@ -31,11 +31,26 @@ export async function generateMetadata({
   const card = cardBySlug.get(slug);
   if (!card) return {};
   return buildMetadata({
-    title: `${card.name} Review 2026 — Fees, Cashback & Availability`,
-    description: `${card.tagline} ${card.name} charges ${pct(card.fxFeePct)} FX and ${card.annualFeeUsd === 0 ? "has no annual fee" : `${money(card.annualFeeUsd)} per year`}. Compare full fees, limits and country availability.`,
+    title: `${shortCardName(card.name)} Review (2026): Fees & Cashback`,
+    description: cardDescription(card),
     path: `/card/${card.slug}`,
+    image: routeOgImage(`/card/${card.slug}`, `${card.name}: fees, cashback and availability`),
     keywords: [card.name, `${card.name} review`, `${card.name} fees`, `${card.name} cashback`],
   });
+}
+
+const MAX_DESCRIPTION_LENGTH = 160;
+
+function cardDescription(card: Card): string {
+  const name = shortCardName(card.name);
+  const fees = `${name} charges ${pct(card.fxFeePct)} FX and ${card.annualFeeUsd === 0 ? "has no annual fee" : `costs ${money(card.annualFeeUsd)} per year`}`;
+  const options = [
+    sentences(card.tagline, fees, "Compare fees, limits and availability"),
+    sentences(card.tagline, fees),
+    sentences(fees, cashbackLabel(card), "Compare fees, limits and country availability"),
+    sentences(fees, "Compare fees, limits and country availability"),
+  ];
+  return options.find((option) => option.length <= MAX_DESCRIPTION_LENGTH) ?? options[options.length - 1];
 }
 
 export function generateStaticParams() {

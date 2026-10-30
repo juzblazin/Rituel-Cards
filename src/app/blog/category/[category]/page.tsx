@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!category) return {};
   return buildMetadata({
     title: `${category.title} — Crypto Card Blog`,
-    description: category.description || `Every RItuel article about ${category.title.toLowerCase()}.`,
+    description: category.description || `Every Rituel Cards article about ${category.title.toLowerCase()}.`,
     path: `/blog/category/${category.slug}`,
   });
 }

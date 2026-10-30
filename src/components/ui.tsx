@@ -29,7 +29,7 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("group flex items-center", className)} aria-label="RItuel home">
+    <Link href="/" className={cn("group flex items-center", className)} aria-label="Rituel Cards home">
       <LogoMark />
     </Link>
   );

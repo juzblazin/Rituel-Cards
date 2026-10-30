@@ -10,7 +10,7 @@ export const ogImage = {
   path: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "RItuel — independent crypto card comparison",
+  alt: "Rituel Cards — independent crypto card comparison",
 } as const;
 
 type SeoInput = {
@@ -23,8 +23,24 @@ type SeoInput = {
   article?: { publishedTime: string; modifiedTime?: string; authors?: string[]; tags?: string[] };
 };
 
+/** Search results show ~60 characters; past that the " | Rituel Cards" suffix only gets cut off. */
+const MAX_TITLE_LENGTH = 65;
+
+/** Appends "— N Cards Compared" only while the title still fits in search results. */
+export function titleWithCount(title: string, count: number): string {
+  const withCount = `${title} — ${count} ${count === 1 ? "Card" : "Cards"} Compared`;
+  return withCount.length <= MAX_TITLE_LENGTH ? withCount : title;
+}
+
+/** Share image rendered by a route's own `opengraph-image.tsx`. */
+export function routeOgImage(path: string, alt: string) {
+  return { url: absoluteUrl(`${path.replace(/\/$/, "")}/opengraph-image`), width: ogImage.width, height: ogImage.height, alt };
+}
+
 export function buildMetadata({ title, description, path, keywords, noIndex, image, article }: SeoInput): Metadata {
   const url = absoluteUrl(path);
+  const pageTitle: Metadata["title"] =
+    `${title} | ${site.name}`.length > MAX_TITLE_LENGTH ? { absolute: title } : title;
   const shareImage = image ?? {
     url: absoluteUrl(ogImage.path),
     width: ogImage.width,
@@ -32,7 +48,7 @@ export function buildMetadata({ title, description, path, keywords, noIndex, ima
     alt: ogImage.alt,
   };
   return {
-    title,
+    title: pageTitle,
     description,
     keywords,
     alternates: { canonical: url },

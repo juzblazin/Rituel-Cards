@@ -3,9 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Sparkles } from "lucide-react";
 import { cards } from "@/lib/data";
-import { buildMetadata, breadcrumbJsonLd, faqJsonLd, itemListJsonLd } from "@/lib/seo";
+import { buildMetadata, titleWithCount, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
 import { attributeBySlug, attributePages, featuredPairs } from "@/lib/taxonomy";
-import { cashbackLabel, pct } from "@/lib/format";
+import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
@@ -23,9 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
   const matched = cards.filter(page.filter);
   return buildMetadata({
-    title: `${page.title} — ${matched.length} Cards Compared`,
-    description: `${page.description} ${matched.length} cards tracked and updated for October 2026.`,
+    title: titleWithCount(page.title, matched.length),
+    description: `${page.description} ${plural(matched.length, "card")} tracked and updated for October 2026.`,
     path: `/cards/${page.slug}`,
+    image: routeOgImage(`/cards/${page.slug}`, page.title),
     keywords: [page.heading.toLowerCase(), page.title.toLowerCase(), "crypto card comparison"],
   });
 }
@@ -85,7 +86,7 @@ export default async function AttributePage({ params }: Props) {
   const faqs = [
     {
       q: `How many ${page.heading.toLowerCase()} are there in 2026?`,
-      a: `We currently track ${matched.length} cards matching this guide, ${zeroFx} of which charge 0% FX. Counts are generated from the directory dataset and update whenever a card is added or its availability changes.`,
+      a: `We currently track ${plural(matched.length, "card")} matching this guide, ${zeroFx} of which charge 0% FX. Counts are generated from the directory dataset and update whenever a card is added or its availability changes.`,
     },
     {
       q: `What is the highest cashback in this category?`,
@@ -142,7 +143,7 @@ export default async function AttributePage({ params }: Props) {
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{page.intro}</p>
 
             <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Badge>{matched.length} cards tracked</Badge>
+              <Badge>{plural(matched.length, "card")} tracked</Badge>
               <Badge>Average score {avgRating.toFixed(1)}/10</Badge>
               <Badge>{zeroFx} with 0% FX</Badge>
               {bestCashback && <Badge>Top cashback {pct(bestCashback.cashbackMaxPct)}</Badge>}
@@ -156,7 +157,7 @@ export default async function AttributePage({ params }: Props) {
           allCards={matched}
           showHeading
           heading={page.heading}
-          subheading={`${matched.length} cards matching this guide. Filters stay within the category.`}
+          subheading={`${plural(matched.length, "card")} matching this guide. Filters stay within the category.`}
           syncUrl
           source={`guide-${page.slug}`}
           id="guide-directory"

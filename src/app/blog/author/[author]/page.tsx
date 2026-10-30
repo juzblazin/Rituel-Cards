@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const author = await getAuthor(slug);
   if (!author) return {};
   return buildMetadata({
-    title: `${author.name}${author.role ? `, ${author.role}` : ""} — RItuel Blog`,
-    description: author.bio || `Articles about crypto cards written by ${author.name} for RItuel.`,
+    title: `${author.name}${author.role ? `, ${author.role}` : ""} — Rituel Cards Blog`,
+    description: author.bio || `Articles about crypto cards written by ${author.name} for Rituel Cards.`,
     path: `/blog/author/${author.slug}`,
   });
 }

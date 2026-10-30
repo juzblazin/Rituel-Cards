@@ -68,7 +68,7 @@ function cardSection(card: Card): string[] {
     "",
     `- URL: ${absoluteUrl(`/card/${card.slug}`)}`,
     `- Issuer: ${card.issuerName} · Network: ${card.network} · Type: ${card.cardType}`,
-    `- RItuel score: ${card.ratingScore}/10`,
+    `- Rituel Cards score: ${card.ratingScore}/10`,
     `- Custody: ${card.custodyModel.replace("_", "-")} · KYC: ${card.kycLevel.replace("_", " ")}`,
     `- Cashback: ${card.cashbackMinPct === card.cashbackMaxPct ? pct(card.cashbackMaxPct) : `${pct(card.cashbackMinPct)}–${pct(card.cashbackMaxPct)}`} paid in ${card.payoutToken}${card.stakingRequirement && !/^none\b/i.test(card.stakingRequirement) ? ` (${card.stakingRequirement})` : ""}`,
     `- Fees: issuance ${usd(card.issuanceFeeUsd)}, annual ${usd(card.annualFeeUsd)}, top-up ${pct(card.topupFeePct)}, FX ${pct(card.fxFeePct)}`,

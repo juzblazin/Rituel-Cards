@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Coins } from "lucide-react";
 import { cards } from "@/lib/data";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { cryptoPages } from "@/lib/taxonomy";
 
 const LOGOS: Record<string, string> = {
@@ -32,35 +32,43 @@ export const metadata: Metadata = buildMetadata({
   path: "/crypto",
 });
 
+const breadcrumbs = breadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Crypto cards by token & chain", path: "/crypto" },
+]);
+
 export default function CryptoIndexPage() {
   const tokens = cryptoPages.filter((page) => page.kind === "token");
   const chains = cryptoPages.filter((page) => page.kind === "chain");
 
   return (
-    <div className="container-page py-12 sm:py-16">
-      <div className="max-w-3xl">
-        <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-          <Coins className="h-3 w-3" /> Tokens & chains
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }} />
+      <div className="container-page py-12 sm:py-16">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
+            <Coins className="h-3 w-3" /> Tokens & chains
+          </div>
+          <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+            Spend the asset you already hold
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground">
+            Not every card supports every token, and even fewer support the chain you actually use. These pages map
+            each programme to the assets and networks it accepts for top-ups.
+          </p>
         </div>
-        <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
-          Spend the asset you already hold
-        </h1>
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">
-          Not every card supports every token, and even fewer support the chain you actually use. These pages map
-          each programme to the assets and networks it accepts for top-ups.
-        </p>
-      </div>
 
-      <Section title="Tokens" pages={tokens} />
-      <Section title="Networks & chains" pages={chains} />
+        <Section title="Tokens" pages={tokens} />
+        <Section title="Networks & chains" pages={chains} />
 
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-border bg-card p-4 text-xs text-muted-foreground">
-        <span>Looking for a specific country instead?</span>
-        <Link href="/countries" className="inline-flex items-center gap-1 font-medium text-foreground underline underline-offset-4">
-          Browse the geo directory <ArrowRight className="h-3 w-3" />
-        </Link>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-border bg-card p-4 text-xs text-muted-foreground">
+          <span>Looking for a specific country instead?</span>
+          <Link href="/countries" className="inline-flex items-center gap-1 font-medium text-foreground underline underline-offset-4">
+            Browse the geo directory <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
