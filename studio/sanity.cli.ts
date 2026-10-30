@@ -6,4 +6,7 @@ export default defineCliConfig({
     dataset: process.env.SANITY_STUDIO_DATASET || "production",
   },
   studioHost: process.env.SANITY_STUDIO_HOST || "rituel",
+  deployment: {
+    appId: "pvzusjg45r24wrv0tmwtwxeo",
+  },
 });
