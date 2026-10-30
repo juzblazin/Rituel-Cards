@@ -249,8 +249,10 @@ function sortValue(card: Card, sort: SortKey): number {
 
 export function sortCards(list: Card[], sort: SortKey): Card[] {
   return [...list].sort((a, b) => {
-    if (a.isSponsored !== b.isSponsored) return a.isSponsored ? -1 : 1;
-    if (a.isSponsored && b.isSponsored) return a.sponsorPriority - b.sponsorPriority;
+    if (sort === "featured") {
+      if (a.isSponsored !== b.isSponsored) return a.isSponsored ? -1 : 1;
+      if (a.isSponsored && b.isSponsored) return a.sponsorPriority - b.sponsorPriority;
+    }
     const av = sortValue(a, sort);
     const bv = sortValue(b, sort);
     const ascending = sort === "fx" || sort === "annual";
