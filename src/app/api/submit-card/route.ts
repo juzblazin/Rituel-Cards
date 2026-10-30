@@ -1,78 +1,100 @@
 import type { NextRequest } from "next/server";
-import { isDatabaseConfigured, saveSubmission, type PlanKey } from "@/lib/db";
-import { isEmailConfigured, sendSubmissionNotification } from "@/lib/email";
+import { isDatabaseConfigured, saveSubmission } from "@/lib/db";
+import { isEmailConfigured, sendSubmissionConfirmation, sendSubmissionNotification } from "@/lib/email";
+import { validateSubmission } from "@/lib/submission";
 
-type Submission = {
-  company?: string;
-  contactName?: string;
-  email?: string;
-  cardName?: string;
-  website?: string;
-  plan?: string;
-  message?: string;
-};
+/** Submissions faster than this after the form rendered are almost always bots. */
+const MIN_FILL_MS = 2500;
 
-const PLANS = new Set(["free", "verified", "sponsored"]);
+/** Reports which delivery channels are configured (booleans only) so a deploy can be checked from outside. */
+export function GET() {
+  return Response.json({
+    database: isDatabaseConfigured(),
+    email: isEmailConfigured(),
+    webhook: Boolean(process.env.SUBMISSIONS_WEBHOOK_URL),
+  });
+}
 
 export async function POST(request: NextRequest) {
-  const body = (await request.json().catch(() => null)) as Submission | null;
-
-  if (!body?.company || !body?.email || !body?.cardName) {
-    return Response.json({ ok: false, error: "Company, email and card name are required." }, { status: 400 });
+  const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
+  if (!body || typeof body !== "object") {
+    return Response.json({ ok: false, error: "Invalid request." }, { status: 400 });
   }
 
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(body.email)) {
-    return Response.json({ ok: false, error: "Enter a valid work email." }, { status: 400 });
+  // Honeypot and timing traps: answer like a success so bots don't learn to adapt.
+  const startedAt = Number(body.startedAt);
+  if (text(body.fax) || (Number.isFinite(startedAt) && Date.now() - startedAt < MIN_FILL_MS)) {
+    return Response.json({ ok: true, id: "sub_received", plan: "free" });
   }
 
-  const { company, email, cardName } = body;
-  const plan: PlanKey = PLANS.has(body.plan ?? "") ? (body.plan as PlanKey) : "free";
+  const result = validateSubmission(body);
+  if (!result.ok) {
+    return Response.json(
+      { ok: false, error: "Please fix the highlighted fields.", fieldErrors: result.errors },
+      { status: 400 },
+    );
+  }
 
   const submission = {
-    id: `sub_${Date.now().toString(36)}`,
-    company,
-    cardName,
-    email,
-    plan,
-    website: body.website,
-    contactName: body.contactName,
-    message: body.message,
+    id: `sub_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+    ...result.value,
     receivedAt: new Date().toISOString(),
-    country: request.headers.get("x-geo-country") || "unknown",
+    country: request.headers.get("x-geo-country") || request.headers.get("cf-ipcountry") || "unknown",
   };
 
+  const webhook = process.env.SUBMISSIONS_WEBHOOK_URL;
+  if (!isDatabaseConfigured() && !isEmailConfigured() && !webhook) {
+    console.error("[card_submission] no DATABASE_URL, RESEND_API_KEY or SUBMISSIONS_WEBHOOK_URL; lead not stored", JSON.stringify(submission));
+    return Response.json(
+      { ok: false, error: "Submissions are temporarily unavailable. Email hello@rituel.xyz instead." },
+      { status: 503 },
+    );
+  }
+
+  let stored = false;
   if (isDatabaseConfigured()) {
     try {
       await saveSubmission(submission);
+      stored = true;
     } catch (error) {
       console.error("[card_submission] Postgres insert failed", error);
-      return Response.json(
-        { ok: false, error: "Could not save the submission. Email us instead." },
-        { status: 502 },
-      );
     }
-  } else {
-    // No database configured (local development). Keep the lead in the log.
-    console.info("[card_submission]", JSON.stringify(submission));
   }
 
-  // Best effort: the lead is already durable in Postgres, so a mail failure is logged, not fatal.
+  let notified = false;
   if (isEmailConfigured()) {
-    const notified = await sendSubmissionNotification(submission);
-    if (!notified.ok) console.error("[card_submission] notification email failed:", notified.error);
+    const sent = await sendSubmissionNotification(submission);
+    notified = sent.ok;
+    if (!sent.ok) console.error("[card_submission] notification email failed:", sent.error);
   }
 
-  const webhook = process.env.SUBMISSIONS_WEBHOOK_URL;
+  let forwarded = false;
   if (webhook) {
-    const forwarded = await fetch(webhook, {
+    const response = await fetch(webhook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(submission),
     }).catch(() => null);
-    if (!forwarded?.ok) {
-      return Response.json({ ok: false, error: "Could not deliver the submission. Email us instead." }, { status: 502 });
-    }
+    forwarded = Boolean(response?.ok);
+    if (!forwarded) console.error("[card_submission] webhook delivery failed");
+  }
+
+  // Success only if the lead landed somewhere a person will see it.
+  if (!stored && !notified && !forwarded) {
+    return Response.json(
+      { ok: false, error: "We couldn't save your submission. Please try again or email hello@rituel.xyz." },
+      { status: 502 },
+    );
+  }
+
+  if (isEmailConfigured()) {
+    const confirmed = await sendSubmissionConfirmation(submission);
+    if (!confirmed.ok) console.warn("[card_submission] confirmation email skipped:", confirmed.error);
   }
 
   return Response.json({ ok: true, id: submission.id, plan: submission.plan });
+}
+
+function text(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
 }
