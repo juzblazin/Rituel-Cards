@@ -42,7 +42,32 @@ export const post = defineType({
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: "keyTakeaways",
+      title: "Key takeaways",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "3–5 one-line facts shown in a box at the top of the post. AI answers quote these directly.",
+      validation: (rule) => rule.max(6),
+    }),
     defineField({ name: "body", type: "blockContent", validation: (rule) => rule.required() }),
+    defineField({
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      description: "Optional questions and short answers shown at the end and sent to Google as FAQ data.",
+      of: [
+        {
+          type: "object",
+          name: "faq",
+          fields: [
+            defineField({ name: "question", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "answer", type: "text", rows: 3, validation: (rule) => rule.required() }),
+          ],
+          preview: { select: { title: "question", subtitle: "answer" } },
+        },
+      ],
+    }),
     defineField({
       name: "seoTitle",
       title: "SEO title (optional)",

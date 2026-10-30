@@ -2,13 +2,17 @@ import type { MetadataRoute } from "next";
 import { cards } from "@/lib/data";
 import { attributePages, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
 import { absoluteUrl } from "@/lib/site";
-import { getCategories, getPosts } from "@/lib/blog";
+import { getAuthors, getCategories, getPosts } from "@/lib/blog";
 
 // Blog posts change without a rebuild, so the sitemap is generated per request.
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date("2026-10-27T00:00:00Z");
+  const [posts, categories, authors] = await Promise.all([getPosts(), getCategories(), getAuthors()]);
+  const newestPost = posts[0] ? new Date(posts[0].updatedAt) : undefined;
+  const cardDate = (card: (typeof cards)[number]) => new Date(card.lastVerifiedAt || card.launchedAt);
+  // Directory pages change whenever any card is re-verified.
+  const lastModified = new Date(Math.max(...cards.map((card) => cardDate(card).getTime())));
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), changeFrequency: "daily", priority: 1 },
@@ -16,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/countries"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/crypto"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare"), changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/blog"), changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/blog"), lastModified: newestPost, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/submit-card"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/methodology"), changeFrequency: "monthly", priority: 0.5 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.2 },
@@ -25,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const cardPages: MetadataRoute.Sitemap = cards.map((card) => ({
     url: absoluteUrl(`/card/${card.slug}`),
-    lastModified: new Date(card.launchedAt),
+    lastModified: cardDate(card),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
@@ -54,7 +58,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const [posts, categories] = await Promise.all([getPosts(), getCategories()]);
 
   const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
     url: absoluteUrl(`/blog/${post.slug}`),
@@ -65,8 +68,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const categoryUrls: MetadataRoute.Sitemap = categories.map((category) => ({
     url: absoluteUrl(`/blog/category/${category.slug}`),
+    lastModified: newestPost,
     changeFrequency: "weekly",
     priority: 0.5,
+  }));
+
+  const authorUrls: MetadataRoute.Sitemap = authors.map((author) => ({
+    url: absoluteUrl(`/blog/author/${author.slug}`),
+    changeFrequency: "monthly",
+    priority: 0.4,
   }));
 
   return [
@@ -78,6 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...compareUrls,
     ...postUrls,
     ...categoryUrls,
+    ...authorUrls,
   ].map((entry) => ({
     ...entry,
     lastModified: entry.lastModified ?? lastModified,
