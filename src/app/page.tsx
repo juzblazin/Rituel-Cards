@@ -117,7 +117,7 @@ const STABLECOIN_ASSETS = [
 ];
 
 const ISSUERS = [
-  { name: "ether.fi", logo: "/logos/etherfi.png" },
+  { name: "ether.fi", logo: "/logos/etherfi-mark.jpeg" },
   { name: "Gnosis Pay", logo: "/logos/gnosispay.png" },
   { name: "Crypto.com", logo: "/logos/cryptocom.png" },
   { name: "Nexo", logo: "/logos/nexo.png" },
