@@ -26,6 +26,13 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const PAGE_SIZE = 12;
 
@@ -36,6 +43,11 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "fx", label: "Lowest FX fee" },
   { value: "annual", label: "Lowest annual fee" },
   { value: "newest", label: "Newest" },
+];
+
+const VIEW_OPTIONS: { value: ViewMode; label: string; icon: typeof Grid2X2 }[] = [
+  { value: "grid", label: "Grid", icon: Grid2X2 },
+  { value: "table", label: "Table", icon: Rows3 },
 ];
 
 type Props = {
@@ -137,6 +149,7 @@ export function Directory({
 
   const visibleCards = results.slice(0, visible);
   const count = activeFilterCount(filters);
+  const sortLabel = SORT_OPTIONS.find((option) => option.value === filters.sort)?.label ?? SORT_OPTIONS[0].label;
   const drawerSidebar = (onClose?: () => void) => (
     <FilterSidebar
       filters={filters}
@@ -173,13 +186,13 @@ export function Directory({
                 {subheading && <p className="mt-0.5 text-xs text-muted-foreground">{subheading}</p>}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex w-full items-center gap-2 sm:w-auto">
                 <Button
                   type="button"
                   variant="outline"
-                  size="sm"
+                  size="lg"
                   onClick={() => setDrawer(true)}
-                  className="lg:hidden"
+                  className="flex-1 sm:flex-none lg:hidden"
                 >
                   <ListFilter />
                   Filters
@@ -190,29 +203,27 @@ export function Directory({
                   )}
                 </Button>
 
-                <div className="flex rounded-lg bg-muted p-0.5" role="group" aria-label="View mode">
-                  <button
-                    type="button"
-                    onClick={() => setView("grid")}
-                    aria-pressed={view === "grid"}
-                    className={cn(
-                      "inline-flex items-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-medium transition",
-                      view === "grid" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
-                    )}
-                  >
-                    <Grid2X2 className="size-3.5" /> Grid
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setView("table")}
-                    aria-pressed={view === "table"}
-                    className={cn(
-                      "inline-flex items-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-medium transition",
-                      view === "table" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
-                    )}
-                  >
-                    <Rows3 className="size-3.5" /> Table
-                  </button>
+                <div
+                  className="grid h-9 flex-1 grid-cols-2 gap-0.5 rounded-lg border bg-muted/60 p-0.5 sm:flex-none dark:bg-input/20"
+                  role="group"
+                  aria-label="View mode"
+                >
+                  {VIEW_OPTIONS.map(({ value, label, icon: Icon }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setView(value)}
+                      aria-pressed={view === value}
+                      className={cn(
+                        "inline-flex items-center justify-center gap-1.5 rounded-md px-3 text-xs font-medium outline-none transition focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                        view === value
+                          ? "bg-background text-foreground shadow-sm ring-1 ring-border dark:bg-input/60"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      <Icon className="size-3.5" /> {label}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -242,21 +253,35 @@ export function Directory({
               </div>
 
               {view === "grid" && (
-                <div className="relative shrink-0">
-                  <select
-                    value={filters.sort}
-                    onChange={(event) => update({ sort: event.target.value as SortKey })}
-                    className="h-9 w-full appearance-none rounded-lg border border-input bg-background pl-3 pr-8 text-xs font-medium outline-none transition focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:w-[168px]"
-                    aria-label="Sort cards"
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    render={
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="w-full justify-between px-3 text-xs sm:w-[188px]"
+                        aria-label={`Sort cards: ${sortLabel}`}
+                      />
+                    }
                   >
-                    {SORT_OPTIONS.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        Sort: {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
-                </div>
+                    <span className="truncate">
+                      <span className="text-muted-foreground">Sort:</span> {sortLabel}
+                    </span>
+                    <ChevronDown className="size-3.5 text-muted-foreground" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuRadioGroup
+                      value={filters.sort}
+                      onValueChange={(value) => update({ sort: value as SortKey })}
+                    >
+                      {SORT_OPTIONS.map((option) => (
+                        <DropdownMenuRadioItem key={option.value} value={option.value} className="text-xs">
+                          {option.label}
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               )}
             </div>
 
