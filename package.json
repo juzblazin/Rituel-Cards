@@ -18,7 +18,8 @@
     "db:import": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/import-cards.mts",
     "db:backfill": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/backfill-catalog.mts",
     "db:split-tiers": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/split-tier-cards.mts",
-    "db:card-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/set-card-images.mts"
+    "db:card-images": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/set-card-images.mts",
+    "blog:image": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/blog-image.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
