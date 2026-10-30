@@ -3,7 +3,8 @@ import { createClient, type SanityClient } from "@sanity/client";
 import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
 import type { PortableTextBlock } from "@portabletext/react";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim() || "";
+// The project ID is public (it is in every image URL), so the production project is the default.
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim() || "uzbgef9r";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET?.trim() || "production";
 const apiVersion = "2025-01-01";
 
