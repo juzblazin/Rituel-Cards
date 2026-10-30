@@ -143,6 +143,7 @@ export function SiteFooter() {
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-x-4 gap-y-2">
+            <Link href="/blog" className="transition hover:text-foreground">Blog</Link>
             <Link href="/methodology" className="transition hover:text-foreground">Methodology</Link>
             <Link href="/privacy" className="transition hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="transition hover:text-foreground">Terms</Link>

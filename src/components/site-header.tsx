@@ -22,6 +22,7 @@ const nav = [
   { href: "/countries", label: "Countries" },
   { href: "/crypto", label: "Tokens & chains" },
   { href: "/compare", label: "Compare" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function SiteHeader() {

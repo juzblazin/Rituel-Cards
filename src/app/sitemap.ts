@@ -2,8 +2,12 @@ import type { MetadataRoute } from "next";
 import { cards } from "@/lib/data";
 import { attributePages, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
 import { absoluteUrl } from "@/lib/site";
+import { getCategories, getPosts } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Blog posts change without a rebuild, so the sitemap is generated per request.
+export const dynamic = "force-dynamic";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date("2026-10-27T00:00:00Z");
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -12,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/countries"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/crypto"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/blog"), changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/submit-card"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/methodology"), changeFrequency: "monthly", priority: 0.5 },
     { url: absoluteUrl("/privacy"), changeFrequency: "yearly", priority: 0.2 },
@@ -49,7 +54,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...cardPages, ...attributeUrls, ...cryptoUrls, ...countryUrls, ...compareUrls].map((entry) => ({
+  const [posts, categories] = await Promise.all([getPosts(), getCategories()]);
+
+  const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: absoluteUrl(`/blog/${post.slug}`),
+    lastModified: new Date(post.updatedAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  const categoryUrls: MetadataRoute.Sitemap = categories.map((category) => ({
+    url: absoluteUrl(`/blog/category/${category.slug}`),
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
+
+  return [
+    ...staticPages,
+    ...cardPages,
+    ...attributeUrls,
+    ...cryptoUrls,
+    ...countryUrls,
+    ...compareUrls,
+    ...postUrls,
+    ...categoryUrls,
+  ].map((entry) => ({
     ...entry,
     lastModified: entry.lastModified ?? lastModified,
   }));

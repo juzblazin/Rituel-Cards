@@ -19,10 +19,18 @@ type SeoInput = {
   path: string;
   keywords?: string[];
   noIndex?: boolean;
+  image?: { url: string; width: number; height: number; alt: string };
+  article?: { publishedTime: string; modifiedTime?: string; authors?: string[]; tags?: string[] };
 };
 
-export function buildMetadata({ title, description, path, keywords, noIndex }: SeoInput): Metadata {
+export function buildMetadata({ title, description, path, keywords, noIndex, image, article }: SeoInput): Metadata {
   const url = absoluteUrl(path);
+  const shareImage = image ?? {
+    url: absoluteUrl(ogImage.path),
+    width: ogImage.width,
+    height: ogImage.height,
+    alt: ogImage.alt,
+  };
   return {
     title,
     description,
@@ -34,16 +42,16 @@ export function buildMetadata({ title, description, path, keywords, noIndex }: S
       description,
       url,
       siteName: site.name,
-      type: "website",
       locale: "en_US",
-      images: [{ url: absoluteUrl(ogImage.path), width: ogImage.width, height: ogImage.height, alt: ogImage.alt }],
+      images: [shareImage],
+      ...(article ? { type: "article" as const, ...article } : { type: "website" as const }),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
       creator: site.twitter,
-      images: [absoluteUrl(ogImage.path)],
+      images: [shareImage.url],
     },
   };
 }
@@ -109,5 +117,31 @@ export function financialProductJsonLd(card: {
     category: "Crypto debit and credit card",
     provider: { "@type": "Organization", name: card.issuerName },
     areaServed: card.regionLabel,
+  };
+}
+
+export function blogPostingJsonLd(post: {
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedAt: string;
+  updatedAt: string;
+  imageUrl?: string;
+  authorName?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: absoluteUrl(`/blog/${post.slug}`),
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    image: post.imageUrl ?? absoluteUrl(ogImage.path),
+    author: post.authorName
+      ? { "@type": "Person", name: post.authorName }
+      : { "@type": "Organization", name: site.name, url: site.url },
+    publisher: { "@type": "Organization", name: site.name, url: site.url },
   };
 }
