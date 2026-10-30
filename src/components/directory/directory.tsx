@@ -275,7 +275,12 @@ export function Directory({
                       onValueChange={(value) => update({ sort: value as SortKey })}
                     >
                       {SORT_OPTIONS.map((option) => (
-                        <DropdownMenuRadioItem key={option.value} value={option.value} className="text-xs">
+                        <DropdownMenuRadioItem
+                          key={option.value}
+                          value={option.value}
+                          closeOnClick
+                          className="text-xs"
+                        >
                           {option.label}
                         </DropdownMenuRadioItem>
                       ))}
