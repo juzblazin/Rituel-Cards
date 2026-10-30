@@ -26,7 +26,65 @@ npm run typecheck  # tsc --noEmit
 npm run build      # production build (174 static pages)
 npm run start      # serve the production build
 npm run lint
+npm run preview    # build for Cloudflare Workers and run it locally (http://localhost:8787)
+npm run deploy     # build for Cloudflare Workers and deploy
 ```
+
+## Deploying to Cloudflare Workers
+
+The site runs on Workers through [OpenNext for Cloudflare](https://opennext.js.org/cloudflare) (`@opennextjs/cloudflare`). Two files in the repo root configure it:
+
+- [wrangler.jsonc](wrangler.jsonc) — the Worker: name (`rituel`), entry point (`.open-next/worker.js`), static assets and compatibility flags.
+- [open-next.config.ts](open-next.config.ts) — how OpenNext serves Next.js. It uses the static-assets incremental cache, so the pages pre-rendered at build time (including the `dynamicParams = false` routes under `/countries`, `/crypto` and `/cards`) are served from the deployed assets. Without an incremental cache those routes 404 with `NoFallbackError`.
+
+Always build, preview and deploy with the `opennextjs-cloudflare` CLI (the `npm run preview` / `npm run deploy` scripts), not plain `wrangler dev` / `wrangler deploy`: only the OpenNext CLI uploads the pre-rendered page cache.
+
+`npm run cf:build` passes `--dangerouslyUseUnsupportedNextVersion` because `@opennextjs/cloudflare` refuses Next.js 15 now that it is past the Next.js support window. Without the flag the build prints an error and **exits 0 without producing a Worker**, so a CI run looks green but deploys nothing. Drop the flag after upgrading to Next.js 16.
+
+### First deploy from your Mac
+
+1. Install Node.js 20 or newer (`node -v` to check; install from [nodejs.org](https://nodejs.org) or `brew install node`).
+2. Install dependencies: `npm install`.
+3. Log in to Cloudflare (opens a browser window): `npx wrangler login`. Check with `npx wrangler whoami`.
+4. Optional — try it locally first: `npm run preview`, then open http://localhost:8787. For local secrets, put them in a `.dev.vars` file (same `KEY=value` format as `.env.local`, gitignored).
+5. Deploy: `npm run deploy`. Wrangler prints the URL, e.g. `https://rituel.<your-subdomain>.workers.dev`.
+6. Add the server-side secrets (each command prompts for the value and applies it to the live Worker — no rebuild needed):
+
+   ```bash
+   npx wrangler secret put DATABASE_URL
+   npx wrangler secret put RESEND_API_KEY
+   npx wrangler secret put R2_ACCOUNT_ID
+   npx wrangler secret put R2_BUCKET_NAME
+   npx wrangler secret put R2_ACCESS_KEY_ID
+   npx wrangler secret put R2_SECRET_ACCESS_KEY
+   # optional: R2_PUBLIC_BASE_URL, EMAIL_FROM, EMAIL_NOTIFY_TO,
+   #           ANALYTICS_WEBHOOK_URL, SUBMISSIONS_WEBHOOK_URL
+   ```
+
+   Or set them in the dashboard under **Workers & Pages → rituel → Settings → Variables and Secrets**.
+7. Custom domain: **Workers & Pages → rituel → Settings → Domains & Routes → Add → Custom domain**, e.g. `rituel.xyz` (the domain's DNS must be on Cloudflare).
+
+`NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_GA_ID` are inlined by Next.js **at build time**, so set them where the build runs (your shell or `.env.local` for `npm run deploy`, or the build variables below), not as Worker secrets. `DATABASE_URL` is also read at build time by `prebuild` to refresh the card snapshot.
+
+### Automatic deploys from GitHub (Workers Builds)
+
+In **Workers & Pages → Create → Import a repository**, pick this repo, then under **Build configuration**:
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npm run cf:build` |
+| Deploy command | `npx opennextjs-cloudflare deploy` |
+| Non-production branch deploy command | `npx opennextjs-cloudflare upload` |
+| Build variables | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GA_ID`, `DATABASE_URL` |
+
+The project name must match `name` in `wrangler.jsonc` (`rituel`). Runtime secrets still go under the Worker's **Variables and Secrets** as in step 6.
+
+### Troubleshooting
+
+- **Build "succeeds" but nothing deploys / `Next.js version … is not supported`** — run the build through `npm run cf:build` so the flag is passed.
+- **`/countries/…`, `/crypto/…` or `/cards/…` return 404 on Workers** — the page cache was not uploaded; deploy with `npx opennextjs-cloudflare deploy`, not `wrangler deploy`.
+- **Submissions or clicks only show up in logs** — the runtime secrets are missing; check **Settings → Variables and Secrets**, and **Observability → Logs** for errors.
+- **`env.IMAGES binding is not defined` warning** — harmless: `next/image` serves the original image. Add an `"images": { "binding": "IMAGES" }` entry to `wrangler.jsonc` to resize through Cloudflare Images (billed beyond its free tier).
 
 ## Environment
 
@@ -39,7 +97,7 @@ Copy `.env.example` to `.env.local` and fill in what you need. Every integration
 | `ANALYTICS_WEBHOOK_URL` | Optional webhook that receives affiliate click events | unset |
 | `SUBMISSIONS_WEBHOOK_URL` | Optional webhook that receives issuer submissions | unset |
 
-On Vercel, set these in **Project → Settings → Environment Variables** rather than committing a file.
+On Vercel, set these in **Project → Settings → Environment Variables** rather than committing a file. On Cloudflare Workers, see [Deploying to Cloudflare Workers](#deploying-to-cloudflare-workers).
 
 ### Neon Postgres — database
 
