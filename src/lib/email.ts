@@ -146,3 +146,31 @@ export async function sendSubmissionNotification(submission: SubmissionEmailInpu
     replyTo: submission.email,
   });
 }
+
+/**
+ * Receipt to the person who submitted. Needs a verified sending domain in Resend:
+ * the `onboarding@resend.dev` test sender can only deliver to the account owner.
+ */
+export async function sendSubmissionConfirmation(submission: SubmissionEmailInput): Promise<SendEmailResult> {
+  if (/@resend\.dev>?$/i.test(fromAddress)) {
+    return { ok: false, error: "EMAIL_FROM uses the resend.dev test sender; verify a domain to email submitters." };
+  }
+  const greeting = submission.contactName ? `Hi ${escapeHtml(submission.contactName)},` : "Hi,";
+  const subject = `We received ${submission.cardName} — RItuel`;
+  const html = [
+    `<p style="font:14px system-ui">${greeting}</p>`,
+    `<p style="font:14px system-ui">Thanks for submitting <strong>${escapeHtml(submission.cardName)}</strong> to RItuel. We review every listing by hand and reply within two business days.</p>`,
+    `<p style="font:14px system-ui">Your reference is <code>${escapeHtml(submission.id)}</code>. Reply to this email if you want to add a fee schedule or country list.</p>`,
+    `<p style="font:14px system-ui">— The RItuel team</p>`,
+  ].join("");
+  const text = [
+    submission.contactName ? `Hi ${submission.contactName},` : "Hi,",
+    "",
+    `Thanks for submitting ${submission.cardName} to RItuel. We review every listing by hand and reply within two business days.`,
+    "",
+    `Your reference is ${submission.id}. Reply to this email if you want to add a fee schedule or country list.`,
+    "",
+    "— The RItuel team",
+  ].join("\n");
+  return sendEmail({ to: submission.email, subject, html, text, replyTo: notifyRecipients[0] });
+}
