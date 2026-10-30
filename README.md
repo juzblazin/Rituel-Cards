@@ -181,26 +181,23 @@ Resend is email only and has no SMS product. Text-message notifications need a s
 
 ### Sanity — blog
 
-Blog posts live in [Sanity](https://www.sanity.io). The site only reads published posts over Sanity's CDN, so no token is needed. `/blog`, each post, the sitemap and the RSS feed are rendered per request, so a newly published post appears within about a minute without a redeploy. With no project ID set, `/blog` shows a "coming soon" state and post URLs return 404.
+Blog posts live in [Sanity](https://www.sanity.io). The site only reads published posts over Sanity's CDN, so no token is needed. `/blog`, each post, the sitemap and the RSS feed are rendered per request, so a newly published post appears within about a minute without a redeploy. The production project (`uzbgef9r`) is the built-in default; set the variable only to use a different project. With no published posts, `/blog` shows a "coming soon" state.
 
 | Variable | Purpose | Default |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project ID (not secret) | unset |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity project ID (not secret) | `uzbgef9r` |
 | `NEXT_PUBLIC_SANITY_DATASET` | Dataset name | `production` |
 
 The editor (Sanity Studio) is a separate app in `studio/`, hosted free by Sanity at `https://<name>.sanity.studio`, so it adds nothing to the Cloudflare Worker bundle.
 
-1. Sign up at [sanity.io](https://www.sanity.io), create a project on the free plan, and copy its **Project ID** from [sanity.io/manage](https://www.sanity.io/manage). Keep the dataset named `production` and its visibility **Public**.
-2. Add `NEXT_PUBLIC_SANITY_PROJECT_ID` to `.env.local`, to Vercel, and to the Cloudflare Workers build variables. Redeploy once.
-3. Deploy the Studio from your Mac:
+1. Deploy the Studio from your Mac:
    ```sh
    cd studio
-   cp .env.example .env        # then paste the Project ID into .env
    npm install
    npx sanity login
-   npm run deploy              # asks for a studio hostname, e.g. rituel
+   npm run deploy              # publishes to https://rituel.sanity.studio
    ```
-4. Open `https://<hostname>.sanity.studio`, create an author and a category, then write and **Publish** a post.
+2. Open https://rituel.sanity.studio, create an author and a category, then write and **Publish** a post.
 
 Run the Studio locally with `npm run dev` inside `studio/` (http://localhost:3333). Content types are in `studio/schemaTypes/`.
 
