@@ -107,16 +107,73 @@ export function financialProductJsonLd(card: {
   description: string;
   issuerName: string;
   regionLabel: string;
+  annualFeeUsd: number;
+  issuanceFeeUsd: number;
+  fxFeePct: number;
+  ratingScore: number;
+  lastVerifiedAt?: string | null;
+  cardImageUrl?: string | null;
+  officialUrl?: string | null;
+  website?: string | null;
 }) {
+  const url = absoluteUrl(`/card/${card.slug}`);
+  const providerUrl = card.officialUrl || card.website || undefined;
   return {
     "@context": "https://schema.org",
     "@type": "FinancialProduct",
     name: card.name,
     description: card.description,
-    url: absoluteUrl(`/card/${card.slug}`),
+    url,
+    image: card.cardImageUrl ? (card.cardImageUrl.startsWith("http") ? card.cardImageUrl : absoluteUrl(card.cardImageUrl)) : undefined,
     category: "Crypto debit and credit card",
-    provider: { "@type": "Organization", name: card.issuerName },
+    brand: { "@type": "Brand", name: card.issuerName },
+    provider: { "@type": "Organization", name: card.issuerName, url: providerUrl },
     areaServed: card.regionLabel,
+    feesAndCommissionsSpecification: `Issuance fee $${card.issuanceFeeUsd}; annual fee $${card.annualFeeUsd}; FX fee ${card.fxFeePct}%.`,
+    offers: {
+      "@type": "Offer",
+      price: card.issuanceFeeUsd,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url,
+    },
+    // A single editorial review (not aggregateRating), so it reflects what the page actually shows.
+    review: {
+      "@type": "Review",
+      name: `${card.name} review`,
+      author: { "@type": "Organization", name: site.name, url: site.url },
+      publisher: { "@type": "Organization", name: site.name, url: site.url },
+      datePublished: card.lastVerifiedAt || undefined,
+      reviewRating: { "@type": "Rating", ratingValue: card.ratingScore, bestRating: 10, worstRating: 0 },
+    },
+  };
+}
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": absoluteUrl("/#organization"),
+    name: site.name,
+    url: site.url,
+    logo: absoluteUrl("/icon.png"),
+    description: site.description,
+    email: site.email,
+    sameAs: site.socialLinks.length > 0 ? site.socialLinks : undefined,
+  };
+}
+
+export function personJsonLd(author: { name: string; slug: string; role?: string; bio?: string; imageUrl?: string; links?: string[] }) {
+  return {
+    "@type": "Person",
+    "@id": absoluteUrl(`/blog/author/${author.slug}#person`),
+    name: author.name,
+    url: absoluteUrl(`/blog/author/${author.slug}`),
+    jobTitle: author.role || undefined,
+    description: author.bio || undefined,
+    image: author.imageUrl,
+    sameAs: author.links && author.links.length > 0 ? author.links : undefined,
+    worksFor: { "@id": absoluteUrl("/#organization"), "@type": "Organization", name: site.name, url: site.url },
   };
 }
 
@@ -127,7 +184,7 @@ export function blogPostingJsonLd(post: {
   publishedAt: string;
   updatedAt: string;
   imageUrl?: string;
-  authorName?: string;
+  author?: Parameters<typeof personJsonLd>[0];
 }) {
   return {
     "@context": "https://schema.org",
@@ -139,9 +196,7 @@ export function blogPostingJsonLd(post: {
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
     image: post.imageUrl ?? absoluteUrl(ogImage.path),
-    author: post.authorName
-      ? { "@type": "Person", name: post.authorName }
-      : { "@type": "Organization", name: site.name, url: site.url },
-    publisher: { "@type": "Organization", name: site.name, url: site.url },
+    author: post.author ? personJsonLd(post.author) : { "@type": "Organization", name: site.name, url: site.url },
+    publisher: { "@type": "Organization", "@id": absoluteUrl("/#organization"), name: site.name, url: site.url, logo: absoluteUrl("/icon.png") },
   };
 }

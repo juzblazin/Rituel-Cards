@@ -18,7 +18,7 @@ import { cards, kycLabel, type Card } from "@/lib/data";
 import { parseFilters, type ViewMode } from "@/lib/filters";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
 import { attributePages, cryptoBySlug, featuredPairs, supportedCountries } from "@/lib/taxonomy";
-import { buildMetadata, faqJsonLd, itemListJsonLd } from "@/lib/seo";
+import { buildMetadata, faqJsonLd, itemListJsonLd, organizationJsonLd } from "@/lib/seo";
 import { absoluteUrl, site } from "@/lib/site";
 import { countryByCode } from "@/lib/countries";
 import { Directory } from "@/components/directory/directory";
@@ -36,9 +36,9 @@ import { Input } from "@/components/ui/input";
 import { DotPattern } from "@/components/dot-pattern";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Crypto Card Comparison 2026 — Compare 24 Debit, Credit & No-KYC Cards",
+  title: `Crypto Card Comparison 2026 — Compare ${cards.length} Debit, Credit & No-KYC Cards`,
   description:
-    "Compare crypto cards on real fees, cashback, KYC and country availability. Independent data on ether.fi, Gnosis Pay, Crypto.com, Nexo, RedotPay and 19 more.",
+    `Compare crypto cards on real fees, cashback, KYC and country availability. Independent data on ether.fi, Gnosis Pay, Crypto.com, Nexo, RedotPay and ${cards.length - 5} more.`,
   path: "/",
   keywords: [
     "crypto card comparison",
@@ -182,6 +182,7 @@ export default async function HomePage({
           }),
         }}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd("Crypto cards", cards)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(FAQS)) }} />
 
@@ -275,7 +276,7 @@ export default async function HomePage({
                 size="lg"
                 className="h-9 px-4 shadow-[0_14px_44px_-22px_var(--brand)]"
               >
-                Browse all 24 cards <ArrowRight />
+                Browse all {cards.length} cards <ArrowRight />
               </ButtonLink>
               <ButtonLink
                 href="/methodology"
@@ -553,7 +554,7 @@ export default async function HomePage({
                 <h2 className="text-sm font-semibold">Country coverage, tracked</h2>
               </div>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                We map {supportedCountries.length} country pages against 24 card programmes. If an issuer does not
+                We map {supportedCountries.length} country pages against {cards.length} card programmes. If an issuer does not
                 publish a country list, we mark it as regional rather than guessing.
               </p>
               <div className="mt-5 flex flex-wrap gap-1.5">
@@ -607,19 +608,6 @@ export default async function HomePage({
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: site.name,
-            url: site.url,
-            description: site.description,
-            email: site.email,
-          }),
-        }}
-      />
     </>
   );
 }

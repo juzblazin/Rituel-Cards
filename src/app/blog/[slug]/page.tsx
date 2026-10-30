@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { cardBySlug } from "@/lib/data";
 import { formatPostDate, getPost, getPosts, imageUrl } from "@/lib/blog";
-import { blogPostingJsonLd, breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import { blogPostingJsonLd, breadcrumbJsonLd, buildMetadata, faqJsonLd } from "@/lib/seo";
 import { PostBody } from "@/components/blog/post-body";
 import { PostCard } from "@/components/blog/post-card";
 import { CardArt, Rating } from "@/components/ui";
@@ -55,7 +55,16 @@ export default async function BlogPostPage({ params }: Props) {
               publishedAt: post.publishedAt,
               updatedAt: post.updatedAt,
               imageUrl: post.mainImage ? imageUrl(post.mainImage, 1200, 630) : undefined,
-              authorName: post.author?.name,
+              author: post.author
+                ? {
+                    name: post.author.name,
+                    slug: post.author.slug,
+                    role: post.author.role,
+                    bio: post.author.bio,
+                    imageUrl: post.author.image ? imageUrl(post.author.image, 400, 400) : undefined,
+                    links: post.author.links,
+                  }
+                : undefined,
             }),
           ),
         }}
@@ -72,6 +81,13 @@ export default async function BlogPostPage({ params }: Props) {
           ),
         }}
       />
+
+      {post.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(post.faqs.map((faq) => ({ q: faq.question, a: faq.answer })))) }}
+        />
+      )}
 
       <div className="mx-auto max-w-3xl">
         <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -90,7 +106,9 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
           {post.author && (
             <>
-              <span className="font-medium text-foreground">{post.author.name}</span>
+              <Link href={`/blog/author/${post.author.slug}`} rel="author" className="font-medium text-foreground hover:underline">
+                {post.author.name}
+              </Link>
               {post.author.role && <span>· {post.author.role}</span>}
               <span aria-hidden>·</span>
             </>
@@ -109,13 +127,39 @@ export default async function BlogPostPage({ params }: Props) {
             alt={post.mainImage.alt ?? ""}
             width={1600}
             height={900}
+            fetchPriority="high"
             className="w-full rounded-xl border border-border"
           />
         </div>
       )}
 
       <div className="mx-auto max-w-3xl">
+        {post.keyTakeaways.length > 0 && (
+          <aside aria-labelledby="key-takeaways" className="mt-10 rounded-xl border border-brand/30 bg-brand-soft/60 p-5">
+            <h2 id="key-takeaways" className="text-sm font-semibold uppercase tracking-wide text-foreground">Key takeaways</h2>
+            <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-6 text-foreground">
+              {post.keyTakeaways.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
         <PostBody value={post.body} />
+
+        {post.faqs.length > 0 && (
+          <section className="mt-12 border-t border-border pt-8">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">Frequently asked questions</h2>
+            <dl className="mt-4 space-y-5">
+              {post.faqs.map((faq) => (
+                <div key={faq.question}>
+                  <dt className="font-medium text-foreground">{faq.question}</dt>
+                  <dd className="mt-1 text-sm leading-6 text-muted-foreground">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
 
         {relatedCards.length > 0 && (
           <section className="mt-12 border-t border-border pt-8">

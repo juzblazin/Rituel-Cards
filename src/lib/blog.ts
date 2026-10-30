@@ -23,7 +23,9 @@ export type BlogImage = SanityImageSource & { alt?: string; caption?: string };
 
 export type BlogCategory = { title: string; slug: string; description?: string };
 
-export type BlogAuthor = { name: string; slug: string; role?: string; bio?: string; image?: BlogImage };
+export type BlogAuthor = { name: string; slug: string; role?: string; bio?: string; image?: BlogImage; links?: string[] };
+
+export type BlogFaq = { question: string; answer: string };
 
 export type BlogPostSummary = {
   title: string;
@@ -41,6 +43,8 @@ export type BlogPost = BlogPostSummary & {
   seoTitle?: string;
   body: PortableTextBlock[];
   relatedCards: string[];
+  keyTakeaways: string[];
+  faqs: BlogFaq[];
 };
 
 const summaryFields = `
@@ -50,7 +54,7 @@ const summaryFields = `
   publishedAt,
   "updatedAt": _updatedAt,
   mainImage,
-  "author": author->{name, "slug": slug.current, role, bio, image},
+  "author": author->{name, "slug": slug.current, role, bio, image, "links": coalesce(links, [])},
   "categories": coalesce(categories[]->{title, "slug": slug.current, description}, []),
   "readingMinutes": round(length(pt::text(body)) / 5 / 220) + 1
 `;
@@ -76,7 +80,7 @@ export const getPosts = cache(
 export const getPost = cache(
   (slug: string): Promise<BlogPost | null> =>
     query(
-      `*[${published} && slug.current == $slug][0] {${summaryFields}, seoTitle, body, "relatedCards": coalesce(relatedCards, [])}`,
+      `*[${published} && slug.current == $slug][0] {${summaryFields}, seoTitle, body, "relatedCards": coalesce(relatedCards, []), "keyTakeaways": coalesce(keyTakeaways, []), "faqs": coalesce(faqs[]{question, answer}, [])}`,
       { slug },
       null,
     ),
@@ -108,6 +112,30 @@ export const getPostsByCategory = cache(
       [],
     ),
 );
+
+const authorFields = `name, "slug": slug.current, role, bio, image, "links": coalesce(links, [])`;
+
+export const getAuthors = cache(
+  (): Promise<BlogAuthor[]> =>
+    query(`*[_type == "author" && defined(slug.current) && count(*[${published} && references(^._id)]) > 0] | order(name asc) {${authorFields}}`, {}, []),
+);
+
+export const getAuthor = cache(
+  (slug: string): Promise<BlogAuthor | null> =>
+    query(`*[_type == "author" && slug.current == $slug][0] {${authorFields}}`, { slug }, null),
+);
+
+export const getPostsByAuthor = cache(
+  (slug: string): Promise<BlogPostSummary[]> =>
+    query(`*[${published} && author->slug.current == $slug] | order(publishedAt desc) {${summaryFields}}`, { slug }, []),
+);
+
+/** Intrinsic size from a Sanity asset ref (`image-<id>-<w>x<h>-<ext>`), to reserve layout space. */
+export function imageDimensions(source: BlogImage): { width: number; height: number } | null {
+  const ref = (source as { asset?: { _ref?: string } }).asset?._ref;
+  const match = ref?.match(/-(\d+)x(\d+)-/);
+  return match ? { width: Number(match[1]), height: Number(match[2]) } : null;
+}
 
 export function imageUrl(source: SanityImageSource, width: number, height?: number): string {
   let builder = createImageUrlBuilder({ projectId, dataset }).image(source).width(width).auto("format").fit("crop");

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PortableText, type PortableTextBlock, type PortableTextComponents } from "@portabletext/react";
-import { imageUrl, type BlogImage } from "@/lib/blog";
+import { imageDimensions, imageUrl, type BlogImage } from "@/lib/blog";
 
 const components: PortableTextComponents = {
   block: {
@@ -44,20 +44,26 @@ const components: PortableTextComponents = {
     },
   },
   types: {
-    image: ({ value }: { value: BlogImage }) => (
+    image: ({ value }: { value: BlogImage }) => {
+      const size = imageDimensions(value);
+      return (
       <figure className="mt-8">
         {/* eslint-disable-next-line @next/next/no-img-element -- Sanity's CDN already resizes and converts format. */}
         <img
           src={imageUrl(value, 1200)}
           alt={value.alt ?? ""}
+          width={size ? 1200 : undefined}
+          height={size ? Math.round((1200 * size.height) / size.width) : undefined}
           loading="lazy"
+          decoding="async"
           className="w-full rounded-xl border border-border"
         />
         {value.caption && (
           <figcaption className="mt-2 text-center text-xs text-muted-foreground">{value.caption}</figcaption>
         )}
       </figure>
-    ),
+      );
+    },
   },
 };
 
