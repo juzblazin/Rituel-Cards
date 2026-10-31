@@ -177,6 +177,86 @@ export function CardArt({
   );
 }
 
+/** Issuer logos present in /public/logos, keyed by normalised brand token. */
+const ISSUER_LOGOS: Record<string, string> = {
+  bitget: "bitget.png",
+  bitpay: "bitpay.png",
+  bleap: "bleap.png",
+  bybit: "bybit.png",
+  coca: "coca.png",
+  cryptocom: "cryptocom.png",
+  etherfi: "etherfi.png",
+  gnosis: "gnosispay.png",
+  jupiter: "jupiter.png",
+  kast: "kast.png",
+  kraken: "kraken.png",
+  lava: "lava.png",
+  metamask: "metamask.png",
+  mexc: "mexc.png",
+  nexo: "nexo.png",
+  nocturne: "nocturne.svg",
+  okx: "okx.png",
+  plasma: "plasma.png",
+  plutus: "plutus.svg",
+  redotpay: "redotpay.png",
+  solidyield: "solidyield.png",
+  wirex: "wirex.png",
+};
+
+function issuerLogoKey(name: string): string {
+  return name
+    .split(" - ")[0]
+    ?.trim()
+    .split(/\s+/)[0]
+    ?.toLowerCase()
+    .replace(/[^a-z0-9]/g, "") ?? "";
+}
+
+/**
+ * Square issuer mark: the real logo file when one exists in /public/logos,
+ * otherwise a monogram tile on the card's brand gradient.
+ */
+export function BrandMark({
+  card,
+  className,
+}: {
+  card: Pick<Card, "name" | "logoText" | "brand">;
+  className?: string;
+}) {
+  const key = issuerLogoKey(card.name);
+  const file = ISSUER_LOGOS[key];
+  if (file) {
+    return (
+      <div
+        className={cn(
+          "relative isolate shrink-0 overflow-hidden rounded-md bg-white ring-1 ring-foreground/10",
+          className,
+        )}
+        role="img"
+        aria-label={`${card.name} issuer logo`}
+      >
+        <Image src={`/logos/${file}`} alt="" fill sizes="64px" className="object-contain p-[3px]" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "relative isolate grid shrink-0 place-items-center overflow-hidden rounded-md ring-1 ring-foreground/10",
+        className,
+      )}
+      style={{ background: `linear-gradient(140deg, ${card.brand.from} 4%, ${card.brand.to} 96%)` }}
+      role="img"
+      aria-label={`${card.name} issuer logo`}
+    >
+      <span className="font-semibold leading-none tracking-tight" style={{ color: card.brand.ink }}>
+        {card.logoText}
+      </span>
+    </div>
+  );
+}
+
 export function Divider({ className }: { className?: string }) {
   return <div className={cn("h-px w-full bg-border", className)} />;
 }

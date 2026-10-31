@@ -158,6 +158,18 @@ const metrics: Metric[] = [
   },
   {
     group: "Access",
+    label: "Top-up tokens",
+    value: (c) => c.supportedCryptos.length,
+    best: "max",
+    render: (c) => (
+      <span className="text-xs leading-4 text-muted-foreground">
+        {c.supportedCryptos.slice(0, 5).join(", ")}
+        {c.supportedCryptos.length > 5 ? ` +${c.supportedCryptos.length - 5}` : ""}
+      </span>
+    ),
+  },
+  {
+    group: "Access",
     label: "Issuer",
     value: (c) => c.issuerName,
     render: (c) => <span className="text-xs">{c.issuerName}</span>,
@@ -189,21 +201,21 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
 
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[800px] border-collapse text-left">
+      <table className="w-full min-w-[640px] border-collapse text-left">
         <thead>
           <tr>
-            <th className="sticky left-0 z-10 w-[160px] border-b border-border bg-card p-4 align-bottom">
+            <th className="sticky left-0 z-10 w-[210px] border-b border-border bg-card p-4 align-bottom">
               <span className="text-xs font-medium text-muted-foreground">Metric</span>
             </th>
             {cards.map((card) => (
-              <th key={card.slug} className="min-w-[240px] border-b border-l border-border p-4 align-top">
+              <th key={card.slug} className="min-w-[200px] border-b border-l border-border p-4 align-top">
                 <div className="relative inline-block">
-                  <CardArt card={card} className="h-[216px] w-[337.5px]" />
+                  <CardArt card={card} className="h-[114px] w-[180px] rounded-md" />
                   {card.isSponsored && (
                     <Badge className="absolute right-2 top-2">Sponsored</Badge>
                   )}
                 </div>
-                <Link href={`/card/${card.slug}`} className="mt-3 block text-base font-semibold leading-5 text-foreground hover:text-foreground">
+                <Link href={`/crypto-card/${card.slug}`} className="mt-3 block text-base font-semibold leading-5 text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
                 <div className="mt-1 text-xs text-muted-foreground">{card.issuerName}</div>
@@ -239,8 +251,8 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
                   const winners = bestSet(metric, cards);
                   return (
                     <tr key={metric.label} className="border-b border-border/80">
-                      <th scope="row" className="sticky left-0 z-10 border-r border-border bg-card px-4 py-3.5 align-top">
-                        <span className="text-xs font-medium text-muted-foreground">{metric.label}</span>
+                      <th scope="row" className="sticky left-0 z-10 w-[210px] border-r border-border bg-card px-4 py-3.5 align-top">
+                        <span className="text-sm font-medium text-muted-foreground">{metric.label}</span>
                         {metric.hint && <span className="mt-0.5 block text-[10px] leading-3 text-muted-foreground">{metric.hint}</span>}
                       </th>
                       {cards.map((card, index) => {

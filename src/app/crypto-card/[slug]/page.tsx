@@ -13,10 +13,12 @@ import {
   X,
 } from "lucide-react";
 import { brandName, cardBySlug, cards, custodyLabel, kycLabel, networkLabel, relatedFamilyCards, type Card } from "@/lib/data";
+import { issuerForCard } from "@/lib/issuers";
 import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge, sentences, shortCardName } from "@/lib/format";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd, routeOgImage } from "@/lib/seo";
 import { countryByCode } from "@/lib/countries";
-import { compareSlug, featuredPairs } from "@/lib/taxonomy";
+import { compareSlug, featuredPairs, attributeBySlug, attributePages } from "@/lib/taxonomy";
+import { AttributeView, attributeMetadata } from "./attribute-view";
 import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { CardEarnings } from "@/components/card-earnings";
@@ -28,13 +30,14 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  if (attributeBySlug.has(slug)) return attributeMetadata(slug);
   const card = cardBySlug.get(slug);
   if (!card) return {};
   return buildMetadata({
     title: `${shortCardName(card.name)} Review (2026): Fees & Cashback`,
     description: cardDescription(card),
-    path: `/card/${card.slug}`,
-    image: routeOgImage(`/card/${card.slug}`, `${card.name}: fees, cashback and availability`),
+    path: `/crypto-card/${card.slug}`,
+    image: routeOgImage(`/crypto-card/${card.slug}`, `${card.name}: fees, cashback and availability`),
     keywords: [card.name, `${card.name} review`, `${card.name} fees`, `${card.name} cashback`],
   });
 }
@@ -54,11 +57,15 @@ function cardDescription(card: Card): string {
 }
 
 export function generateStaticParams() {
-  return cards.map((card) => ({ slug: card.slug }));
+  return [
+    ...cards.map((card) => ({ slug: card.slug })),
+    ...attributePages.map((page) => ({ slug: page.slug })),
+  ];
 }
 
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (attributeBySlug.has(slug)) return <AttributeView slug={slug} />;
   const card = cardBySlug.get(slug);
   if (!card) notFound();
 
@@ -69,6 +76,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
 
   const faqs = buildCardFaqs(card, geo?.name, availableInGeo);
   const family = relatedFamilyCards(card);
+  const issuer = issuerForCard(card);
   const related = cards
     .filter((item) => item.slug !== card.slug && !family.some((f) => f.slug === item.slug))
     .sort((a, b) => {
@@ -107,7 +115,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Crypto cards", path: "/" },
-              { name: card.name, path: `/card/${card.slug}` },
+              { name: card.name, path: `/crypto-card/${card.slug}` },
             ]),
           ),
         }}
@@ -118,7 +126,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="size-3 shrink-0" />
-          <Link href="/cards" className="hover:text-foreground">Cards</Link>
+          <Link href="/crypto-card" className="hover:text-foreground">Cards</Link>
           <ChevronRight className="size-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{card.name}</span>
         </div>
@@ -138,6 +146,11 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
                 <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground">
                   <span className="font-mono uppercase tracking-wider">{networkLabel[card.network]}</span>
                   <span>Issued by {card.issuerName}</span>
+                  {issuer && issuer.cards.length > 1 && (
+                    <Link href={`/issuer/${issuer.slug}`} className="mt-1 block text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">
+                      Compare all {issuer.name} cards ({issuer.cards.length})
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -330,7 +343,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
                 {family.map((item) => (
                   <Link
                     key={item.slug}
-                    href={`/card/${item.slug}`}
+                    href={`/crypto-card/${item.slug}`}
                     className="group flex items-center gap-3 rounded-xl border border-border p-3 transition-colors hover:border-brand/50 hover:bg-muted/50"
                   >
                     <CardArt card={item} className="h-11 w-16 shrink-0" />
@@ -525,7 +538,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
               {related.map((item) => (
                 <Link
                   key={item.slug}
-                  href={`/card/${item.slug}`}
+                  href={`/crypto-card/${item.slug}`}
                   className="flex items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-muted"
                 >
                   <CardArt card={item} className="h-7 w-10 shrink-0" />
@@ -543,12 +556,12 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Related guides</h2>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {[
-                card.kycLevel === "no_kyc" || card.kycLevel === "light_kyc" ? ["No-KYC cards", "/cards/no-kyc"] : null,
-                card.custodyModel === "self_custody" ? ["Self-custody", "/cards/self-custody"] : null,
-                card.cashbackMaxPct >= 3 ? ["High cashback", "/cards/high-cashback"] : null,
-                card.fxFeePct === 0 ? ["0% FX cards", "/cards/no-fx"] : null,
-                card.mobileWallets.includes("apple_pay") ? ["Apple Pay", "/cards/apple-pay"] : null,
-                card.audience !== "personal" ? ["Business cards", "/cards/business"] : null,
+                card.kycLevel === "no_kyc" || card.kycLevel === "light_kyc" ? ["No-KYC cards", "/crypto-card/no-kyc"] : null,
+                card.custodyModel === "self_custody" ? ["Self-custody", "/crypto-card/self-custody"] : null,
+                card.cashbackMaxPct >= 3 ? ["High cashback", "/crypto-card/high-cashback"] : null,
+                card.fxFeePct === 0 ? ["0% FX cards", "/crypto-card/no-fx"] : null,
+                card.mobileWallets.includes("apple_pay") ? ["Apple Pay", "/crypto-card/apple-pay"] : null,
+                card.audience !== "personal" ? ["Business cards", "/crypto-card/business"] : null,
               ]
                 .filter((item): item is string[] => Boolean(item))
                 .map(([label, href]) => (

@@ -9,7 +9,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Crypto Card Guides — No-KYC, Self-Custody, Cashback & More",
   description:
     "Browse every crypto card guide: no-KYC cards, self-custody wallets, Apple Pay, 0% FX, business cards and high cashback programmes.",
-  path: "/cards",
+  path: "/crypto-card",
 });
 
 const ICONS: Record<string, typeof ShieldCheck> = {
@@ -30,7 +30,7 @@ const ICONS: Record<string, typeof ShieldCheck> = {
 
 const breadcrumbs = breadcrumbJsonLd([
   { name: "Home", path: "/" },
-  { name: "Crypto card guides", path: "/cards" },
+  { name: "Crypto card guides", path: "/crypto-card" },
 ]);
 
 export default function GuidesIndexPage() {
@@ -58,7 +58,7 @@ export default function GuidesIndexPage() {
             return (
               <Link
                 key={page.slug}
-                href={`/cards/${page.slug}`}
+                href={`/crypto-card/${page.slug}`}
                 className="group flex flex-col rounded-xl border border-border bg-card p-4 transition hover:border-foreground/20 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between gap-2">

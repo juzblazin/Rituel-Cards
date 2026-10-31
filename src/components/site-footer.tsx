@@ -7,13 +7,13 @@ import { Wordmark } from "./ui";
 import { NewsletterForm } from "./newsletter-form";
 
 const guides = [
-  ["No-KYC cards", "/cards/no-kyc"],
-  ["Self-custody cards", "/cards/self-custody"],
-  ["High cashback", "/cards/high-cashback"],
-  ["Stablecoin cards", "/cards/stablecoin"],
-  ["Zero FX fees", "/cards/no-fx"],
-  ["Apple Pay cards", "/cards/apple-pay"],
-  ["Cards for ad spend", "/cards/virtual-ad-spend"],
+  ["No-KYC cards", "/crypto-card/no-kyc"],
+  ["Self-custody cards", "/crypto-card/self-custody"],
+  ["High cashback", "/crypto-card/high-cashback"],
+  ["Stablecoin cards", "/crypto-card/stablecoin"],
+  ["Zero FX fees", "/crypto-card/no-fx"],
+  ["Apple Pay cards", "/crypto-card/apple-pay"],
+  ["Cards for ad spend", "/crypto-card/virtual-ad-spend"],
 ];
 
 const countries = [
@@ -33,7 +33,7 @@ const chains = [
   ["Base cards", "/crypto/base"],
   ["Arbitrum cards", "/crypto/arbitrum"],
   ["Tron cards", "/crypto/tron"],
-  ["Bitcoin cards", "/crypto/bitcoin"],
+  ["Bitcoin cards", "/crypto/btc"],
 ];
 
 /** Footer comparisons are labelled by brand, not brand + card variant. */

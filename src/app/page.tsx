@@ -254,10 +254,10 @@ export default async function HomePage({
             <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
               <span className="text-xs text-muted-foreground">Popular:</span>
               {[
-                ["No KYC", "/cards/no-kyc"],
-                ["Self-custody", "/cards/self-custody"],
-                ["0% FX", "/cards/no-fx"],
-                ["Apple Pay", "/cards/apple-pay"],
+                ["No KYC", "/crypto-card/no-kyc"],
+                ["Self-custody", "/crypto-card/self-custody"],
+                ["0% FX", "/crypto-card/no-fx"],
+                ["Apple Pay", "/crypto-card/apple-pay"],
                 ["USDT", "/crypto/usdt"],
               ].map(([label, href]) => (
                 <Link
@@ -353,7 +353,7 @@ export default async function HomePage({
             eyebrow="Browse by need"
             title="Start with the constraint that matters"
             description="Programmatic hubs built from the same fee database — not hand-written listicles."
-            href="/cards"
+            href="/crypto-card"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {NEEDS.map((need) => {
@@ -363,7 +363,7 @@ export default async function HomePage({
               return (
                 <Link
                   key={need.slug}
-                  href={`/cards/${need.slug}`}
+                  href={`/crypto-card/${need.slug}`}
                   className="group flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-brand/35 hover:bg-brand/[0.04]"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-brand/10 text-brand ring-1 ring-brand/15 transition-colors group-hover:bg-brand/15">
@@ -468,7 +468,7 @@ export default async function HomePage({
             eyebrow="Stablecoin"
             title="Cards that run on stablecoins"
             description="Top up from USDC, USDT or EURe and keep your balance pegged to fiat. Compare top-up costs, cashback and FX across every stablecoin-ready programme."
-            href="/cards/stablecoin"
+            href="/crypto-card/stablecoin"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {stablecoinAssets.map((asset) => (
@@ -495,7 +495,7 @@ export default async function HomePage({
               </Link>
             ))}
             <Link
-              href="/cards/stablecoin"
+              href="/crypto-card/stablecoin"
               className="group flex flex-col rounded-xl border border-brand/25 bg-brand/[0.04] p-4 transition-colors hover:border-brand/45 hover:bg-brand/[0.08]"
             >
               <div className="flex items-center gap-2.5">
@@ -669,7 +669,7 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {sponsored.map((card) => (
-            <Link key={card.slug} href={`/card/${card.slug}`}>
+            <Link key={card.slug} href={`/crypto-card/${card.slug}`}>
               <SpotlightCard
                 theme="auto"
                 spotlightColor="oklch(0.66 0.23 292)"

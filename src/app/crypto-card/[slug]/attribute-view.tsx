@@ -9,24 +9,15 @@ import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
-type Props = { params: Promise<{ attribute: string }> };
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return attributePages.map((page) => ({ attribute: page.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { attribute } = await params;
-  const page = attributeBySlug.get(attribute);
+export async function attributeMetadata(slug: string): Promise<Metadata> {
+  const page = attributeBySlug.get(slug);
   if (!page) return {};
   const matched = cards.filter(page.filter);
   return buildMetadata({
     title: titleWithCount(page.title, matched.length),
     description: `${page.description} ${plural(matched.length, "card")} tracked and updated for October 2026.`,
-    path: `/cards/${page.slug}`,
-    image: routeOgImage(`/cards/${page.slug}`, page.title),
+    path: `/crypto-card/${page.slug}`,
+    image: routeOgImage(`/crypto-card/${page.slug}`, page.title),
     keywords: [page.heading.toLowerCase(), page.title.toLowerCase(), "crypto card comparison"],
   });
 }
@@ -70,9 +61,8 @@ const EXTRA_FAQS: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
-export default async function AttributePage({ params }: Props) {
-  const { attribute } = await params;
-  const page = attributeBySlug.get(attribute);
+export async function AttributeView({ slug }: { slug: string }) {
+  const page = attributeBySlug.get(slug);
   if (!page) notFound();
 
   const matched = cards.filter(page.filter).sort((a, b) => b.ratingScore - a.ratingScore);
@@ -112,8 +102,8 @@ export default async function AttributePage({ params }: Props) {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Guides", path: "/cards" },
-              { name: page.heading, path: `/cards/${page.slug}` },
+              { name: "Guides", path: "/crypto-card" },
+              { name: page.heading, path: `/crypto-card/${page.slug}` },
             ]),
           ),
         }}
@@ -124,7 +114,7 @@ export default async function AttributePage({ params }: Props) {
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
-          <Link href="/cards" className="hover:text-foreground">Guides</Link>
+          <Link href="/crypto-card" className="hover:text-foreground">Guides</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{page.heading}</span>
         </div>
@@ -218,7 +208,7 @@ export default async function AttributePage({ params }: Props) {
             {related.map((item) => (
               <Link
                 key={item.slug}
-                href={`/cards/${item.slug}`}
+                href={`/crypto-card/${item.slug}`}
                 className="rounded-full border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-foreground/20 hover:text-foreground"
               >
                 {item.heading}

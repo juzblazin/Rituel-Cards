@@ -18,7 +18,7 @@ export async function GET(
   try {
     target = new URL(card.affiliateUrl);
   } catch {
-    return Response.redirect(new URL(`/card/${card.slug}`, request.url), 302);
+    return Response.redirect(new URL(`/crypto-card/${card.slug}`, request.url), 302);
   }
 
   const host = request.nextUrl.hostname.replace(/^www\./, "");

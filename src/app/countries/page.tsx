@@ -78,7 +78,7 @@ export default function CountriesIndexPage() {
           <h2 className="text-sm font-semibold text-foreground">Don&apos;t see your country?</h2>
           <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">
             Some cards operate regionally without publishing a full country list. Start with the{" "}
-            <Link href="/cards" className="font-medium text-foreground underline underline-offset-4">guide directory</Link>{" "}
+            <Link href="/crypto-card" className="font-medium text-foreground underline underline-offset-4">guide directory</Link>{" "}
             or{" "}
             <Link href="/submit-card" className="font-medium text-foreground underline underline-offset-4">submit a card</Link>{" "}
             that should be listed here.

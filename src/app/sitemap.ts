@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { cards } from "@/lib/data";
-import { attributePages, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
+import { issuers } from "@/lib/issuers";
+import { attributePages, cardsForCountry, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
 import { absoluteUrl } from "@/lib/site";
 import { getAuthors, getCategories, getPosts } from "@/lib/blog";
 
@@ -16,10 +17,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), changeFrequency: "daily", priority: 1 },
-    { url: absoluteUrl("/cards"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/crypto-card"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/countries"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/crypto"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/issuer"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/blog"), lastModified: newestPost, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/submit-card"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/methodology"), changeFrequency: "monthly", priority: 0.5 },
@@ -28,14 +30,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const cardPages: MetadataRoute.Sitemap = cards.map((card) => ({
-    url: absoluteUrl(`/card/${card.slug}`),
+    url: absoluteUrl(`/crypto-card/${card.slug}`),
     lastModified: cardDate(card),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
   const attributeUrls: MetadataRoute.Sitemap = attributePages.map((page) => ({
-    url: absoluteUrl(`/cards/${page.slug}`),
+    url: absoluteUrl(`/crypto-card/${page.slug}`),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
@@ -46,17 +48,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const countryUrls: MetadataRoute.Sitemap = supportedCountries.map((country) => ({
-    url: absoluteUrl(`/countries/${country.slug}`),
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  const countryUrls: MetadataRoute.Sitemap = supportedCountries
+    .filter((country) => cardsForCountry(country.code).length >= 5)
+    .map((country) => ({
+      url: absoluteUrl(`/countries/${country.slug}`),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
 
   const compareUrls: MetadataRoute.Sitemap = featuredPairs.map((pair) => ({
     url: absoluteUrl(`/compare/${pair.slug}`),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
+
+  const issuerUrls: MetadataRoute.Sitemap = issuers
+    .filter((issuer) => issuer.cards.length > 1)
+    .map((issuer) => ({
+      url: absoluteUrl(`/issuer/${issuer.slug}`),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
 
 
   const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
@@ -86,6 +98,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cryptoUrls,
     ...countryUrls,
     ...compareUrls,
+    ...issuerUrls,
     ...postUrls,
     ...categoryUrls,
     ...authorUrls,

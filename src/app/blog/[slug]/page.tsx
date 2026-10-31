@@ -168,7 +168,7 @@ export default async function BlogPostPage({ params }: Props) {
               {relatedCards.map((card) => (
                 <Link
                   key={card.slug}
-                  href={`/card/${card.slug}`}
+                  href={`/crypto-card/${card.slug}`}
                   className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition hover:border-foreground/20"
                 >
                   <CardArt card={card} className="h-11 w-16 shrink-0" />

@@ -5,6 +5,16 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
+  async redirects() {
+    return [
+      { source: "/card/:slug", destination: "/crypto-card/:slug", permanent: true },
+      { source: "/cards", destination: "/crypto-card", permanent: true },
+      { source: "/cards/:attribute", destination: "/crypto-card/:attribute", permanent: true },
+      { source: "/crypto-cards", destination: "/crypto-card", permanent: true },
+      { source: "/crypto-cards/:attribute", destination: "/crypto-card/:attribute", permanent: true },
+      { source: "/crypto/bitcoin", destination: "/crypto/btc", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

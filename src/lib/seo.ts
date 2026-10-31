@@ -94,7 +94,7 @@ export function itemListJsonLd(name: string, cards: { name: string; slug: string
     itemListElement: cards.map((card, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: absoluteUrl(`/card/${card.slug}`),
+      url: absoluteUrl(`/crypto-card/${card.slug}`),
       name: card.name,
     })),
   };
@@ -132,7 +132,7 @@ export function financialProductJsonLd(card: {
   officialUrl?: string | null;
   website?: string | null;
 }) {
-  const url = absoluteUrl(`/card/${card.slug}`);
+  const url = absoluteUrl(`/crypto-card/${card.slug}`);
   const providerUrl = card.officialUrl || card.website || undefined;
   return {
     "@context": "https://schema.org",

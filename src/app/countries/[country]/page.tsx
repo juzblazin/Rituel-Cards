@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: titleWithCount(countryPageTitle(country.name), available.length),
     description: `Compare ${plural(available.length, "crypto card")} available in ${country.name}: debit, credit and prepaid. Real FX fees, cashback, KYC levels and limits for 2026.`,
     path: `/countries/${country.slug}`,
+    noIndex: available.length < 5,
     image: routeOgImage(`/countries/${country.slug}`, countryPageTitle(country.name)),
     keywords: [
       `crypto card ${country.name}`,
@@ -154,7 +155,7 @@ export default async function CountryPage({ params }: Props) {
               <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Quick picks</h2>
               <div className="mt-2 divide-y divide-border">
                 {top.map((card, index) => (
-                  <Link key={card.slug} href={`/card/${card.slug}`} className="flex items-center gap-2 py-2 first:pt-0 last:pb-0">
+                  <Link key={card.slug} href={`/crypto-card/${card.slug}`} className="flex items-center gap-2 py-2 first:pt-0 last:pb-0">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{index + 1}</span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-xs font-semibold text-foreground">{card.name}</span>
@@ -227,7 +228,7 @@ export default async function CountryPage({ params }: Props) {
               {["no-kyc", "self-custody", "high-cashback", "no-fx", "apple-pay", "business"].map((attribute) => (
                 <Link
                   key={attribute}
-                  href={`/cards/${attribute}`}
+                  href={`/crypto-card/${attribute}`}
                   className="rounded-full border border-border bg-background px-2 py-1 text-xs text-muted-foreground hover:border-foreground/20 hover:text-foreground"
                 >
                   {attribute.replace(/-/g, " ")}
