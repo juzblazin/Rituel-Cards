@@ -4,7 +4,7 @@ import { ChevronRight, Landmark } from "lucide-react";
 import { issuers } from "@/lib/issuers";
 import { buildMetadata, breadcrumbJsonLd, routeOgImage } from "@/lib/seo";
 import { cashbackLabel, plural } from "@/lib/format";
-import { Badge } from "@/components/ui";
+import { Badge, BrandMark } from "@/components/ui";
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -71,11 +71,14 @@ export default function IssuersIndex() {
               href={`/issuer/${issuer.slug}`}
               className="group rounded-xl border border-border bg-card p-4 transition hover:border-foreground/25"
             >
-              <div className="flex items-baseline justify-between gap-2">
-                <h2 className="text-sm font-semibold text-foreground group-hover:text-foreground">
-                  {issuer.name}
-                </h2>
-                <span className="text-[10px] text-muted-foreground">{issuer.domain}</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-2">
+                  <BrandMark card={issuer.topCard} className="h-7 w-7 text-xs" />
+                  <h2 className="truncate text-sm font-semibold text-foreground group-hover:text-foreground">
+                    {issuer.name}
+                  </h2>
+                </div>
+                <span className="shrink-0 text-[10px] text-muted-foreground">{issuer.domain}</span>
               </div>
               <div className="mt-1 text-xs text-muted-foreground">
                 {plural(issuer.cards.length, "card")} · {cashbackLabel(issuer.topCard)} best ·{" "}

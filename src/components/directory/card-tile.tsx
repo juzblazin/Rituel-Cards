@@ -93,6 +93,11 @@ export function CardTile({
           size="lg"
           className="relative aspect-[1.586/1] w-full rounded-lg shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:-translate-y-0.5"
         />
+        {card.isSponsored && (
+          <span className="absolute right-4 top-4 z-10 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-medium tracking-wide text-white/80 backdrop-blur-sm">
+            Sponsored
+          </span>
+        )}
       </Link>
 
       <div className="mt-3.5">

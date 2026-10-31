@@ -7,7 +7,7 @@ import { buildMetadata, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImag
 import { cashbackLabel, feeLabel, plural } from "@/lib/format";
 import { custodyLabel, kycLabel } from "@/lib/data";
 import { ComparisonMatrix, WinnerSummary } from "@/components/compare/comparison-matrix";
-import { Badge } from "@/components/ui";
+import { Badge, BrandMark } from "@/components/ui";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -111,7 +111,8 @@ export default async function IssuerPage({ params }: Props) {
             <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               <Landmark className="h-3 w-3" /> Card issuer · {issuer.domain}
             </div>
-            <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+            <h1 className="mt-3 flex items-center gap-4 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+              <BrandMark card={issuer.topCard} className="h-12 w-12 shrink-0 text-2xl" />
               {multi ? `Compare ${issuer.name} cards` : `${issuer.name} card`}
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">

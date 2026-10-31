@@ -30,7 +30,7 @@ const ICONS: Record<string, typeof ShieldCheck> = {
 
 const breadcrumbs = breadcrumbJsonLd([
   { name: "Home", path: "/" },
-  { name: "Crypto card guides", path: "/crypto-card" },
+  { name: "Categories", path: "/crypto-card" },
 ]);
 
 export default function GuidesIndexPage() {
@@ -40,7 +40,7 @@ export default function GuidesIndexPage() {
       <div className="container-page py-12 sm:py-16">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-            <Sparkles className="h-3 w-3" /> Guides
+            <Sparkles className="h-3 w-3" /> Categories
           </div>
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
             Start with the right constraint

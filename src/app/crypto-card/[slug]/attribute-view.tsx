@@ -102,7 +102,7 @@ export async function AttributeView({ slug }: { slug: string }) {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Guides", path: "/crypto-card" },
+              { name: "Categories", path: "/crypto-card" },
               { name: page.heading, path: `/crypto-card/${page.slug}` },
             ]),
           ),
@@ -114,7 +114,7 @@ export async function AttributeView({ slug }: { slug: string }) {
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
-          <Link href="/crypto-card" className="hover:text-foreground">Guides</Link>
+          <Link href="/crypto-card" className="hover:text-foreground">Categories</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{page.heading}</span>
         </div>

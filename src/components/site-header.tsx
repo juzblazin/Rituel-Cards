@@ -18,9 +18,7 @@ import {
 
 const nav = [
   { href: "/", label: "Crypto Card" },
-  { href: "/crypto-card", label: "Guides" },
-  { href: "/countries", label: "Countries" },
-  { href: "/crypto", label: "Tokens & chains" },
+  { href: "/crypto-card", label: "Categories" },
   { href: "/issuer", label: "Issuers" },
   { href: "/compare", label: "Compare" },
   { href: "/blog", label: "Blog" },

@@ -184,6 +184,22 @@ export const cards: Card[] = cardsFromDb as unknown as Card[];
 
 export const cardBySlug = new Map(cards.map((c) => [c.slug, c]));
 
+/**
+ * Featured partners are distinct from `isSponsored`: featured partners get the
+ * large "Featured partners" homepage placement, while sponsored cards get
+ * pinned placement in the directory plus a Sponsored badge.
+ * Move to a DB flag if partners change frequently.
+ */
+export const featuredPartnerSlugs = new Set<string>([
+  "metamask-card-metal",
+  "etherfi-cash-luxe",
+  "coca-card",
+]);
+
+export function isFeaturedPartner(card: Card): boolean {
+  return featuredPartnerSlugs.has(card.slug);
+}
+
 /* ------------------------------------------------------------------ */
 /* Product families                                                    */
 /* ------------------------------------------------------------------ */

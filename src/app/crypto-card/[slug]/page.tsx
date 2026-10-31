@@ -143,12 +143,20 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             >
               <div className="w-full max-w-[270px]">
                 <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
-                <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground">
-                  <span className="font-mono uppercase tracking-wider">{networkLabel[card.network]}</span>
-                  <span>Issued by {card.issuerName}</span>
-                  {issuer && issuer.cards.length > 1 && (
-                    <Link href={`/issuer/${issuer.slug}`} className="mt-1 block text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">
-                      Compare all {issuer.name} cards ({issuer.cards.length})
+                <div className="mt-4 space-y-1.5">
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span className="font-mono uppercase tracking-wider">{networkLabel[card.network]}</span>
+                    <span>Issued by {card.issuerName}</span>
+                  </div>
+                  {issuer && (
+                    <Link
+                      href={`/issuer/${issuer.slug}`}
+                      className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                    >
+                      {issuer.cards.length > 1
+                        ? `Compare all ${issuer.name} cards (${issuer.cards.length})`
+                        : `View the ${issuer.name} issuer page`}
+                      <ChevronRight className="size-3 shrink-0" />
                     </Link>
                   )}
                 </div>

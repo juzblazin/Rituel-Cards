@@ -147,7 +147,7 @@ const columns: Record<Preset, Column[]> = {
       sortValue: (c) => c.payoutToken,
       csv: (c) => c.payoutToken,
       render: (c) => (
-        <span className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px]">{c.payoutToken}</span>
+        <span className="rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-xs">{c.payoutToken}</span>
       ),
     },
     {
@@ -319,14 +319,14 @@ export function TableView({
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-border bg-muted/60">
-                <th className="sticky left-0 z-20 min-w-[182px] border-r border-border bg-muted px-2.5 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <th className="sticky left-0 z-20 min-w-[220px] border-r border-border bg-muted px-3 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Card
                 </th>
                 {active.map((column) => (
                   <th
                     key={column.key}
                     className={cn(
-                      "whitespace-nowrap px-2.5 py-2.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground",
+                      "whitespace-nowrap px-3 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground",
                       column.align === "right" && "text-right",
                       column.width,
                     )}
@@ -350,7 +350,7 @@ export function TableView({
                     </button>
                   </th>
                 ))}
-                <th className="px-2 py-2.5 text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <th className="px-2 py-2.5 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Action
                 </th>
               </tr>
@@ -373,7 +373,7 @@ export function TableView({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-muted/40 px-3 py-2.5 text-[10px] text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border bg-muted/40 px-3 py-2.5 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1">
           <Sparkles className="h-3 w-3 text-muted-foreground" /> This table sorts on raw metrics only.
         </span>
@@ -420,14 +420,14 @@ function Row({
             >
               {expanded ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
             </button>
-            <BrandMark card={card} className="h-8 w-8 shrink-0 text-sm" />
+            <BrandMark card={card} className="h-9 w-9 shrink-0 text-base" />
             <div className="min-w-0">
               <div className="flex items-center gap-1">
-                <Link href={`/crypto-card/${card.slug}`} className="max-w-[132px] truncate text-xs font-semibold text-foreground hover:text-foreground">
+                <Link href={`/crypto-card/${card.slug}`} className="max-w-[180px] truncate text-sm font-semibold text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
               </div>
-              <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span>{networkLabel[card.network]}</span>
                 <span>·</span>
                 <span className="num text-warning">★ {card.ratingScore.toFixed(1)}</span>
@@ -440,7 +440,7 @@ function Row({
         {columns.map((column) => (
           <td
             key={column.key}
-            className={cn("px-2.5 py-2.5 align-middle", column.align === "right" && "text-right", column.width)}
+            className={cn("px-3 py-3 align-middle", column.align === "right" && "text-right", column.width)}
           >
             {column.render(card)}
           </td>
@@ -454,7 +454,7 @@ function Row({
               disabled={!selected && compareDisabled}
               aria-pressed={selected}
               className={cn(
-                "rounded-md border px-1.5 py-1 text-[10px] font-semibold transition",
+                "rounded-md border px-2 py-1.5 text-xs font-semibold transition",
                 selected
                   ? "border-primary bg-primary/10 text-primary"
                   : "border-border text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -467,7 +467,7 @@ function Row({
               slug={card.slug}
               cardName={card.name}
               source="directory-table"
-              className="inline-flex items-center gap-0.5 rounded-md bg-primary px-2 py-1 text-[10px] font-medium text-primary-foreground hover:bg-primary/80"
+              className="inline-flex items-center gap-0.5 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/80"
             >
               Get <ExternalLink className="h-2.5 w-2.5" />
             </AffiliateLink>
@@ -483,23 +483,23 @@ function Row({
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {card.name} tiers
                 </h4>
-                <span className="text-[10px] text-muted-foreground">{card.stakingRequirement}</span>
+                <span className="text-xs text-muted-foreground">{card.stakingRequirement}</span>
               </div>
               <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
                 {card.tiers.map((tier) => (
                   <div key={tier.name} className="rounded-lg border border-border p-2.5">
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-xs font-semibold text-foreground">{tier.name}</span>
-                      <span className="rounded bg-success/10 px-1.5 py-0.5 text-[10px] font-medium text-success">
+                      <span className="rounded bg-success/10 px-1.5 py-0.5 text-xs font-medium text-success">
                         {pct(tier.cashbackPct)} back
                       </span>
                     </div>
-                    <div className="mt-1 text-[10px] text-muted-foreground">
+                    <div className="mt-1 text-xs text-muted-foreground">
                       Stake: {tier.stake} · Annual: {feeLabel(tier.annualFeeUsd, "None")} · FX: {pct(tier.fxFeePct)}
                     </div>
                     <ul className="mt-1.5 space-y-0.5">
                       {tier.perks.map((perk) => (
-                        <li key={perk} className="text-[10px] leading-4 text-muted-foreground">· {perk}</li>
+                        <li key={perk} className="text-xs leading-4 text-muted-foreground">· {perk}</li>
                       ))}
                     </ul>
                   </div>

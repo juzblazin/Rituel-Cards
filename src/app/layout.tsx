@@ -33,6 +33,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
   icons: {
     icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],

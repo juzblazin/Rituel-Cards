@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   Wallet,
 } from "lucide-react";
-import { cards, kycLabel, type Card } from "@/lib/data";
+import { cards, isFeaturedPartner, kycLabel, type Card } from "@/lib/data";
 import { parseFilters, type ViewMode } from "@/lib/filters";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
 import { attributePages, cryptoBySlug, featuredPairs, supportedCountries } from "@/lib/taxonomy";
@@ -138,8 +138,8 @@ export default async function HomePage({
   const filters = parseFilters(params);
   const view: ViewMode = params.view === "table" ? "table" : "grid";
 
-  const sponsored = cards
-    .filter((card) => card.isSponsored)
+  const featured = cards
+    .filter(isFeaturedPartner)
     .sort((a, b) => a.sponsorPriority - b.sponsorPriority)
     .slice(0, 3);
 
@@ -317,7 +317,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      <FeaturedPartners cards={sponsored} />
+      <FeaturedPartners cards={featured} />
 
       <section id="directory" className="scroll-mt-20 border-y bg-muted/30 py-16">
         <div className="container-page">
@@ -679,7 +679,12 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
                 borderGlow={0.45}
                 className="group flex flex-col rounded-xl border border-border/80 p-5 transition-colors hover:border-brand/40"
               >
-                <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
+                <div className="relative">
+                  <CardArt card={card} size="lg" className="aspect-[1.58/1] w-full" />
+                  <span className="absolute right-2.5 top-2.5 z-10 rounded-md bg-amber-400/95 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-amber-950 shadow">
+                    Featured
+                  </span>
+                </div>
 
                 <div className="mt-5 flex items-start justify-between gap-3">
                   <div className="min-w-0">
