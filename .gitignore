@@ -13,3 +13,7 @@ next-env.d.ts
 .neon
 .dev.vars
 .dev.vars.*
+
+# Freebuff build artifacts
+.freebuff/
+freebuff-sites-build/
