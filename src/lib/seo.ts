@@ -85,6 +85,31 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
+/** Dataset schema for the master comparison set — targets Google Dataset Search. */
+export function datasetJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: "Crypto card comparison dataset",
+    description:
+      "Verified fee, reward, limit and availability data for crypto debit and credit cards, re-checked against issuer documentation on a rolling basis.",
+    url: absoluteUrl("/"),
+    keywords: ["crypto card", "bitcoin debit card", "card fees", "cashback rates", "KYC requirements"],
+    creator: {
+      "@type": "Organization",
+      name: "Rituel",
+      url: absoluteUrl("/"),
+    },
+    distribution: {
+      "@type": "DataDownload",
+      contentUrl: absoluteUrl("/llms-full.txt"),
+      encodingFormat: "text/plain",
+    },
+    dateModified: new Date().toISOString().slice(0, 10),
+    isAccessibleForFree: true,
+  };
+}
+
 export function itemListJsonLd(name: string, cards: { name: string; slug: string }[]) {
   return {
     "@context": "https://schema.org",

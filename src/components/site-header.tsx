@@ -19,7 +19,7 @@ import {
 const nav = [
   { href: "/", label: "Crypto Card" },
   { href: "/crypto-card", label: "Categories" },
-  { href: "/issuer", label: "Issuers" },
+  { href: "/brands", label: "Brands" },
   { href: "/compare", label: "Compare" },
   { href: "/blog", label: "Blog" },
 ];

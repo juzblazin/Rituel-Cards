@@ -400,7 +400,11 @@ export function Directory({
             ) : view === "grid" ? (
               <>
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {visibleCards.map((card, index) => (
+                  {(() => {
+                    const sponsoredTop = new Set(
+                      visibleCards.filter((card) => card.isSponsored).slice(0, 3).map((card) => card.slug),
+                    );
+                    return visibleCards.map((card, index) => (
                     <Fragment key={card.id}>
                       <CardTile
                         card={card}
@@ -409,10 +413,12 @@ export function Directory({
                         onToggleCompare={() => toggleCompare(card.slug)}
                         compareDisabled={selected.length >= 4}
                         source={source}
+                        showSponsored={sponsoredTop.has(card.slug)}
                       />
                       {index === 5 && visibleCards.length > 6 && <MidFeedBanner />}
                     </Fragment>
-                  ))}
+                    ));
+                  })()}
                 </div>
 
                 {visible < results.length && (

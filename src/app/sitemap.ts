@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { cards } from "@/lib/data";
 import { issuers } from "@/lib/issuers";
-import { attributePages, cardsForCountry, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
+import { attributePages, bestPages, cardsForCountry, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
+import { infraProviders } from "@/lib/infra";
 import { absoluteUrl } from "@/lib/site";
 import { getAuthors, getCategories, getPosts } from "@/lib/blog";
 
@@ -21,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/countries"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/crypto"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/compare"), changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/issuer"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/brands"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/blog"), lastModified: newestPost, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/submit-card"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/methodology"), changeFrequency: "monthly", priority: 0.5 },
@@ -48,6 +49,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const bestUrls: MetadataRoute.Sitemap = bestPages.map((page) => ({
+    url: absoluteUrl(`/best/${page.slug}-crypto-cards`),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  const infraUrls: MetadataRoute.Sitemap = [
+    { url: absoluteUrl("/issuers"), changeFrequency: "weekly", priority: 0.7 },
+    ...infraProviders.map((provider) => ({
+      url: absoluteUrl(`/issuers/${provider.slug}`),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
+  ];
+
   const countryUrls: MetadataRoute.Sitemap = supportedCountries
     .filter((country) => cardsForCountry(country.code).length >= 5)
     .map((country) => ({
@@ -65,7 +81,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const issuerUrls: MetadataRoute.Sitemap = issuers
     .filter((issuer) => issuer.cards.length > 1)
     .map((issuer) => ({
-      url: absoluteUrl(`/issuer/${issuer.slug}`),
+      url: absoluteUrl(`/brands/${issuer.slug}`),
       changeFrequency: "weekly",
       priority: 0.7,
     }));
@@ -96,6 +112,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cardPages,
     ...attributeUrls,
     ...cryptoUrls,
+    ...bestUrls,
+    ...infraUrls,
     ...countryUrls,
     ...compareUrls,
     ...issuerUrls,

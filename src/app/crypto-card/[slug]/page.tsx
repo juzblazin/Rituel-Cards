@@ -114,7 +114,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Crypto cards", path: "/" },
+              { name: "Cards", path: "/crypto-card" },
               { name: card.name, path: `/crypto-card/${card.slug}` },
             ]),
           ),
@@ -150,7 +150,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
                   </div>
                   {issuer && (
                     <Link
-                      href={`/issuer/${issuer.slug}`}
+                      href={`/brands/${issuer.slug}`}
                       className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
                     >
                       {issuer.cards.length > 1

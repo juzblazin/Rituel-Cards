@@ -18,7 +18,7 @@ import { cards, isFeaturedPartner, kycLabel, type Card } from "@/lib/data";
 import { parseFilters, type ViewMode } from "@/lib/filters";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
 import { attributePages, cryptoBySlug, featuredPairs, supportedCountries } from "@/lib/taxonomy";
-import { buildMetadata, faqJsonLd, itemListJsonLd, organizationJsonLd } from "@/lib/seo";
+import { buildMetadata, datasetJsonLd, faqJsonLd, itemListJsonLd, organizationJsonLd } from "@/lib/seo";
 import { absoluteUrl, site } from "@/lib/site";
 import { countryByCode } from "@/lib/countries";
 import { Directory } from "@/components/directory/directory";
@@ -184,6 +184,7 @@ export default async function HomePage({
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd("Crypto cards", cards)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetJsonLd()) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(FAQS)) }} />
 
       <section className="relative overflow-hidden border-b bg-gradient-to-b from-background to-background/60 pb-16 pt-16 sm:pt-20">
@@ -202,7 +203,7 @@ export default async function HomePage({
                 </span>
                 <span className="dark:hidden">
                   <ShinyText
-                    text={`Updated October 2026 · ${cards.length} cards · 12 fee inputs`}
+                    text={`Updated October 2026`}
                     color="#52525b"
                     shineColor="#18181b"
                     speed={4}
@@ -212,7 +213,7 @@ export default async function HomePage({
                 </span>
                 <span className="hidden dark:inline-block">
                   <ShinyText
-                    text={`Updated October 2026 · ${cards.length} cards · 12 fee inputs`}
+                    text={`Updated October 2026`}
                     color="#a1a1aa"
                     shineColor="#fafafa"
                     speed={4}

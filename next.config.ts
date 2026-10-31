@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       { source: "/crypto-cards", destination: "/crypto-card", permanent: true },
       { source: "/crypto-cards/:attribute", destination: "/crypto-card/:attribute", permanent: true },
       { source: "/crypto/bitcoin", destination: "/crypto/btc", permanent: true },
+      { source: "/issuer", destination: "/brands", permanent: true },
+      { source: "/issuer/:slug", destination: "/brands/:slug", permanent: true },
     ];
   },
   async headers() {

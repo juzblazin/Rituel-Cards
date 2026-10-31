@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { cards } from "@/lib/data";
-import { featuredPairs } from "@/lib/taxonomy";
+import { bestPages, featuredPairs } from "@/lib/taxonomy";
+import { cardsOnRail, infraProviders } from "@/lib/infra";
 import { Wordmark } from "./ui";
 import { NewsletterForm } from "./newsletter-form";
 
@@ -36,6 +37,12 @@ const chains = [
   ["Bitcoin cards", "/crypto/btc"],
 ];
 
+const cardIssuers = infraProviders
+  .map((provider) => ({ provider, powered: cardsOnRail(provider, cards).length }))
+  .sort((a, b) => b.powered - a.powered)
+  .slice(0, 8)
+  .map(({ provider }) => [provider.name, `/issuers/${provider.slug}`]);
+
 /** Footer comparisons are labelled by brand, not brand + card variant. */
 function pairLabel(pair: { a: { name: string }; b: { name: string } }): string {
   const brand = (name: string) => {
@@ -46,12 +53,6 @@ function pairLabel(pair: { a: { name: string }; b: { name: string } }): string {
   const b = brand(pair.b.name);
   return a === b ? `${pair.a.name} vs ${pair.b.name}` : `${a} vs ${b}`;
 }
-
-const stats = [
-  [`${cards.length}`, "cards tracked"],
-  ["250", "countries searchable"],
-  ["12", "fees per card"],
-];
 
 export function SiteFooter() {
   return (
@@ -65,22 +66,13 @@ export function SiteFooter() {
           <NewsletterForm />
         </div>
 
-        <div className="grid gap-10 border-t pt-12 lg:grid-cols-[1.3fr_2fr]">
-          <div className="max-w-sm">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 border-t pt-12 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="col-span-full max-w-sm lg:col-span-1">
             <Wordmark />
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
               Independent crypto card comparison. We track the fees, limits and country availability that
               marketing pages tend to bury.
             </p>
-            <dl className="mt-6 flex gap-7">
-              {stats.map(([value, label]) => (
-                <div key={label}>
-                  <dt className="sr-only">{label}</dt>
-                  <dd className="text-lg font-semibold tracking-tight text-foreground">{value}</dd>
-                  <dd className="text-[11px] uppercase tracking-wider text-muted-foreground">{label}</dd>
-                </div>
-              ))}
-            </dl>
             <div className="mt-6 flex flex-wrap gap-2">
               <Link
                 href="/submit-card"
@@ -97,18 +89,17 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            <FooterColumn title="Guides" links={guides} />
-            <FooterColumn title="Countries" links={countries} />
-            <FooterColumn title="Chains" links={chains} />
-            <FooterColumn
-              title="Compare"
-              links={featuredPairs.slice(0, 6).map((pair) => [
-                pairLabel(pair),
-                `/compare/${pair.slug}`,
-              ])}
-            />
-          </div>
+          <FooterColumn title="Card issuers" links={[...cardIssuers, ["All issuers", "/issuers"]]} />
+          <FooterColumn title="Categories" links={guides} />
+          <FooterColumn title="Countries" links={countries} />
+          <FooterColumn title="Chains" links={chains} />
+          <FooterColumn
+            title="Compare"
+            links={featuredPairs.slice(0, 6).map((pair) => [
+              pairLabel(pair),
+              `/compare/${pair.slug}`,
+            ])}
+          />
         </div>
 
         <div className="mt-12 border-t pt-8">
@@ -123,6 +114,24 @@ export function SiteFooter() {
                   className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {pairLabel(pair)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-8 border-t pt-8">
+          <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Best of crypto cards
+          </h2>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            {bestPages.map((page) => (
+              <li key={page.slug}>
+                <Link
+                  href={`/best/${page.slug}-crypto-cards`}
+                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {page.heading}
                 </Link>
               </li>
             ))}
