@@ -70,6 +70,27 @@ export async function saveSubmission(input: CardSubmissionInput): Promise<void> 
   `;
 }
 
+export type NewsletterSubscriberInput = {
+  email: string;
+  country?: string;
+  source?: string;
+  subscribedAt?: string;
+};
+
+export async function saveSubscriber(input: NewsletterSubscriberInput): Promise<void> {
+  const sql = getSql();
+  await sql`
+    insert into newsletter_subscribers (email, country, source, subscribed_at)
+    values (
+      ${input.email.toLowerCase()},
+      ${input.country ?? "unknown"},
+      ${input.source ?? "footer"},
+      ${input.subscribedAt ?? new Date().toISOString()}
+    )
+    on conflict (email) do nothing
+  `;
+}
+
 export type AffiliateClickInput = {
   slug: string;
   card?: string;

@@ -48,3 +48,13 @@ create index if not exists affiliate_clicks_slug_idx
 
 create index if not exists affiliate_clicks_clicked_at_idx
   on affiliate_clicks (clicked_at desc);
+
+create table if not exists newsletter_subscribers (
+  email          text primary key,
+  country        text not null default 'unknown',
+  source         text not null default 'footer',
+  subscribed_at  timestamptz not null default now()
+);
+
+create index if not exists newsletter_subscribers_subscribed_at_idx
+  on newsletter_subscribers (subscribed_at desc);
