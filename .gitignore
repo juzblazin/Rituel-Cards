@@ -18,3 +18,11 @@ next-env.d.ts
 # Freebuff build artifacts
 .freebuff/
 freebuff-sites-build/
+
+# Research / crawl working artifacts
+.cloud-attachments/
+crawl/
+rea/
+crawl-targets.json
+card-details-*
+COMPETITOR-SEO-AUDIT.md

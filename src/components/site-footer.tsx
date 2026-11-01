@@ -156,6 +156,7 @@ export function SiteFooter() {
             <Link href="/methodology" className="transition hover:text-foreground">Methodology</Link>
             <Link href="/privacy" className="transition hover:text-foreground">Privacy</Link>
             <Link href="/terms" className="transition hover:text-foreground">Terms</Link>
+            <Link href="/sitemap.xml" className="transition hover:text-foreground">Sitemap</Link>
             <a href={`mailto:${site.email}`} className="transition hover:text-foreground">{site.email}</a>
           </div>
         </div>
