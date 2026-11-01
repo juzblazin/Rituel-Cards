@@ -60,7 +60,7 @@ export function CategoryNav({ categories, active }: { categories: { title: strin
   return (
     <nav aria-label="Blog categories" className="flex flex-wrap gap-2">
       <Link href="/blog" className={`${pill} ${active ? off : on}`} aria-current={active ? undefined : "page"}>
-        All posts
+        All
       </Link>
       {categories.map((category) => (
         <Link

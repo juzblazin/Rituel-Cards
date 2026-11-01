@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
-import { getCategories, getCategory, getPostsByCategory } from "@/lib/blog";
+import { getCategory, getNavCategories, getPostsByCategory } from "@/lib/blog";
+import { BlogEmpty } from "@/components/blog/blog-empty";
 import { CategoryNav, PostGrid } from "@/components/blog/post-card";
 
 export const dynamic = "force-dynamic";
@@ -26,9 +27,9 @@ export default async function BlogCategoryPage({ params }: Props) {
   const [category, posts, categories] = await Promise.all([
     getCategory(slug),
     getPostsByCategory(slug),
-    getCategories(),
+    getNavCategories(),
   ]);
-  if (!category || posts.length === 0) notFound();
+  if (!category) notFound();
 
   return (
     <div className="container-page py-12 sm:py-16">
@@ -58,9 +59,7 @@ export default async function BlogCategoryPage({ params }: Props) {
       <div className="mt-6">
         <CategoryNav categories={categories} active={category.slug} />
       </div>
-      <div className="mt-6">
-        <PostGrid posts={posts} />
-      </div>
+      <div className="mt-6">{posts.length > 0 ? <PostGrid posts={posts} /> : <BlogEmpty />}</div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { cardBySlug } from "@/lib/data";
 import { formatPostDate, getPost, getPosts, imageUrl } from "@/lib/blog";
-import { blogPostingJsonLd, breadcrumbJsonLd, buildMetadata, faqJsonLd } from "@/lib/seo";
+import { articleGraphJsonLd, buildMetadata } from "@/lib/seo";
 import { PostBody } from "@/components/blog/post-body";
 import { PostCard } from "@/components/blog/post-card";
 import { CardArt, Rating } from "@/components/ui";
@@ -48,46 +48,31 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            blogPostingJsonLd({
-              title: post.title,
-              slug: post.slug,
-              excerpt: post.excerpt,
-              publishedAt: post.publishedAt,
-              updatedAt: post.updatedAt,
-              imageUrl: post.mainImage ? imageUrl(post.mainImage, 1200, 630) : undefined,
-              author: post.author
-                ? {
-                    name: post.author.name,
-                    slug: post.author.slug,
-                    role: post.author.role,
-                    bio: post.author.bio,
-                    imageUrl: post.author.image ? imageUrl(post.author.image, 400, 400) : undefined,
-                    links: post.author.links,
-                  }
-                : undefined,
+            articleGraphJsonLd({
+              post: {
+                title: post.title,
+                slug: post.slug,
+                excerpt: post.excerpt,
+                publishedAt: post.publishedAt,
+                updatedAt: post.updatedAt,
+                imageUrl: post.mainImage ? imageUrl(post.mainImage, 1200, 630) : undefined,
+                author: post.author
+                  ? {
+                      name: post.author.name,
+                      slug: post.author.slug,
+                      role: post.author.role,
+                      bio: post.author.bio,
+                      imageUrl: post.author.image ? imageUrl(post.author.image, 400, 400) : undefined,
+                      links: post.author.links,
+                    }
+                  : undefined,
+              },
+              cards: relatedCards,
+              faqs: post.faqs,
             }),
           ),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            breadcrumbJsonLd([
-              { name: "Home", path: "/" },
-              { name: "Blog", path: "/blog" },
-              { name: post.title, path: `/blog/${post.slug}` },
-            ]),
-          ),
-        }}
-      />
-
-      {post.faqs.length > 0 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(post.faqs.map((faq) => ({ q: faq.question, a: faq.answer })))) }}
-        />
-      )}
 
       <div className="mx-auto max-w-3xl">
         <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-xs text-muted-foreground">

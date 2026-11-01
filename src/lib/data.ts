@@ -218,7 +218,7 @@ function familyId(card: Card) {
 }
 
 /** Display brand, e.g. "Bybit" from "Bybit - VIP Card" or "Crypto.com Visa - Ruby Steel Card". */
-export function brandName(card: Card) {
+export function brandName(card: { name: string }) {
   return card.name.split(" - ")[0]?.trim().split(/\s+/)[0] ?? card.name;
 }
 

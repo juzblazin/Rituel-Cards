@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Newspaper, Rss } from "lucide-react";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
-import { getCategories, getPosts } from "@/lib/blog";
+import { getNavCategories, getPosts } from "@/lib/blog";
 import { BlogEmpty } from "@/components/blog/blog-empty";
 import { CategoryNav, PostGrid } from "@/components/blog/post-card";
 
@@ -9,14 +9,14 @@ import { CategoryNav, PostGrid } from "@/components/blog/post-card";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Crypto Card Blog — Fee Changes, Launches & Guides",
+  title: "Rituel Cards Intelligence — Crypto Debit Card Teardowns, Fees & Payment Rails",
   description:
-    "News and analysis on crypto debit and credit cards: fee and cashback changes, new launches, country availability and how-to guides.",
+    "Independent benchmarks on self-custody crypto cards, DeFi collateral borrowing, zero-FX travel spending, and BaaS issuing rails. Data reviewed late 2026.",
   path: "/blog",
 });
 
 export default async function BlogIndexPage() {
-  const [posts, categories] = await Promise.all([getPosts(), getCategories()]);
+  const [posts, categories] = await Promise.all([getPosts(), getNavCategories()]);
 
   return (
     <div className="container-page py-12 sm:py-16">
@@ -32,10 +32,13 @@ export default async function BlogIndexPage() {
             <Newspaper className="h-3 w-3" /> Blog
           </div>
           <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
-            The fine print, explained
+            Rituel Cards Intelligence: Web3 Payment Rails, Card Teardowns & Regulatory Guides
           </h1>
-          <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            Fee changes, new card launches and practical guides, written from the same data as the directory.
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
+            Rituel delivers independent research, fee audits, and technical teardowns across four Web3 payment
+            pillars: self-custody hardware and smart contract cards, Layer-1 and Layer-2 blockchain rails,
+            zero-FX travel and MiCA/FCA regulatory corridors, and white-label banking issuers including
+            Monavate, Baanx, and Rain.
           </p>
         </div>
         <a

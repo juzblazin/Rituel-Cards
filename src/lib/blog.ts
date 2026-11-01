@@ -95,6 +95,29 @@ export const getCategories = cache(
     ),
 );
 
+/**
+ * Every category, ordered for the pillar tab nav: the four editorial pillars
+ * first (also seeded by scripts/blog-pillars.mts), the rest alphabetically.
+ * Unlike getCategories this includes empty pillars so the tabs stay stable.
+ */
+const pillarOrder = ["defi", "ecosystem", "regulations", "compare-guides"];
+
+export const getNavCategories = cache(async (): Promise<BlogCategory[]> => {
+  const cats = await query<BlogCategory[]>(
+    `*[_type == "category" && defined(slug.current)] | order(title asc) {title, "slug": slug.current, description}`,
+    {},
+    [],
+  );
+  return cats.sort((a, b) => {
+    const ia = pillarOrder.indexOf(a.slug);
+    const ib = pillarOrder.indexOf(b.slug);
+    if (ia === -1 && ib === -1) return a.title.localeCompare(b.title);
+    if (ia === -1) return 1;
+    if (ib === -1) return -1;
+    return ia - ib;
+  });
+});
+
 export const getCategory = cache(
   (slug: string): Promise<BlogCategory | null> =>
     query(

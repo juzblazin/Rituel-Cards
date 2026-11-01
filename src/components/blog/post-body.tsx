@@ -64,6 +64,42 @@ const components: PortableTextComponents = {
       </figure>
       );
     },
+    table: ({ value }: { value: { caption?: string; headerRow?: boolean; rows?: { cells?: string[] }[] } }) => {
+      const rows = value.rows ?? [];
+      const [head, ...body] = value.headerRow === false ? [] : rows;
+      const bodyRows = value.headerRow === false ? rows : body;
+      return (
+        <figure className="mt-8">
+          <div className="overflow-x-auto rounded-xl border border-border">
+            <table className="w-full min-w-[36rem] text-left text-[13px] leading-6">
+              {head && (
+                <thead className="bg-muted/60 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  <tr>
+                    {head.cells?.map((cell, index) => (
+                      <th key={index} className="px-4 py-2.5 first:pl-5 last:pr-5">{cell}</th>
+                    ))}
+                  </tr>
+                </thead>
+              )}
+              <tbody className="divide-y divide-border text-muted-foreground">
+                {bodyRows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {row.cells?.map((cell, cellIndex) => (
+                      <td key={cellIndex} className="px-4 py-2.5 align-top first:pl-5 first:font-medium first:text-foreground last:pr-5">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {value.caption && (
+            <figcaption className="mt-2 text-center text-xs text-muted-foreground">{value.caption}</figcaption>
+          )}
+        </figure>
+      );
+    },
   },
 };
 

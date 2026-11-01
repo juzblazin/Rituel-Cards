@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { brandName, type Card } from "./data";
 import { absoluteUrl, site } from "./site";
 
 /**
@@ -142,7 +143,7 @@ export function faqJsonLd(faqs: { q: string; a: string }[]) {
  * asserts real customer reviews, and inventing them risks a structured-data
  * penalty. The score stays visible on the page as editorial commentary.
  */
-export function financialProductJsonLd(card: {
+export function financialProductNode(card: {
   name: string;
   slug: string;
   description: string;
@@ -151,6 +152,11 @@ export function financialProductJsonLd(card: {
   annualFeeUsd: number;
   issuanceFeeUsd: number;
   fxFeePct: number;
+  atmFeePct?: number;
+  atmFeeNote?: string;
+  cashbackMinPct?: number;
+  cashbackMaxPct?: number;
+  balanceYieldApyPct?: number;
   ratingScore: number;
   lastVerifiedAt?: string | null;
   cardImageUrl?: string | null;
@@ -158,19 +164,37 @@ export function financialProductJsonLd(card: {
   website?: string | null;
 }) {
   const url = absoluteUrl(`/crypto-card/${card.slug}`);
-  const providerUrl = card.officialUrl || card.website || undefined;
+  const rawProviderUrl = card.officialUrl || card.website || undefined;
+  const providerUrl = rawProviderUrl
+    ? rawProviderUrl.startsWith("http")
+      ? rawProviderUrl
+      : `https://${rawProviderUrl}`
+    : undefined;
+  const atmFee = card.atmFeeNote || (card.atmFeePct != null ? `${card.atmFeePct}%` : undefined);
+  const cashbackPct = card.cashbackMaxPct ?? card.cashbackMinPct ?? 0;
+  // `interestRate` is the closest schema.org has to a reward rate; unitText keeps it honest.
+  const interestRate =
+    cashbackPct > 0
+      ? { "@type": "QuantitativeValue", value: cashbackPct, unitText: "% cashback" }
+      : card.balanceYieldApyPct && card.balanceYieldApyPct > 0
+        ? { "@type": "QuantitativeValue", value: card.balanceYieldApyPct, unitText: "% APY" }
+        : undefined;
   return {
-    "@context": "https://schema.org",
     "@type": "FinancialProduct",
+    "@id": `${url}#product`,
     name: card.name,
     description: card.description,
     url,
     image: card.cardImageUrl ? (card.cardImageUrl.startsWith("http") ? card.cardImageUrl : absoluteUrl(card.cardImageUrl)) : undefined,
     category: "Crypto debit and credit card",
-    brand: { "@type": "Brand", name: card.issuerName },
+    brand: { "@type": "Brand", name: brandName(card) },
     provider: { "@type": "Organization", name: card.issuerName, url: providerUrl },
     areaServed: card.regionLabel,
-    feesAndCommissionsSpecification: `Issuance fee $${card.issuanceFeeUsd}; annual fee $${card.annualFeeUsd}; FX fee ${card.fxFeePct}%.`,
+    feesAndCommissionsSpecification:
+      `Issuance fee $${card.issuanceFeeUsd}; annual fee $${card.annualFeeUsd}; FX fee ${card.fxFeePct}%` +
+      (atmFee ? `; ATM fee ${atmFee}` : "") +
+      ".",
+    interestRate,
     offers: {
       "@type": "Offer",
       price: card.issuanceFeeUsd,
@@ -182,12 +206,16 @@ export function financialProductJsonLd(card: {
     review: {
       "@type": "Review",
       name: `${card.name} review`,
-      author: { "@type": "Organization", name: site.name, url: site.url },
+      author: { "@id": absoluteUrl("/#organization"), "@type": "Organization", name: site.name, url: site.url },
       publisher: { "@type": "Organization", name: site.name, url: site.url },
       datePublished: card.lastVerifiedAt || undefined,
       reviewRating: { "@type": "Rating", ratingValue: card.ratingScore, bestRating: 10, worstRating: 0 },
     },
   };
+}
+
+export function financialProductJsonLd(card: Parameters<typeof financialProductNode>[0]) {
+  return { "@context": "https://schema.org", ...financialProductNode(card) };
 }
 
 export function organizationJsonLd() {
@@ -218,26 +246,141 @@ export function personJsonLd(author: { name: string; slug: string; role?: string
   };
 }
 
-export function blogPostingJsonLd(post: {
-  title: string;
-  slug: string;
-  excerpt: string;
-  publishedAt: string;
-  updatedAt: string;
-  imageUrl?: string;
-  author?: Parameters<typeof personJsonLd>[0];
+/**
+ * One `@graph` payload per article. Organization/WebSite carry site-wide `@id`s;
+ * every post-scoped node (page, breadcrumb, article, products, FAQs) hangs off
+ * the canonical URL so crawlers read them as a single interlinked entity set.
+ */
+export function articleGraphJsonLd({
+  post,
+  cards = [],
+  faqs = [],
+}: {
+  post: {
+    title: string;
+    slug: string;
+    excerpt: string;
+    publishedAt: string;
+    updatedAt: string;
+    imageUrl?: string;
+    author?: Parameters<typeof personJsonLd>[0];
+  };
+  cards?: Card[];
+  faqs?: { question: string; answer: string }[];
 }) {
+  const orgId = absoluteUrl("/#organization");
+  const websiteId = absoluteUrl("/#website");
+  const pageUrl = absoluteUrl(`/blog/${post.slug}`);
+  const articleId = `${pageUrl}#article`;
+  const image = post.imageUrl ?? absoluteUrl(ogImage.path);
+  const authorNode = post.author ? personJsonLd(post.author) : undefined;
+  const productId = (slug: string) => `${absoluteUrl(`/crypto-card/${slug}`)}#product`;
+
   return {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    url: absoluteUrl(`/blog/${post.slug}`),
-    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt,
-    image: post.imageUrl ?? absoluteUrl(ogImage.path),
-    author: post.author ? personJsonLd(post.author) : { "@type": "Organization", name: site.name, url: site.url },
-    publisher: { "@type": "Organization", "@id": absoluteUrl("/#organization"), name: site.name, url: site.url, logo: absoluteUrl("/icon.png") },
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": orgId,
+        name: site.name,
+        legalName: site.name,
+        url: site.url,
+        email: site.email,
+        logo: absoluteUrl("/icon.png"),
+        description: site.description,
+        disambiguatingDescription:
+          "Rituel.xyz (Rituel Cards) is an independent Web3 debit card, stablecoin payment rail, and crypto banking issuer comparison platform. It is completely distinct from and unaffiliated with the Ritual AI Layer-1 blockchain network (ritual.net) or the RITUAL cryptocurrency token.",
+        knowsAbout: [
+          "Crypto Debit Cards",
+          "Self-Custody Smart Contract Wallets",
+          "MiCA Stablecoin Compliance",
+          "Electronic Money Institutions",
+          "DeFi Collateralized Credit Lines",
+        ],
+        sameAs: site.socialLinks.length > 0 ? site.socialLinks : undefined,
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        url: site.url,
+        name: `${site.name} — Web3 & Crypto Card Intelligence`,
+        publisher: { "@id": orgId },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: { "@type": "EntryPoint", urlTemplate: `${site.url}/?q={search_term_string}` },
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "WebPage",
+        "@id": pageUrl,
+        url: pageUrl,
+        name: post.title,
+        description: post.excerpt,
+        isPartOf: { "@id": websiteId },
+        about: { "@id": articleId },
+        primaryImageOfPage: image,
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Blog", item: absoluteUrl("/blog") },
+          { "@type": "ListItem", position: 3, name: post.title, item: pageUrl },
+        ],
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": articleId,
+        headline: post.title,
+        description: post.excerpt,
+        url: pageUrl,
+        mainEntityOfPage: { "@id": pageUrl },
+        isPartOf: { "@id": pageUrl },
+        datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+        image,
+        author: { "@id": authorNode ? authorNode["@id"] : orgId },
+        publisher: { "@id": orgId },
+        mentions: cards.length > 0 ? cards.map((card) => ({ "@id": productId(card.slug) })) : undefined,
+      },
+      ...(authorNode ? [authorNode] : []),
+      ...cards.map((card) => financialProductNode(card)),
+      ...(cards.length > 0
+        ? [
+            {
+              "@type": "ItemList",
+              "@id": `${pageUrl}#cardlist`,
+              name: `Cards featured in ${post.title}`,
+              numberOfItems: cards.length,
+              itemListElement: cards.map((card, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: card.name,
+                url: absoluteUrl(`/crypto-card/${card.slug}`),
+                item: { "@id": productId(card.slug) },
+              })),
+            },
+          ]
+        : []),
+      ...(faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              "@id": `${pageUrl}#faq`,
+              isPartOf: { "@id": articleId },
+              mainEntity: faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: { "@type": "Answer", text: faq.answer },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 }
