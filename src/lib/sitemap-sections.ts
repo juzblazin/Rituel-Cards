@@ -38,6 +38,7 @@ export async function buildSitemapSection(id: SitemapSectionId): Promise<Metadat
         { url: absoluteUrl("/countries"), changeFrequency: weekly, priority: 0.9 },
         { url: absoluteUrl("/crypto"), changeFrequency: weekly, priority: 0.9 },
         { url: absoluteUrl("/compare"), changeFrequency: weekly, priority: 0.8 },
+        { url: absoluteUrl("/leaderboard"), changeFrequency: "monthly", priority: 0.9 },
         { url: absoluteUrl("/brands"), changeFrequency: weekly, priority: 0.8 },
         { url: absoluteUrl("/issuers"), changeFrequency: weekly, priority: 0.8 },
         { url: absoluteUrl("/best"), changeFrequency: weekly, priority: 0.8 },

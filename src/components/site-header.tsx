@@ -21,6 +21,7 @@ const nav = [
   { href: "/crypto-card", label: "Categories" },
   { href: "/brands", label: "Brands" },
   { href: "/compare", label: "Compare" },
+  { href: "/leaderboard", label: "Leaderboard" },
   { href: "/blog", label: "Blog" },
 ];
 

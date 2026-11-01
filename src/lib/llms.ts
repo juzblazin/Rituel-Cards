@@ -31,6 +31,7 @@ export async function llmsTxt(): Promise<string> {
     "",
     link("Crypto card directory", "/", "every card with filters for fees, cashback, KYC and region"),
     link("Compare cards", "/compare", "side-by-side fee and feature comparisons"),
+    link("Crypto card leaderboard", "/leaderboard", "on-chain card spend rankings — volume, run-rates and market share across the heavyweight programs"),
     link("Cards by country", "/countries", `availability in ${supportedCountries.length} countries`),
     link("Cards by crypto and chain", "/crypto", "which cards accept each token or network"),
     link("Methodology", "/methodology", "how cards are scored and verified"),
