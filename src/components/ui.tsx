@@ -179,28 +179,61 @@ export function CardArt({
 
 /** Issuer logos present in /public/logos, keyed by normalised brand token. */
 const ISSUER_LOGOS: Record<string, string> = {
+  allscale: "allscale.png",
+  altitude: "altitude.png",
+  avalanche: "avalanche.png",
+  avici: "avici.png",
   bitget: "bitget.png",
   bitpay: "bitpay.png",
+  bitunix: "bitunix.png",
   bleap: "bleap.png",
   bybit: "bybit.png",
   coca: "coca.png",
+  coinbase: "coinbase.png",
+  coinjar: "coinjar.png",
   cryptocom: "cryptocom.png",
+  deblock: "deblock.png",
+  dolarapp: "dolarapp.png",
+  el: "el.png",
+  ethena: "ethena.png",
   etherfi: "etherfi.png",
-  gnosis: "gnosispay.png",
+  exa: "exa.png",
+  fold: "fold.png",
+  gemini: "gemini.png",
+  gnosis: "gnosis.png",
+  gokubu: "gokubu.png",
+  holyheld: "holyheld.png",
+  hyperbeat: "hyperbeat.png",
   jupiter: "jupiter.png",
   kast: "kast.png",
+  kolo: "kolo.png",
   kraken: "kraken.png",
   lava: "lava.png",
-  metamask: "metamask.png",
+  ledger: "ledger.png",
+  metamask: "metamask.svg",
   mexc: "mexc.png",
   nexo: "nexo.png",
   nocturne: "nocturne.svg",
   okx: "okx.png",
+  oobit: "oobit.png",
+  payitfast: "payitfast.png",
+  phantom: "phantom.png",
+  picnic: "picnic.png",
   plasma: "plasma.png",
-  plutus: "plutus.svg",
+  plutus: "plutus.png",
   redotpay: "redotpay.png",
+  revolut: "revolut.png",
+  robinhood: "robinhood.png",
+  ruvo: "ruvo.png",
+  shakepay: "shakepay.png",
+  solayer: "solayer.png",
+  solflare: "solflare.png",
   solidyield: "solidyield.png",
+  tria: "tria.png",
+  tuyo: "tuyo.png",
+  vaultleap: "vaultleap.png",
   wirex: "wirex.png",
+  yodl: "yodl.png",
 };
 
 function issuerLogoKey(name: string): string {
@@ -210,6 +243,12 @@ function issuerLogoKey(name: string): string {
     .split(/\s+/)[0]
     ?.toLowerCase()
     .replace(/[^a-z0-9]/g, "") ?? "";
+}
+
+/** `/logos/...` path for a card's issuer mark, or null when no file exists. */
+export function issuerLogoSrc(name: string): string | null {
+  const file = ISSUER_LOGOS[issuerLogoKey(name)];
+  return file ? `/logos/${file}` : null;
 }
 
 /**
@@ -223,9 +262,8 @@ export function BrandMark({
   card: Pick<Card, "name" | "logoText" | "brand">;
   className?: string;
 }) {
-  const key = issuerLogoKey(card.name);
-  const file = ISSUER_LOGOS[key];
-  if (file) {
+  const src = issuerLogoSrc(card.name);
+  if (src) {
     return (
       <div
         className={cn(
@@ -235,7 +273,7 @@ export function BrandMark({
         role="img"
         aria-label={`${card.name} issuer logo`}
       >
-        <Image src={`/logos/${file}`} alt="" fill sizes="64px" className="object-contain p-[3px]" />
+        <Image src={src} alt="" fill sizes="64px" className="object-cover" />
       </div>
     );
   }

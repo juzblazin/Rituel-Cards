@@ -28,7 +28,7 @@ import BlurText from "@/components/react-bits/blur-text";
 import LogoLoop from "@/components/react-bits/logo-loop";
 import ShinyText from "@/components/react-bits/shiny-text";
 import SpotlightCard from "@/components/react-bits/spotlight-card";
-import { Badge, CardArt, Rating } from "@/components/ui";
+import { Badge, CardArt, Rating, issuerLogoSrc } from "@/components/ui";
 import { Badge as ShadBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -81,16 +81,6 @@ const NEEDS = [
   { slug: "apple-pay", label: "Apple Pay", icon: BadgeCheck, blurb: "Tap to spend" },
   { slug: "virtual-ad-spend", label: "Ad spend", icon: Megaphone, blurb: "Virtual cards that work" },
 ];
-
-const CARD_LOGOS: Record<string, string> = {
-  "etherfi-cash": "/logos/etherfi-mark.jpeg",
-  "gnosis-pay": "/logos/gnosispay.png",
-  "crypto-com-visa": "/logos/cryptocom.png",
-  "nexo-card": "/logos/nexo.png",
-  "wirex-card": "/logos/wirex.png",
-  redotpay: "/logos/redotpay.png",
-  kast: "/logos/kast.png",
-};
 
 const STABLECOIN_ASSETS = [
   {
@@ -427,7 +417,7 @@ export default async function HomePage({
               >
                 <div className="flex shrink-0 items-center gap-1.5">
                   {[pair.a, pair.b].map((card) => {
-                    const logo = CARD_LOGOS[card.slug];
+                    const logo = issuerLogoSrc(card.name);
                     return logo ? (
                       <Image
                         key={card.slug}
@@ -435,7 +425,7 @@ export default async function HomePage({
                         alt={`${card.name} logo`}
                         width={32}
                         height={32}
-                        className="size-8 rounded-lg object-cover ring-1 ring-black/10"
+                        className="size-8 rounded-lg bg-white object-cover ring-1 ring-black/10"
                       />
                     ) : (
                       <span
