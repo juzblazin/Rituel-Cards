@@ -37,6 +37,8 @@ export type BlogPostSummary = {
   author?: BlogAuthor;
   categories: BlogCategory[];
   readingMinutes: number;
+  /** Language of the version returned ("en" unless a translation exists). */
+  language: string;
 };
 
 export type BlogPost = BlogPostSummary & {
@@ -56,12 +58,25 @@ const summaryFields = `
   mainImage,
   "author": author->{name, "slug": slug.current, role, bio, image, "links": coalesce(links, [])},
   "categories": coalesce(categories[]->{title, "slug": slug.current, description}, []),
-  "readingMinutes": round(length(pt::text(body)) / 5 / 220) + 1
+  "readingMinutes": round(length(pt::text(body)) / 5 / 220) + 1,
+  "language": coalesce(language, "en")
 `;
 
 const published = `_type == "post" && defined(slug.current) && publishedAt <= now()`;
 
-async function query<T>(groq: string, params: Record<string, string>, fallback: T): Promise<T> {
+/** Posts in the requested language, falling back to English for untranslated posts. */
+const inLanguage = `coalesce(language, "en") in [$language, "en"]`;
+
+function preferLanguage<T extends { slug: string; language: string }>(posts: T[], language: string): T[] {
+  const bySlug = new Map<string, T>();
+  for (const post of posts) {
+    const current = bySlug.get(post.slug);
+    if (!current || (post.language === language && current.language !== language)) bySlug.set(post.slug, post);
+  }
+  return posts.filter((post) => bySlug.get(post.slug) === post);
+}
+
+async function query<T>(groq: string, params: Record<string, unknown>, fallback: T): Promise<T> {
   if (!isBlogConfigured()) return fallback;
   try {
     const result = await getClient().fetch<T | null>(groq, params);
@@ -73,16 +88,29 @@ async function query<T>(groq: string, params: Record<string, string>, fallback: 
 }
 
 export const getPosts = cache(
-  (): Promise<BlogPostSummary[]> =>
-    query(`*[${published}] | order(publishedAt desc) {${summaryFields}}`, {}, []),
+  async (language: string = "en"): Promise<BlogPostSummary[]> =>
+    preferLanguage(
+      await query<BlogPostSummary[]>(`*[${published} && ${inLanguage}] | order(publishedAt desc) {${summaryFields}}`, { language }, []),
+      language,
+    ),
 );
 
 export const getPost = cache(
-  (slug: string): Promise<BlogPost | null> =>
-    query(
-      `*[${published} && slug.current == $slug][0] {${summaryFields}, seoTitle, body, "relatedCards": coalesce(relatedCards, []), "keyTakeaways": coalesce(keyTakeaways, []), "faqs": coalesce(faqs[]{question, answer}, [])}`,
-      { slug },
-      null,
+  async (slug: string, language: string = "en"): Promise<BlogPost | null> => {
+    const versions = await query<BlogPost[]>(
+      `*[${published} && slug.current == $slug && ${inLanguage}] {${summaryFields}, seoTitle, body, "relatedCards": coalesce(relatedCards, []), "keyTakeaways": coalesce(keyTakeaways, []), "faqs": coalesce(faqs[]{question, answer}, [])}`,
+      { slug, language },
+      [],
+    );
+    return versions.find((post) => post.language === language) ?? versions[0] ?? null;
+  },
+);
+
+/** Languages a post has been published in, for hreflang alternates. */
+export const getPostLanguages = cache(
+  (slug: string): Promise<string[]> =>
+    query(`array::unique(*[${published} && slug.current == $slug].language)`, { slug }, []).then((languages) =>
+      (languages as (string | null)[]).map((language) => language ?? "en"),
     ),
 );
 
@@ -128,11 +156,14 @@ export const getCategory = cache(
 );
 
 export const getPostsByCategory = cache(
-  (slug: string): Promise<BlogPostSummary[]> =>
-    query(
-      `*[${published} && $slug in categories[]->slug.current] | order(publishedAt desc) {${summaryFields}}`,
-      { slug },
-      [],
+  async (slug: string, language: string = "en"): Promise<BlogPostSummary[]> =>
+    preferLanguage(
+      await query<BlogPostSummary[]>(
+        `*[${published} && ${inLanguage} && $slug in categories[]->slug.current] | order(publishedAt desc) {${summaryFields}}`,
+        { slug, language },
+        [],
+      ),
+      language,
     ),
 );
 
@@ -149,8 +180,15 @@ export const getAuthor = cache(
 );
 
 export const getPostsByAuthor = cache(
-  (slug: string): Promise<BlogPostSummary[]> =>
-    query(`*[${published} && author->slug.current == $slug] | order(publishedAt desc) {${summaryFields}}`, { slug }, []),
+  async (slug: string, language: string = "en"): Promise<BlogPostSummary[]> =>
+    preferLanguage(
+      await query<BlogPostSummary[]>(
+        `*[${published} && ${inLanguage} && author->slug.current == $slug] | order(publishedAt desc) {${summaryFields}}`,
+        { slug, language },
+        [],
+      ),
+      language,
+    ),
 );
 
 /** Intrinsic size from a Sanity asset ref (`image-<id>-<w>x<h>-<ext>`), to reserve layout space. */
@@ -166,6 +204,6 @@ export function imageUrl(source: SanityImageSource, width: number, height?: numb
   return builder.url();
 }
 
-export function formatPostDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+export function formatPostDate(iso: string, locale: string = "en"): string {
+  return new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 }
