@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowUpDown, ChevronDown, ChevronRight, Download, ExternalLink, Sparkles } from "lucide-react";
 import type { Card } from "@/lib/data";
 import { audienceLabel, custodyLabel, kycLabel, networkLabel } from "@/lib/data";

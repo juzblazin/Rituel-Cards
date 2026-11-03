@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Crypto Card",
+    "categories": "Categories",
+    "brands": "Brands",
+    "compare": "Compare",
+    "leaderboard": "Leaderboard",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Main navigation",
+  "mobileNavigation": "Mobile navigation",
+  "searchDirectory": "Search the directory",
+  "openMenu": "Open menu",
+  "submitCard": "Submit a card",
+  "browseCards": "Browse cards",
+  "language": "Language",
+  "homeLabel": "Rituel Cards home"
+}

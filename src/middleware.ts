@@ -1,7 +1,10 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/i18n/routing";
 
 const COUNTRY = /^[A-Z]{2}$/;
+
+const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request: NextRequest) {
   const cookieCountry = request.cookies.get("cr_country")?.value;
@@ -15,9 +18,10 @@ export function middleware(request: NextRequest) {
   const headers = new Headers(request.headers);
   headers.set("x-geo-country", country);
 
-  return NextResponse.next({ request: { headers } });
+  // next-intl forwards these request headers on its rewrite/next responses.
+  return intlMiddleware(new NextRequest(request, { headers }));
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  matcher: ["/((?!api/|go/|_next|_vercel|sitemaps/|favicon.ico|.*\\..*).*)"],
 };

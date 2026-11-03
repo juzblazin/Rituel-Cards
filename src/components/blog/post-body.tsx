@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { PortableText, type PortableTextBlock, type PortableTextComponents } from "@portabletext/react";
 import { imageDimensions, imageUrl, type BlogImage } from "@/lib/blog";
 

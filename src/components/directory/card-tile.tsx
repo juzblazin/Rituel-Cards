@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowUpRight, Check, Plus } from "lucide-react";
 import type { Card, MobileWallet } from "@/lib/data";
 import { kycLabel, walletOptions } from "@/lib/data";

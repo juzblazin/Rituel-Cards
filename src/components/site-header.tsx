@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useState } from "react";
 import { ArrowUpRight, Menu, Search } from "lucide-react";
 import { Wordmark } from "./ui";
 import { ThemeToggle } from "./theme-toggle";
+import { LanguageSwitcher } from "./language-switcher";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,15 +18,16 @@ import {
 } from "@/components/ui/sheet";
 
 const nav = [
-  { href: "/", label: "Crypto Card" },
-  { href: "/crypto-card", label: "Categories" },
-  { href: "/brands", label: "Brands" },
-  { href: "/compare", label: "Compare" },
-  { href: "/leaderboard", label: "Leaderboard" },
-  { href: "/blog", label: "Blog" },
-];
+  { href: "/", key: "cryptoCard" },
+  { href: "/crypto-card", key: "categories" },
+  { href: "/brands", key: "brands" },
+  { href: "/compare", key: "compare" },
+  { href: "/leaderboard", key: "leaderboard" },
+  { href: "/blog", key: "blog" },
+] as const;
 
 export function SiteHeader() {
+  const t = useTranslations("header");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -40,7 +42,7 @@ export function SiteHeader() {
           <Wordmark />
         </div>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label={t("mainNavigation")}>
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -50,7 +52,7 @@ export function SiteHeader() {
                 isActive(item.href) && "bg-brand/10 text-foreground ring-1 ring-brand/15",
               )}
             >
-              {item.label}
+              {t(`nav.${item.key}`)}
             </Link>
           ))}
         </nav>
@@ -59,32 +61,34 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Search the directory"
+            aria-label={t("searchDirectory")}
             nativeButton={false}
             render={<Link href="/#directory" />}
           >
             <Search />
           </Button>
+          <LanguageSwitcher />
           <ThemeToggle />
           <Button
             variant="outline"
             nativeButton={false}
             render={<Link href="/submit-card" />}
           >
-            Submit a card
+            {t("submitCard")}
             <ArrowUpRight data-icon="inline-end" />
           </Button>
           <Button variant="brand" nativeButton={false} render={<Link href="/#directory" />}>
-            Browse cards
+            {t("browseCards")}
           </Button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
           <ThemeToggle />
           <Button
             variant="ghost"
             size="icon"
-            aria-label="Search the directory"
+            aria-label={t("searchDirectory")}
             nativeButton={false}
             render={<Link href="/#directory" />}
           >
@@ -93,7 +97,7 @@ export function SiteHeader() {
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               render={
-                <Button variant="ghost" size="icon" aria-label="Open menu" />
+                <Button variant="ghost" size="icon" aria-label={t("openMenu")} />
               }
             >
               <Menu />
@@ -104,7 +108,7 @@ export function SiteHeader() {
                   <Wordmark />
                 </SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col gap-1 px-4" aria-label="Mobile navigation">
+              <nav className="flex flex-col gap-1 px-4" aria-label={t("mobileNavigation")}>
                 {nav.map((item) => (
                   <Link
                     key={item.href}
@@ -115,7 +119,7 @@ export function SiteHeader() {
                       isActive(item.href) && "bg-brand/10 text-foreground ring-1 ring-brand/15",
                     )}
                   >
-                    {item.label}
+                    {t(`nav.${item.key}`)}
                   </Link>
                 ))}
               </nav>
@@ -125,14 +129,14 @@ export function SiteHeader() {
                   nativeButton={false}
                   render={<Link href="/submit-card" onClick={() => setOpen(false)} />}
                 >
-                  Submit a card
+                  {t("submitCard")}
                 </Button>
                 <Button
                   variant="brand"
                   nativeButton={false}
                   render={<Link href="/#directory" onClick={() => setOpen(false)} />}
                 >
-                  Browse cards
+                  {t("browseCards")}
                 </Button>
               </div>
             </SheetContent>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight, Check, Copy, X } from "lucide-react";
 import type { Card } from "@/lib/data";
 import { cn } from "@/lib/cn";

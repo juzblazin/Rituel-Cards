@@ -14,6 +14,7 @@ export const site = {
   tagline: "Find the crypto card that actually pays you.",
   description:
     `Compare ${cardsSnapshot.length} crypto debit, credit and prepaid cards on real fees, cashback, KYC and country availability. Independent data, zero fluff.`,
+  cardCount: cardsSnapshot.length,
   url: siteUrl,
   email: "hello@rituel.xyz",
   twitter: "@rituel",

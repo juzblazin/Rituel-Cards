@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Star } from "lucide-react";
 import type { Card } from "@/lib/data";
 import { networkLabel } from "@/lib/data";
@@ -29,7 +29,7 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("group flex items-center", className)} aria-label="Rituel Cards home">
+    <Link href="/" className={cn("group flex items-center", className)} aria-label="Rituel Cards">
       <LogoMark />
     </Link>
   );

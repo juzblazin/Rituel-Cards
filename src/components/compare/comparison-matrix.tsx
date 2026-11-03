@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Fragment } from "react";
 import { ArrowUpRight, Check, X } from "lucide-react";
 import type { Card, MobileWallet } from "@/lib/data";
