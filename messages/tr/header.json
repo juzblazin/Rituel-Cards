@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Kripto Kart",
+    "categories": "Kategoriler",
+    "brands": "Markalar",
+    "compare": "Karşılaştır",
+    "leaderboard": "Sıralama",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Ana gezinme",
+  "mobileNavigation": "Mobil gezinme",
+  "searchDirectory": "Dizinde ara",
+  "openMenu": "Menüyü aç",
+  "submitCard": "Kart gönder",
+  "browseCards": "Kartlara göz at",
+  "language": "Dil",
+  "homeLabel": "Rituel Cards ana sayfa"
+}

@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Krypto-Karte",
+    "categories": "Kategorien",
+    "brands": "Marken",
+    "compare": "Vergleichen",
+    "leaderboard": "Rangliste",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Hauptnavigation",
+  "mobileNavigation": "Mobile Navigation",
+  "searchDirectory": "Verzeichnis durchsuchen",
+  "openMenu": "Menü öffnen",
+  "submitCard": "Karte einreichen",
+  "browseCards": "Karten ansehen",
+  "language": "Sprache",
+  "homeLabel": "Rituel Cards Startseite"
+}

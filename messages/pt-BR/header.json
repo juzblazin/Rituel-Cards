@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Cartão cripto",
+    "categories": "Categorias",
+    "brands": "Marcas",
+    "compare": "Comparar",
+    "leaderboard": "Ranking",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Navegação principal",
+  "mobileNavigation": "Navegação móvel",
+  "searchDirectory": "Pesquisar no diretório",
+  "openMenu": "Abrir menu",
+  "submitCard": "Enviar um cartão",
+  "browseCards": "Ver cartões",
+  "language": "Idioma",
+  "homeLabel": "Página inicial da Rituel Cards"
+}

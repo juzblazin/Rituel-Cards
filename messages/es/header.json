@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Tarjeta cripto",
+    "categories": "Categorías",
+    "brands": "Marcas",
+    "compare": "Comparar",
+    "leaderboard": "Ranking",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Navegación principal",
+  "mobileNavigation": "Navegación móvil",
+  "searchDirectory": "Buscar en el directorio",
+  "openMenu": "Abrir menú",
+  "submitCard": "Enviar una tarjeta",
+  "browseCards": "Ver tarjetas",
+  "language": "Idioma",
+  "homeLabel": "Inicio de Rituel Cards"
+}

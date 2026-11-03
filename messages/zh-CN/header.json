@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "加密卡",
+    "categories": "分类",
+    "brands": "品牌",
+    "compare": "对比",
+    "leaderboard": "排行榜",
+    "blog": "博客"
+  },
+  "mainNavigation": "主导航",
+  "mobileNavigation": "移动端导航",
+  "searchDirectory": "搜索目录",
+  "openMenu": "打开菜单",
+  "submitCard": "提交卡片",
+  "browseCards": "浏览卡片",
+  "language": "语言",
+  "homeLabel": "Rituel Cards 首页"
+}

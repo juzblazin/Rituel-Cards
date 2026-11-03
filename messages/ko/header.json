@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "크립토 카드",
+    "categories": "카테고리",
+    "brands": "브랜드",
+    "compare": "비교",
+    "leaderboard": "리더보드",
+    "blog": "블로그"
+  },
+  "mainNavigation": "주요 내비게이션",
+  "mobileNavigation": "모바일 내비게이션",
+  "searchDirectory": "디렉터리 검색",
+  "openMenu": "메뉴 열기",
+  "submitCard": "카드 제출",
+  "browseCards": "카드 둘러보기",
+  "language": "언어",
+  "homeLabel": "Rituel Cards 홈"
+}

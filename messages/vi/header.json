@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "Thẻ crypto",
+    "categories": "Danh mục",
+    "brands": "Thương hiệu",
+    "compare": "So sánh",
+    "leaderboard": "Bảng xếp hạng",
+    "blog": "Blog"
+  },
+  "mainNavigation": "Điều hướng chính",
+  "mobileNavigation": "Điều hướng trên di động",
+  "searchDirectory": "Tìm trong danh bạ",
+  "openMenu": "Mở menu",
+  "submitCard": "Gửi thẻ",
+  "browseCards": "Xem các thẻ",
+  "language": "Ngôn ngữ",
+  "homeLabel": "Trang chủ Rituel Cards"
+}

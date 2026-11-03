@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "cryptoCard": "クリプトカード",
+    "categories": "カテゴリー",
+    "brands": "ブランド",
+    "compare": "比較",
+    "leaderboard": "ランキング",
+    "blog": "ブログ"
+  },
+  "mainNavigation": "メインナビゲーション",
+  "mobileNavigation": "モバイルナビゲーション",
+  "searchDirectory": "ディレクトリを検索",
+  "openMenu": "メニューを開く",
+  "submitCard": "カードを申請",
+  "browseCards": "カードを見る",
+  "language": "言語",
+  "homeLabel": "Rituel Cards ホーム"
+}
