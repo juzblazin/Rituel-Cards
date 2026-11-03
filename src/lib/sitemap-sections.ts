@@ -4,7 +4,9 @@ import { issuers } from "@/lib/issuers";
 import { attributePages, bestPages, cardsForCountry, cryptoPages, featuredPairs, supportedCountries } from "@/lib/taxonomy";
 import { infraProviders } from "@/lib/infra";
 import { absoluteUrl } from "@/lib/site";
-import { getAuthors, getCategories, getPosts } from "@/lib/blog";
+import { getAuthors, getCategories, getPostLanguages, getPosts } from "@/lib/blog";
+import { localizedUrl } from "@/i18n/paths";
+import { locales } from "@/i18n/routing";
 
 export const sitemapSectionIds = [
   "core",
@@ -107,12 +109,24 @@ export async function buildSitemapSection(id: SitemapSectionId): Promise<Metadat
       const newestPost = posts[0] ? new Date(posts[0].updatedAt) : undefined;
       const entries: MetadataRoute.Sitemap = [
         { url: absoluteUrl("/blog"), lastModified: newestPost, changeFrequency: "daily", priority: 0.8 },
-        ...posts.map((post) => ({
-          url: absoluteUrl(`/blog/${post.slug}`),
-          lastModified: new Date(post.updatedAt),
-          changeFrequency: "monthly" as const,
-          priority: 0.7,
-        })),
+        ...(await Promise.all(
+          posts.map(async (post) => {
+            const path = `/blog/${post.slug}`;
+            const available = await getPostLanguages(post.slug);
+            return {
+              url: absoluteUrl(path),
+              lastModified: new Date(post.updatedAt),
+              changeFrequency: "monthly" as const,
+              priority: 0.7,
+              // Only the languages this post has been translated into.
+              alternates: {
+                languages: Object.fromEntries(
+                  locales.filter((locale) => available.includes(locale)).map((locale) => [locale, localizedUrl(locale, path)]),
+                ),
+              },
+            };
+          }),
+        )),
         ...categories.map((category) => ({
           url: absoluteUrl(`/blog/category/${category.slug}`),
           lastModified: newestPost,
@@ -128,4 +142,20 @@ export async function buildSitemapSection(id: SitemapSectionId): Promise<Metadat
       return entries.map((entry) => ({ ...entry, lastModified: entry.lastModified ?? lastModified }));
     }
   }
+}
+
+/**
+ * Expands English entries into one entry per language, each listing every language version
+ * as an hreflang alternate. Entries that already carry `alternates.languages` keep that set.
+ */
+export function localizeSitemap(entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap {
+  const origin = absoluteUrl("/").replace(/\/$/, "");
+  return entries.flatMap((entry) => {
+    const path = entry.url.slice(origin.length) || "/";
+    const languages =
+      entry.alternates?.languages ??
+      Object.fromEntries(locales.map((locale) => [locale, localizedUrl(locale, path)]));
+    const alternates = { languages: { ...languages, "x-default": localizedUrl("en", path) } };
+    return Object.values(languages).map((url) => ({ ...entry, url: url as string, alternates }));
+  });
 }

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { buildSitemapSection, sitemapSectionIds, type SitemapSectionId } from "@/lib/sitemap-sections";
+import { buildSitemapSection, localizeSitemap, sitemapSectionIds, type SitemapSectionId } from "@/lib/sitemap-sections";
 
 export const dynamic = "force-dynamic";
 
@@ -10,19 +10,22 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const section = id.replace(/\.xml$/, "") as SitemapSectionId;
   if (!sitemapSectionIds.includes(section)) notFound();
 
-  const entries = await buildSitemapSection(section);
+  const entries = localizeSitemap(await buildSitemapSection(section));
   const urlset = entries
     .map((entry) => {
       const parts = [`    <loc>${escape(entry.url)}</loc>`];
       if (entry.lastModified) parts.push(`    <lastmod>${new Date(entry.lastModified).toISOString().slice(0, 10)}</lastmod>`);
       if (entry.changeFrequency) parts.push(`    <changefreq>${entry.changeFrequency}</changefreq>`);
       if (entry.priority !== undefined) parts.push(`    <priority>${entry.priority}</priority>`);
+      for (const [hreflang, href] of Object.entries(entry.alternates?.languages ?? {})) {
+        parts.push(`    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${escape(String(href))}" />`);
+      }
       return `  <url>\n${parts.join("\n")}\n  </url>`;
     })
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urlset}
 </urlset>`;
 
