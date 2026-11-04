@@ -203,6 +203,18 @@
       "_type": "image",
       "asset": { "_type": "reference", "_ref": "image-0dc82d44150147a38c378401e7e19c4491cf1c56-1448x1086-png" },
       "alt": "Thick custodial fee layers versus a single thin layer-2 gas sliver"
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-archetypes", "href": "/blog/crypto-debit-vs-prepaid-vs-credit-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Hardware-linked cards are one branch of a wider decision. For the full picture on when each card type converts your crypto, who holds custody and which tax events a swipe triggers, read ", "marks": [] },
+        { "_type": "span", "text": "Crypto Debit vs. Prepaid vs. Credit Cards: Fees, Custody & Tax Differences Explained", "marks": ["l-archetypes"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
     }
   ]
 }

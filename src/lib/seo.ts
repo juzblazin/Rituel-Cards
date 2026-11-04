@@ -206,6 +206,7 @@ export function financialProductNode(card: {
     review: {
       "@type": "Review",
       name: `${card.name} review`,
+      itemReviewed: { "@id": `${url}#product` },
       author: { "@id": absoluteUrl("/#organization"), "@type": "Organization", name: site.name, url: site.url },
       publisher: { "@type": "Organization", name: site.name, url: site.url },
       datePublished: card.lastVerifiedAt || undefined,

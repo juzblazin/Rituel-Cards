@@ -1,0 +1,865 @@
+{
+  "title": "Crypto Debit vs. Prepaid vs. Credit Cards: Fees, Custody & Tax Differences Explained",
+  "slug": "crypto-debit-vs-prepaid-vs-credit-card",
+  "seoTitle": "Crypto Debit vs. Prepaid vs. Credit Cards (2026): Fees & Taxes",
+  "excerpt": "How do crypto cards work? Compare crypto debit, prepaid, revolving credit and DeFi collateral cards on conversion spreads, self-custody and capital-gains tax triggers.",
+  "authorSlug": "rituel-editorial",
+  "categorySlugs": ["compare-guides"],
+  "mainImage": {
+    "_type": "image",
+    "asset": { "_type": "reference", "_ref": "image-b634acd647a99041bb1d14339ce7777e1feb8caf-1536x864-png" },
+    "alt": "Three glass payment cards representing crypto debit, prepaid and collateralized credit cards - coins streaming out of one, loading into another, and locked in a vault beside the third"
+  },
+  "relatedCards": ["bleap", "okx-card", "bybit-card", "crypto-com-visa", "bitpay-card", "redotpay", "gemini-credit-card", "coinbase-one-card", "etherfi-cash", "nexo-card", "avici", "exa-card"],
+  "keyTakeaways": [
+    "Every crypto card settles fiat to the merchant over Visa or Mastercard rails. The real differences are when your crypto converts, who holds custody, and which tax events trigger.",
+    "Debit converts at the point of sale (a capital gain per swipe), prepaid converts at top-up (up to 3% load fees and a taxable disposal before you shop), revolving credit never sells your crypto, and collateralized lines borrow against it.",
+    "Self-custody smart accounts keep your USDC or ETH in your own wallet until checkout authorization; custodial cards leave you as an unsecured creditor if the issuer freezes withdrawals.",
+    "A '$0 monthly fee' card can still cost $18 to $60 on a $2,000 monthly spend once conversion spreads and FX markups are counted.",
+    "Collateralized credit-line cards like ether.fi Cash, Nexo and Avici defer capital gains because borrowing against crypto is not a disposal - until your collateral is liquidated."
+  ],
+  "body": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Every crypto payment card bridges digital assets to the traditional Visa, Mastercard or American Express merchant rails, because merchants always receive local fiat currency at the point of sale - never cryptocurrency. Whether you tap a physical card or Apple Pay, the terminal requests dollars or euros and a chain of issuers, processors and smart contracts decides how to fund it. What actually separates the four card architectures is when your crypto is sold, who holds custody of your balance, how much the conversion or cashback really costs, and which taxable events each swipe triggers. The four models:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-bleap", "href": "/crypto-card/bleap" },
+        { "_type": "link", "_key": "l-okx", "href": "/crypto-card/okx-card" },
+        { "_type": "link", "_key": "l-bybit", "href": "/crypto-card/bybit-card" },
+        { "_type": "link", "_key": "l-metamask", "href": "/crypto-card/metamask-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Crypto debit cards", "marks": ["strong"] },
+        { "_type": "span", "text": " (", "marks": [] },
+        { "_type": "span", "text": "Bleap", "marks": ["l-bleap"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "OKX Card", "marks": ["l-okx"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Bybit", "marks": ["l-bybit"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "MetaMask Card", "marks": ["l-metamask"] },
+        { "_type": "span", "text": ") convert crypto or stablecoins to fiat in real time at the exact second of checkout - a capital gain or loss per swipe, unless you spend 1:1 USD-pegged stablecoins.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-bitpay", "href": "/crypto-card/bitpay-card" },
+        { "_type": "link", "_key": "l-cdc", "href": "/crypto-card/crypto-com-visa" },
+        { "_type": "link", "_key": "l-redotpay", "href": "/crypto-card/redotpay" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Crypto prepaid cards", "marks": ["strong"] },
+        { "_type": "span", "text": " (", "marks": [] },
+        { "_type": "span", "text": "BitPay", "marks": ["l-bitpay"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Crypto.com Visa", "marks": ["l-cdc"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "RedotPay", "marks": ["l-redotpay"] },
+        { "_type": "span", "text": ") require pre-loading a segregated card balance. Converting BTC or ETH into fiat or stablecoins at load time charges a top-up fee of up to 3% and crystallizes a taxable disposal before you ever shop.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-gemini", "href": "/crypto-card/gemini-credit-card" },
+        { "_type": "link", "_key": "l-cbone", "href": "/crypto-card/coinbase-one-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Revolving crypto credit cards", "marks": ["strong"] },
+        { "_type": "span", "text": " (", "marks": [] },
+        { "_type": "span", "text": "Gemini Credit Card", "marks": ["l-gemini"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Coinbase One Card", "marks": ["l-cbone"] },
+        { "_type": "span", "text": ") work like ordinary bank credit cards: you borrow fiat, repay in cash each month and earn 1-4% in crypto rewards. Nothing is sold, so no capital gains trigger at checkout.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-etherfi", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-nexo", "href": "/crypto-card/nexo-card" },
+        { "_type": "link", "_key": "l-avici", "href": "/crypto-card/avici" },
+        { "_type": "link", "_key": "l-exa", "href": "/crypto-card/exa-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Collateralized credit-line cards", "marks": ["strong"] },
+        { "_type": "span", "text": " (", "marks": [] },
+        { "_type": "span", "text": "ether.fi Cash", "marks": ["l-etherfi"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Nexo", "marks": ["l-nexo"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Avici", "marks": ["l-avici"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Exa", "marks": ["l-exa"] },
+        { "_type": "span", "text": ") lock BTC, ETH or USDC as collateral and let you borrow spending liquidity - so you spend without selling principal or triggering a taxable disposal.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "table",
+      "caption": "The four crypto card architectures at a glance - funding mechanics, custody, costs and the moment each one triggers a tax event.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Card archetype", "Funding & settlement mechanic", "Custody options", "Typical conversion / load cost", "Primary tax event trigger", "Top 2026 examples (Rituel score)"]
+        },
+        {
+          "_type": "row",
+          "cells": [
+            "Crypto debit card",
+            "Real-time auto-conversion from wallet or exchange balance at point of sale",
+            "Self-custody smart account, hybrid or custodial exchange balance",
+            "0% (Bleap, OKX) to ~2% (Bybit, Bitpanda-class exchange cards)",
+            "At point of sale - each purchase is a disposal of property",
+            "Bleap (8.0), OKX Card (7.9), Jupiter (7.0), MetaMask (7.0), Kraken (6.9), Bybit (6.4)"
+          ]
+        },
+        {
+          "_type": "row",
+          "cells": [
+            "Crypto prepaid card",
+            "Pre-loaded, segregated fiat or stablecoin card balance before spending",
+            "Custodial - provider holds the loaded balance",
+            "0% stablecoin-par loads to 1-3% top-up or conversion fee (BitPay 3%)",
+            "At card top-up / load, if converting volatile crypto to fiat or stablecoin",
+            "Crypto.com Visa (7.1), KAST (7.4), RedotPay (5.5), BitPay (4.8), Coinbase Card (7.2)"
+          ]
+        },
+        {
+          "_type": "row",
+          "cells": [
+            "Revolving crypto credit card",
+            "Bank-issued fiat credit line repaid monthly; crypto rewards on spend",
+            "Traditional bank credit - no crypto held on the card; rewards post to your wallet",
+            "$0 conversion spread; $0-$49.99+/yr plan; 16-34% APR if you carry a balance",
+            "No disposal at purchase - crypto cashback is generally a non-taxable rebate",
+            "Gemini Credit Card (6.5), Coinbase One Card (6.7)"
+          ]
+        },
+        {
+          "_type": "row",
+          "cells": [
+            "Collateralized DeFi / CeFi credit line",
+            "Over-collateralized credit line backed by locked BTC, ETH, eETH or USDC",
+            "Self-custody escrow / smart contract or custodial collateral pool",
+            "0% conversion spread on the credit draw; 0% (escrow) to ~14% borrowing APR",
+            "Deferred - borrowing against collateral is not a sale unless liquidated",
+            "ether.fi Cash (7.6), SolidYield (7.6), Plasma One (7.8), Avici (6.8), Exa (6.2), Nexo (6.5)"
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "How crypto payment cards actually work: the 4-step settlement flow", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "When you tap a crypto card at a terminal or in Apple Pay, four things happen in under three seconds. Understanding this flow explains why 'spending crypto' is really 'selling crypto at the checkout' for debit and prepaid cards - and why credit-line cards escape that tax event entirely.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "text": "Terminal authorization request. ", "marks": ["strong"] },
+        { "_type": "span", "text": "You tap at any of the 150M+ Visa or Mastercard merchants. The terminal requests payment in local fiat - EUR, USD, GBP - and knows nothing about crypto.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-rain", "href": "/issuers/rain" },
+        { "_type": "link", "_key": "l-baanx", "href": "/issuers/baanx" },
+        { "_type": "link", "_key": "l-monavate", "href": "/issuers/monavate" },
+        { "_type": "link", "_key": "l-dipocket", "href": "/issuers/dipocket" },
+        { "_type": "link", "_key": "l-foris", "href": "/issuers/foris" }
+      ],
+      "children": [
+        { "_type": "span", "text": "BIN sponsor and processor routing. ", "marks": ["strong"] },
+        { "_type": "span", "text": "The payment processor and licensed BIN sponsor - issuers like ", "marks": [] },
+        { "_type": "span", "text": "Rain", "marks": ["l-rain"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Baanx", "marks": ["l-baanx"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Monavate", "marks": ["l-monavate"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "DiPocket", "marks": ["l-dipocket"] },
+        { "_type": "span", "text": " or ", "marks": [] },
+        { "_type": "span", "text": "Foris DAX", "marks": ["l-foris"] },
+        { "_type": "span", "text": " - receive the fiat request and identify which programme and funding account it belongs to.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "text": "Conversion or collateral check. ", "marks": ["strong"] },
+        { "_type": "span", "text": "A debit card swaps your crypto at the point of sale, a prepaid card deducts from a balance you already loaded, and a credit-line card posts the charge against your collateralized limit. This is the step where fees and tax events are born.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "text": "Fiat settlement to the merchant. ", "marks": ["strong"] },
+        { "_type": "span", "text": "The merchant receives 100% standard fiat over the card network rails and never touches cryptocurrency. Your statement may say 'coffee,' but the ledger behind it is either a crypto sale, a balance debit or a loan.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "image",
+      "asset": { "_type": "reference", "_ref": "image-eb106a0b13ced5f3a0d38c676496023e73aadab3-1448x1086-png" },
+      "alt": "A glass payment card linked by four glowing steps to a merchant terminal - the point-of-sale settlement flow behind every crypto card swipe",
+      "caption": "From tap to settlement: the four steps that run behind every crypto card swipe"
+    },
+    {
+      "_type": "table",
+      "caption": "Representative 2026 cards mapped to their real rail, issuer or BIN sponsor, FX markup and custody boundary.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Card", "Archetype", "Network", "Issuer / BIN sponsor", "FX markup", "Custody boundary"]
+        },
+        { "_type": "row", "cells": ["Bleap", "Debit", "Mastercard", "Unlimit", "0%", "Self-custody smart account"] },
+        { "_type": "row", "cells": ["OKX Card", "Debit", "Mastercard", "OKX", "0%", "Self-custody / hybrid"] },
+        { "_type": "row", "cells": ["Bybit Card", "Debit", "Mastercard", "Moorwand", "2%", "Custodial exchange balance"] },
+        { "_type": "row", "cells": ["Kraken Card", "Debit", "Mastercard", "Monavate", "0%", "Custodial exchange balance"] },
+        { "_type": "row", "cells": ["Crypto.com Visa", "Prepaid", "Visa", "Foris DAX", "0.5%", "Custodial loaded balance"] },
+        { "_type": "row", "cells": ["BitPay Card", "Prepaid", "Mastercard", "BitPay", "3% (load)", "Custodial loaded balance"] },
+        { "_type": "row", "cells": ["Coinbase Card", "Prepaid", "Visa", "Pathward N.A.", "3%", "Custodial loaded balance"] },
+        { "_type": "row", "cells": ["Gemini Credit Card", "Revolving credit", "Mastercard", "WebBank", "0%", "Bank credit line"] },
+        { "_type": "row", "cells": ["Coinbase One Card", "Revolving credit", "Visa", "First Electronic Bank", "0%", "Bank credit line"] },
+        { "_type": "row", "cells": ["ether.fi Cash", "Collateral credit line", "Visa", "Third National Bank", "0%", "Self-custody on-chain escrow"] },
+        { "_type": "row", "cells": ["Avici", "Collateral credit line", "Visa", "Third National Bank", "1%", "Self-custody escrow contract"] },
+        { "_type": "row", "cells": ["Nexo Card", "Dual-mode credit/debit", "Mastercard", "DiPocket UAB", "2%", "Custodial collateral pool"] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Crypto debit vs. prepaid cards: real-time conversion vs. top-up spreads", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Marketing blurs the line between 'debit' and 'prepaid' - issuers call almost everything a debit card. The mechanical difference matters to your wallet: a true debit card leaves funds in your main balance until the second you pay, while a prepaid card forces you to move value into a separate, provider-held card balance first.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "True crypto debit mechanics", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-bybit2", "href": "/crypto-card/bybit-card" },
+        { "_type": "link", "_key": "l-okx2", "href": "/crypto-card/okx-card" },
+        { "_type": "link", "_key": "l-kraken", "href": "/crypto-card/kraken-card" },
+        { "_type": "link", "_key": "l-bleap2", "href": "/crypto-card/bleap" },
+        { "_type": "link", "_key": "l-mm2", "href": "/crypto-card/metamask-card" },
+        { "_type": "link", "_key": "l-gnosis", "href": "/crypto-card/gnosis-pay" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "A true debit card is connected directly to a funding account - either an exchange balance (",
+          "marks": []
+        },
+        { "_type": "span", "text": "Bybit Card", "marks": ["l-bybit2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "OKX Card", "marks": ["l-okx2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Kraken Card", "marks": ["l-kraken"] },
+        { "_type": "span", "text": ") or a wallet under your own keys (", "marks": [] },
+        { "_type": "span", "text": "Bleap", "marks": ["l-bleap2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "MetaMask Card", "marks": ["l-mm2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Gnosis Pay", "marks": ["l-gnosis"] },
+        {
+          "_type": "span",
+          "text": "). Funds sit in your main balance - earning yield or simply remaining yours - until you swipe. The conversion happens at the point of sale at the spot rate, minus whatever spread the issuer charges.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "blockquote",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Pro tip: Bybit Card spends fiat first. If you hold EUR or GBP in your Bybit Funding Account, the card draws the fiat balance and sidesteps the crypto conversion fee entirely. The trade-off: fiat-funded purchases on Bybit Global do not earn cashback points.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Crypto prepaid mechanics - and the prepaid trap", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-cdc2", "href": "/crypto-card/crypto-com-visa" },
+        { "_type": "link", "_key": "l-bitpay2", "href": "/crypto-card/bitpay-card" },
+        { "_type": "link", "_key": "l-redotpay2", "href": "/crypto-card/redotpay" },
+        { "_type": "link", "_key": "l-cb2", "href": "/crypto-card/coinbase-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "A prepaid card makes you move funds into a segregated card wallet first - ", "marks": [] },
+        { "_type": "span", "text": "Crypto.com Visa", "marks": ["l-cdc2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "BitPay", "marks": ["l-bitpay2"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "RedotPay", "marks": ["l-redotpay2"] },
+        { "_type": "span", "text": " and the ", "marks": [] },
+        { "_type": "span", "text": "Coinbase Card", "marks": ["l-cb2"] },
+        {
+          "_type": "span",
+          "text": " all work this way. Two consequences follow. First, the conversion happens at load time, which is when top-up fees apply (BitPay charges 3% to preload USD from your wallet) and when a volatile-crypto disposal crystallizes for tax purposes - before you buy anything. Second, the prepaid trap: once value is loaded onto many prepaid programmes it cannot be transferred back out to an on-chain wallet. Your exit is spending it.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-stable", "href": "/best/stablecoin-crypto-cards" },
+        { "_type": "link", "_key": "l-cmp1", "href": "/compare/bleap-vs-okx-card" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "If you want to minimize both spreads and tax noise in either model, fund the card with USDC or USDT - see our list of the ",
+          "marks": []
+        },
+        { "_type": "span", "text": "best stablecoin crypto cards", "marks": ["l-stable"] },
+        { "_type": "span", "text": ". For a concrete head-to-head between the two funding models, we compared the ", "marks": [] },
+        { "_type": "span", "text": "self-custody Bleap card against the OKX Card", "marks": ["l-cmp1"] },
+        { "_type": "span", "text": " on fees, limits and cashback.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Crypto credit cards explained: revolving fiat credit vs. collateralized DeFi credit lines", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "'Crypto credit card' describes two completely different products in 2026. One is a conventional bank credit card that happens to pay rewards in Bitcoin. The other is an on-chain collateralized credit line that lets you spend without selling.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Revolving fiat credit cards (US credit check required)", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-gemini2", "href": "/crypto-card/gemini-credit-card" },
+        { "_type": "link", "_key": "l-cbone2", "href": "/crypto-card/coinbase-one-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Gemini Credit Card (6.5/10)", "marks": ["l-gemini2"] },
+        {
+          "_type": "span",
+          "text": " is a metal Mastercard available in all 50 US states: $0 annual fee, 0% FX fee, 4% back on fuel, EV charging and transit (up to $300/month of spend, then 1%), 3% on dining, 2% on groceries and 1% on everything else, with rewards deposited instantly as crypto (APR 16.49%-34.49%). The ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Coinbase One Card (6.7/10)", "marks": ["l-cbone2"] },
+        {
+          "_type": "span",
+          "text": " pays 2-4% back in BTC - the full 4% requires $200,000+ held on Coinbase, and the card itself requires a Coinbase One membership starting at $49.99/year. Both require a real credit check because you are borrowing fiat from a bank.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Collateralized 'spend without selling' credit lines (no hard credit pull)", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-etherfi2", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-avici2", "href": "/crypto-card/avici" },
+        { "_type": "link", "_key": "l-nexo2", "href": "/crypto-card/nexo-card" },
+        { "_type": "link", "_key": "l-exa2", "href": "/crypto-card/exa-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "ether.fi Cash (7.6/10)", "marks": ["l-etherfi2"] },
+        {
+          "_type": "span",
+          "text": " is a DeFi-native Visa on Scroll: borrow against ETH, eETH, USDC or USDT - or spend directly from Liquid USD yield vaults - with gasless transactions and 3-4% cashback. ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Avici (6.8/10)", "marks": ["l-avici2"] },
+        {
+          "_type": "span",
+          "text": " is a self-custodial secured Visa Platinum: you lock USDC in an on-chain escrow smart contract you control and settle in USD. ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Nexo Card (6.5/10)", "marks": ["l-nexo2"] },
+        {
+          "_type": "span",
+          "text": " is a dual-mode Mastercard - flip in-app between Credit Mode (borrow at 1.9%-13.9% APR with no fixed repayment schedule, plus up to 2% cashback if you hold $5,000+) and Debit Mode (earn up to 14% compound interest on your idle balance). ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Exa Card (6.2/10)", "marks": ["l-exa2"] },
+        {
+          "_type": "span",
+          "text": " offers fixed-rate USDC 'Pay Later' via the Exactly Protocol. The shared warning: a sharp drop in collateral price can trigger a smart-contract liquidation, which converts your deferred tax advantage into a forced sale at the worst possible moment.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral-crypto-cards" },
+        { "_type": "link", "_key": "l-cmp2", "href": "/compare/etherfi-cash-vs-nexo-card" },
+        { "_type": "link", "_key": "l-cmp3", "href": "/compare/gemini-credit-card-vs-nexo-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "For the full filtered list see the ", "marks": [] },
+        { "_type": "span", "text": "best DeFi collateral crypto spending cards", "marks": ["l-defi"] },
+        { "_type": "span", "text": ", and for the on-chain vs. CeFi trade-off read ", "marks": [] },
+        { "_type": "span", "text": "ether.fi Cash vs. Nexo", "marks": ["l-cmp2"] },
+        { "_type": "span", "text": " or ", "marks": [] },
+        { "_type": "span", "text": "Gemini vs. Nexo", "marks": ["l-cmp3"] },
+        { "_type": "span", "text": " to see a bank card against a collateral line.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Custody architecture: custodial exchange balances vs. self-custody smart accounts", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-bybit3", "href": "/crypto-card/bybit-card" },
+        { "_type": "link", "_key": "l-cb3", "href": "/crypto-card/coinbase-card" },
+        { "_type": "link", "_key": "l-cdc3", "href": "/crypto-card/crypto-com-visa" },
+        { "_type": "link", "_key": "l-redotpay3", "href": "/crypto-card/redotpay" },
+        { "_type": "link", "_key": "l-kast", "href": "/crypto-card/kast" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "The 2026 shift away from centralized custodial pools followed a familiar pattern: exchange freezes, halted withdrawals and platform insolvencies. With custodial cards - ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Bybit", "marks": ["l-bybit3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Coinbase", "marks": ["l-cb3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Crypto.com", "marks": ["l-cdc3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "RedotPay", "marks": ["l-redotpay3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "KAST", "marks": ["l-kast"] },
+        {
+          "_type": "span",
+          "text": " - the provider controls your keys. If the issuer freezes your account or halts withdrawals, your card balance becomes an unsecured claim on a company.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-bleap3", "href": "/crypto-card/bleap" },
+        { "_type": "link", "_key": "l-plasma", "href": "/crypto-card/plasma-one" },
+        { "_type": "link", "_key": "l-tuyo", "href": "/crypto-card/tuyo-card" },
+        { "_type": "link", "_key": "l-avici3", "href": "/crypto-card/avici" },
+        { "_type": "link", "_key": "l-mm3", "href": "/crypto-card/metamask-card" },
+        { "_type": "link", "_key": "l-gnosis2", "href": "/crypto-card/gnosis-pay" },
+        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Self-custody cards - ", "marks": [] },
+        { "_type": "span", "text": "Bleap", "marks": ["l-bleap3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Plasma One", "marks": ["l-plasma"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Tuyo", "marks": ["l-tuyo"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Avici", "marks": ["l-avici3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "MetaMask Card", "marks": ["l-mm3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Gnosis Pay", "marks": ["l-gnosis2"] },
+        {
+          "_type": "span",
+          "text": " - are powered by smart accounts (account abstraction) or user-owned escrow contracts, so your USDC or EURe stays in your wallet until the exact millisecond of point-of-sale authorization. One transparency caveat: on Bleap, wallet spending uses a co-signer architecture where independent key recovery takes 24-72 hours. Browse every option in our ",
+          "marks": []
+        },
+        { "_type": "span", "text": "self-custody crypto card ranking", "marks": ["l-selfcustody"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Fee forensics: auditing load fees, conversion spreads, FX markups and monthly caps", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "A 'free' card can still cost $30 to $60 a month in hidden friction. Run the same $2,000 monthly spend through each architecture and the differences stop looking like rounding errors:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "image",
+      "asset": { "_type": "reference", "_ref": "image-4535942d2f145dc67ad38ee8984e48225ebcdfd3-1024x768-png" },
+      "alt": "A balance scale comparing hidden crypto card fees against rewards - auditing load fees, conversion spreads and FX markups",
+      "caption": "Fee drag vs. rewards: what each architecture really costs on $2,000 of monthly spend"
+    },
+    {
+      "_type": "table",
+      "caption": "What $2,000 of monthly spend actually costs across the four architectures - before cashback.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Card model", "Example", "Cost mechanics", "Monthly fee drag", "Offsetting rewards"]
+        },
+        {
+          "_type": "row",
+          "cells": ["Self-custody zero-fee debit", "Bleap (EEA) / Fuse (US)", "$0 plan + 0% conversion + 0% FX", "$0", "+$40 cashback at 2%"]
+        },
+        {
+          "_type": "row",
+          "cells": ["Low-spread hybrid debit", "OKX Card (EEA)", "$0 plan + ~0.1% stablecoin conversion spread", "~$2.00", "+EUR 40 cashback at 2% Regular rate"]
+        },
+        {
+          "_type": "row",
+          "cells": ["Exchange debit spending volatile crypto", "Bybit (EEA) / Bitpanda", "0.9%-2.49% conversion fee per swipe", "$18.00-$49.80", "Wipes out a 1% cashback rate; hits entry-tier caps fast"]
+        },
+        {
+          "_type": "row",
+          "cells": ["Prepaid load card", "BitPay / Crypto.com lower tiers abroad", "3% load or FX fee at top-up", "$60.00", "No cashback at base tiers"]
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-calc", "href": "/#calculator" },
+        { "_type": "link", "_key": "l-travel", "href": "/best/travel-crypto-cards" },
+        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Run your own numbers on the ", "marks": [] },
+        { "_type": "span", "text": "net effective return calculator", "marks": ["l-calc"] },
+        { "_type": "span", "text": " on our homepage, which models conversion spread, FX markup and cashback caps per card. If your spend is mostly abroad, start with the ", "marks": [] },
+        { "_type": "span", "text": "zero-FX travel card list", "marks": ["l-travel"] },
+        { "_type": "span", "text": "; if it is mostly domestic, the ", "marks": [] },
+        { "_type": "span", "text": "high-cashback ranking", "marks": ["l-cashback"] },
+        { "_type": "span", "text": " matters more than any fee.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Tax implications (IRS Form 1099-DA & 8949): when does a card swipe trigger capital gains?", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Under IRS Notice 2014-21, crypto is property - so spending it is a disposal, just like selling it. Revenue Procedure 2024-28 adds mandatory per-wallet cost-basis tracking, and brokers now report disposals on Form 1099-DA. Here is what each architecture does to your tax return:",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "text": "Spending volatile crypto on a debit card (BTC, ETH, SOL): ", "marks": ["strong"] },
+        { "_type": "span", "text": "every coffee or subscription renewal is a taxable property disposal. You owe Form 8949 and Schedule D math on each swipe: capital gain = proceeds at checkout minus original cost basis.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [],
+      "children": [
+        { "_type": "span", "text": "Loading a prepaid card: ", "marks": ["strong"] },
+        { "_type": "span", "text": "converting BTC to USD - or even swapping BTC for USDT - to top up triggers the capital gain at the moment of the load, before you buy anything.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-usdc", "href": "/crypto/usdc" },
+        { "_type": "link", "_key": "l-usdt", "href": "/crypto/usdt" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Spending stablecoins (", "marks": ["strong"] },
+        { "_type": "span", "text": "USDC", "marks": ["l-usdc"] },
+        { "_type": "span", "text": " / ", "marks": ["strong"] },
+        { "_type": "span", "text": "USDT", "marks": ["l-usdt"] },
+        { "_type": "span", "text": "): ", "marks": ["strong"] },
+        { "_type": "span", "text": "technically still a property disposal in the US, but spending USDC acquired at $1.00 produces a ~$0.00 gain or loss - you still reconcile the 1099-DA, yet there is no surprise tax bill.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-nexo3", "href": "/crypto-card/nexo-card" },
+        { "_type": "link", "_key": "l-etherfi3", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-avici4", "href": "/crypto-card/avici" },
+        { "_type": "link", "_key": "l-exa3", "href": "/crypto-card/exa-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Borrowing via collateralized credit cards (", "marks": ["strong"] },
+        { "_type": "span", "text": "Nexo", "marks": ["l-nexo3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "ether.fi Cash", "marks": ["l-etherfi3"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Avici", "marks": ["l-avici4"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "Exa", "marks": ["l-exa3"] },
+        { "_type": "span", "text": "): ", "marks": ["strong"] },
+        { "_type": "span", "text": "loan proceeds are not taxable income and no asset is sold at checkout, so borrowing against your crypto defers capital gains indefinitely - unless your collateral is liquidated, which is itself a forced disposal.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-koinly", "href": "https://koinly.io" },
+        { "_type": "link", "_key": "l-cointracker", "href": "https://www.cointracker.io" },
+        { "_type": "link", "_key": "l-tokentax", "href": "https://tokentax.co" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Practical step: connect your exchange and wallet histories to ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Koinly", "marks": ["l-koinly"] },
+        { "_type": "span", "text": ", ", "marks": [] },
+        { "_type": "span", "text": "CoinTracker", "marks": ["l-cointracker"] },
+        { "_type": "span", "text": " or ", "marks": [] },
+        { "_type": "span", "text": "TokenTax", "marks": ["l-tokentax"] },
+        {
+          "_type": "span",
+          "text": " - they auto-import card transactions and generate Form 8949 line items so the per-swipe math does not become a spreadsheet nightmare.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "blockquote",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "This section is educational, not tax advice. Crypto tax treatment varies by jurisdiction and your situation - confirm with a qualified tax adviser before restructuring how you spend.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "The bottom line: which architecture fits you?", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-bleap4", "href": "/crypto-card/bleap" },
+        { "_type": "link", "_key": "l-sc2", "href": "/best/self-custody-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Everyday stablecoin spender: ", "marks": ["strong"] },
+        { "_type": "span", "text": "a zero-spread self-custody debit card like ", "marks": [] },
+        { "_type": "span", "text": "Bleap", "marks": ["l-bleap4"] },
+        { "_type": "span", "text": " - see the full ", "marks": [] },
+        { "_type": "span", "text": "self-custody ranking", "marks": ["l-sc2"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-cdc4", "href": "/crypto-card/crypto-com-visa" },
+        { "_type": "link", "_key": "l-kast2", "href": "/crypto-card/kast" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Budgeting or gifting a fixed amount: ", "marks": ["strong"] },
+        { "_type": "span", "text": "a prepaid card like ", "marks": [] },
+        { "_type": "span", "text": "Crypto.com Visa", "marks": ["l-cdc4"] },
+        { "_type": "span", "text": " or ", "marks": [] },
+        { "_type": "span", "text": "KAST", "marks": ["l-kast2"] },
+        { "_type": "span", "text": " - just load it with stablecoins to dodge the conversion fee and the tax event.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-gemini3", "href": "/crypto-card/gemini-credit-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "US-based rewards maximizer who pays in full: ", "marks": ["strong"] },
+        { "_type": "span", "text": "a revolving credit card like ", "marks": [] },
+        { "_type": "span", "text": "Gemini", "marks": ["l-gemini3"] },
+        { "_type": "span", "text": " - no disposals, and cashback is a rebate rather than income.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "markDefs": [
+        { "_type": "link", "_key": "l-etherfi4", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-defi2", "href": "/best/defi-collateral-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Long-term holder needing tax-efficient liquidity: ", "marks": ["strong"] },
+        { "_type": "span", "text": "a collateralized credit line like ", "marks": [] },
+        { "_type": "span", "text": "ether.fi Cash", "marks": ["l-etherfi4"] },
+        { "_type": "span", "text": " from the ", "marks": [] },
+        { "_type": "span", "text": "DeFi collateral card list", "marks": ["l-defi2"] },
+        { "_type": "span", "text": " - spend against your position, never against your exit plan.", "marks": [] }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the difference between a crypto debit card and a crypto prepaid card?",
+      "answer": "A crypto debit card pulls from your main wallet or exchange balance and converts to fiat in real time at the point of sale. A prepaid card requires loading a segregated card balance first - which charges top-up fees of up to 3% and triggers a taxable disposal at load time if you convert volatile crypto."
+    },
+    {
+      "question": "Do crypto credit cards require a credit check?",
+      "answer": "US revolving credit cards like the Gemini Credit Card and Coinbase One Card require a real credit check because a bank is lending you fiat. Collateralized credit-line cards like Nexo, ether.fi Cash and Avici require only crypto collateral and standard KYC - no hard credit pull."
+    },
+    {
+      "question": "Which type of crypto card avoids capital gains taxes when spending?",
+      "answer": "Collateralized credit-line cards let you borrow against BTC or ETH without selling, so no disposal occurs at checkout. Spending 1:1 USD-pegged stablecoins like USDC on a debit card is a close second - technically a disposal, but with roughly $0 gain or loss per swipe."
+    },
+    {
+      "question": "Can I switch between debit mode and credit mode on the same crypto card?",
+      "answer": "Yes - dual-mode cards like the Nexo Card let you toggle in-app between spending your balance directly (debit mode) and borrowing against collateral (credit mode). Solid, Exa and XPlace offer similar mode-switching between direct spending and collateralized credit."
+    }
+  ]
+}

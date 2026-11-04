@@ -1,0 +1,473 @@
+{
+  "title": "October 2026 Crypto Card Volume Report: RedotPay, ether.fi & KAST Lead a $1.37B Month",
+  "slug": "top-crypto-cards-by-volume-october-2026",
+  "seoTitle": "Top Crypto Cards by Volume (October 2026): $1.37B Leaderboard",
+  "excerpt": "Crypto card settlement volume hit $1.37B in October 2026, up 11.3% month over month. See the top 10 programs ranked by volume, ARR and market share - led by RedotPay, ether.fi and KAST.",
+  "authorSlug": "rituel-editorial",
+  "categorySlugs": ["ecosystem"],
+  "mainImage": {
+    "_type": "image",
+    "asset": { "_type": "reference", "_ref": "image-f144fe0a3da7d0b51365467e83656f934566c18a-1672x941-png" },
+    "alt": "Three glass payment cards on an ascending podium with coins flowing upward - the October 2026 crypto card volume leaderboard led by RedotPay, ether.fi and KAST"
+  },
+  "relatedCards": ["redotpay", "etherfi-cash", "kast", "wirex-one", "plasma-one", "kolo", "tria", "coca-card", "bleap", "okx-card"],
+  "keyTakeaways": [
+    "Crypto card settlement volume reached $1.37 billion in October 2026, up 11.3% month over month, pushing 44-month cumulative throughput to $13.87 billion across 32 tracked programs.",
+    "363.3K active wallets executed 12.94 million card swipes - roughly 35.6 swipes per spender and a ~$105.87 average ticket, or about $3,771 of monthly spend per active wallet.",
+    "Three programs cleared the $82.2M/month threshold for the $1B+ annualized run-rate club: RedotPay ($423.5M, 30.9% share), ether.fi Cash ($141.9M, 10.4%) and KAST ($121.0M, 8.8%) - 50.1% of the market combined.",
+    "Custodial programs like RedotPay book volume at the deposit boundary, while self-custodial cards like ether.fi Cash, Tria and COCA settle swipe-by-swipe on-chain - so raw rankings mix two different accounting methods.",
+    "Volume is not value: #1 RedotPay scores 5.5-6.5/10 on fee drag, while higher-rated challengers like Bleap (8.0), Plasma One (7.8) and ether.fi Cash (7.6) pair scale with better net returns."
+  ],
+  "body": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-leaderboard", "href": "/leaderboard" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "According to the October 2026 snapshot on the ",
+          "marks": []
+        },
+        { "_type": "span", "text": "live Crypto Card Leaderboard", "marks": ["l-leaderboard"] },
+        {
+          "_type": "span",
+          "text": " - which aggregates verified settlement data from Paymentscan and WaldenPay across 32 active programs - global crypto payment card volume surpassed $1.37 billion in October 2026, accelerating +11.3% month over month and pushing 44-month cumulative throughput to $13.87 billion. Activity was driven by 363.3K active wallets executing 12.94 million monthly card swipes (~35.6 swipes per spender). Three heavyweight programs exceeded the $82.2M/month benchmark required for the $1B+ Annualized Run-Rate (ARR) Club, collectively commanding 50.1% of global volume.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "table",
+      "caption": "October 2026 top 10 crypto card programs by settlement volume. Implied ARR = October volume x 365/30, so $82.2M/month equals the $1.00B ARR threshold.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Rank", "Card program", "Cohort status", "Oct 2026 volume", "Implied ARR", "Market share", "Custody & settlement model", "Rituel score"]
+        },
+        { "_type": "row", "cells": ["#1", "RedotPay", "Market anchor", "$423.50M", "$5.15B", "30.9%", "Custodial (deposit-booked top-ups)", "6.5/10 physical - 5.5/10 virtual"] },
+        { "_type": "row", "cells": ["#2", "ether.fi Cash", "$1B+ ARR Club", "$141.90M", "~$1.73B", "10.4%", "Self-custody (Scroll/Optimism credit & vaults)", "7.6/10 - 7.7/10 Luxe"] },
+        { "_type": "row", "cells": ["#3", "KAST", "$1B+ ARR Club", "$121.00M", "~$1.47B", "8.8%", "Custodial (stablecoin neobank via Rain)", "7.4/10"] },
+        { "_type": "row", "cells": ["#4", "Wirex One", "Scaling challenger", "$54.83M", "~$667.1M", "4.0%", "Hybrid (neobank + crypto-backed credit)", "6.8/10"] },
+        { "_type": "row", "cells": ["#5", "Karta", "Scaling challenger", "$53.63M", "~$652.5M", "3.9%", "Custodial top-ups (emerging-market Visa)", "Tracked on leaderboard"] },
+        { "_type": "row", "cells": ["#6", "Plasma One", "Scaling challenger", "$29.79M", "~$362.4M", "2.2%", "Self-custody neobank + DeFi earn vault", "7.8/10"] },
+        { "_type": "row", "cells": ["#7", "Kolo", "Scaling challenger", "$20.50M", "~$249.4M", "1.5%", "Hybrid card-spend wallet (Visa, BTC cashback)", "7.0/10"] },
+        { "_type": "row", "cells": ["#8", "Karta.io", "Scaling challenger", "$18.05M", "~$219.6M", "1.3%", "Self-custody wallet + Visa Signature", "Tracked on leaderboard"] },
+        { "_type": "row", "cells": ["#9", "Tria", "Scaling challenger", "$15.79M", "~$192.1M", "1.2%", "Self-custody chain-abstracted card", "7.3/10"] },
+        { "_type": "row", "cells": ["#10", "Coca (COCA Card)", "Scaling challenger", "$7.82M", "~$95.2M", "0.6%", "Self-custody MPC Visa on Wirex rails", "7.7/10"] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Macro market acceleration: from the GENIUS Act ($339.7M) to $1.37 billion per month", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "The 44-month curve from March 2023 to October 2026 has a clear inflection point: the passage of the GENIUS Act in July 2025, when monthly sector volume sat at $339.7 million. Regulatory clarity turned stablecoin payment rails into an institutional and consumer product almost overnight. Within exactly one year, July 2026 delivered the first $1B+ month at $1.04 billion - and three months later October printed $1.37 billion, a further +31.7% expansion with +11.3% month-over-month velocity.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "image",
+      "asset": { "_type": "reference", "_ref": "image-3a531811bdf038d952ed368eade1923ac07dc74d-1448x1086-png" },
+      "alt": "Ascending glass bars with a rising arc of coins - crypto card settlement volume accelerating to $1.37 billion in October 2026",
+      "caption": "Four years of stablecoin card spend: $339.7M a month in July 2025 to $1.37B in October 2026"
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "The engagement math underneath is the more important signal. 363.3K active wallets generated 12.94 million swipes - about 35.6 swipes per active cardholder, or 1.15 transactions every single day, at a ~$105.87 average ticket and roughly $3,771 of monthly spend per active wallet. That usage pattern is not a speculative off-ramp; it is a primary checking-account replacement. People are buying groceries, paying subscriptions and settling POS transactions with stablecoin-funded cards as their default payment method.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "table",
+      "caption": "Sector-wide volume and user activity benchmarks, March 2023 - October 2026.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Sector metric / milestone", "Verified figure", "Context & analytical significance"]
+        },
+        { "_type": "row", "cells": ["October 2026 monthly volume", "$1.37 billion", "+11.3% MoM across 32 tracked stablecoin payment programs"] },
+        { "_type": "row", "cells": ["Cumulative all-time volume", "$13.87 billion", "44-month aggregate USD settlement throughput (Mar 2023 - Oct 2026)"] },
+        { "_type": "row", "cells": ["GENIUS Act inflection (Jul 2025)", "$339.7 million/mo", "Regulatory catalyst behind a 4x volume expansion in 15 months"] },
+        { "_type": "row", "cells": ["First $1B+ month (Jul 2026)", "$1.04 billion/mo", "Sector crossed the $1B monthly threshold 12 months after the GENIUS Act"] },
+        { "_type": "row", "cells": ["Monthly card swipes (Oct 2026)", "12.94 million", "High-frequency retail, subscription and POS transaction velocity"] },
+        { "_type": "row", "cells": ["Active spenders (30-day window)", "363.3K unique wallets", "~35.6 swipes per active user, ~$105.87 average ticket"] },
+        { "_type": "row", "cells": ["On-chain verified volume", "$938.2 million", "Excludes issuer-reported feeds (RedotPay, BFinance)"] },
+        { "_type": "row", "cells": ["$1B ARR benchmark threshold", "$82.2 million/mo", "Monthly volume needed for a $1B annualized run-rate (Vol x 365/30)"] }
+      ]
+    },
+    {
+      "_type": "table",
+      "caption": "Where crypto card spend actually settles - October 2026 on-chain POS share by network.",
+      "headerRow": true,
+      "rows": [
+        {
+          "_type": "row",
+          "cells": ["Settlement chain", "October volume", "Share of on-chain spend", "Notable programs"]
+        },
+        { "_type": "row", "cells": ["Base", "$259.1M", "27.6%", "KAST, MetaMask, Plasma One, Karta.io"] },
+        { "_type": "row", "cells": ["Optimism", "$144.6M", "15.4%", "ether.fi Cash, Exa"] },
+        { "_type": "row", "cells": ["Solana", "$141.1M", "15.0%", "KAST, Avici, MetaMask, Phantom Cash"] },
+        { "_type": "row", "cells": ["Arbitrum", "$86.0M", "9.2%", "Multi-chain Rain/Bridge programs"] },
+        { "_type": "row", "cells": ["Stellar", "$74.0M", "7.9%", "Institutional USDC settlement"] },
+        { "_type": "row", "cells": ["Polygon", "$63.7M", "6.8%", "Retail stablecoin payment rail"] },
+        { "_type": "row", "cells": ["Ethereum", "$39.3M", "4.2%", "53% of stablecoin float, under 5% of swipes"] },
+        { "_type": "row", "cells": ["Other (11 chains)", "$130.3M", "13.9%", "Arc, Plasma, Gnosis, Scroll, Linea, HyperEVM"] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-base", "href": "/crypto/base" },
+        { "_type": "link", "_key": "l-solana", "href": "/crypto/solana" },
+        { "_type": "link", "_key": "l-usdc", "href": "/crypto/usdc" },
+        { "_type": "link", "_key": "l-usdt", "href": "/crypto/usdt" }
+      ],
+      "children": [
+        { "_type": "span", "text": "The chain mix explains the consumer behavior: ", "marks": [] },
+        { "_type": "span", "text": "Base", "marks": ["l-base"] },
+        { "_type": "span", "text": " and ", "marks": [] },
+        { "_type": "span", "text": "Solana", "marks": ["l-solana"] },
+        { "_type": "span", "text": " - the chains built for cheap, fast ", "marks": [] },
+        { "_type": "span", "text": "USDC", "marks": ["l-usdc"] },
+        { "_type": "span", "text": " and ", "marks": [] },
+        { "_type": "span", "text": "USDT", "marks": ["l-usdt"] },
+        { "_type": "span", "text": " transfers - now clear more card spend than Ethereum mainnet by an order of magnitude. Retail swipes migrated to L2s and high-throughput chains because a $0.001 gas fee is invisible against a $105 ticket.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Methodology note: why custodial top-up volume differs from self-custodial swipe settlement", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-leaderboard2", "href": "/leaderboard" },
+        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody-crypto-cards" },
+        { "_type": "link", "_key": "l-archetypes", "href": "/blog/crypto-debit-vs-prepaid-vs-credit-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "One accounting rule on the ", "marks": [] },
+        { "_type": "span", "text": "leaderboard", "marks": ["l-leaderboard2"] },
+        { "_type": "span", "text": " is easy to miss but changes how you should read every rank: total volume alone cannot rank cards fairly, because custodial programs book deposits while ", "marks": [] },
+        { "_type": "span", "text": "self-custodial cards", "marks": ["l-selfcustody"] },
+        { "_type": "span", "text": " settle swipe-by-swipe on-chain. When a user moves $5,000 of USDT into a custodial prepaid card like RedotPay or KAST, that inflow is recorded at the funding boundary - whether or not it is ever spent. When the same $5,000 sits in a self-custodial card like ether.fi Cash, Plasma One, Tria or COCA, it stays in the user's own smart contract until the exact millisecond a merchant terminal requests it. Every dollar of self-custodial volume is therefore verified point-of-sale settlement, while custodial volume is partially a deposit float measure. For a deeper breakdown of how each card architecture converts, holds and settles funds, see our ", "marks": [] },
+        { "_type": "span", "text": "crypto debit vs. prepaid vs. credit card explainer", "marks": ["l-archetypes"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Inside the $1B+ ARR Club: how RedotPay, ether.fi Cash & KAST captured 50.1% of the market", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Only three programs cleared the $82.2M/month bar for a billion-dollar annualized run-rate in October. Together they booked $686.4M of the month's $1.37B total - half the entire sector.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "image",
+      "asset": { "_type": "reference", "_ref": "image-dded2f786f551fd9ef0f0749b28d09bc50c16378-1448x1086-png" },
+      "alt": "Three glass payment cards inside a glowing ring - the $1B+ annualized run-rate club of RedotPay, ether.fi Cash and KAST",
+      "caption": "The $1B+ ARR Club: three programs now carry half of all crypto card settlement"
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "#1 RedotPay - market anchor ($423.5M | $5.15B ARR | 30.9% share)", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-redotpay", "href": "/crypto-card/redotpay" },
+        { "_type": "link", "_key": "l-cmp-rk", "href": "/compare/kast-vs-redotpay" }
+      ],
+      "children": [
+        { "_type": "span", "text": "RedotPay", "marks": ["l-redotpay"] },
+        {
+          "_type": "span",
+          "text": " commands nearly a third of global volume because it solved the urgent problem first: cross-border USDT income and P2P payouts across Asia, Latin America and the Middle East. Operating across 200+ countries through a multi-issuer stack (StraitsX, Reap and regional BIN partners) with Fireblocks-grade custody plumbing, it offers up to $1M/day limits after full KYC and accounts for roughly half of all-time sector volume. Its nearest rival in absolute terms is still ",
+          "marks": []
+        },
+        { "_type": "span", "text": "KAST - a gap we priced out in our head-to-head", "marks": ["l-cmp-rk"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "#2 ether.fi Cash ($141.9M | ~$1.73B ARR | 10.4% share)", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-etherfi", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-rain", "href": "/issuers/rain" },
+        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "ether.fi Cash", "marks": ["l-etherfi"] },
+        {
+          "_type": "span",
+          "text": " is the proof that DeFi collateral can carry consumer scale: a restaking protocol became the #2 payment card in the world. Issued on ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Rain", "marks": ["l-rain"] },
+        {
+          "_type": "span",
+          "text": "'s platform and settling on Scroll and Optimism, it lets users borrow at ~4% APR against yield-bearing ETH, eETH and USDC vaults - or spend Liquid USD directly - while paying 3-4% cashback with no staking required on the Core tier. It crossed $1B in all-time volume and leads the ",
+          "marks": []
+        },
+        { "_type": "span", "text": "DeFi collateral card category", "marks": ["l-defi"] },
+        { "_type": "span", "text": " on spend-verified settlement.", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h3",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "#3 KAST ($121.0M | ~$1.47B ARR | 8.8% share)", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-kast", "href": "/crypto-card/kast" },
+        { "_type": "link", "_key": "l-solana2", "href": "/crypto/solana" },
+        { "_type": "link", "_key": "l-base2", "href": "/crypto/base" }
+      ],
+      "children": [
+        { "_type": "span", "text": "KAST", "marks": ["l-kast"] },
+        {
+          "_type": "span",
+          "text": " is the breakout stablecoin neobank of 2026, riding a +143% year-over-year surge in search interest. Built on ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Solana", "marks": ["l-solana2"] },
+        { "_type": "span", "text": " and ", "marks": [] },
+        { "_type": "span", "text": "Base", "marks": ["l-base2"] },
+        {
+          "_type": "span",
+          "text": " with issuance on Rain's stack, it pairs 90-second automated KYC with a 0% USD stablecoin top-up spread, 1.5-3% cashback and global SWIFT/SEPA/PIX payout rails across 165+ countries - the closest thing to a borderless checking account the sector has produced.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "The scaling challengers (ranks #4 to #10): self-custody & virtual cards gain ground", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [],
+      "children": [
+        {
+          "_type": "span",
+          "text": "The seven challengers booked $200.41M in October - 14.7% of the market - and the cohort is where the interesting structural shift lives: five of the seven are self-custody or hybrid programs settling real POS volume on-chain.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-wirex", "href": "/crypto-card/wirex-one" },
+        { "_type": "link", "_key": "l-cmp-wx", "href": "/compare/gnosis-pay-vs-wirex-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "The ~$650M ARR neck-and-neck battle. ", "marks": ["strong"] },
+        { "_type": "span", "text": "", "marks": [] },
+        { "_type": "span", "text": "Wirex One", "marks": ["l-wirex"] },
+        {
+          "_type": "span",
+          "text": " (#4, $54.83M, 4.0%) - a hybrid neobank paying up to 8% cashback for WPAY holders - is expanding at +2,717% over four months on the Arc settlement chain, yet sits just $1.2M ahead of Karta (#5, $53.63M, 3.9%), the TRC-20-funded emerging-market Visa card that grew +6.2% in the month. (For context on the legacy Wirex product line, see ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Gnosis Pay vs. Wirex", "marks": ["l-cmp-wx"] },
+        { "_type": "span", "text": ".)", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-plasma", "href": "/crypto-card/plasma-one" },
+        { "_type": "link", "_key": "l-tria", "href": "/crypto-card/tria" },
+        { "_type": "link", "_key": "l-coca", "href": "/crypto-card/coca-card" }
+      ],
+      "children": [
+        { "_type": "span", "text": "The self-custody breakout trio. ", "marks": ["strong"] },
+        { "_type": "span", "text": "", "marks": [] },
+        { "_type": "span", "text": "Plasma One", "marks": ["l-plasma"] },
+        {
+          "_type": "span",
+          "text": " (#6, $29.79M, 2.2%) grew +178.5% in 90 days on a 2-4% cashback card that sweetens the deal with 10% back on AI subscriptions and flights plus ACH/Fedwire/SEPA rails. ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Tria", "marks": ["l-tria"] },
+        {
+          "_type": "span",
+          "text": " (#9, $15.79M, 1.2%) runs a chain-abstracted self-custodial wallet card with 1.5-6% cashback tiers, and ",
+          "marks": []
+        },
+        { "_type": "span", "text": "COCA Card", "marks": ["l-coca"] },
+        {
+          "_type": "span",
+          "text": " (#10, $7.82M, 0.6%) pairs an MPC non-custodial Visa on Wirex rails with 1-8% cashback, 0% FX and subscription rebates. Three self-custody programs in the top 10 would have been unthinkable 18 months ago.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-kolo", "href": "/crypto-card/kolo" }
+      ],
+      "children": [
+        { "_type": "span", "text": "The mid-table movers. ", "marks": ["strong"] },
+        { "_type": "span", "text": "", "marks": [] },
+        { "_type": "span", "text": "Kolo", "marks": ["l-kolo"] },
+        {
+          "_type": "span",
+          "text": " (#7, $20.50M, 1.5%) found traction as a free virtual Visa paying BTC cashback with EUR SEPA cash-out rails, while Karta.io (#8, $18.05M, 1.3%) rounds out the Karta family as a self-custody wallet with a Visa Signature attached.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "markDefs": [],
+      "children": [{ "_type": "span", "text": "Volume vs. value: does the biggest crypto card equal the best card for your wallet?", "marks": [] }]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-redotpay2", "href": "/crypto-card/redotpay" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "Here is the uncomfortable part of the leaderboard: picking a card on volume rank alone can cost hundreds of dollars a year in avoidable fees. ",
+          "marks": []
+        },
+        { "_type": "span", "text": "RedotPay", "marks": ["l-redotpay2"] },
+        {
+          "_type": "span",
+          "text": " is a legitimate powerhouse for Asian and emerging-market users who need instant USDT liquidity and high daily limits - but with a $10 virtual / $100 physical issuance fee, a 1% crypto conversion fee, a 1.2% FX markup and 0% base cashback on standard tiers, it scores just 5.5-6.5/10 on net value in our reviews.",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-etherfi2", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-plasma2", "href": "/crypto-card/plasma-one" },
+        { "_type": "link", "_key": "l-bleap", "href": "/crypto-card/bleap" },
+        { "_type": "link", "_key": "l-okx", "href": "/crypto-card/okx-card" },
+        { "_type": "link", "_key": "l-cmp-bo", "href": "/compare/bleap-vs-okx-card" }
+      ],
+      "children": [
+        {
+          "_type": "span",
+          "text": "The smarter shortlist, by use case: US and global DeFi spenders get scale and better economics from ",
+          "marks": []
+        },
+        { "_type": "span", "text": "ether.fi Cash (7.6/10)", "marks": ["l-etherfi2"] },
+        { "_type": "span", "text": " or ", "marks": [] },
+        { "_type": "span", "text": "Plasma One (7.8/10)", "marks": ["l-plasma2"] },
+        {
+          "_type": "span",
+          "text": " - 3-4%+ cashback, full self-custody, and already operating at $360M to $1.73B annualized scale. European zero-fee spenders are better served by ",
+          "marks": []
+        },
+        { "_type": "span", "text": "Bleap (8.0/10)", "marks": ["l-bleap"] },
+        { "_type": "span", "text": " and ", "marks": [] },
+        { "_type": "span", "text": "OKX Card (7.9/10)", "marks": ["l-okx"] },
+        { "_type": "span", "text": " - 0% FX, $0 issuance and up to 10% category cashback, ", "marks": [] },
+        { "_type": "span", "text": "compared head-to-head here", "marks": ["l-cmp-bo"] },
+        { "_type": "span", "text": ".", "marks": [] }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "markDefs": [
+        { "_type": "link", "_key": "l-leaderboard3", "href": "/leaderboard" },
+        { "_type": "link", "_key": "l-dir", "href": "/" },
+        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback-crypto-cards" }
+      ],
+      "children": [
+        { "_type": "span", "text": "Explore all 32 ranked programs on the ", "marks": [] },
+        { "_type": "span", "text": "live Crypto Card Leaderboard", "marks": ["l-leaderboard3"] },
+        { "_type": "span", "text": ", or filter every reviewed card by country, fee and KYC level in the ", "marks": [] },
+        { "_type": "span", "text": "Rituel card directory", "marks": ["l-dir"] },
+        { "_type": "span", "text": ". If rewards are your deciding factor, the ", "marks": [] },
+        { "_type": "span", "text": "high-cashback ranking", "marks": ["l-cashback"] },
+        { "_type": "span", "text": " shows which programs actually pay out at attainable tiers.", "marks": [] }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Which crypto card has the highest transaction volume in 2026?",
+      "answer": "In October 2026, RedotPay ranked #1 globally with $423.5 million in monthly volume (a $5.15 billion annualized run-rate), capturing 30.9% of the $1.37 billion crypto card market, followed by ether.fi Cash ($141.9M; 10.4% share) and KAST ($121.0M; 8.8% share)."
+    },
+    {
+      "question": "How big is the global crypto card market in October 2026?",
+      "answer": "Across the 32 stablecoin card programs tracked by Rituel via Paymentscan and WaldenPay settlement data, monthly volume reached $1.37 billion in October 2026 (+11.3% month over month), bringing 44-month cumulative volume since March 2023 to $13.87 billion across 363.3K active wallets and 12.94 million monthly card swipes."
+    },
+    {
+      "question": "What is the $1B Annualized Run-Rate (ARR) Club on the Rituel Leaderboard?",
+      "answer": "The $1B ARR Club represents crypto card programs processing at least $82.2 million in monthly settlement volume (monthly volume x 365/30 >= $1B). As of October 2026 only three programs qualify: RedotPay ($5.15B ARR), ether.fi Cash (~$1.73B ARR) and KAST (~$1.47B ARR)."
+    },
+    {
+      "question": "Why do custodial and self-custodial crypto cards report volume differently?",
+      "answer": "Custodial programs like RedotPay and KAST book volume when users deposit stablecoins into the issuer's funding wallets, whereas self-custodial cards like ether.fi Cash, Plasma One, Tria and COCA keep funds in user-controlled smart contracts and record volume swipe-by-swipe as merchant transactions settle on-chain."
+    }
+  ]
+}
