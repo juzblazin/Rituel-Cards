@@ -87,6 +87,21 @@
   --sidebar-accent-foreground: oklch(0.38 0.14 292);
   --sidebar-border: oklch(0.905 0.018 285);
   --sidebar-ring: oklch(0.62 0.2 292);
+
+  /* Tactile layer: ink-coloured crisp shadows (ring + 1px drop + one tight drop).
+     --shadow-ink is the light ink-12 as RGB; dark shadows stay black. */
+  --shadow-ink: 30 25 44;
+  --primary-hover: color-mix(in oklab, var(--primary) 93%, var(--primary-foreground));
+  --shadow-button: 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 0 0 1px rgb(var(--shadow-ink) / .08);
+  --shadow-primary: 0 0 0 1px var(--card), 0 1px 2px 0 rgb(var(--shadow-ink) / .1);
+  --shadow-toggle: var(--shadow-button);
+  --shadow-card: 0 0 0 1px rgb(var(--shadow-ink) / .07), 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 3px 4px -2px rgb(var(--shadow-ink) / .08);
+  --shadow-card-hover: 0 0 0 1px rgb(var(--shadow-ink) / .09), 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 5px 8px -3px rgb(var(--shadow-ink) / .12);
+  --shadow-table: 0 1px 2px 0 rgb(var(--shadow-ink) / .12);
+  --shadow-menu: 0 0 0 1px rgb(var(--shadow-ink) / .08), 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 4px 8px -4px rgb(var(--shadow-ink) / .16);
+  --shadow-modal: 0 0 0 1px rgb(var(--shadow-ink) / .07), 0 1px 2px 0 rgb(var(--shadow-ink) / .14), 0 6px 8px -4px rgb(var(--shadow-ink) / .14);
+  --shadow-badge: 0 1px 2px 0 color-mix(in srgb, currentColor 16%, transparent), 0 0 0 1px color-mix(in srgb, currentColor 14%, transparent);
+  --ease-tactile: cubic-bezier(.23, 1, .32, 1);
 }
 
 .dark {
@@ -127,6 +142,17 @@
   --sidebar-accent-foreground: oklch(0.98 0.005 285);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.68 0.2 292);
+
+  /* Dark tactile: one solid 0.5px outline, same colour all round, plus a tight
+     black drop. No lit top edge, no glow. */
+  --shadow-button: 0 0 0 0.5px oklch(1 0 0 / 16%), 0 1px 2px 0 rgb(0 0 0 / .5);
+  --shadow-primary: 0 0 0 0.5px var(--primary), 0 1px 2px 0 rgb(0 0 0 / .5);
+  --shadow-card: 0 0 0 0.5px oklch(1 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 3px 4px -2px rgb(0 0 0 / .4);
+  --shadow-card-hover: 0 0 0 0.5px oklch(1 0 0 / 14%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 5px 8px -3px rgb(0 0 0 / .45);
+  --shadow-table: 0 1px 2px 0 rgb(0 0 0 / .5);
+  --shadow-menu: 0 0 0 0.5px oklch(1 0 0 / 18%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 4px 8px -4px rgb(0 0 0 / .5);
+  --shadow-modal: 0 0 0 0.5px oklch(1 0 0 / 16%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 6px 8px -4px rgb(0 0 0 / .5);
+  --shadow-badge: 0 0 0 0.5px color-mix(in srgb, currentColor 34%, #000), 0 1px 2px 0 rgb(0 0 0 / .5);
 }
 
 @layer base {

@@ -75,7 +75,7 @@ function MacroChart() {
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Monthly card volume trend, March 2023 to October 2026">
       {gridlines.map((g) => (
         <g key={g}>
-          <line x1={PAD.l} x2={W - PAD.r} y1={y(g)} y2={y(g)} className="stroke-border" strokeWidth={g === 0 ? 1.2 : 0.7} strokeDasharray={g === 0 ? undefined : "3 4"} />
+          <line x1={PAD.l} x2={W - PAD.r} y1={y(g)} y2={y(g)} className="stroke-border" strokeWidth={g === 0 ? 1 : 0.5} strokeDasharray={g === 0 ? undefined : "3 4"} />
           <text x={PAD.l - 6} y={y(g) + 3} textAnchor="end" className="fill-muted-foreground" fontSize={10}>
             {yTickLabel(g)}
           </text>
@@ -138,8 +138,8 @@ function cohortOf(entry: LeaderboardEntry): Cohort {
 }
 
 const cohortMeta: Record<Cohort, { label: string; bar: string; badge: string }> = {
-  anchor: { label: "#1 Market Anchor", bar: "bg-brand", badge: "bg-brand/10 text-brand" },
-  club: { label: "$1B+ ARR Club", bar: "bg-info", badge: "bg-info/10 text-info" },
+  anchor: { label: "#1 Market Anchor", bar: "bg-brand", badge: "bg-brand/10 text-brand shadow-[var(--shadow-badge)]" },
+  club: { label: "$1B+ ARR Club", bar: "bg-info", badge: "bg-info/10 text-info shadow-[var(--shadow-badge)]" },
   challenger: { label: "Scaling Challenger", bar: "bg-muted-foreground/40", badge: "bg-muted text-muted-foreground" },
 };
 
@@ -201,7 +201,7 @@ export function Heavyweights() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {kpiCards.map((card) => (
-          <div key={card.label} className="rounded-xl border border-border bg-card p-4">
+          <div key={card.label} className="rounded-xl bg-card p-4 shadow-[var(--shadow-card)]">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{card.label}</div>
             <div className={cn("num mt-2 text-2xl font-bold", card.valueClass)}>{card.value}</div>
             <div className={cn("mt-1 text-xs", card.subClass)}>{card.sub}</div>
@@ -210,7 +210,7 @@ export function Heavyweights() {
       </div>
 
       {/* Macro trend chart */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5">
+      <div className="flex flex-col gap-3 rounded-2xl bg-card p-5 shadow-[var(--shadow-card)]">
         <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-center">
           <div>
             <h3 className="text-base font-semibold text-foreground">
@@ -228,7 +228,7 @@ export function Heavyweights() {
       </div>
 
       {/* Top-10 heavyweight table */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-5">
+      <div className="flex flex-col gap-4 rounded-2xl bg-card p-5 shadow-[var(--shadow-card)]">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
           <div>
             <h3 className="text-base font-semibold text-foreground">
@@ -246,9 +246,9 @@ export function Heavyweights() {
                 onClick={() => setMetric(m.key)}
                 aria-pressed={metric === m.key}
                 className={cn(
-                  "rounded-lg px-3 py-1.5 transition",
+                  "rounded-lg px-3 py-1.5 transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[0.97]",
                   metric === m.key
-                    ? "bg-brand font-semibold text-brand-foreground"
+                    ? "bg-card font-semibold text-foreground shadow-[var(--shadow-toggle)]"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -260,9 +260,9 @@ export function Heavyweights() {
 
         <div className="flex flex-wrap items-center gap-2 text-xs">
           <span className="font-semibold text-foreground">ARR cohorts:</span>
-          <span className="rounded bg-brand/10 px-2 py-0.5 font-medium text-brand">● RedotPay — #1 market anchor ($5.15B ARR)</span>
-          <span className="rounded bg-info/10 px-2 py-0.5 font-medium text-info">● ether.fi &amp; KAST — $1B+ run-rate club</span>
-          <span className="rounded bg-muted px-2 py-0.5 font-medium text-muted-foreground">● Scaling challengers</span>
+          <span className="rounded-full bg-brand/10 px-2 py-0.5 font-medium text-brand shadow-[var(--shadow-badge)]">● RedotPay — #1 market anchor ($5.15B ARR)</span>
+          <span className="rounded-full bg-info/10 px-2 py-0.5 font-medium text-info shadow-[var(--shadow-badge)]">● ether.fi &amp; KAST — $1B+ run-rate club</span>
+          <span className="rounded-full bg-card px-2 py-0.5 font-medium text-muted-foreground shadow-[var(--shadow-button)]">● Scaling challengers</span>
         </div>
 
         <div className="overflow-x-auto">

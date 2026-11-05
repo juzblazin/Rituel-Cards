@@ -273,7 +273,7 @@ export function TableView({
   };
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
+    <div className="overflow-hidden rounded-xl bg-card shadow-[var(--shadow-card)]">
       <div className="flex flex-col gap-3 border-b border-border px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="hide-scrollbar -mx-1 flex items-center gap-1 overflow-x-auto px-1">
           {PRESETS.map((item) => (
@@ -285,9 +285,9 @@ export function TableView({
                 setSort({ key: "", dir: "desc" });
               }}
               className={cn(
-                "whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition",
+                "whitespace-nowrap rounded-md px-2.5 py-1.5 text-xs font-medium transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[0.97]",
                 preset === item.key
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-card text-foreground shadow-[var(--shadow-toggle)]"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
             >
@@ -302,7 +302,7 @@ export function TableView({
           <button
             type="button"
             onClick={exportCsv}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-semibold text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-card px-2.5 py-1.5 text-xs font-semibold text-muted-foreground shadow-[var(--shadow-button)] transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] hover:bg-muted hover:text-foreground active:scale-[0.97]"
           >
             <Download className="h-3.5 w-3.5" /> .CSV
           </button>
@@ -454,10 +454,10 @@ function Row({
               disabled={!selected && compareDisabled}
               aria-pressed={selected}
               className={cn(
-                "rounded-md border px-2 py-1.5 text-xs font-semibold transition",
+                "rounded-md px-2 py-1.5 text-xs font-semibold transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[0.97]",
                 selected
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border text-muted-foreground hover:bg-muted hover:text-foreground",
+                  ? "bg-primary/10 text-primary shadow-[var(--shadow-badge)]"
+                  : "bg-card text-muted-foreground shadow-[var(--shadow-button)] hover:bg-muted hover:text-foreground",
                 !selected && compareDisabled && "cursor-not-allowed opacity-40",
               )}
             >
@@ -467,7 +467,7 @@ function Row({
               slug={card.slug}
               cardName={card.name}
               source="directory-table"
-              className="inline-flex items-center gap-0.5 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/80"
+              className="inline-flex items-center gap-0.5 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground shadow-[var(--shadow-primary)] transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] hover:bg-[var(--primary-hover)] active:scale-[0.97]"
             >
               Get <ExternalLink className="h-2.5 w-2.5" />
             </AffiliateLink>

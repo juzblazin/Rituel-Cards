@@ -24,7 +24,7 @@ export function CardEarnings({ card }: { card: Card }) {
     new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(value);
 
   return (
-    <div className="rounded-xl border bg-card p-4">
+    <div className="rounded-xl bg-card p-4 shadow-[var(--shadow-card)]">
       <div className="flex items-center gap-2">
         <span className="grid h-7 w-7 place-items-center rounded-lg bg-primary text-primary-foreground">
           <Calculator className="h-3.5 w-3.5" />
@@ -38,7 +38,7 @@ export function CardEarnings({ card }: { card: Card }) {
       <div className="mt-3 grid grid-cols-2 gap-2">
         <label className="col-span-2 block">
           <span className="mb-1 block text-[10px] font-medium uppercase tracking-wider text-muted-foreground">Monthly spend</span>
-          <div className="flex h-9 items-center rounded-lg border border-border bg-background px-2">
+          <div className="flex h-9 items-center rounded-lg bg-muted px-2 transition-colors duration-150 focus-within:bg-[color-mix(in_oklab,var(--muted),var(--foreground)_5%)]">
             <span className="text-xs text-muted-foreground">$</span>
             <input
               type="number"
@@ -56,7 +56,7 @@ export function CardEarnings({ card }: { card: Card }) {
           <select
             value={currency}
             onChange={(event) => setCurrency(event.target.value)}
-            className="h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="h-9 w-full rounded-lg bg-muted px-2 text-xs outline-none transition-colors duration-150 focus-visible:bg-[color-mix(in_oklab,var(--muted),var(--foreground)_5%)] focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             {CURRENCIES.map((code) => (
               <option key={code}>{code}</option>
@@ -68,7 +68,7 @@ export function CardEarnings({ card }: { card: Card }) {
           <select
             value={token}
             onChange={(event) => setToken(event.target.value)}
-            className="h-9 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="h-9 w-full rounded-lg bg-muted px-2 text-xs outline-none transition-colors duration-150 focus-visible:bg-[color-mix(in_oklab,var(--muted),var(--foreground)_5%)] focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             {TOKENS.map((code) => (
               <option key={code}>{code}</option>
@@ -120,7 +120,7 @@ export function CardEarnings({ card }: { card: Card }) {
         slug={card.slug}
         cardName={card.name}
         source="card-calculator"
-        className="mt-3 flex h-9 w-full items-center justify-center gap-1 rounded-lg bg-primary text-xs font-medium text-primary-foreground transition hover:bg-primary/80"
+        className="mt-3 flex h-9 w-full items-center justify-center gap-1 rounded-lg bg-primary text-xs font-medium tracking-[-0.01em] text-primary-foreground shadow-[var(--shadow-primary)] transition duration-150 ease-[cubic-bezier(.23,1,.32,1)] hover:bg-[var(--primary-hover)] active:scale-[0.97]"
       >
         Get {card.name} <ArrowUpRight className="h-3 w-3" />
       </AffiliateLink>

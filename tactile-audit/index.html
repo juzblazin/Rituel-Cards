@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tactile audit — before / after</title>
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; background: #f6f5f4; color: #211f1c; margin: 0; padding: 32px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #73716c; margin: 0 0 28px; }
+  .part { margin-bottom: 40px; }
+  .part h2 { font-size: 15px; margin: 0 0 4px; }
+  .part p { margin: 0 0 12px; color: #57554f; max-width: 720px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .pair figure { margin: 0; }
+  .pair figcaption { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: #8a887f; margin-bottom: 6px; }
+  .pair img { width: 100%; border-radius: 8px; box-shadow: 0 0 0 1px rgb(0 0 0 / .08), 0 1px 2px rgb(0 0 0 / .08); background: #fff; }
+</style>
+</head>
+<body>
+<h1>Tactile audit — before / after</h1>
+<p class="sub">kosta4a/tactile-design applied to Rituel Cards. Left = before, right = after.</p>
+
+<div class="part">
+  <h2>1 · Buttons</h2>
+  <p>Secondary/muted/destructive were bordered or grey fills with a flat look and a translate-y press. Now: white fill + 1px ink ring + crisp 1px drop (the tactile "button" recipe), red text on the destructive trigger, and a scale(.97) squeeze on press at 150ms on the strong ease-out curve.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/01-buttons.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/01-buttons.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>2 · Buttons, mid-press</h2>
+  <p>Caught while held down: the primary squeezes to 97% instead of nudging down 1px.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/05-button-pressed.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/05-button-pressed.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>3 · Fields</h2>
+  <p>Inputs were bordered boxes. Now they're wells: an ink-3 fill that deepens a step on focus, no border — a field sinks into the surface, a button rises off it.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/02-fields.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/02-fields.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>4 · Cards</h2>
+  <p>Cards drew their edge with a flat ring-1 border. Now a raised surface: white + 0.07 ring + crisp 1px drop + a tight 3px/4px shadow — the card visibly sits on the page. Badges got their own tinted edge (14% ring + 16% drop of their own colour).</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/03-cards.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/03-cards.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>5 · Tables</h2>
+  <p>The table floated borderless. Now a framed object: rounded 8px, 0.5px frame, and the table drop (the button's 1px drop without its ring) so it reads as one tactile object.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/04-tables.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/04-tables.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>6 · Dropdowns</h2>
+  <p>Menu kept white but the edge/shadow moved to the menu recipe (ring + 1px + tight 4px/8px drop), 150ms ease-out in, and item highlight is now a neutral muted fill instead of brand-purple — hue no longer ranks hover states.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/06-dropdown-open.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/06-dropdown-open.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>7 · Sheets</h2>
+  <p>Backdrop was a barely-there 10% wash. Now black 30% with a 2px blur (90% in dark), and the sheet draws the modal edge instead of a generic shadow-lg — the layer stack reads correctly.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/08-sheet-full.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/08-sheet-full.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>8 · Chart card</h2>
+  <p>The leaderboard chart card gets the same raised-surface recipe; gridlines went to a true 0.5px hairline (1px baseline).</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/09-chart.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/09-chart.png"></figure>
+  </div>
+</div>
+
+<div class="part">
+  <h2>9 · Leaderboard section (KPI cards + data table)</h2>
+  <p>KPI tiles, the chart card and the top-10 table all sit raised now; the metric toggle's chosen option is a white pill with the button shadow inside a muted track instead of a solid brand fill.</p>
+  <div class="pair">
+    <figure><figcaption>Before</figcaption><img src="before/10-leaderboard.png"></figure>
+    <figure><figcaption>After</figcaption><img src="after/10-leaderboard.png"></figure>
+  </div>
+</div>
+
+</body>
+</html>

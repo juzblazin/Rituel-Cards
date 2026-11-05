@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "improve-ui": {
+      "source": "ibelick/ui-skills",
+      "sourceType": "github",
+      "skillPath": "skills/improve-ui/SKILL.md",
+      "computedHash": "31c09b79a1c196adccb1637a225cef54f537da87430fda0ba309ef83e78f10e5"
+    },
+    "tactile-design": {
+      "source": "kosta4a/tactile-design",
+      "sourceType": "github",
+      "skillPath": "skills/tactile-design/SKILL.md",
+      "computedHash": "444045c7e006f0eb8444939ea16d4911adc7fa3f3e9975f3d9f1c89c0931fe8e"
+    }
+  }
+}

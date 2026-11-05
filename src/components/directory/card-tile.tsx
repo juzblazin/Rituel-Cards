@@ -74,8 +74,8 @@ export function CardTile({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-2xl border bg-card p-3.5 transition-[border-color,box-shadow,background-color] hover:border-brand/40 hover:shadow-[0_28px_70px_-44px_var(--brand)]",
-        selected && "border-brand/60 bg-brand/[0.02] ring-1 ring-brand/25",
+        "group relative flex h-full flex-col rounded-2xl bg-card p-3.5 shadow-[var(--shadow-card)] transition-[box-shadow,background-color,transform] duration-150 ease-[cubic-bezier(.23,1,.32,1)] hover:shadow-[var(--shadow-card-hover)] active:scale-[0.99]",
+        selected && "bg-brand/[0.02] shadow-[var(--shadow-card)] ring-1 ring-brand/25",
       )}
     >
       <Link
@@ -93,7 +93,7 @@ export function CardTile({
         <CardArt
           card={card}
           size="lg"
-          className="relative aspect-[1.586/1] w-full rounded-lg shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:-translate-y-0.5"
+          className="relative aspect-[1.586/1] w-full rounded-lg shadow-[0_1px_2px_0_rgb(0_0_0/.3),0_4px_8px_-3px_rgb(0_0_0/.28)] transition-transform duration-300 group-hover:-translate-y-0.5"
         />
         {card.isSponsored && showSponsored && (
           <span className="absolute right-4 top-4 z-10 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-medium tracking-wide text-white/80 backdrop-blur-sm">
