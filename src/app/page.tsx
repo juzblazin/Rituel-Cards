@@ -24,6 +24,7 @@ import { countryByCode } from "@/lib/countries";
 import { Directory } from "@/components/directory/directory";
 import { NetReturnCalculator } from "@/components/calculator";
 import { AffiliateLink } from "@/components/affiliate-link";
+import BeyondHorizon from "@/components/react-bits/beyond-horizon";
 import BlurText from "@/components/react-bits/blur-text";
 import LogoLoop from "@/components/react-bits/logo-loop";
 import ShinyText from "@/components/react-bits/shiny-text";
@@ -179,6 +180,9 @@ export default async function HomePage({
 
       <section className="relative overflow-hidden border-b bg-gradient-to-b from-background to-background/60 pb-16 pt-16 sm:pt-20">
         <div className="hero-aurora" aria-hidden="true" />
+        <div className="absolute inset-0 hidden dark:block" aria-hidden="true">
+          <BeyondHorizon style={{ position: "absolute", inset: 0, minWidth: 0, minHeight: 0 }} />
+        </div>
         <DotPattern className="opacity-50" fadeStyle="ellipse" />
         <div className="container-page relative">
           <div className="mx-auto max-w-4xl text-center">

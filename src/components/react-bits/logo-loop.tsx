@@ -1223,7 +1223,7 @@ export const LogoLoop = memo<LogoLoopProps>(
               ) : (
                 <img
                   className={cx(
-                    'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto rounded-[22%] bg-white object-cover ring-1 ring-foreground/10 [-webkit-user-drag:none] [image-rendering:-webkit-optimize-contrast]',
+                    'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto rounded-full bg-white object-cover ring-1 ring-foreground/10 [-webkit-user-drag:none] [image-rendering:-webkit-optimize-contrast]',
                     zoomClass
                   )}
                   src={item.src}

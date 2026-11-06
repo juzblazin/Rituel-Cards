@@ -73,7 +73,7 @@ export default function IssuersIndex() {
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex min-w-0 items-center gap-2">
-                  <BrandMark card={issuer.topCard} className="h-7 w-7 text-xs" />
+                  <BrandMark card={issuer.topCard} className="h-7 w-7 rounded-full text-xs" />
                   <h2 className="truncate text-sm font-semibold text-foreground group-hover:text-foreground">
                     {issuer.name}
                   </h2>

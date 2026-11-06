@@ -420,7 +420,7 @@ function Row({
             >
               {expanded ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
             </button>
-            <BrandMark card={card} className="h-9 w-9 shrink-0 text-base" />
+            <BrandMark card={card} className="h-9 w-9 shrink-0 rounded-full text-base" />
             <div className="min-w-0">
               <div className="flex items-center gap-1">
                 <Link href={`/crypto-card/${card.slug}`} className="max-w-[180px] truncate text-sm font-semibold text-foreground hover:text-foreground">
