@@ -8,6 +8,7 @@ import { articleGraphJsonLd, buildMetadata } from "@/lib/seo";
 import { PostBody } from "@/components/blog/post-body";
 import { PostCard } from "@/components/blog/post-card";
 import { CardArt, Rating } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 export const dynamic = "force-dynamic";
 
@@ -153,7 +154,7 @@ export default async function BlogPostPage({ params }: Props) {
               {relatedCards.map((card) => (
                 <Link
                   key={card.slug}
-                  href={`/crypto-card/${card.slug}`}
+                  href={cardPath(card.slug)}
                   className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition hover:border-foreground/20"
                 >
                   <CardArt card={card} className="h-11 w-16 shrink-0" />

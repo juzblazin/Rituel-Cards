@@ -1,47 +1,54 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
-import { cards } from "@/lib/data";
-import { bestPages, featuredPairs } from "@/lib/taxonomy";
-import { cardsOnRail, infraProviders } from "@/lib/infra";
+import { bestListPages, featuredPairs } from "@/lib/taxonomy";
 import { Wordmark } from "./ui";
 import { NewsletterForm } from "./newsletter-form";
 
-const guides = [
-  ["No-KYC cards", "/crypto-card/no-kyc"],
-  ["Self-custody cards", "/crypto-card/self-custody"],
-  ["High cashback", "/crypto-card/high-cashback"],
-  ["Stablecoin cards", "/crypto-card/stablecoin"],
-  ["Zero FX fees", "/crypto-card/no-fx"],
-  ["Apple Pay cards", "/crypto-card/apple-pay"],
-  ["Cards for ad spend", "/crypto-card/virtual-ad-spend"],
+const rankings = [
+  ["Best No-KYC cards", "/best/no-kyc"],
+  ["Best self-custody", "/best/self-custody"],
+  ["Zero-FX travel cards", "/best/travel"],
+  ["High cashback cards", "/best/high-cashback"],
+  ["Business cards", "/best/business"],
+  ["Virtual cards (ads)", "/use-cases/virtual-ad-spend"],
 ];
 
-const countries = [
+const ecosystem = [
+  ["Solana cards", "/chains/solana"],
+  ["Base cards", "/chains/base"],
+  ["Ethereum cards", "/chains/ethereum"],
+  ["USDC cards", "/tokens/usdc"],
+  ["USDT cards", "/tokens/usdt"],
+  ["EUR stablecoins", "/tokens/eure"],
+];
+
+const regions = [
   ["United States", "/countries/united-states"],
   ["United Kingdom", "/countries/united-kingdom"],
-  ["Germany", "/countries/germany"],
-  ["Canada", "/countries/canada"],
-  ["Australia", "/countries/australia"],
-  ["Singapore", "/countries/singapore"],
-  ["United Arab Emirates", "/countries/united-arab-emirates"],
+  ["Germany (EEA)", "/countries/germany"],
   ["Brazil", "/countries/brazil"],
+  ["United Arab Emirates", "/countries/united-arab-emirates"],
+  ["All countries", "/countries"],
 ];
 
-const chains = [
-  ["Ethereum cards", "/crypto/ethereum"],
-  ["Solana cards", "/crypto/solana"],
-  ["Base cards", "/crypto/base"],
-  ["Arbitrum cards", "/crypto/arbitrum"],
-  ["Tron cards", "/crypto/tron"],
-  ["Bitcoin cards", "/crypto/btc"],
+const issuersAndTech = [
+  ["BaaS issuers directory", "/issuers"],
+  ["Rain issuing", "/issuers/rain"],
+  ["Pathward", "/issuers/pathward"],
+  ["Fee & cashback calculator", "/tools/net-return-calculator"],
+  ["All tools", "/tools"],
+  ["Upcoming waitlists", "/upcoming"],
 ];
 
-const cardIssuers = infraProviders
-  .map((provider) => ({ provider, powered: cardsOnRail(provider, cards).length }))
-  .sort((a, b) => b.powered - a.powered)
-  .slice(0, 8)
-  .map(({ provider }) => [provider.name, `/issuers/${provider.slug}`]);
+const company = [
+  ["About & methodology", "/methodology"],
+  ["Submit a card", "/submit-card"],
+  ["Affiliate disclosure", "/terms"],
+  ["Privacy policy", "/privacy"],
+  ["Terms of service", "/terms"],
+  ["XML sitemap", "/sitemap.xml"],
+];
 
 /** Footer comparisons are labelled by brand, not brand + card variant. */
 function pairLabel(pair: { a: { name: string }; b: { name: string } }): string {
@@ -89,17 +96,11 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <FooterColumn title="Card issuers" links={[...cardIssuers, ["All issuers", "/issuers"]]} />
-          <FooterColumn title="Categories" links={guides} />
-          <FooterColumn title="Countries" links={countries} />
-          <FooterColumn title="Chains" links={chains} />
-          <FooterColumn
-            title="Compare"
-            links={featuredPairs.slice(0, 6).map((pair) => [
-              pairLabel(pair),
-              `/compare/${pair.slug}`,
-            ])}
-          />
+          <FooterColumn title="Rankings" links={rankings} />
+          <FooterColumn title="Ecosystem" links={ecosystem} />
+          <FooterColumn title="Regional hubs" links={regions} />
+          <FooterColumn title="Issuers & tech" links={issuersAndTech} />
+          <FooterColumn title="Company & legal" links={company} />
         </div>
 
         <div className="mt-12 border-t pt-8">
@@ -107,7 +108,7 @@ export function SiteFooter() {
             Popular card comparisons
           </h2>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-            {featuredPairs.slice(6, 18).map((pair) => (
+            {featuredPairs.map((pair) => (
               <li key={pair.slug}>
                 <Link
                   href={`/compare/${pair.slug}`}
@@ -125,10 +126,10 @@ export function SiteFooter() {
             Best of crypto cards
           </h2>
           <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-            {bestPages.map((page) => (
+            {bestListPages.slice(0, 11).map((page) => (
               <li key={page.slug}>
                 <Link
-                  href={`/best/${page.slug}-crypto-cards`}
+                  href={`/best/${page.slug}`}
                   className="text-xs text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {page.heading}
@@ -151,14 +152,6 @@ export function SiteFooter() {
               in your jurisdiction.
             </p>
           </div>
-          <div className="flex shrink-0 flex-wrap gap-x-4 gap-y-2">
-            <Link href="/blog" className="transition hover:text-foreground">Blog</Link>
-            <Link href="/methodology" className="transition hover:text-foreground">Methodology</Link>
-            <Link href="/privacy" className="transition hover:text-foreground">Privacy</Link>
-            <Link href="/terms" className="transition hover:text-foreground">Terms</Link>
-            <Link href="/sitemap.xml" className="transition hover:text-foreground">Sitemap</Link>
-            <a href={`mailto:${site.email}`} className="transition hover:text-foreground">{site.email}</a>
-          </div>
         </div>
 
         <div className="mt-8 flex flex-col items-start justify-between gap-2 border-t pt-6 text-[11px] text-muted-foreground sm:flex-row sm:items-center">
@@ -176,7 +169,7 @@ function FooterColumn({ title, links }: { title: string; links: string[][] }) {
       <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{title}</h2>
       <ul className="mt-3 space-y-2.5">
         {links.map(([label, href]) => (
-          <li key={href}>
+          <li key={label}>
             <Link
               href={href}
               className="text-sm leading-5 text-muted-foreground transition-colors hover:text-foreground"

@@ -138,10 +138,10 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-base", "href": "/crypto/base" },
-        { "_type": "link", "_key": "l-solana", "href": "/crypto/solana" },
-        { "_type": "link", "_key": "l-usdc", "href": "/crypto/usdc" },
-        { "_type": "link", "_key": "l-usdt", "href": "/crypto/usdt" }
+        { "_type": "link", "_key": "l-base", "href": "/chains/base" },
+        { "_type": "link", "_key": "l-solana", "href": "/chains/solana" },
+        { "_type": "link", "_key": "l-usdc", "href": "/tokens/usdc" },
+        { "_type": "link", "_key": "l-usdt", "href": "/tokens/usdt" }
       ],
       "children": [
         { "_type": "span", "text": "The chain mix explains the consumer behavior: ", "marks": [] },
@@ -166,8 +166,8 @@
       "style": "normal",
       "markDefs": [
         { "_type": "link", "_key": "l-leaderboard2", "href": "/leaderboard" },
-        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody-crypto-cards" },
-        { "_type": "link", "_key": "l-archetypes", "href": "/blog/crypto-debit-vs-prepaid-vs-credit-card" }
+        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody" },
+        { "_type": "link", "_key": "l-archetypes", "href": "/blog/tokens-debit-vs-prepaid-vs-credit-card" }
       ],
       "children": [
         { "_type": "span", "text": "One accounting rule on the ", "marks": [] },
@@ -213,7 +213,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-redotpay", "href": "/crypto-card/redotpay" },
+        { "_type": "link", "_key": "l-redotpay", "href": "/cards/redotpay" },
         { "_type": "link", "_key": "l-cmp-rk", "href": "/compare/kast-vs-redotpay" }
       ],
       "children": [
@@ -237,9 +237,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-etherfi", "href": "/crypto-card/etherfi-cash" },
+        { "_type": "link", "_key": "l-etherfi", "href": "/cards/etherfi-cash" },
         { "_type": "link", "_key": "l-rain", "href": "/issuers/rain" },
-        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral-crypto-cards" }
+        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral" }
       ],
       "children": [
         { "_type": "span", "text": "ether.fi Cash", "marks": ["l-etherfi"] },
@@ -268,9 +268,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-kast", "href": "/crypto-card/kast" },
-        { "_type": "link", "_key": "l-solana2", "href": "/crypto/solana" },
-        { "_type": "link", "_key": "l-base2", "href": "/crypto/base" }
+        { "_type": "link", "_key": "l-kast", "href": "/cards/kast" },
+        { "_type": "link", "_key": "l-solana2", "href": "/chains/solana" },
+        { "_type": "link", "_key": "l-base2", "href": "/chains/base" }
       ],
       "children": [
         { "_type": "span", "text": "KAST", "marks": ["l-kast"] },
@@ -311,7 +311,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-wirex", "href": "/crypto-card/wirex-one" },
+        { "_type": "link", "_key": "l-wirex", "href": "/cards/wirex-one" },
         { "_type": "link", "_key": "l-cmp-wx", "href": "/compare/gnosis-pay-vs-wirex-card" }
       ],
       "children": [
@@ -331,9 +331,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-plasma", "href": "/crypto-card/plasma-one" },
-        { "_type": "link", "_key": "l-tria", "href": "/crypto-card/tria" },
-        { "_type": "link", "_key": "l-coca", "href": "/crypto-card/coca-card" }
+        { "_type": "link", "_key": "l-plasma", "href": "/cards/plasma-one" },
+        { "_type": "link", "_key": "l-tria", "href": "/cards/tria" },
+        { "_type": "link", "_key": "l-coca", "href": "/cards/coca-card" }
       ],
       "children": [
         { "_type": "span", "text": "The self-custody breakout trio. ", "marks": ["strong"] },
@@ -362,7 +362,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-kolo", "href": "/crypto-card/kolo" }
+        { "_type": "link", "_key": "l-kolo", "href": "/cards/kolo" }
       ],
       "children": [
         { "_type": "span", "text": "The mid-table movers. ", "marks": ["strong"] },
@@ -385,7 +385,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-redotpay2", "href": "/crypto-card/redotpay" }
+        { "_type": "link", "_key": "l-redotpay2", "href": "/cards/redotpay" }
       ],
       "children": [
         {
@@ -405,10 +405,10 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-etherfi2", "href": "/crypto-card/etherfi-cash" },
-        { "_type": "link", "_key": "l-plasma2", "href": "/crypto-card/plasma-one" },
-        { "_type": "link", "_key": "l-bleap", "href": "/crypto-card/bleap" },
-        { "_type": "link", "_key": "l-okx", "href": "/crypto-card/okx-card" },
+        { "_type": "link", "_key": "l-etherfi2", "href": "/cards/etherfi-cash" },
+        { "_type": "link", "_key": "l-plasma2", "href": "/cards/plasma-one" },
+        { "_type": "link", "_key": "l-bleap", "href": "/cards/bleap" },
+        { "_type": "link", "_key": "l-okx", "href": "/cards/okx-card" },
         { "_type": "link", "_key": "l-cmp-bo", "href": "/compare/bleap-vs-okx-card" }
       ],
       "children": [
@@ -439,7 +439,7 @@
       "markDefs": [
         { "_type": "link", "_key": "l-leaderboard3", "href": "/leaderboard" },
         { "_type": "link", "_key": "l-dir", "href": "/" },
-        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback-crypto-cards" }
+        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback" }
       ],
       "children": [
         { "_type": "span", "text": "Explore all 32 ranked programs on the ", "marks": [] },

@@ -10,6 +10,7 @@ import { cn } from "@/lib/cn";
 import { ComparisonMatrix, WinnerSummary } from "@/components/compare/comparison-matrix";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { Badge, CardArt } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 type Props = { params: Promise<{ pair: string }> };
 
@@ -122,7 +123,7 @@ export default async function ComparePage({ params }: Props) {
           {compared.map((card, index) => (
             <span key={card.slug} className="inline-flex items-center gap-2">
               {index > 0 && <span className="text-base font-normal text-muted-foreground">vs</span>}
-              <Link href={`/crypto-card/${card.slug}`} className="hover:text-foreground">{card.name}</Link>
+              <Link href={cardPath(card.slug)} className="hover:text-foreground">{card.name}</Link>
             </span>
           ))}
         </h1>
@@ -167,7 +168,7 @@ export default async function ComparePage({ params }: Props) {
                     <div className="flex items-center gap-2">
                       <CardArt card={card} className="h-8 w-12 shrink-0" />
                       <div className="min-w-0">
-                        <Link href={`/crypto-card/${card.slug}`} className="block truncate text-sm font-medium text-foreground hover:text-foreground">
+                        <Link href={cardPath(card.slug)} className="block truncate text-sm font-medium text-foreground hover:text-foreground">
                           {card.name}
                         </Link>
                         <div className="text-[10px] text-muted-foreground">{card.issuerName}</div>
@@ -182,7 +183,7 @@ export default async function ComparePage({ params }: Props) {
                     </ul>
                     <div className="mt-2 flex gap-1.5">
                       <Link
-                        href={`/crypto-card/${card.slug}`}
+                        href={cardPath(card.slug)}
                         className="inline-flex h-8 flex-1 items-center justify-center rounded-md border border-border text-xs font-medium text-foreground hover:border-foreground/20"
                       >
                         Review
@@ -265,7 +266,7 @@ export default async function ComparePage({ params }: Props) {
                 {compared.map((card) => (
                   <Link
                     key={card.slug}
-                    href={`/crypto-card/${card.slug}`}
+                    href={cardPath(card.slug)}
                     className="flex items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-muted"
                   >
                     <CardArt card={card} className="h-7 w-10 shrink-0" />
@@ -288,7 +289,7 @@ export default async function ComparePage({ params }: Props) {
           {compared.map((card) => (
             <Link
               key={card.slug}
-              href={`/crypto-card/${card.slug}`}
+              href={cardPath(card.slug)}
               className="text-xs text-muted-foreground hover:text-foreground"
             >
               {card.name} review

@@ -12,6 +12,7 @@ import {
 } from "@/lib/leaderboard";
 import { cn } from "@/lib/cn";
 import { BrandMark } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 /* ------------------------------------------------------------------ */
 /* Formatting                                                          */
@@ -297,7 +298,7 @@ export function Heavyweights() {
                           </span>
                         )}
                         {card ? (
-                          <Link href={`/crypto-card/${card.slug}`} className="font-semibold text-foreground hover:text-brand">
+                          <Link href={cardPath(card.slug)} className="font-semibold text-foreground hover:text-brand">
                             {entry.name}
                           </Link>
                         ) : (

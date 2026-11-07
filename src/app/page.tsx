@@ -17,14 +17,16 @@ import {
 import { cards, isFeaturedPartner, kycLabel, type Card } from "@/lib/data";
 import { parseFilters, type ViewMode } from "@/lib/filters";
 import { cashbackLabel, feeLabel, pct } from "@/lib/format";
-import { attributePages, cryptoBySlug, featuredPairs, supportedCountries } from "@/lib/taxonomy";
+import { attributePages, cryptoBySlug, featuredPairs, supportedCountries, useCasePages } from "@/lib/taxonomy";
+import { cardPath } from "@/lib/paths";
+
+const guidePages = [...attributePages, ...useCasePages];
 import { buildMetadata, datasetJsonLd, faqJsonLd, itemListJsonLd, organizationJsonLd } from "@/lib/seo";
 import { absoluteUrl, site } from "@/lib/site";
 import { countryByCode } from "@/lib/countries";
 import { Directory } from "@/components/directory/directory";
 import { NetReturnCalculator } from "@/components/calculator";
 import { AffiliateLink } from "@/components/affiliate-link";
-import BeyondHorizon from "@/components/react-bits/beyond-horizon";
 import BlurText from "@/components/react-bits/blur-text";
 import LogoLoop from "@/components/react-bits/logo-loop";
 import ShinyText from "@/components/react-bits/shiny-text";
@@ -75,12 +77,12 @@ const FAQS = [
 ];
 
 const NEEDS = [
-  { slug: "no-kyc", label: "No KYC", icon: ShieldCheck, blurb: "Low-limit, minimal ID" },
-  { slug: "self-custody", label: "Self-custody", icon: Wallet, blurb: "Keys stay with you" },
-  { slug: "high-cashback", label: "High cashback", icon: PiggyBank, blurb: "3%+ headline rates" },
-  { slug: "no-fx", label: "0% FX", icon: Globe2, blurb: "No travel markup" },
-  { slug: "apple-pay", label: "Apple Pay", icon: BadgeCheck, blurb: "Tap to spend" },
-  { slug: "virtual-ad-spend", label: "Ad spend", icon: Megaphone, blurb: "Virtual cards that work" },
+  { slug: "no-kyc", href: "/best/no-kyc", label: "No KYC", icon: ShieldCheck, blurb: "Low-limit, minimal ID" },
+  { slug: "self-custody", href: "/best/self-custody", label: "Self-custody", icon: Wallet, blurb: "Keys stay with you" },
+  { slug: "high-cashback", href: "/best/high-cashback", label: "High cashback", icon: PiggyBank, blurb: "3%+ headline rates" },
+  { slug: "no-fx", href: "/best/no-fx", label: "0% FX", icon: Globe2, blurb: "No travel markup" },
+  { slug: "apple-pay", href: "/use-cases/apple-pay", label: "Apple Pay", icon: BadgeCheck, blurb: "Tap to spend" },
+  { slug: "virtual-ad-spend", href: "/use-cases/virtual-ad-spend", label: "Ad spend", icon: Megaphone, blurb: "Virtual cards that work" },
 ];
 
 const STABLECOIN_ASSETS = [
@@ -180,9 +182,6 @@ export default async function HomePage({
 
       <section className="relative overflow-hidden border-b bg-gradient-to-b from-background to-background/60 pb-16 pt-16 sm:pt-20">
         <div className="hero-aurora" aria-hidden="true" />
-        <div className="absolute inset-0 hidden dark:block" aria-hidden="true">
-          <BeyondHorizon style={{ position: "absolute", inset: 0, minWidth: 0, minHeight: 0 }} />
-        </div>
         <DotPattern className="opacity-50" fadeStyle="ellipse" />
         <div className="container-page relative">
           <div className="mx-auto max-w-4xl text-center">
@@ -215,7 +214,6 @@ export default async function HomePage({
                     trigger="view"
                   />
                 </span>
-                <ArrowRight />
               </ShadBadge>
             </div>
 
@@ -237,7 +235,7 @@ export default async function HomePage({
                   type="search"
                   name="q"
                   placeholder="Search cards, issuers or tokens…"
-                  className="h-9 border-0 bg-transparent px-1 shadow-none focus-visible:ring-0"
+                  className="h-9 border-0 bg-transparent px-1 shadow-none focus-visible:bg-transparent focus-visible:ring-0 dark:bg-transparent dark:focus-visible:bg-transparent"
                   aria-label="Search crypto cards"
                 />
                 <Button type="submit" variant="brand" className="h-9 shrink-0">
@@ -249,11 +247,11 @@ export default async function HomePage({
             <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
               <span className="text-xs text-muted-foreground">Popular:</span>
               {[
-                ["No KYC", "/crypto-card/no-kyc"],
-                ["Self-custody", "/crypto-card/self-custody"],
-                ["0% FX", "/crypto-card/no-fx"],
-                ["Apple Pay", "/crypto-card/apple-pay"],
-                ["USDT", "/crypto/usdt"],
+                ["No KYC", "/best/no-kyc"],
+                ["Self-custody", "/best/self-custody"],
+                ["0% FX", "/best/no-fx"],
+                ["Apple Pay", "/use-cases/apple-pay"],
+                ["USDT", "/tokens/usdt"],
               ].map(([label, href]) => (
                 <Link
                   key={href}
@@ -348,17 +346,17 @@ export default async function HomePage({
             eyebrow="Browse by need"
             title="Start with the constraint that matters"
             description="Programmatic hubs built from the same fee database — not hand-written listicles."
-            href="/crypto-card"
+            href="/best"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {NEEDS.map((need) => {
-              const page = attributePages.find((item) => item.slug === need.slug);
+              const page = guidePages.find((item) => item.slug === need.slug);
               const count = page ? cards.filter(page.filter).length : 0;
               const Icon = need.icon;
               return (
                 <Link
                   key={need.slug}
-                  href={`/crypto-card/${need.slug}`}
+                  href={need.href}
                   className="group flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:border-brand/35 hover:bg-brand/[0.04]"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-brand/10 text-brand ring-1 ring-brand/15 transition-colors group-hover:bg-brand/15">
@@ -463,13 +461,13 @@ export default async function HomePage({
             eyebrow="Stablecoin"
             title="Cards that run on stablecoins"
             description="Top up from USDC, USDT or EURe and keep your balance pegged to fiat. Compare top-up costs, cashback and FX across every stablecoin-ready programme."
-            href="/crypto-card/stablecoin"
+            href="/best/stablecoin"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {stablecoinAssets.map((asset) => (
               <Link
                 key={asset.slug}
-                href={`/crypto/${asset.slug}`}
+                href={`/tokens/${asset.slug}`}
                 className="group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-brand/35 hover:bg-brand/[0.04]"
               >
                 <div className="flex items-center gap-2.5">
@@ -490,7 +488,7 @@ export default async function HomePage({
               </Link>
             ))}
             <Link
-              href="/crypto-card/stablecoin"
+              href="/best/stablecoin"
               className="group flex flex-col rounded-xl border border-brand/25 bg-brand/[0.04] p-4 transition-colors hover:border-brand/45 hover:bg-brand/[0.08]"
             >
               <div className="flex items-center gap-2.5">
@@ -664,7 +662,7 @@ function FeaturedPartners({ cards: sponsored }: { cards: Card[] }) {
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {sponsored.map((card) => (
-            <Link key={card.slug} href={`/crypto-card/${card.slug}`}>
+            <Link key={card.slug} href={cardPath(card.slug)}>
               <SpotlightCard
                 theme="auto"
                 spotlightColor="oklch(0.66 0.23 292)"

@@ -1,5 +1,6 @@
 import { cards, type Card } from "./data";
-import { attributePages, cryptoPages, supportedCountries } from "./taxonomy";
+import { bestListPages, cryptoPages, supportedCountries, useCasePages } from "./taxonomy";
+import { cardPath, cryptoPath } from "./paths";
 import { absoluteUrl, site } from "./site";
 import { getPosts } from "./blog";
 
@@ -33,21 +34,26 @@ export async function llmsTxt(): Promise<string> {
     link("Compare cards", "/compare", "side-by-side fee and feature comparisons"),
     link("Crypto card leaderboard", "/leaderboard", "on-chain card spend rankings — volume, run-rates and market share across the heavyweight programs"),
     link("Cards by country", "/countries", `availability in ${supportedCountries.length} countries`),
-    link("Cards by crypto and chain", "/crypto", "which cards accept each token or network"),
+    link("Cards by token", "/tokens", "which cards accept each token"),
+    link("Cards by chain", "/chains", "which cards accept each network"),
     link("Methodology", "/methodology", "how cards are scored and verified"),
     link("List your card", "/submit-card", "for issuers"),
     "",
     "## Best-of guides",
     "",
-    ...attributePages.map((page) => link(page.title, `/crypto-card/${page.slug}`, page.description)),
+    ...bestListPages.map((page) => link(page.title, `/best/${page.slug}`, page.description)),
+    "",
+    "## Use cases",
+    "",
+    ...useCasePages.map((page) => link(page.title, `/use-cases/${page.slug}`, page.description)),
     "",
     "## Top-rated cards",
     "",
-    ...byScore.slice(0, 20).map((card) => link(card.name, `/crypto-card/${card.slug}`, `${card.ratingScore}/10. ${card.tagline}`)),
+    ...byScore.slice(0, 20).map((card) => link(card.name, cardPath(card.slug), `${card.ratingScore}/10. ${card.tagline}`)),
     "",
     "## Cards by crypto",
     "",
-    ...cryptoPages.map((page) => link(page.title, `/crypto/${page.slug}`)),
+    ...cryptoPages.map((page) => link(page.title, cryptoPath(page))),
     "",
     ...(await blogSection(20)),
     "## Optional",
@@ -67,7 +73,7 @@ function cardSection(card: Card): string[] {
     "",
     `${card.description}`,
     "",
-    `- URL: ${absoluteUrl(`/crypto-card/${card.slug}`)}`,
+    `- URL: ${absoluteUrl(cardPath(card.slug))}`,
     `- Issuer: ${card.issuerName} · Network: ${card.network} · Type: ${card.cardType}`,
     `- Rituel Cards score: ${card.ratingScore}/10`,
     `- Custody: ${card.custodyModel.replace("_", "-")} · KYC: ${card.kycLevel.replace("_", " ")}`,

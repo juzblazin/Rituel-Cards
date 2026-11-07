@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -17,8 +17,8 @@ import { issuerForCard } from "@/lib/issuers";
 import { cashbackLabel, feeLabel, isNew, money, pct, relativeAge, sentences, shortCardName } from "@/lib/format";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, financialProductJsonLd, routeOgImage } from "@/lib/seo";
 import { countryByCode } from "@/lib/countries";
-import { compareSlug, featuredPairs, attributeBySlug, attributePages } from "@/lib/taxonomy";
-import { AttributeView, attributeMetadata } from "./attribute-view";
+import { compareSlug, featuredPairs, attributeBySlug, cryptoBySlug, useCaseBySlug } from "@/lib/taxonomy";
+import { bestPath, cardPath, cryptoPath, useCasePath } from "@/lib/paths";
 import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { CardEarnings } from "@/components/card-earnings";
@@ -30,14 +30,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  if (attributeBySlug.has(slug)) return attributeMetadata(slug);
   const card = cardBySlug.get(slug);
   if (!card) return {};
   return buildMetadata({
     title: `${shortCardName(card.name)} Review (2026): Fees & Cashback`,
     description: cardDescription(card),
-    path: `/crypto-card/${card.slug}`,
-    image: routeOgImage(`/crypto-card/${card.slug}`, `${card.name}: fees, cashback and availability`),
+    path: cardPath(card.slug),
+    image: routeOgImage(cardPath(card.slug), `${card.name}: fees, cashback and availability`),
     keywords: [card.name, `${card.name} review`, `${card.name} fees`, `${card.name} cashback`],
   });
 }
@@ -56,16 +55,18 @@ function cardDescription(card: Card): string {
   return options.find((option) => option.length <= MAX_DESCRIPTION_LENGTH) ?? options[options.length - 1];
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  return [
-    ...cards.map((card) => ({ slug: card.slug })),
-    ...attributePages.map((page) => ({ slug: page.slug })),
-  ];
+  return cards.map((card) => ({ slug: card.slug }));
 }
 
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  if (attributeBySlug.has(slug)) return <AttributeView slug={slug} />;
+  // Legacy category URLs that shared this namespace get a permanent redirect
+  // (next.config handles them at the edge; this covers any direct hit).
+  if (attributeBySlug.has(slug)) permanentRedirect(bestPath(slug));
+  if (useCaseBySlug.has(slug)) permanentRedirect(useCasePath(slug));
   const card = cardBySlug.get(slug);
   if (!card) notFound();
 
@@ -114,8 +115,8 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Cards", path: "/crypto-card" },
-              { name: card.name, path: `/crypto-card/${card.slug}` },
+              { name: "Cards", path: "/cards" },
+              { name: card.name, path: cardPath(card.slug) },
             ]),
           ),
         }}
@@ -126,7 +127,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="size-3 shrink-0" />
-          <Link href="/crypto-card" className="hover:text-foreground">Cards</Link>
+          <Link href="/cards" className="hover:text-foreground">Cards</Link>
           <ChevronRight className="size-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{card.name}</span>
         </div>
@@ -351,7 +352,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
                 {family.map((item) => (
                   <Link
                     key={item.slug}
-                    href={`/crypto-card/${item.slug}`}
+                    href={cardPath(item.slug)}
                     className="group flex items-center gap-3 rounded-xl border border-border p-3 transition-colors hover:border-brand/50 hover:bg-muted/50"
                   >
                     <CardArt card={item} className="h-11 w-16 shrink-0" />
@@ -389,15 +390,26 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Chains</h3>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {card.supportedChains.map((chain) => (
-                    <Link
-                      key={chain}
-                      href={`/crypto/${chain.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="rounded-lg border border-border bg-card px-2 py-1 text-xs text-muted-foreground hover:bg-muted"
-                    >
-                      {chain}
-                    </Link>
-                  ))}
+                  {card.supportedChains.map((chain) => {
+                    const slug = chain.toLowerCase().replace(/\s+/g, "-");
+                    const page = cryptoBySlug.get(slug);
+                    return page ? (
+                      <Link
+                        key={chain}
+                        href={cryptoPath(page)}
+                        className="rounded-lg border border-border bg-card px-2 py-1 text-xs text-muted-foreground hover:bg-muted"
+                      >
+                        {chain}
+                      </Link>
+                    ) : (
+                      <span
+                        key={chain}
+                        className="rounded-lg border border-border bg-card px-2 py-1 text-xs text-muted-foreground"
+                      >
+                        {chain}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -546,7 +558,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
               {related.map((item) => (
                 <Link
                   key={item.slug}
-                  href={`/crypto-card/${item.slug}`}
+                  href={cardPath(item.slug)}
                   className="flex items-center gap-2 rounded-lg px-1.5 py-1.5 hover:bg-muted"
                 >
                   <CardArt card={item} className="h-7 w-10 shrink-0" />
@@ -564,12 +576,12 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Related guides</h2>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {[
-                card.kycLevel === "no_kyc" || card.kycLevel === "light_kyc" ? ["No-KYC cards", "/crypto-card/no-kyc"] : null,
-                card.custodyModel === "self_custody" ? ["Self-custody", "/crypto-card/self-custody"] : null,
-                card.cashbackMaxPct >= 3 ? ["High cashback", "/crypto-card/high-cashback"] : null,
-                card.fxFeePct === 0 ? ["0% FX cards", "/crypto-card/no-fx"] : null,
-                card.mobileWallets.includes("apple_pay") ? ["Apple Pay", "/crypto-card/apple-pay"] : null,
-                card.audience !== "personal" ? ["Business cards", "/crypto-card/business"] : null,
+                card.kycLevel === "no_kyc" || card.kycLevel === "light_kyc" ? ["No-KYC cards", bestPath("no-kyc")] : null,
+                card.custodyModel === "self_custody" ? ["Self-custody", bestPath("self-custody")] : null,
+                card.cashbackMaxPct >= 3 ? ["High cashback", bestPath("high-cashback")] : null,
+                card.fxFeePct === 0 ? ["0% FX cards", bestPath("no-fx")] : null,
+                card.mobileWallets.includes("apple_pay") ? ["Apple Pay", useCasePath("apple-pay")] : null,
+                card.audience !== "personal" ? ["Business cards", bestPath("business")] : null,
               ]
                 .filter((item): item is string[] => Boolean(item))
                 .map(([label, href]) => (

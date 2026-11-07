@@ -37,10 +37,10 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-bleap", "href": "/crypto-card/bleap" },
-        { "_type": "link", "_key": "l-okx", "href": "/crypto-card/okx-card" },
-        { "_type": "link", "_key": "l-bybit", "href": "/crypto-card/bybit-card" },
-        { "_type": "link", "_key": "l-metamask", "href": "/crypto-card/metamask-card" }
+        { "_type": "link", "_key": "l-bleap", "href": "/cards/bleap" },
+        { "_type": "link", "_key": "l-okx", "href": "/cards/okx-card" },
+        { "_type": "link", "_key": "l-bybit", "href": "/cards/bybit-card" },
+        { "_type": "link", "_key": "l-metamask", "href": "/cards/metamask-card" }
       ],
       "children": [
         { "_type": "span", "text": "Crypto debit cards", "marks": ["strong"] },
@@ -61,9 +61,9 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-bitpay", "href": "/crypto-card/bitpay-card" },
-        { "_type": "link", "_key": "l-cdc", "href": "/crypto-card/crypto-com-visa" },
-        { "_type": "link", "_key": "l-redotpay", "href": "/crypto-card/redotpay" }
+        { "_type": "link", "_key": "l-bitpay", "href": "/cards/bitpay-card" },
+        { "_type": "link", "_key": "l-cdc", "href": "/cards/tokens-com-visa" },
+        { "_type": "link", "_key": "l-redotpay", "href": "/cards/redotpay" }
       ],
       "children": [
         { "_type": "span", "text": "Crypto prepaid cards", "marks": ["strong"] },
@@ -82,8 +82,8 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-gemini", "href": "/crypto-card/gemini-credit-card" },
-        { "_type": "link", "_key": "l-cbone", "href": "/crypto-card/coinbase-one-card" }
+        { "_type": "link", "_key": "l-gemini", "href": "/cards/gemini-credit-card" },
+        { "_type": "link", "_key": "l-cbone", "href": "/cards/coinbase-one-card" }
       ],
       "children": [
         { "_type": "span", "text": "Revolving crypto credit cards", "marks": ["strong"] },
@@ -100,10 +100,10 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-etherfi", "href": "/crypto-card/etherfi-cash" },
-        { "_type": "link", "_key": "l-nexo", "href": "/crypto-card/nexo-card" },
-        { "_type": "link", "_key": "l-avici", "href": "/crypto-card/avici" },
-        { "_type": "link", "_key": "l-exa", "href": "/crypto-card/exa-card" }
+        { "_type": "link", "_key": "l-etherfi", "href": "/cards/etherfi-cash" },
+        { "_type": "link", "_key": "l-nexo", "href": "/cards/nexo-card" },
+        { "_type": "link", "_key": "l-avici", "href": "/cards/avici" },
+        { "_type": "link", "_key": "l-exa", "href": "/cards/exa-card" }
       ],
       "children": [
         { "_type": "span", "text": "Collateralized credit-line cards", "marks": ["strong"] },
@@ -308,12 +308,12 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-bybit2", "href": "/crypto-card/bybit-card" },
-        { "_type": "link", "_key": "l-okx2", "href": "/crypto-card/okx-card" },
-        { "_type": "link", "_key": "l-kraken", "href": "/crypto-card/kraken-card" },
-        { "_type": "link", "_key": "l-bleap2", "href": "/crypto-card/bleap" },
-        { "_type": "link", "_key": "l-mm2", "href": "/crypto-card/metamask-card" },
-        { "_type": "link", "_key": "l-gnosis", "href": "/crypto-card/gnosis-pay" }
+        { "_type": "link", "_key": "l-bybit2", "href": "/cards/bybit-card" },
+        { "_type": "link", "_key": "l-okx2", "href": "/cards/okx-card" },
+        { "_type": "link", "_key": "l-kraken", "href": "/cards/kraken-card" },
+        { "_type": "link", "_key": "l-bleap2", "href": "/cards/bleap" },
+        { "_type": "link", "_key": "l-mm2", "href": "/cards/metamask-card" },
+        { "_type": "link", "_key": "l-gnosis", "href": "/cards/gnosis-pay" }
       ],
       "children": [
         {
@@ -361,10 +361,10 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-cdc2", "href": "/crypto-card/crypto-com-visa" },
-        { "_type": "link", "_key": "l-bitpay2", "href": "/crypto-card/bitpay-card" },
-        { "_type": "link", "_key": "l-redotpay2", "href": "/crypto-card/redotpay" },
-        { "_type": "link", "_key": "l-cb2", "href": "/crypto-card/coinbase-card" }
+        { "_type": "link", "_key": "l-cdc2", "href": "/cards/tokens-com-visa" },
+        { "_type": "link", "_key": "l-bitpay2", "href": "/cards/bitpay-card" },
+        { "_type": "link", "_key": "l-redotpay2", "href": "/cards/redotpay" },
+        { "_type": "link", "_key": "l-cb2", "href": "/cards/coinbase-card" }
       ],
       "children": [
         { "_type": "span", "text": "A prepaid card makes you move funds into a segregated card wallet first - ", "marks": [] },
@@ -386,7 +386,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-stable", "href": "/best/stablecoin-crypto-cards" },
+        { "_type": "link", "_key": "l-stable", "href": "/best/stablecoin" },
         { "_type": "link", "_key": "l-cmp1", "href": "/compare/bleap-vs-okx-card" }
       ],
       "children": [
@@ -429,8 +429,8 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-gemini2", "href": "/crypto-card/gemini-credit-card" },
-        { "_type": "link", "_key": "l-cbone2", "href": "/crypto-card/coinbase-one-card" }
+        { "_type": "link", "_key": "l-gemini2", "href": "/cards/gemini-credit-card" },
+        { "_type": "link", "_key": "l-cbone2", "href": "/cards/coinbase-one-card" }
       ],
       "children": [
         { "_type": "span", "text": "Gemini Credit Card (6.5/10)", "marks": ["l-gemini2"] },
@@ -457,10 +457,10 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-etherfi2", "href": "/crypto-card/etherfi-cash" },
-        { "_type": "link", "_key": "l-avici2", "href": "/crypto-card/avici" },
-        { "_type": "link", "_key": "l-nexo2", "href": "/crypto-card/nexo-card" },
-        { "_type": "link", "_key": "l-exa2", "href": "/crypto-card/exa-card" }
+        { "_type": "link", "_key": "l-etherfi2", "href": "/cards/etherfi-cash" },
+        { "_type": "link", "_key": "l-avici2", "href": "/cards/avici" },
+        { "_type": "link", "_key": "l-nexo2", "href": "/cards/nexo-card" },
+        { "_type": "link", "_key": "l-exa2", "href": "/cards/exa-card" }
       ],
       "children": [
         { "_type": "span", "text": "ether.fi Cash (7.6/10)", "marks": ["l-etherfi2"] },
@@ -493,7 +493,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral-crypto-cards" },
+        { "_type": "link", "_key": "l-defi", "href": "/best/defi-collateral" },
         { "_type": "link", "_key": "l-cmp2", "href": "/compare/etherfi-cash-vs-nexo-card" },
         { "_type": "link", "_key": "l-cmp3", "href": "/compare/gemini-credit-card-vs-nexo-card" }
       ],
@@ -517,11 +517,11 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-bybit3", "href": "/crypto-card/bybit-card" },
-        { "_type": "link", "_key": "l-cb3", "href": "/crypto-card/coinbase-card" },
-        { "_type": "link", "_key": "l-cdc3", "href": "/crypto-card/crypto-com-visa" },
-        { "_type": "link", "_key": "l-redotpay3", "href": "/crypto-card/redotpay" },
-        { "_type": "link", "_key": "l-kast", "href": "/crypto-card/kast" }
+        { "_type": "link", "_key": "l-bybit3", "href": "/cards/bybit-card" },
+        { "_type": "link", "_key": "l-cb3", "href": "/cards/coinbase-card" },
+        { "_type": "link", "_key": "l-cdc3", "href": "/cards/tokens-com-visa" },
+        { "_type": "link", "_key": "l-redotpay3", "href": "/cards/redotpay" },
+        { "_type": "link", "_key": "l-kast", "href": "/cards/kast" }
       ],
       "children": [
         {
@@ -549,13 +549,13 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-bleap3", "href": "/crypto-card/bleap" },
-        { "_type": "link", "_key": "l-plasma", "href": "/crypto-card/plasma-one" },
-        { "_type": "link", "_key": "l-tuyo", "href": "/crypto-card/tuyo-card" },
-        { "_type": "link", "_key": "l-avici3", "href": "/crypto-card/avici" },
-        { "_type": "link", "_key": "l-mm3", "href": "/crypto-card/metamask-card" },
-        { "_type": "link", "_key": "l-gnosis2", "href": "/crypto-card/gnosis-pay" },
-        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody-crypto-cards" }
+        { "_type": "link", "_key": "l-bleap3", "href": "/cards/bleap" },
+        { "_type": "link", "_key": "l-plasma", "href": "/cards/plasma-one" },
+        { "_type": "link", "_key": "l-tuyo", "href": "/cards/tuyo-card" },
+        { "_type": "link", "_key": "l-avici3", "href": "/cards/avici" },
+        { "_type": "link", "_key": "l-mm3", "href": "/cards/metamask-card" },
+        { "_type": "link", "_key": "l-gnosis2", "href": "/cards/gnosis-pay" },
+        { "_type": "link", "_key": "l-selfcustody", "href": "/best/self-custody" }
       ],
       "children": [
         { "_type": "span", "text": "Self-custody cards - ", "marks": [] },
@@ -635,8 +635,8 @@
       "style": "normal",
       "markDefs": [
         { "_type": "link", "_key": "l-calc", "href": "/#calculator" },
-        { "_type": "link", "_key": "l-travel", "href": "/best/travel-crypto-cards" },
-        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback-crypto-cards" }
+        { "_type": "link", "_key": "l-travel", "href": "/best/travel" },
+        { "_type": "link", "_key": "l-cashback", "href": "/best/high-cashback" }
       ],
       "children": [
         { "_type": "span", "text": "Run your own numbers on the ", "marks": [] },
@@ -694,8 +694,8 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-usdc", "href": "/crypto/usdc" },
-        { "_type": "link", "_key": "l-usdt", "href": "/crypto/usdt" }
+        { "_type": "link", "_key": "l-usdc", "href": "/tokens/usdc" },
+        { "_type": "link", "_key": "l-usdt", "href": "/tokens/usdt" }
       ],
       "children": [
         { "_type": "span", "text": "Spending stablecoins (", "marks": ["strong"] },
@@ -712,10 +712,10 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-nexo3", "href": "/crypto-card/nexo-card" },
-        { "_type": "link", "_key": "l-etherfi3", "href": "/crypto-card/etherfi-cash" },
-        { "_type": "link", "_key": "l-avici4", "href": "/crypto-card/avici" },
-        { "_type": "link", "_key": "l-exa3", "href": "/crypto-card/exa-card" }
+        { "_type": "link", "_key": "l-nexo3", "href": "/cards/nexo-card" },
+        { "_type": "link", "_key": "l-etherfi3", "href": "/cards/etherfi-cash" },
+        { "_type": "link", "_key": "l-avici4", "href": "/cards/avici" },
+        { "_type": "link", "_key": "l-exa3", "href": "/cards/exa-card" }
       ],
       "children": [
         { "_type": "span", "text": "Borrowing via collateralized credit cards (", "marks": ["strong"] },
@@ -780,8 +780,8 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-bleap4", "href": "/crypto-card/bleap" },
-        { "_type": "link", "_key": "l-sc2", "href": "/best/self-custody-crypto-cards" }
+        { "_type": "link", "_key": "l-bleap4", "href": "/cards/bleap" },
+        { "_type": "link", "_key": "l-sc2", "href": "/best/self-custody" }
       ],
       "children": [
         { "_type": "span", "text": "Everyday stablecoin spender: ", "marks": ["strong"] },
@@ -798,8 +798,8 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-cdc4", "href": "/crypto-card/crypto-com-visa" },
-        { "_type": "link", "_key": "l-kast2", "href": "/crypto-card/kast" }
+        { "_type": "link", "_key": "l-cdc4", "href": "/cards/tokens-com-visa" },
+        { "_type": "link", "_key": "l-kast2", "href": "/cards/kast" }
       ],
       "children": [
         { "_type": "span", "text": "Budgeting or gifting a fixed amount: ", "marks": ["strong"] },
@@ -816,7 +816,7 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-gemini3", "href": "/crypto-card/gemini-credit-card" }
+        { "_type": "link", "_key": "l-gemini3", "href": "/cards/gemini-credit-card" }
       ],
       "children": [
         { "_type": "span", "text": "US-based rewards maximizer who pays in full: ", "marks": ["strong"] },
@@ -831,8 +831,8 @@
       "listItem": "bullet",
       "level": 1,
       "markDefs": [
-        { "_type": "link", "_key": "l-etherfi4", "href": "/crypto-card/etherfi-cash" },
-        { "_type": "link", "_key": "l-defi2", "href": "/best/defi-collateral-crypto-cards" }
+        { "_type": "link", "_key": "l-etherfi4", "href": "/cards/etherfi-cash" },
+        { "_type": "link", "_key": "l-defi2", "href": "/best/defi-collateral" }
       ],
       "children": [
         { "_type": "span", "text": "Long-term holder needing tax-efficient liquidity: ", "marks": ["strong"] },

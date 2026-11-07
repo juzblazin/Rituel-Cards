@@ -14,6 +14,7 @@ import {
 import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 type Props = { params: Promise<{ country: string }> };
 
@@ -155,7 +156,7 @@ export default async function CountryPage({ params }: Props) {
               <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Quick picks</h2>
               <div className="mt-2 divide-y divide-border">
                 {top.map((card, index) => (
-                  <Link key={card.slug} href={`/crypto-card/${card.slug}`} className="flex items-center gap-2 py-2 first:pt-0 last:pb-0">
+                  <Link key={card.slug} href={cardPath(card.slug)} className="flex items-center gap-2 py-2 first:pt-0 last:pb-0">
                     <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{index + 1}</span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-xs font-semibold text-foreground">{card.name}</span>
@@ -225,10 +226,17 @@ export default async function CountryPage({ params }: Props) {
               </p>
             </div>
             <div className="mt-4 flex flex-wrap gap-1.5">
-              {["no-kyc", "self-custody", "high-cashback", "no-fx", "apple-pay", "business"].map((attribute) => (
+              {[
+                ["no-kyc", "/best/no-kyc"],
+                ["self-custody", "/best/self-custody"],
+                ["high-cashback", "/best/high-cashback"],
+                ["no-fx", "/best/no-fx"],
+                ["apple-pay", "/use-cases/apple-pay"],
+                ["business", "/best/business"],
+              ].map(([attribute, href]) => (
                 <Link
                   key={attribute}
-                  href={`/crypto-card/${attribute}`}
+                  href={href}
                   className="rounded-full border border-border bg-background px-2 py-1 text-xs text-muted-foreground hover:border-foreground/20 hover:text-foreground"
                 >
                   {attribute.replace(/-/g, " ")}

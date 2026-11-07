@@ -92,8 +92,8 @@
      --shadow-ink is the light ink-12 as RGB; dark shadows stay black. */
   --shadow-ink: 30 25 44;
   --primary-hover: color-mix(in oklab, var(--primary) 93%, var(--primary-foreground));
-  --shadow-button: 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 0 0 1px rgb(var(--shadow-ink) / .08);
-  --shadow-primary: 0 0 0 1px var(--card), 0 1px 2px 0 rgb(var(--shadow-ink) / .1);
+  --shadow-button: 0 1px 2px 0 rgb(var(--shadow-ink) / .12);
+  --shadow-primary: 0 1px 2px 0 rgb(var(--shadow-ink) / .1);
   --shadow-toggle: var(--shadow-button);
   --shadow-card: 0 0 0 1px rgb(var(--shadow-ink) / .07), 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 3px 4px -2px rgb(var(--shadow-ink) / .08);
   --shadow-card-hover: 0 0 0 1px rgb(var(--shadow-ink) / .09), 0 1px 2px 0 rgb(var(--shadow-ink) / .12), 0 5px 8px -3px rgb(var(--shadow-ink) / .12);
@@ -145,8 +145,8 @@
 
   /* Dark tactile: one solid 0.5px outline, same colour all round, plus a tight
      black drop. No lit top edge, no glow. */
-  --shadow-button: 0 0 0 0.5px oklch(1 0 0 / 16%), 0 1px 2px 0 rgb(0 0 0 / .5);
-  --shadow-primary: 0 0 0 0.5px var(--primary), 0 1px 2px 0 rgb(0 0 0 / .5);
+  --shadow-button: 0 1px 2px 0 rgb(0 0 0 / .5);
+  --shadow-primary: 0 1px 2px 0 rgb(0 0 0 / .5);
   --shadow-card: 0 0 0 0.5px oklch(1 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 3px 4px -2px rgb(0 0 0 / .4);
   --shadow-card-hover: 0 0 0 0.5px oklch(1 0 0 / 14%), 0 1px 2px 0 rgb(0 0 0 / .5), 0 5px 8px -3px rgb(0 0 0 / .45);
   --shadow-table: 0 1px 2px 0 rgb(0 0 0 / .5);

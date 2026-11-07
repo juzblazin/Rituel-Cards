@@ -1,23 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { ChevronRight, Sparkles } from "lucide-react";
 import { cards } from "@/lib/data";
 import { buildMetadata, titleWithCount, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
-import { attributeBySlug, attributePages, featuredPairs } from "@/lib/taxonomy";
+import { attributePages, useCasePages, featuredPairs, type AttributePage } from "@/lib/taxonomy";
+import { bestPath, useCasePath } from "@/lib/paths";
 import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
-export async function attributeMetadata(slug: string): Promise<Metadata> {
-  const page = attributeBySlug.get(slug);
-  if (!page) return {};
+export type GuideBase = "best" | "use-cases";
+
+const BASE_CONFIG: Record<
+  GuideBase,
+  { label: string; indexPath: string; pagePath: (slug: string) => string; pool: AttributePage[] }
+> = {
+  best: { label: "Best lists", indexPath: "/best", pagePath: bestPath, pool: attributePages },
+  "use-cases": { label: "Use cases", indexPath: "/use-cases", pagePath: useCasePath, pool: useCasePages },
+};
+
+export function guideMetadata(page: AttributePage, base: GuideBase): Metadata {
+  const config = BASE_CONFIG[base];
   const matched = cards.filter(page.filter);
+  const path = config.pagePath(page.slug);
   return buildMetadata({
     title: titleWithCount(page.title, matched.length),
     description: `${page.description} ${plural(matched.length, "card")} tracked and updated for October 2026.`,
-    path: `/crypto-card/${page.slug}`,
-    image: routeOgImage(`/crypto-card/${page.slug}`, page.title),
+    path,
+    image: routeOgImage(path, page.title),
     keywords: [page.heading.toLowerCase(), page.title.toLowerCase(), "crypto card comparison"],
   });
 }
@@ -59,12 +69,37 @@ const EXTRA_FAQS: Record<string, { q: string; a: string }[]> = {
       a: "Check the weekend markup and the reference rate. Some cards advertise 0% but apply a 0.5–1% spread on weekends or use an unfavourable rate. We record the fee notes for every card rather than trusting the headline.",
     },
   ],
+  "apple-pay": [
+    {
+      q: "How do I add a crypto card to Apple Pay?",
+      a: "Open the issuer's app, find the card screen, and tap 'Add to Apple Wallet'. Some programmes let you add it from the Wallet app directly using the card details.",
+    },
+    {
+      q: "Does Apple Pay work with virtual crypto cards?",
+      a: "Yes — that's the main point. Most programmes issue the virtual card instantly and you can be tapping within minutes of approval, long before any physical card arrives.",
+    },
+    {
+      q: "Are there fees for paying with Apple Pay?",
+      a: "No extra fees from Apple or the card — you pay the same FX and conversion fees as a normal card transaction.",
+    },
+  ],
+  "google-pay": [
+    {
+      q: "Does Google Pay work with virtual crypto cards?",
+      a: "Yes. Most programmes issue the virtual card instantly and you can add it to Google Wallet within minutes of approval, before any physical card ships.",
+    },
+  ],
+  "virtual-ad-spend": [
+    {
+      q: "Why do ad platforms decline crypto cards?",
+      a: "Meta and Google score cards on BIN history and issuer reputation. Prepaid virtual cards from little-known issuers get flagged more often, which is why programmes with established BIN sponsors perform better for ad spend.",
+    },
+  ],
 };
 
-export async function AttributeView({ slug }: { slug: string }) {
-  const page = attributeBySlug.get(slug);
-  if (!page) notFound();
-
+export async function GuideView({ page, base }: { page: AttributePage; base: GuideBase }) {
+  const config = BASE_CONFIG[base];
+  const pagePath = config.pagePath(page.slug);
   const matched = cards.filter(page.filter).sort((a, b) => b.ratingScore - a.ratingScore);
   const avgRating = matched.reduce((sum, card) => sum + card.ratingScore, 0) / matched.length;
   const bestCashback = [...matched].sort((a, b) => b.cashbackMaxPct - a.cashbackMaxPct)[0];
@@ -91,7 +126,7 @@ export async function AttributeView({ slug }: { slug: string }) {
     ...(EXTRA_FAQS[page.slug] ?? []),
   ];
 
-  const related = attributePages.filter((item) => item.slug !== page.slug).slice(0, 4);
+  const related = config.pool.filter((item) => item.slug !== page.slug).slice(0, 4);
 
   return (
     <>
@@ -102,8 +137,8 @@ export async function AttributeView({ slug }: { slug: string }) {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Categories", path: "/crypto-card" },
-              { name: page.heading, path: `/crypto-card/${page.slug}` },
+              { name: config.label, path: config.indexPath },
+              { name: page.heading, path: pagePath },
             ]),
           ),
         }}
@@ -114,7 +149,7 @@ export async function AttributeView({ slug }: { slug: string }) {
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
-          <Link href="/crypto-card" className="hover:text-foreground">Categories</Link>
+          <Link href={config.indexPath} className="hover:text-foreground">{config.label}</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{page.heading}</span>
         </div>
@@ -208,7 +243,7 @@ export async function AttributeView({ slug }: { slug: string }) {
             {related.map((item) => (
               <Link
                 key={item.slug}
-                href={`/crypto-card/${item.slug}`}
+                href={config.pagePath(item.slug)}
                 className="rounded-full border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-foreground/20 hover:text-foreground"
               >
                 {item.heading}

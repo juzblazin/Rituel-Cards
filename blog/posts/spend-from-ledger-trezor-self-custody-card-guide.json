@@ -53,9 +53,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "cryptocom", "href": "/crypto-card/crypto-com-card" },
-        { "_type": "link", "_key": "coinbase", "href": "/crypto-card/coinbase-card" },
-        { "_type": "link", "_key": "bitget", "href": "/crypto-card/bitget-card" }
+        { "_type": "link", "_key": "cryptocom", "href": "/cards/tokens-com-card" },
+        { "_type": "link", "_key": "coinbase", "href": "/cards/coinbase-card" },
+        { "_type": "link", "_key": "bitget", "href": "/cards/bitget-card" }
       ],
       "children": [
         { "_type": "span", "text": "Centralized exchange (CEX) debit cards—such as those operated by ", "marks": [] },
@@ -82,9 +82,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "gnosis", "href": "/crypto-card/gnosis-pay" },
-        { "_type": "link", "_key": "metamask", "href": "/crypto-card/metamask-card" },
-        { "_type": "link", "_key": "compare", "href": "/compare/crypto-com-visa-vs-gnosis-pay" }
+        { "_type": "link", "_key": "gnosis", "href": "/cards/gnosis-pay" },
+        { "_type": "link", "_key": "metamask", "href": "/cards/metamask-card" },
+        { "_type": "link", "_key": "compare", "href": "/compare/tokens-com-visa-vs-gnosis-pay" }
       ],
       "children": [
         { "_type": "span", "text": "Hardware devices cannot physically sign an elliptic curve transaction in real time during a 400-millisecond Visa or Mastercard point-of-sale (POS) terminal timeout. Modern self-custodial cards resolve this latency bottleneck through two distinct architectural mechanisms: delegated smart contract allowances and ERC-4337 session keys. In the smart account model pioneered by ", "marks": [] },
@@ -111,9 +111,9 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "ledger", "href": "/crypto-card/ledger-live-card" },
+        { "_type": "link", "_key": "ledger", "href": "/cards/ledger-live-card" },
         { "_type": "link", "_key": "rain", "href": "/issuers/rain" },
-        { "_type": "link", "_key": "etherfi", "href": "/crypto-card/etherfi-cash" }
+        { "_type": "link", "_key": "etherfi", "href": "/cards/etherfi-cash" }
       ],
       "children": [
         { "_type": "span", "text": "Connecting an air-gapped hardware device to a live payment card requires bridging the cold-storage signing environment to a compatible Layer-2 spending account. First, the hardware wallet owner binds the ", "marks": [] },
@@ -208,7 +208,7 @@
       "_type": "block",
       "style": "normal",
       "markDefs": [
-        { "_type": "link", "_key": "l-archetypes", "href": "/blog/crypto-debit-vs-prepaid-vs-credit-card" }
+        { "_type": "link", "_key": "l-archetypes", "href": "/blog/tokens-debit-vs-prepaid-vs-credit-card" }
       ],
       "children": [
         { "_type": "span", "text": "Hardware-linked cards are one branch of a wider decision. For the full picture on when each card type converts your crypto, who holds custody and which tax events a swipe triggers, read ", "marks": [] },

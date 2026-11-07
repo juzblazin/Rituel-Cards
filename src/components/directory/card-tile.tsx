@@ -8,6 +8,7 @@ import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { CardArt, Rating } from "@/components/ui";
 import { buttonVariants } from "@/components/ui/button";
+import { cardPath } from "@/lib/paths";
 
 const cryptoTones: Record<string, string> = {
   BTC: "#f7931a",
@@ -79,7 +80,7 @@ export function CardTile({
       )}
     >
       <Link
-        href={`/crypto-card/${card.slug}`}
+        href={cardPath(card.slug)}
         className={cn(
           "relative block overflow-hidden rounded-xl border bg-muted/30 p-2.5 transition-colors",
           selected ? "border-brand/40 bg-brand/[0.04]" : "border-border/70",
@@ -106,7 +107,7 @@ export function CardTile({
         <div className="flex items-start justify-between gap-3">
           <h3 className="flex min-w-0 items-center gap-1.5 text-[15px] font-semibold leading-tight tracking-tight">
             <Link
-              href={`/crypto-card/${card.slug}`}
+              href={cardPath(card.slug)}
               className="truncate transition-colors group-hover:text-brand"
             >
               {card.name}

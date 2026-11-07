@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { ArrowRight, ChevronRight, Crown, Sparkles, Trophy } from "lucide-react";
 import { cards, kycLabel, networkLabel } from "@/lib/data";
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
-import { bestPageFromSlug, bestPages } from "@/lib/taxonomy";
+import { attributeBySlug, bestListPages, bestPageFromSlug, bestPages } from "@/lib/taxonomy";
+import { bestPath, cardPath } from "@/lib/paths";
+import { GuideView, guideMetadata } from "@/components/guide-view";
 import { cashbackLabel, feeLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { AffiliateLink } from "@/components/affiliate-link";
@@ -17,19 +19,22 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return bestPages.map((page) => ({ slug: `${page.slug}-crypto-cards` }));
+  return bestListPages.map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = bestPageFromSlug(slug);
-  if (!page) return {};
+  if (!page) {
+    const guide = attributeBySlug.get(slug);
+    return guide ? guideMetadata(guide, "best") : {};
+  }
   const matched = cards.filter(page.filter);
   return buildMetadata({
     title: `${page.title} (${matched.length})`,
     description: page.description,
-    path: `/best/${slug}`,
-    image: routeOgImage(`/best/${slug}`, page.title),
+    path: bestPath(slug),
+    image: routeOgImage(bestPath(slug), page.title),
     keywords: [page.keyword, "best crypto card", "crypto debit card", "crypto card comparison"],
   });
 }
@@ -37,7 +42,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BestPageRoute({ params }: Props) {
   const { slug } = await params;
   const page = bestPageFromSlug(slug);
-  if (!page) notFound();
+  if (!page) {
+    const guide = attributeBySlug.get(slug);
+    if (!guide) notFound();
+    return <GuideView page={guide} base="best" />;
+  }
 
   const matched = cards.filter(page.filter);
   if (matched.length === 0) notFound();
@@ -62,7 +71,7 @@ export default async function BestPageRoute({ params }: Props) {
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Best lists", path: "/best" },
-              { name: page.heading, path: `/best/${slug}` },
+              { name: page.heading, path: bestPath(slug) },
             ]),
           ),
         }}
@@ -129,7 +138,7 @@ export default async function BestPageRoute({ params }: Props) {
               )}
               <div className="flex items-start justify-between gap-3">
                 <h3 className="text-lg font-semibold leading-tight tracking-tight">
-                  <Link href={`/crypto-card/${card.slug}`} className="hover:text-brand">
+                  <Link href={cardPath(card.slug)} className="hover:text-brand">
                     {card.name}
                   </Link>
                 </h3>
@@ -172,7 +181,7 @@ export default async function BestPageRoute({ params }: Props) {
                   Get card
                 </AffiliateLink>
                 <Link
-                  href={`/crypto-card/${card.slug}`}
+                  href={cardPath(card.slug)}
                   className={cn(buttonVariants({ variant: "outline", size: "sm" }), "flex-1")}
                 >
                   Full review
@@ -201,7 +210,7 @@ export default async function BestPageRoute({ params }: Props) {
           {rest.map((other) => (
             <Link
               key={other.slug}
-              href={`/best/${other.slug}-crypto-cards`}
+              href={bestPath(other.slug)}
               className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-brand/40 hover:text-foreground"
             >
               {other.heading} <ArrowRight className="size-3" />

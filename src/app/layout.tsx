@@ -65,6 +65,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href={process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com"} />
+        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com"} />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground">
         <ThemeProvider>

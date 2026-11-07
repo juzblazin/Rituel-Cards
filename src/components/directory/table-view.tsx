@@ -9,6 +9,7 @@ import { cashbackLabel, downloadCsv, feeLabel, money, pct } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { Badge, BrandMark } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 type Preset = "overview" | "fees" | "rewards" | "limits";
 
@@ -423,7 +424,7 @@ function Row({
             <BrandMark card={card} className="h-9 w-9 shrink-0 rounded-full text-base" />
             <div className="min-w-0">
               <div className="flex items-center gap-1">
-                <Link href={`/crypto-card/${card.slug}`} className="max-w-[180px] truncate text-sm font-semibold text-foreground hover:text-foreground">
+                <Link href={cardPath(card.slug)} className="max-w-[180px] truncate text-sm font-semibold text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
               </div>

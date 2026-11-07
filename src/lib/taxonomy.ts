@@ -2,7 +2,7 @@ import { cards, type Card } from "./data";
 import { countries, countryByCode, countryBySlug } from "./countries";
 
 /* ------------------------------------------------------------------ */
-/* Attribute hubs: /cards/[attribute]                                  */
+/* Attribute guides: /best/[slug]                                       */
 /* ------------------------------------------------------------------ */
 
 export type AttributePage = {
@@ -39,39 +39,6 @@ export const attributePages: AttributePage[] = [
     intro:
       "Self-custody cards keep your assets in your own wallet until the moment of settlement. The trade-off is usually lighter rewards and a more involved onboarding flow.",
     filter: (card) => card.custodyModel === "self_custody",
-  },
-  {
-    slug: "apple-pay",
-    eyebrow: "Mobile wallets",
-    title: "Crypto Cards with Apple Pay (2026)",
-    heading: "Crypto cards with Apple Pay",
-    description:
-      "Every crypto card that supports Apple Pay, ranked by fees, cashback and real country availability.",
-    intro:
-      "Apple Pay support is now table stakes for virtual cards. All of the cards below can be added to Apple Wallet and used for contactless payments.",
-    filter: (card) => card.mobileWallets.includes("apple_pay"),
-  },
-  {
-    slug: "google-pay",
-    eyebrow: "Mobile wallets",
-    title: "Crypto Cards with Google Pay (2026)",
-    heading: "Crypto cards with Google Pay",
-    description:
-      "Crypto debit and prepaid cards that work with Google Wallet, compared on fees and rewards.",
-    intro:
-      "Google Pay support varies by region even within the same card programme. Check the issuer's local availability before applying.",
-    filter: (card) => card.mobileWallets.includes("google_pay"),
-  },
-  {
-    slug: "virtual-ad-spend",
-    eyebrow: "Business",
-    title: "Best Crypto Cards for Ad Spend & Virtual Cards",
-    heading: "Crypto cards for ad spend",
-    description:
-      "Virtual crypto cards for Facebook, Google and TikTok ads. Compare limits, top-up fees and ad-platform acceptance.",
-    intro:
-      "Ad platforms are strict about card BINs and issuer history. These cards are the most commonly reported to work for Meta and Google Ads, often with instant virtual issuance.",
-    filter: (card) => card.hasVirtual && (card.audience === "business" || card.audience === "both"),
   },
   {
     slug: "high-cashback",
@@ -163,7 +130,49 @@ export const attributePages: AttributePage[] = [
 export const attributeBySlug = new Map(attributePages.map((page) => [page.slug, page]));
 
 /* ------------------------------------------------------------------ */
-/* Token & chain hubs: /crypto/[token]                                 */
+/* Use-case / payment-rail hubs: /use-cases/[slug]                      */
+/* ------------------------------------------------------------------ */
+
+export const useCasePages: AttributePage[] = [
+  {
+    slug: "apple-pay",
+    eyebrow: "Mobile wallets",
+    title: "Crypto Cards with Apple Pay (2026)",
+    heading: "Crypto cards with Apple Pay",
+    description:
+      "Every crypto card that supports Apple Pay, ranked by fees, cashback and real country availability.",
+    intro:
+      "Apple Pay support is now table stakes for virtual cards. All of the cards below can be added to Apple Wallet and used for contactless payments.",
+    filter: (card) => card.mobileWallets.includes("apple_pay"),
+  },
+  {
+    slug: "google-pay",
+    eyebrow: "Mobile wallets",
+    title: "Crypto Cards with Google Pay (2026)",
+    heading: "Crypto cards with Google Pay",
+    description:
+      "Crypto debit and prepaid cards that work with Google Wallet, compared on fees and rewards.",
+    intro:
+      "Google Pay support varies by region even within the same card programme. Check the issuer's local availability before applying.",
+    filter: (card) => card.mobileWallets.includes("google_pay"),
+  },
+  {
+    slug: "virtual-ad-spend",
+    eyebrow: "Business",
+    title: "Best Crypto Cards for Ad Spend & Virtual Cards",
+    heading: "Crypto cards for ad spend",
+    description:
+      "Virtual crypto cards for Facebook, Google and TikTok ads. Compare limits, top-up fees and ad-platform acceptance.",
+    intro:
+      "Ad platforms are strict about card BINs and issuer history. These cards are the most commonly reported to work for Meta and Google Ads, often with instant virtual issuance.",
+    filter: (card) => card.hasVirtual && (card.audience === "business" || card.audience === "both"),
+  },
+];
+
+export const useCaseBySlug = new Map(useCasePages.map((page) => [page.slug, page]));
+
+/* ------------------------------------------------------------------ */
+/* Token & chain hubs: /tokens/[slug] and /chains/[slug]                */
 /* ------------------------------------------------------------------ */
 
 export type CryptoPage = {
@@ -338,7 +347,7 @@ export const featuredPairs = featuredPairSeeds
 export const allCountryCodes = countries.map((c) => c.code);
 
 export type BestPage = {
-  /** Category key — the URL is /best/{slug}-crypto-cards. */
+  /** Category key — the URL is /best/{slug}. */
   slug: string;
   /** Primary query the page targets. */
   keyword: string;
@@ -476,29 +485,20 @@ export const bestPages: BestPage[] = [
       { q: "Do business crypto cards support multiple team members?", a: "The good ones issue additional virtual or physical cards per employee with per-card spend limits — check the programme's team features before applying." },
     ],
   },
-  {
-    slug: "apple-pay",
-    keyword: "best apple pay crypto cards",
-    title: "Best Apple Pay Crypto Cards in 2026",
-    heading: "Best Apple Pay crypto cards",
-    description:
-      "Crypto cards that work with Apple Pay: tap-to-pay from your crypto balance. Compare which programmes support Apple Wallet, fees and card types.",
-    intro:
-      "A crypto card you can't tap is half a card. Apple Pay support turns a virtual card into something you can actually use day-to-day — and it's also the tell for whether the issuer is a serious programme or a paper wallet with a Visa logo. These cards all support Apple Wallet.",
-    filter: (card) => card.mobileWallets.includes("apple_pay"),
-    faqs: [
-      { q: "How do I add a crypto card to Apple Pay?", a: "Open the issuer's app, find the card screen, and tap 'Add to Apple Wallet'. Some programmes let you add it from the Wallet app directly using the card details." },
-      { q: "Does Apple Pay work with virtual crypto cards?", a: "Yes — that's the main point. Most programmes issue the virtual card instantly and you can be tapping within minutes of approval, long before any physical card arrives." },
-      { q: "Are there fees for paying with Apple Pay?", a: "No extra fees from Apple or the card — you pay the same FX and conversion fees as a normal card transaction." },
-    ],
-  },
 ];
 
 export const bestBySlug = new Map(bestPages.map((page) => [page.slug, page]));
 
-/** Best-page route param: '/best/self-custody-crypto-cards' -> 'self-custody'. */
+/** Best-page route param: '/best/self-custody' -> the matching best page. */
 export function bestPageFromSlug(slug: string): BestPage | undefined {
-  const suffix = "-crypto-cards";
-  if (!slug.endsWith(suffix)) return undefined;
-  return bestBySlug.get(slug.slice(0, -suffix.length));
+  return bestBySlug.get(slug);
 }
+
+/**
+ * Every page served under /best: curated best lists plus attribute guides.
+ * Curated lists win on shared slugs (e.g. no-kyc exists in both sets).
+ */
+export const bestListPages: (BestPage | AttributePage)[] = [
+  ...bestPages,
+  ...attributePages.filter((page) => !bestBySlug.has(page.slug)),
+];

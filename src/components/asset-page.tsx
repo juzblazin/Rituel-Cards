@@ -1,41 +1,35 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Coins, Network, Sparkles } from "lucide-react";
+import { ChevronRight, Coins, Network } from "lucide-react";
 import { cards } from "@/lib/data";
 import { buildMetadata, titleWithCount, breadcrumbJsonLd, faqJsonLd, itemListJsonLd, routeOgImage } from "@/lib/seo";
-import { cryptoBySlug, cryptoPages, featuredPairs } from "@/lib/taxonomy";
+import { cryptoPages, featuredPairs, type CryptoPage } from "@/lib/taxonomy";
+import { cryptoPath } from "@/lib/paths";
 import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Directory } from "@/components/directory/directory";
 import { Badge } from "@/components/ui";
 
-type Props = { params: Promise<{ token: string }> };
+const KIND_CONFIG = {
+  token: { label: "Tokens", indexPath: "/tokens", badge: "Token directory", icon: Coins },
+  chain: { label: "Chains", indexPath: "/chains", badge: "Chain directory", icon: Network },
+} as const;
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return cryptoPages.map((page) => ({ token: page.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { token } = await params;
-  const page = cryptoBySlug.get(token);
-  if (!page) return {};
+export function assetMetadata(page: CryptoPage): Metadata {
   const matched = cards.filter(page.filter);
+  const path = cryptoPath(page);
   return buildMetadata({
     title: titleWithCount(page.title, matched.length),
     description: `${page.description} ${plural(matched.length, "card")} tracked for 2026.`,
-    path: `/crypto/${page.slug}`,
-    image: routeOgImage(`/crypto/${page.slug}`, page.title),
+    path,
+    image: routeOgImage(path, page.title),
     keywords: [page.heading.toLowerCase(), `${page.label} crypto card`, "crypto card comparison"],
   });
 }
 
-export default async function CryptoPage({ params }: Props) {
-  const { token } = await params;
-  const page = cryptoBySlug.get(token);
-  if (!page) notFound();
-
+export async function AssetPage({ page }: { page: CryptoPage }) {
+  const config = KIND_CONFIG[page.kind];
+  const pagePath = cryptoPath(page);
   const matched = cards.filter(page.filter).sort((a, b) => b.ratingScore - a.ratingScore);
   if (matched.length === 0) notFound();
 
@@ -75,6 +69,8 @@ export default async function CryptoPage({ params }: Props) {
     },
   ];
 
+  const Icon = config.icon;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd(page.title, matched)) }} />
@@ -84,8 +80,8 @@ export default async function CryptoPage({ params }: Props) {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Tokens & chains", path: "/crypto" },
-              { name: page.label, path: `/crypto/${page.slug}` },
+              { name: config.label, path: config.indexPath },
+              { name: page.label, path: pagePath },
             ]),
           ),
         }}
@@ -96,7 +92,7 @@ export default async function CryptoPage({ params }: Props) {
         <div className="container-page flex items-center gap-1.5 overflow-x-auto py-3 text-xs text-muted-foreground">
           <Link href="/" className="hover:text-foreground">Crypto Card</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
-          <Link href="/crypto" className="hover:text-foreground">Tokens & chains</Link>
+          <Link href={config.indexPath} className="hover:text-foreground">{config.label}</Link>
           <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="truncate font-medium text-muted-foreground">{page.label}</span>
         </div>
@@ -107,8 +103,8 @@ export default async function CryptoPage({ params }: Props) {
         <div className="container-page relative py-12 sm:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-              {page.kind === "token" ? <Coins className="h-3 w-3" /> : <Network className="h-3 w-3" />}
-              {page.kind === "token" ? "Token directory" : "Chain directory"}
+              <Icon className="h-3 w-3" />
+              {config.badge}
             </div>
             <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
               {page.heading}
@@ -132,8 +128,8 @@ export default async function CryptoPage({ params }: Props) {
           heading={`Cards that support ${page.label}`}
           subheading={`${matched.length} programmes accept ${page.label}. Switch to table view to sort on fees.`}
           syncUrl
-          source={`crypto-${page.slug}`}
-          id="crypto-directory"
+          source={`asset-${page.slug}`}
+          id="asset-directory"
         />
       </div>
 
@@ -201,12 +197,12 @@ export default async function CryptoPage({ params }: Props) {
         )}
 
         <div className="mt-6">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Related {page.kind === "token" ? "tokens" : "chains"}</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Related {config.label.toLowerCase()}</h2>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {related.map((item) => (
               <Link
                 key={item.slug}
-                href={`/crypto/${item.slug}`}
+                href={cryptoPath(item)}
                 className="rounded-full border border-border bg-card px-2.5 py-1 text-xs text-muted-foreground hover:border-foreground/20 hover:text-foreground"
               >
                 {item.label}

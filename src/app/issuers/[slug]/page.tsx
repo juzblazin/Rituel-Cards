@@ -8,6 +8,7 @@ import { cardsOnRail, infraBySlug, infraProviders } from "@/lib/infra";
 import { cashbackLabel, pct, plural } from "@/lib/format";
 import { Badge, BrandMark } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { cardPath } from "@/lib/paths";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -137,7 +138,7 @@ export default async function InfraProviderPage({ params }: Props) {
             {powered.map((card) => (
               <Link
                 key={card.slug}
-                href={`/crypto-card/${card.slug}`}
+                href={cardPath(card.slug)}
                 className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-brand/40"
               >
                 <BrandMark card={card} className="h-9 w-9 shrink-0 text-sm" />

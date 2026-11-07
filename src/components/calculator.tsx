@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowUpRight, Calculator, Info, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Calculator, Crown, Info, Sparkles, TrendingUp } from "lucide-react";
 import type { Card } from "@/lib/data";
 import { rankCards, type CalcResult } from "@/lib/calc";
 import { cashbackLabel } from "@/lib/format";
@@ -178,21 +178,26 @@ export function NetReturnCalculator({ cards }: { cards: Card[] }) {
                     index === 0 && "border-foreground/25 shadow-sm",
                   )}
                 >
-                  {index === 0 && (
-                    <Badge className="absolute right-0 top-0 rounded-none rounded-bl-lg border-0 bg-primary text-primary-foreground">
-                      Best net
-                    </Badge>
-                  )}
                   <div className="flex items-start gap-3">
                     <div className="relative">
                       <CardArt card={result.card} className="h-20 w-[124px] shrink-0" />
-                      <span className="absolute -left-2 -top-2 grid size-5 place-items-center rounded-full border bg-background text-[10px] font-medium">
+                      <span className={cn(
+                        "absolute -left-2 -top-2 grid size-5 place-items-center rounded-full border text-[10px] font-medium",
+                        index === 0 ? "border-transparent bg-amber-400 font-bold text-amber-950" : "bg-background",
+                      )}>
                         {index + 1}
                       </span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-baseline justify-between gap-2">
-                        <span className="truncate text-sm font-medium">{result.card.name}</span>
+                        <span className="flex min-w-0 items-center gap-1.5">
+                          <span className="truncate text-sm font-medium">{result.card.name}</span>
+                          {index === 0 && (
+                            <Badge className="shrink-0 gap-1 border-0 bg-amber-400 font-semibold text-amber-950">
+                              <Crown className="size-3" /> Winner
+                            </Badge>
+                          )}
+                        </span>
                         <span className={cn("num shrink-0 text-lg font-semibold tracking-tight", result.net >= 0 ? "text-success" : "text-destructive")}>
                           {result.net >= 0 ? "+" : ""}
                           {fmt(result.net)}

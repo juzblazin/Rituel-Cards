@@ -3,12 +3,15 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, Trophy } from "lucide-react";
 import { cards } from "@/lib/data";
 import { buildMetadata, breadcrumbJsonLd, routeOgImage } from "@/lib/seo";
-import { bestPages } from "@/lib/taxonomy";
+import { bestListPages } from "@/lib/taxonomy";
+import { bestPath } from "@/lib/paths";
+
+const lists = bestListPages;
 import { plural } from "@/lib/format";
 import { Badge } from "@/components/ui";
 
 export const metadata: Metadata = buildMetadata({
-  title: `Best crypto card lists — ${bestPages.length} curated rankings`,
+  title: `Best crypto card lists — ${lists.length} curated rankings`,
   description:
     "Curated 'best' rankings of crypto cards by use case: self-custody, zero-FX travel, no-KYC, high cashback, stablecoin, business and more.",
   path: "/best",
@@ -43,7 +46,7 @@ export default function BestIndexPage() {
         <div className="container-page relative py-12 sm:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
-              <Trophy className="h-3 w-3" /> Best lists · {bestPages.length} rankings
+              <Trophy className="h-3 w-3" /> Best lists · {lists.length} rankings
             </div>
             <h1 className="mt-3 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
               Best crypto cards, by use case
@@ -57,12 +60,12 @@ export default function BestIndexPage() {
       </section>
 
       <section className="container-page mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {bestPages.map((page) => {
+        {lists.map((page) => {
           const count = cards.filter(page.filter).length;
           return (
             <Link
               key={page.slug}
-              href={`/best/${page.slug}-crypto-cards`}
+              href={bestPath(page.slug)}
               className="group rounded-xl border border-border bg-card p-5 transition-colors hover:border-brand/40"
             >
               <div className="flex items-start justify-between gap-3">

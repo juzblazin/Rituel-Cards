@@ -7,6 +7,7 @@ import { cashbackLabel, feeLabel, money, pct } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import { AffiliateLink } from "@/components/affiliate-link";
 import { Badge, CardArt, Rating } from "@/components/ui";
+import { cardPath } from "@/lib/paths";
 
 type Metric = {
   label: string;
@@ -215,7 +216,7 @@ export function ComparisonMatrix({ cards }: { cards: Card[] }) {
                     <Badge className="absolute right-2 top-2">Sponsored</Badge>
                   )}
                 </div>
-                <Link href={`/crypto-card/${card.slug}`} className="mt-3 block text-base font-semibold leading-5 text-foreground hover:text-foreground">
+                <Link href={cardPath(card.slug)} className="mt-3 block text-base font-semibold leading-5 text-foreground hover:text-foreground">
                   {card.name}
                 </Link>
                 <div className="mt-1 text-xs text-muted-foreground">{card.issuerName}</div>
