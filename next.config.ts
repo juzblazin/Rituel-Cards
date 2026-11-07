@@ -12,6 +12,9 @@ const redirect = (source: string, destination: string) => ({ source, destination
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ["lucide-react", "@hugeicons/react", "@hugeicons/core-free-icons"],
+  },
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
     formats: ["image/avif", "image/webp"],

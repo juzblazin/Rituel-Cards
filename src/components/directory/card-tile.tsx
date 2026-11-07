@@ -136,9 +136,6 @@ export function CardTile({
 
           <div className="shrink-0 text-right">
             <Rating score={card.ratingScore} />
-            <p className="mt-0.5 text-[10px] text-muted-foreground">
-              {compactCount(card.reviewCount)} reviews
-            </p>
           </div>
         </div>
 

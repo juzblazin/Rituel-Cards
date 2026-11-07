@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { brandName, type Card } from "./data";
+import { brandName, cards, type Card } from "./data";
 import { absoluteUrl, site } from "./site";
 import { cardPath } from "./paths";
 
@@ -107,7 +107,9 @@ export function datasetJsonLd() {
       contentUrl: absoluteUrl("/llms-full.txt"),
       encodingFormat: "text/plain",
     },
-    dateModified: new Date().toISOString().slice(0, 10),
+    dateModified: new Date(
+      Math.max(...cards.map((card) => new Date(card.lastVerifiedAt || card.launchedAt).getTime())),
+    ).toISOString().slice(0, 10),
     isAccessibleForFree: true,
   };
 }

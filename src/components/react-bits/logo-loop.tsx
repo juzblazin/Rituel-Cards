@@ -2,6 +2,7 @@
 'use client';
 
 import React, { memo, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export type LogoItem =
   | {
@@ -1221,14 +1222,12 @@ export const LogoLoop = memo<LogoLoopProps>(
                   {item.node}
                 </span>
               ) : (
-                <img
+                <Image
                   className={cx(
                     'pointer-events-none block h-[var(--logoloop-logoHeight)] w-auto rounded-full bg-white object-cover ring-1 ring-foreground/10 [-webkit-user-drag:none] [image-rendering:-webkit-optimize-contrast]',
                     zoomClass
                   )}
                   src={item.src}
-                  srcSet={item.srcSet}
-                  sizes={item.sizes}
                   width={item.width}
                   height={item.height}
                   alt={item.alt ?? ''}

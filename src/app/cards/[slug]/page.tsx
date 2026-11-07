@@ -192,7 +192,6 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
                     <span className="text-xs text-muted-foreground">/10</span>
                   </div>
                   <Stars score={card.ratingScore} className="justify-end" />
-                  <div className="mt-0.5 text-[10px] text-muted-foreground">{card.reviewCount.toLocaleString("en-US")} reviews</div>
                 </div>
               </div>
 

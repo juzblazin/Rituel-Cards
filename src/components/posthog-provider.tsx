@@ -35,6 +35,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
           defaults: "2026-05-30",
           capture_pageview: false,
           capture_pageleave: true,
+          disable_session_recording: true,
         });
         client = posthog;
         window.posthog = posthog;
