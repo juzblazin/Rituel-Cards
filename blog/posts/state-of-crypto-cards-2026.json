@@ -1,0 +1,293 @@
+{
+ "title": "State of Crypto Cards 2026: 83 Programs, Three Architectures, and the Truth About Cashback",
+ "slug": "state-of-crypto-cards-2026",
+ "excerpt": "We crawled all 83 crypto card programs across 43 issuers. The market split into three settlement architectures, headline cashback rarely survives the fee math, and a handful of BaaS banks issue almost everything.",
+ "seoTitle": "State of Crypto Cards 2026 \u2014 83-Program Market Report",
+ "authorSlug": "rituel-editorial",
+ "categorySlugs": [
+  "ecosystem"
+ ],
+ "relatedCards": [
+  "metamask-card-metal",
+  "etherfi-cash",
+  "coinbase-one-card",
+  "kast",
+  "dpt-pay",
+  "hyperbeat"
+ ],
+ "keyTakeaways": [
+  "$25B/yr settles on stablecoin card rails; ~$1.5B/mo retail volume across 83 programs.",
+  "Three settlement models decide custody, tax and fees: custodial preload, collateralized credit, self-custodial smart wallet.",
+  "Headline cashback diverges from real yield \u2014 caps, FX drag and lockup requirements compress most advertised rates.",
+  "Third National Bank underpins 13 programs; a handful of EMIs cover most of Europe."
+ ],
+ "faqs": [
+  {
+   "question": "What is the best crypto card for everyday spending in 2026?",
+   "answer": "For US users, Robinhood Gold (3% flat, $50/yr membership), Coinbase One (2\u20134% BTC, 0% FX) and Gemini (up to 4%, $0 fee) lead on net return. Globally, MetaMask Metal (3% mUSD, 0% FX) and OKX (0% FX, 0.1% spread) are the cleanest picks."
+  },
+  {
+   "question": "Which crypto cards don't require staking tokens?",
+   "answer": "Subscription-backed cards like KAST Premium, MetaMask Metal, Robinhood Gold, Coinbase One and DPT Pay avoid token lockups entirely. ether.fi Cash Core and Exa Card also pay rewards without native-token staking."
+  },
+  {
+   "question": "How do collateralized crypto credit cards work?",
+   "answer": "Cards like ether.fi Cash, Nexo, Exa and Hyperbeat let you deposit yield-bearing assets (staked ETH, BTC, stablecoins) into a lending vault and borrow fiat at checkout. You keep asset exposure and yield, avoid a taxable sale, and the card earns or offsets its fees through protocol borrow rates."
+  }
+ ],
+ "body": [
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Crypto payment cards have quietly become real financial infrastructure. Across the 83 card programs we track, issuers now settle an estimated $25 billion a year on stablecoin rails alone \u2014 roughly $1.5 billion in retail card volume every month, spanning 43 issuer brands and more than 50 jurisdictions. This report distills what we found crawling every program's fee pages: three settlement architectures, who actually issues these cards, and why the headline cashback rate almost never matches what you earn.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "h2",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Three ways a crypto card actually settles a purchase",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Underneath the marketing, every program in the dataset runs one of three settlement models, and the model determines your custody risk, tax treatment and capital efficiency:",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Custodial exchange preload \u2014 your balance sits on an exchange (Crypto.com, Bybit, Coinbase, Gemini) and converts to fiat at swipe time. Simple, but every purchase is a taxable disposal and usually carries a 0.5\u20132% conversion spread.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Collateralized credit \u2014 you lock yield-bearing collateral (eETH, BTC, HYPE) in a lending vault and borrow fiat at settlement. ether.fi Cash, Exa Card, Nexo and Hyperbeat work this way: no sale, no realized gain, and 4\u201314% APY on the collateral can offset fees.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Self-custodial smart wallet \u2014 funds stay in a smart contract wallet you control (MetaMask, Gnosis Pay, Bleap) and settle atomically on-chain. Zero off-ramping, full key custody.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "h2",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Who really issues crypto cards",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Brands don't issue cards \u2014 banks do. Issuance is heavily concentrated in a handful of BaaS providers: Third National Bank alone underpins 13 programs in our index (ether.fi, KAST, Hyperbeat, Exa, Ethena Pay, Plasma One, Avalanche, Avici, PayitFast, Solayer), while regional partners cover nine more. In Europe, DiPocket (Nexo), Baanx (MetaMask, Ledger), Monavate (Kraken), Moorwand (Bybit), Contis (Wirex) and Monerium (Gnosis Pay, Picnic) dominate; in the US it's Coastal Community Bank (Robinhood), WebBank (Gemini), Pathward and First Electronic Bank (Coinbase).",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "h2",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Headline cashback vs. what you actually earn",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "The gap between advertised and effective yield is the report's biggest finding. Hyperbeat advertises 12% \u2014 but that tier needs $50 million in rolling 30-day perp volume and caps at $5,004/month; the everyday base rate is 0.2%. Crypto.com's November 2025 Level Up overhaul killed the Amazon Prime, Expedia and Airbnb rebates and now gates rewards behind $500\u2013$1M CRO lockups or $4.99\u2013$29.99/month subscriptions. Meanwhile Plutus's 3% is nearly neutralized by its 2.5% non-domestic FX fee, and KAST's entry card caps its 1.5% at $30/month.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "h2",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Where real yield lives",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "US retail: Robinhood Gold (3% flat, $50/yr), Coinbase One Amex (2\u20134% BTC, 5% travel, 0% FX) and Gemini (4% gas/dining, instant rewards) beat custodial debit cards on net return.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Global nomads: MetaMask Metal ($199/yr, 3% mUSD, 0% FX) and OKX (0% FX, 0.1% spread, 2\u201310% USDG) minimize cross-border leakage.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "DeFi users: ether.fi Cash, Exa Card and Nexo let you spend against collateral that's still earning \u2014 the tax-deferred model.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "listItem": "bullet",
+   "level": 1,
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "UHNW/travel: DPT Pay Obsidian ($10K/yr) buys Quintessentially membership, unlimited lounges and $1.5M travel cover with zero token lockup; Crypto.com Private buys the same with $50K\u2013500K CRO at stake.",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [],
+   "children": [
+    {
+     "_type": "span",
+     "text": "",
+     "marks": []
+    }
+   ]
+  },
+  {
+   "_type": "block",
+   "style": "normal",
+   "markDefs": [
+    {
+     "_key": "m1",
+     "_type": "link",
+     "href": "/tools/net-return-calculator"
+    },
+    {
+     "_key": "m2",
+     "_type": "link",
+     "href": "/cards"
+    }
+   ],
+   "children": [
+    {
+     "_type": "span",
+     "text": "Our takeaway: price the lockup, not the logo. A subscription card you understand beats an 8% headline you never qualify for. Run your own spend through our ",
+     "marks": []
+    },
+    {
+     "_type": "span",
+     "text": "net return calculator",
+     "marks": [
+      "m1"
+     ]
+    },
+    {
+     "_type": "span",
+     "text": " or browse the full ",
+     "marks": []
+    },
+    {
+     "_type": "span",
+     "text": "crypto card directory",
+     "marks": [
+      "m2"
+     ]
+    },
+    {
+     "_type": "span",
+     "text": " \u2014 every figure above is sourced on each card page.",
+     "marks": []
+    }
+   ]
+  }
+ ]
+}
