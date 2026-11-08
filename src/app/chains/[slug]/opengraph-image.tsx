@@ -14,6 +14,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOgImage({
     eyebrow: "Crypto cards by chain",
     title: page?.title ?? "Crypto cards by chain",
-    stats: [`${plural(matched.length, "card")} compared`, "Fees, cashback & chains", "Updated October 2026"],
+    stats: [`${plural(matched.length, "card")} compared`, "Fees, cashback & chains", "Updated November 2026"],
   });
 }

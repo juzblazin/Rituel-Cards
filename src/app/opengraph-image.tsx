@@ -10,6 +10,6 @@ export default function OpengraphImage() {
   return renderOgImage({
     eyebrow: "Independent crypto card comparison",
     title: "Find the crypto card that actually pays you.",
-    stats: [`${cards.length} cards tracked`, `${supportedCountries.length} country directories`, "Audited October 2026"],
+    stats: [`${cards.length} cards tracked`, `${supportedCountries.length} country directories`, "Audited November 2026"],
   });
 }

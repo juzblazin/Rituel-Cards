@@ -13,6 +13,6 @@ export default async function Image({ params }: { params: Promise<{ country: str
   return renderOgImage({
     eyebrow: "Crypto cards by country",
     title: country ? countryPageTitle(country.name) : "Crypto cards by country",
-    stats: [`${plural(available.length, "card")} available`, "Fees, cashback & KYC", "Updated October 2026"],
+    stats: [`${plural(available.length, "card")} available`, "Fees, cashback & KYC", "Updated November 2026"],
   });
 }

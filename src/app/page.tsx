@@ -196,7 +196,7 @@ export default async function HomePage({
                 </span>
                 <span className="dark:hidden">
                   <ShinyText
-                    text={`Updated October 2026`}
+                    text={`Updated November 2026`}
                     color="#52525b"
                     shineColor="#18181b"
                     speed={4}
@@ -206,7 +206,7 @@ export default async function HomePage({
                 </span>
                 <span className="hidden dark:inline-block">
                   <ShinyText
-                    text={`Updated October 2026`}
+                    text={`Updated November 2026`}
                     color="#a1a1aa"
                     shineColor="#fafafa"
                     speed={4}

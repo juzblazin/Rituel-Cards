@@ -156,7 +156,7 @@ export function SiteFooter() {
 
         <div className="mt-8 flex flex-col items-start justify-between gap-2 border-t pt-6 text-[11px] text-muted-foreground sm:flex-row sm:items-center">
           <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
-          <span className="font-mono text-[10px] uppercase tracking-wider">Data reviewed Oct 2026</span>
+          <span className="font-mono text-[10px] uppercase tracking-wider">Data reviewed Nov 2026</span>
         </div>
       </div>
     </footer>

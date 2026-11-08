@@ -378,7 +378,7 @@ export function TableView({
         <span className="inline-flex items-center gap-1">
           <Sparkles className="h-3 w-3 text-muted-foreground" /> This table sorts on raw metrics only.
         </span>
-        <span className="font-mono uppercase tracking-wider">Data · Oct 2026</span>
+        <span className="font-mono uppercase tracking-wider">Data · Nov 2026</span>
       </div>
     </div>
   );

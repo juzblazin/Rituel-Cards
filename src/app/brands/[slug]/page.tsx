@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `Compare ${issuer.name} crypto cards (${issuer.cards.length} cards, 2026)`
     : `${issuer.topCard.name} — fees, cashback and availability`;
   const description = multi
-    ? `All ${issuer.cards.length} ${issuer.name} crypto cards side by side: fees, cashback, limits, KYC and supported assets. Updated for October 2026.`
+    ? `All ${issuer.cards.length} ${issuer.name} crypto cards side by side: fees, cashback, limits, KYC and supported assets. Updated for November 2026.`
     : `${issuer.topCard.name} reviewed: ${cashbackLabel(issuer.topCard)}, ${feeLabel(issuer.topCard.annualFeeUsd)} annual fee, ${issuer.topCard.supportedCountries.length} countries.`;
   return buildMetadata({
     title,

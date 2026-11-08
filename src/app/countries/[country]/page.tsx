@@ -148,7 +148,7 @@ export default async function CountryPage({ params }: Props) {
               <div className="mt-4 flex flex-wrap items-center gap-1.5">
                 <Badge>Best cashback: {bestCashback.name} · {pct(bestCashback.cashbackMaxPct)}</Badge>
                 {top[0] && <Badge>Top rated: {top[0].name} · {top[0].ratingScore.toFixed(1)}/10</Badge>}
-                <Badge>Updated Oct 2026</Badge>
+                <Badge>Updated Nov 2026</Badge>
               </div>
             </div>
 
@@ -283,7 +283,7 @@ export default async function CountryPage({ params }: Props) {
         <div className="mt-6 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-border bg-card p-3 text-xs text-muted-foreground">
           <span>
             Showing {available.length} of {cards.length} tracked programmes. Availability sourced from issuer
-            documentation, reviewed October 2026.
+            documentation, reviewed November 2026.
           </span>
           <div className="flex gap-3">
             <Link href="/countries" className="font-medium text-foreground underline underline-offset-4">All countries</Link>

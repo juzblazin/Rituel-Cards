@@ -25,7 +25,7 @@ export function guideMetadata(page: AttributePage, base: GuideBase): Metadata {
   const path = config.pagePath(page.slug);
   return buildMetadata({
     title: titleWithCount(page.title, matched.length),
-    description: `${page.description} ${plural(matched.length, "card")} tracked and updated for October 2026.`,
+    description: `${page.description} ${plural(matched.length, "card")} tracked and updated for November 2026.`,
     path,
     image: routeOgImage(path, page.title),
     keywords: [page.heading.toLowerCase(), page.title.toLowerCase(), "crypto card comparison"],

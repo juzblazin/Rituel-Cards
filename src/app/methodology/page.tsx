@@ -102,7 +102,7 @@ export default function MethodologyPage() {
           <div className="mt-5 flex flex-wrap gap-2">
             <Badge>{cards.length} cards tracked</Badge>
             <Badge>{supportedCountries.length} country directories</Badge>
-            <Badge>Last reviewed October 2026</Badge>
+            <Badge>Last reviewed November 2026</Badge>
           </div>
         </div>
 

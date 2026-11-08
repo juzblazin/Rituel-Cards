@@ -15,6 +15,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return renderOgImage({
     eyebrow: "Crypto card guide",
     title: page.title,
-    stats: [`${plural(matched.length, "card")} compared`, `${matched.filter((card) => card.fxFeePct === 0).length} with 0% FX`, "Updated October 2026"],
+    stats: [`${plural(matched.length, "card")} compared`, `${matched.filter((card) => card.fxFeePct === 0).length} with 0% FX`, "Updated November 2026"],
   });
 }

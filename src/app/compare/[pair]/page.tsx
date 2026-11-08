@@ -115,7 +115,7 @@ export default async function ComparePage({ params }: Props) {
       <div className="container-page py-8">
         <div className="flex flex-wrap items-center gap-1.5">
           <Badge><Scale className="h-3 w-3" /> Head-to-head</Badge>
-          <Badge>Updated October 2026</Badge>
+          <Badge>Updated November 2026</Badge>
           {compared.some((card) => card.isSponsored) && <Badge>Includes sponsored card</Badge>}
         </div>
 

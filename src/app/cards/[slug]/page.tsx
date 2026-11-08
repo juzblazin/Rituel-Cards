@@ -276,7 +276,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
           <section className="overflow-hidden rounded-xl border border-border bg-card">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-5 py-4">
               <SectionTitle eyebrow="Full transparency" title="Fees, limits & requirements" />
-              <span className="text-[10px] text-muted-foreground">Reviewed Oct 2026</span>
+              <span className="text-[10px] text-muted-foreground">Reviewed Nov 2026</span>
             </div>
             <dl className="divide-y divide-border">
               <FeeRow label="Issuance fee" value={feeLabel(card.issuanceFeeUsd)} note="One-time card creation" />
@@ -544,7 +544,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
               Get {card.name} <ArrowUpRight className="size-3.5" />
             </AffiliateLink>
             <p className="mt-1.5 text-center text-[10px] leading-3 text-muted-foreground">
-              We may earn a commission. Fees verified Oct 2026.
+              We may earn a commission. Fees verified Nov 2026.
             </p>
           </div>
 
