@@ -19,7 +19,7 @@ import type {
  * Postgres returns `numeric` and `date` as strings, so every value is coerced.
  */
 
-const NETWORKS = new Set(["visa", "mastercard", "unionpay"]);
+const NETWORKS = new Set(["visa", "mastercard", "unionpay", "other"]);
 const KINDS = new Set(["debit", "credit", "prepaid"]);
 const CUSTODY = new Set(["self_custody", "custodial", "hybrid"]);
 const AUDIENCES = new Set(["personal", "business", "both"]);

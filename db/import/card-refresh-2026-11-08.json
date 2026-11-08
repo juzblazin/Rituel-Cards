@@ -1,0 +1,1998 @@
+{
+ "meta": {
+  "generated_at": "2026-11-08T00:00:00.000Z",
+  "sources": "Untitled.md \u2014 83-card market synthesis report (official + 3rd-party)",
+  "guide": "db/DATA-GUIDE.md"
+ },
+ "cards": [
+  {
+   "slug": "ledger-live-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Baanx \u2014 Ledger Live Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "cashback '1% BTC/USDC'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "altitude",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "BaaS Partner \u2014 Altitude (src: official)",
+   "changes": [
+    {
+     "field": "status",
+     "from": "live",
+     "to": "discontinued",
+     "evidence": "report: winding down",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "bitget-card-vip",
+   "source_url": "",
+   "confidence": "low",
+   "note": "Bitget \u2014 Bitget - VIP Card (src: 3rd party)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 0,
+     "to": 2.0,
+     "evidence": "cashback '2% ($5/mo cap)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 0,
+     "to": 2.0,
+     "evidence": "cashback '2% ($5/mo cap)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 1.5,
+     "to": 1.0,
+     "evidence": "fx '1%'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "bitget-card",
+   "source_url": "",
+   "confidence": "low",
+   "note": "Bitget \u2014 Bitget - Standard Card (src: 3rd party)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 0,
+     "to": 2.0,
+     "evidence": "cashback '2% ($5/mo cap)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 0,
+     "to": 2.0,
+     "evidence": "cashback '2% ($5/mo cap)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 1.5,
+     "to": 1.0,
+     "evidence": "fx '1%'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "coinjar-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "CoinJar \u2014 CoinJar Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 0.5,
+     "to": 1.0,
+     "evidence": "cashback '1% fee back as rewards'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 1.0,
+     "evidence": "atm '1%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Comenity Capital Bank \u2014 Crypto.com Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 6,
+     "to": 0.0,
+     "evidence": "cashback '0% base / up to 5%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "monthly_spend_limit_usd",
+     "from": null,
+     "to": 25000.0,
+     "evidence": "monthly spend '\u20ac25,000'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 0,
+     "to": 0.2,
+     "evidence": "fx '0.2% EU/UK, 2% elsewhere'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "topup_fee_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "topup '1% card top-up'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": null,
+     "to": 2000.0,
+     "evidence": "atm lim '\u20ac2K/day, \u20ac10K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "wirex-one",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Contis / Wirex Ltd \u2014 Wirex One (src: official+3rd)",
+   "changes": [
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 0.0,
+     "evidence": "atm '0% claim'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "metamask-card-metal",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Crypto Life (Baanx) \u2014 MetaMask - Metal Card (src: official)",
+   "changes": [
+    {
+     "field": "topup_fee_pct",
+     "from": 0.88,
+     "to": 0.875,
+     "evidence": "topup '0.875% non-stable'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 0.0,
+     "evidence": "atm '0% to $1.2K/mo, then 2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "metamask-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Crypto Life (Baanx) \u2014 MetaMask - Virtual Card (src: official)",
+   "changes": [
+    {
+     "field": "topup_fee_pct",
+     "from": 0.88,
+     "to": 0.875,
+     "evidence": "topup '0.875% non-stable'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "deblock",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Deblock \u2014 Deblock (src: official)",
+   "changes": [
+    {
+     "field": "monthly_atm_limit_usd",
+     "from": null,
+     "to": 30000,
+     "evidence": "ATM \u20ac15\u201330K/mo by tier",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 1000,
+     "to": 100.0,
+     "evidence": "atm free allowance 'Free \u20ac100\u20131K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "nexo-card-platinum",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "DiPocket UAB \u2014 Nexo - Platinum Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 200.0,
+     "evidence": "monthly cap 'cb cap ~$200'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.2,
+     "evidence": "fx '0.2% EEA*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 2000.0,
+     "evidence": "atm free allowance 'Free \u20ac2K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "nexo-card-gold",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "DiPocket UAB \u2014 Nexo - Gold Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 200.0,
+     "evidence": "monthly cap 'cb cap ~$200'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.2,
+     "evidence": "fx '0.2% EEA*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 1000,
+     "evidence": "Gold \u20ac1,000/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "nexo-card-silver",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "DiPocket UAB \u2014 Nexo - Silver Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.2,
+     "evidence": "fx '0.2% EEA*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 500,
+     "evidence": "Silver \u20ac500/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "nexo-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "DiPocket UAB \u2014 Nexo - Base Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 50.0,
+     "evidence": "monthly cap 'cb cap ~$50'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.2,
+     "evidence": "fx '0.2% EEA*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 200.0,
+     "evidence": "atm free allowance 'Free \u20ac200/mo*'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "coinbase-one-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "First Electronic Bank \u2014 Coinbase One Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 400,
+     "evidence": "4% BTC on first $10,000/mo spend",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "network",
+     "from": "visa",
+     "to": "other",
+     "evidence": "net 'Amex' (Amex)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-visa-icy-white",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Foris DAX Asia \u2014 Crypto.com Visa - Icy White Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 4.5,
+     "to": 3.0,
+     "evidence": "cashback '~3\u20135%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-visa-obsidian",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Foris DAX Asia \u2014 Crypto.com Visa - Obsidian Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 6,
+     "to": 6.5,
+     "evidence": "cashback 'Up to ~5\u20136.5%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "monthly_spend_limit_usd",
+     "from": null,
+     "to": 25000.0,
+     "evidence": "monthly spend '\u20ac25,000'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-visa-jade-green",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Foris DAX Asia \u2014 Crypto.com Visa - Jade Green Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 3,
+     "to": 2.0,
+     "evidence": "cashback '~2\u20133%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "monthly_spend_limit_usd",
+     "from": null,
+     "to": 25000.0,
+     "evidence": "monthly spend '\u20ac25,000'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 0.5,
+     "to": 0.0,
+     "evidence": "fx '0% to \u20ac800/mo, then 2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "topup_fee_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "topup '1% card top-up'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 20000,
+     "to": 25000.0,
+     "evidence": "daily '\u20ac25,000 POS'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": null,
+     "to": 2000.0,
+     "evidence": "atm lim '\u20ac2K/day, \u20ac10K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-visa-royal-indigo",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Foris DAX Asia \u2014 Crypto.com Visa - Royal Indigo Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 3,
+     "to": 2.0,
+     "evidence": "cashback '~2\u20133%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "monthly_spend_limit_usd",
+     "from": null,
+     "to": 25000.0,
+     "evidence": "monthly spend '\u20ac25,000'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 0.5,
+     "to": 0.0,
+     "evidence": "fx '0% to \u20ac800/mo, then 2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "topup_fee_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "topup '1% card top-up'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 20000,
+     "to": 25000.0,
+     "evidence": "daily '\u20ac25,000 POS'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": null,
+     "to": 2000.0,
+     "evidence": "atm lim '\u20ac2K/day, \u20ac10K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "crypto-com-visa",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Foris DAX Asia \u2014 Crypto.com Visa - Ruby Steel Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 2,
+     "to": 1.0,
+     "evidence": "cashback '~1%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 2,
+     "to": 1.0,
+     "evidence": "cashback '~1%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "monthly_spend_limit_usd",
+     "from": null,
+     "to": 25000.0,
+     "evidence": "monthly spend '\u20ac25,000'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 0.5,
+     "to": 0.0,
+     "evidence": "fx '0% to \u20ac400/mo, then 2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "topup_fee_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "topup '1% card top-up'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% >free limit'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 20000,
+     "to": 25000.0,
+     "evidence": "daily '\u20ac25,000 POS'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": null,
+     "to": 2000.0,
+     "evidence": "atm lim '\u20ac2K/day, \u20ac10K/mo'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "gnosis-pay-prime",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Gnosis Safe / Monerium \u2014 Gnosis Pay - Prime Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 2,
+     "to": 0,
+     "evidence": "cashback 'Ended (was up to 4% GNO)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 4,
+     "to": 0,
+     "evidence": "cashback 'Ended (was up to 4% GNO)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "annual_fee_usd",
+     "from": 30.23,
+     "to": 0.0,
+     "evidence": "annual '$0'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "gnosis-pay",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Gnosis Safe / Monerium \u2014 Gnosis Pay - Standard Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 1,
+     "to": 0,
+     "evidence": "cashback 'Ended (was ~1% GNO)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 4,
+     "to": 0,
+     "evidence": "cashback 'Ended (was ~1% GNO)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "annual_fee_usd",
+     "from": 30.23,
+     "to": 0.0,
+     "evidence": "annual '$0'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 15000,
+     "to": 200,
+     "evidence": "5 free or \u20ac200/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "phantom-cash",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Lead Bank \u2014 Phantom Cash (src: official)",
+   "changes": [
+    {
+     "field": "topup_fee_pct",
+     "from": 3.5,
+     "to": 3.5,
+     "evidence": "0.3\u20133.5% top-up (max bound)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "plutus",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Modulr \u2014 Plutus (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 9,
+     "to": 9,
+     "evidence": "3% base, up to 9% PLU",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 250000.0,
+     "evidence": "monthly cap 'cb cap \u00a3250\u20131K*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 0,
+     "to": 2.5,
+     "evidence": "fx '2.5%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 10000,
+     "to": 500000.0,
+     "evidence": "daily '\u00a3500K*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "bybit-card-vip",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Moorwand \u2014 Bybit - VIP Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.0,
+     "evidence": "fx '0%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 100.0,
+     "evidence": "atm free allowance '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 30.0,
+     "evidence": "referral '20+10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USDT",
+     "evidence": "referral '20+10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "bybit-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Moorwand \u2014 Bybit - Standard Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 0.0,
+     "evidence": "fx '0%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 10000,
+     "to": 100.0,
+     "evidence": "atm free allowance '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 30.0,
+     "evidence": "referral '20+10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USDT",
+     "evidence": "referral '20+10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "coinbase-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Pathward N.A. \u2014 Coinbase Card (src: official)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 3,
+     "to": 0.0,
+     "evidence": "fx '0%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "plutus-card-plus",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Plutus \u2014 Plutus - Plus Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 5,
+     "to": 3.0,
+     "evidence": "cashback '3%+ (higher caps)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "annual_fee_usd",
+     "from": 239.88,
+     "to": 0.0,
+     "evidence": "annual '$0 virtual'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 500.0,
+     "evidence": "monthly cap 'cb cap ~\u00a3500*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": null,
+     "to": 9,
+     "evidence": "3%+ (up to 9% PLU)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "manual fix from report prose"
+    }
+   ]
+  },
+  {
+   "slug": "plutus-card-pro",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Plutus \u2014 Plutus - Pro Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 8,
+     "to": 3.0,
+     "evidence": "cashback '3%+ (higher caps)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_max_pct",
+     "from": 8,
+     "to": 9,
+     "evidence": "3%+ (up to 9% PLU)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 1000.0,
+     "evidence": "monthly cap 'cb cap ~\u00a31K*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 1.5,
+     "to": 2.5,
+     "evidence": "fx '2.5%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 10000,
+     "to": 500000.0,
+     "evidence": "daily '\u00a3500K*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "plutus-card-everyday",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Plutus \u2014 Plutus - Everyday Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "annual_fee_usd",
+     "from": 119.88,
+     "to": 0.0,
+     "evidence": "annual '$0 virtual'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 250.0,
+     "evidence": "monthly cap 'cb cap ~\u00a3250*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "plutus-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Plutus \u2014 Plutus - Starter Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 1,
+     "to": 3.0,
+     "evidence": "cashback '3%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "annual_fee_usd",
+     "from": 83.88,
+     "to": 0.0,
+     "evidence": "annual '$0 virtual'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 250.0,
+     "evidence": "monthly cap 'cb cap ~\u00a3250*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "jupiter-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Rain Cards \u2014 Jupiter Card (src: official)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 1.8,
+     "to": 1.0,
+     "evidence": "fx '1% (Rain) / 1.8% (DCS)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "gokubu-pay",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Rain Cards \u2014 Gokubu Pay (src: official)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 120,
+     "evidence": "6% on first $2,000/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "tuyo-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Rain Cards \u2014 Tuyo Card (src: official)",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 250,
+     "to": 250,
+     "evidence": "$250 per withdrawal, 3/day",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "redotpay-physical",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 RedotPay - Physical Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 3,
+     "to": 0.0,
+     "evidence": "cashback '0% (Pro 3%)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "annual_fee_usd",
+     "from": 100,
+     "to": 0.0,
+     "evidence": "annual '$0'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 3.0,
+     "evidence": "atm '~3%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "redotpay",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 RedotPay - Virtual Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "annual_fee_usd",
+     "from": 10,
+     "to": 0.0,
+     "evidence": "annual '$0'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "mexc-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 MEXC Card (src: official)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 800,
+     "evidence": "cb cap 100\u2013800 USDT by tier (upper bound)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 20.0,
+     "evidence": "referral '20 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USDT",
+     "evidence": "referral '20 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "kolo",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 Kolo (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 100.0,
+     "evidence": "monthly cap 'cb cap $100'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 500,
+     "to": 500,
+     "evidence": "$500 per withdrawal, 3/day",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 10.0,
+     "evidence": "referral '10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USDT",
+     "evidence": "referral '10 USDT'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "bitunix-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 Bitunix Card (src: official)",
+   "changes": [
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 3000,
+     "to": 100.0,
+     "evidence": "atm free allowance '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '2% (>$100/mo free)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "solflare-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partner \u2014 Solflare Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "network",
+     "from": "visa",
+     "to": "mastercard",
+     "evidence": "net 'Mastercard'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "status",
+     "from": "live",
+     "to": "paused",
+     "evidence": "report: 'Coming (paused)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "holyheld",
+   "source_url": "",
+   "confidence": "low",
+   "note": "Regional Partner \u2014 Holyheld (src: 3rd party)",
+   "changes": [
+    {
+     "field": "annual_fee_usd",
+     "from": 10,
+     "to": 0.0,
+     "evidence": "annual '$0'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "bitget-wallet-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Regional Partners \u2014 Bitget Wallet Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 1.7,
+     "to": 0.0,
+     "evidence": "fx '~0% (Google rate)'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 3000,
+     "to": 10000.0,
+     "evidence": "atm lim '$3K/tx, $10K/day*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "eldorado",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Tala Mobile / Visa Partner \u2014 El Dorado (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 0,
+     "to": 2.0,
+     "evidence": "cashback '2% (paid tier)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "oobit",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Tether Backed / Visa Partner \u2014 Oobit (src: official+3rd)",
+   "changes": [
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 3.0,
+     "evidence": "atm '~3% (min $5)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 250,
+     "to": 250,
+     "evidence": "$250 per withdrawal, 3/day",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 50.0,
+     "evidence": "referral '$50'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USD",
+     "evidence": "referral '$50'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "etherfi-cash-luxe",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 ether.fi Cash - Luxe Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 3.5,
+     "to": 3.0,
+     "evidence": "cashback '3%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '~2%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 300,
+     "evidence": "3% cap to $10,000 spend",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "etherfi-cash",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 ether.fi Cash - Cash Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 0,
+     "to": 1.0,
+     "evidence": "fx '1%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 2.0,
+     "evidence": "atm '~2%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 60,
+     "evidence": "3% on first $2,000/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "plasma-one",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 Plasma One (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 4,
+     "to": 2.0,
+     "evidence": "cashback '2% (cap $250/mo)*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "daily_spend_limit_usd",
+     "from": 1000000,
+     "to": 1000.0,
+     "evidence": "daily '$1,000+ adj*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 250,
+     "evidence": "2% capped $250/mo",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "kast-private",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 KAST - Private Card (src: official)",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 500,
+     "to": 1500.0,
+     "evidence": "atm lim '$500/wd, $1.5K/day'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": null,
+     "evidence": "remove spend-cap value misfiled as cashback cap",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "cap correction from issuer fee schedule"
+    }
+   ]
+  },
+  {
+   "slug": "kast",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 KAST - Standard Card (src: official)",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 500,
+     "to": 1500.0,
+     "evidence": "atm lim '$500/wd, $1.5K/day'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 30,
+     "evidence": "KAST Standard 1.5% capped at $30/mo ($2,000 spend)",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "cap correction from issuer fee schedule"
+    }
+   ]
+  },
+  {
+   "slug": "kast-premium",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 KAST - Premium Card (src: official)",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 500,
+     "to": 1500.0,
+     "evidence": "atm lim '$500/wd, $1.5K/day'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": null,
+     "evidence": "remove spend-cap value misfiled as cashback cap; KAST tiers are unlimited spend",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "cap correction from issuer fee schedule"
+    }
+   ]
+  },
+  {
+   "slug": "avalanche-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 Avalanche Card (src: official)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 2,
+     "to": 1.0,
+     "evidence": "fx '1%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "avici",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 Avici (src: official+3rd)",
+   "changes": [
+    {
+     "field": "annual_fee_usd",
+     "from": 30,
+     "to": 0.0,
+     "evidence": "annual '$0\u2013$20'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "fx_fee_pct",
+     "from": 1,
+     "to": 0.0,
+     "evidence": "fx '0% claim'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "exa-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Third National Bank \u2014 Exa Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": 250,
+     "to": 250,
+     "evidence": "$250 per withdrawal, 4/day",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "kraken-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "UAB Monavate \u2014 Kraken Card (src: official)",
+   "changes": [
+    {
+     "field": "topup_fee_pct",
+     "from": 1,
+     "to": 0.0,
+     "evidence": "topup '0%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "bleap",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Unlimit \u2014 Bleap (src: official)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 2,
+     "to": 20.0,
+     "evidence": "cashback 'Up to 20%*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "ruvo-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "US Banking Partner \u2014 Ruvo Card (src: official)",
+   "changes": [
+    {
+     "field": "topup_fee_pct",
+     "from": 0.5,
+     "to": 0,
+     "evidence": "topup '0.3\u20130.5% conv'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "cashi",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "US Partner \u2014 Cashi (src: official)",
+   "changes": [
+    {
+     "field": "cashback_min_pct",
+     "from": 1,
+     "to": 1,
+     "evidence": "3%/2%/1% by category",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_usd",
+     "from": null,
+     "to": 5.0,
+     "evidence": "referral '$5 @ $50 spend'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_token",
+     "from": null,
+     "to": "USD",
+     "evidence": "referral '$5 @ $50 spend'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "welcome_bonus_spend_usd",
+     "from": null,
+     "to": 50.0,
+     "evidence": "referral '$5 @ $50 spend'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "wirex-card-elite",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Wirex \u2014 Wirex - Elite Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 3,
+     "to": 8.0,
+     "evidence": "cashback 'Up to 8% USD'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 0.0,
+     "evidence": "atm '0% claim'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "wirex-card-premium",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Wirex \u2014 Wirex - Premium Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 1,
+     "to": 8.0,
+     "evidence": "cashback 'Up to 8% USD'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 0.0,
+     "evidence": "atm '0% claim'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "wirex-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Wirex \u2014 Wirex - Standard Card (src: official+3rd)",
+   "changes": [
+    {
+     "field": "cashback_max_pct",
+     "from": 0.5,
+     "to": 8.0,
+     "evidence": "cashback 'Up to 8% USD'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 25.0,
+     "evidence": "monthly cap 'cb cap ~$25*'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    },
+    {
+     "field": "atm_intl_fee_pct",
+     "from": null,
+     "to": 0.0,
+     "evidence": "atm '0% claim'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "cashback_min_pct",
+     "from": 0.5,
+     "to": 1,
+     "evidence": "Standard 1% base Cryptoback",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "coca-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "Wirex Partner \u2014 COCA Card (src: official)",
+   "changes": [
+    {
+     "field": "fx_fee_pct",
+     "from": 0.6,
+     "to": 0.0,
+     "evidence": "fx '0% direct pairs'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "atm_monthly_free_allowance_usd",
+     "from": 2000,
+     "to": 250.0,
+     "evidence": "atm free allowance 'Free $250/mo, then 2%'",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    },
+    {
+     "field": "kyc_level",
+     "from": "full_kyc",
+     "to": "no_kyc",
+     "evidence": "kyc 'No-KYC claim'",
+     "evidence_verified": false,
+     "status": "hold",
+     "reason": "third-party/ambiguous \u2014 manual review"
+    }
+   ]
+  },
+  {
+   "slug": "dpt-pay",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "deep-dive prose facts",
+   "changes": [
+    {
+     "field": "daily_atm_limit_usd",
+     "from": null,
+     "to": 750,
+     "evidence": "$750/day ATM",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  },
+  {
+   "slug": "gemini-credit-card",
+   "source_url": "",
+   "confidence": "medium",
+   "note": "deep-dive prose facts",
+   "changes": [
+    {
+     "field": "cashback_cap_monthly_usd",
+     "from": null,
+     "to": 300,
+     "evidence": "4% gas capped at $300/mo spend",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official table value"
+    }
+   ]
+  }
+ ]
+}

@@ -7,6 +7,7 @@ import { loadEnv } from "./env.mts";
  *
  *   npm run db:backfill            # dry run: print what would change
  *   npm run db:backfill -- --write # apply in one transaction
+ *   npm run db:backfill -- --file db/import/card-refresh-YYYY-MM-DD.json
  *   npm run db:sync                # refresh the app snapshot afterwards
  *
  * Only changes whose audit status is `apply` are written; held, manual and
@@ -14,7 +15,13 @@ import { loadEnv } from "./env.mts";
  * `last_verified_at` from the audit so the provenance is visible in the table.
  */
 
-const AUDIT = "db/import/card-refresh-2026-10-28.json";
+const auditArg = process.argv.find((arg) => arg.startsWith("--file="));
+const fileFlagIndex = process.argv.indexOf("--file");
+const AUDIT = auditArg
+  ? auditArg.slice("--file=".length)
+  : fileFlagIndex !== -1 && process.argv[fileFlagIndex + 1]
+    ? process.argv[fileFlagIndex + 1]
+    : "db/import/card-refresh-2026-10-28.json";
 
 const CARD_COLUMNS = new Set([
   "network",
@@ -22,21 +29,41 @@ const CARD_COLUMNS = new Set([
   "custody_model",
   "audience",
   "kyc_level",
+  "kyc_provider",
   "issuer_bank",
+  "status",
   "annual_fee_usd",
   "monthly_fee_usd",
+  "issuance_virtual_fee_usd",
   "issuance_physical_fee_usd",
   "topup_fee_pct",
+  "topup_fee_notes",
   "fx_fee_pct",
+  "fx_fee_notes",
   "atm_local_fee_pct",
+  "atm_intl_fee_pct",
+  "atm_fee_text",
+  "atm_monthly_free_allowance_usd",
+  "monthly_atm_limit_usd",
   "cashback_min_pct",
   "cashback_max_pct",
+  "cashback_cap_monthly_usd",
   "payout_token",
   "staking_requirement",
   "regional_scope",
   "has_virtual",
   "has_physical",
+  "has_metal",
+  "mobile_wallets",
+  "no_kyc_limit_usd",
+  "daily_spend_limit_usd",
+  "monthly_spend_limit_usd",
+  "daily_atm_limit_usd",
+  "welcome_bonus_usd",
+  "welcome_bonus_token",
+  "welcome_bonus_spend_usd",
   "supported_countries",
+  "excluded_countries",
   "supported_cryptos",
   "supported_chains",
   "perks",
@@ -46,8 +73,10 @@ const CARD_COLUMNS = new Set([
 
 const ARRAY_COLUMNS = new Set([
   "supported_countries",
+  "excluded_countries",
   "supported_cryptos",
   "supported_chains",
+  "mobile_wallets",
   "perks",
   "pros",
   "cons",

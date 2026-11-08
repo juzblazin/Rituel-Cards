@@ -148,10 +148,11 @@ export function NetReturnCalculator({ cards }: { cards: Card[] }) {
             </button>
             {expanded && (
               <div className="mt-3 rounded-lg bg-muted p-3 text-xs leading-5 text-muted-foreground">
-                Net = (spend × cashback %) − (spend × top-up %) − (spend × FX %) − (annual fee ÷ 12). FX is
-                only applied when spending in a non-USD currency. A 0.5% conversion surcharge is added when a
-                card does not support your funding token. Cashback is modelled at the card&apos;s maximum
-                published tier; staking requirements are not priced in.
+                Net = (eligible spend × cashback %) − (top-up % + FX % + monthly &amp; annual fees). Rewards are
+                capped at each card&apos;s published monthly limit, and spend above its monthly cap earns nothing.
+                FX applies only on non-USD spend; a 0.5% conversion surcharge applies when a card can&apos;t be
+                funded with your token. Cashback is modelled at the maximum published tier — staking lockups are
+                flagged but not priced in.
               </div>
             )}
           </div>
@@ -216,6 +217,24 @@ export function NetReturnCalculator({ cards }: { cards: Card[] }) {
                             <span className="text-warning">token not supported (+0.5%)</span>
                           </>
                         )}
+                        {result.cappedByReward && (
+                          <>
+                            <span>·</span>
+                            <span className="text-warning">monthly reward cap hit</span>
+                          </>
+                        )}
+                        {result.limitedSpend && (
+                          <>
+                            <span>·</span>
+                            <span className="text-warning">monthly spend limit</span>
+                          </>
+                        )}
+                        {result.requiresStaking && (
+                          <>
+                            <span>·</span>
+                            <span className="text-warning">staking required</span>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -224,14 +243,14 @@ export function NetReturnCalculator({ cards }: { cards: Card[] }) {
                     <Metric label="Cashback" value={fmt(result.grossCashback)} tone="text-success" />
                     <Metric label="Top-up" value={`−${fmt(result.topupCost)}`} />
                     <Metric label="FX" value={`−${fmt(result.fxCost)}`} />
-                    <Metric label="Annual" value={`−${fmt(result.annualCost)}`} />
+                    <Metric label="Fees" value={`−${fmt(result.annualCost)}`} />
                   </div>
 
                   <div className="mt-3 flex items-center justify-between gap-2">
                     <span className="text-[10px] text-muted-foreground">
                       Effective return{" "}
                       <strong className={cn("font-medium", result.net >= 0 ? "text-success" : "text-destructive")}>
-                        {spend > 0 ? ((result.net / spend) * 100).toFixed(2) : "0.00"}%
+                        {result.effectiveReturnPct.toFixed(2)}%
                       </strong>
                     </span>
                     <AffiliateLink

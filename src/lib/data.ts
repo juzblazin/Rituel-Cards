@@ -1,6 +1,6 @@
 import cardsFromDb from "./cards.generated.json";
 
-export type Network = "visa" | "mastercard" | "unionpay";
+export type Network = "visa" | "mastercard" | "unionpay" | "other";
 export type CardType = "debit" | "credit" | "prepaid";
 export type CustodyModel = "self_custody" | "custodial" | "hybrid";
 export type Audience = "personal" | "business" | "both";
@@ -273,6 +273,7 @@ export const networkLabel: Record<Network, string> = {
   visa: "Visa",
   mastercard: "Mastercard",
   unionpay: "UnionPay",
+  other: "Other",
 };
 
 export const cardTypeLabel: Record<CardType, string> = {
