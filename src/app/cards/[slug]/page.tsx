@@ -341,6 +341,25 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             </section>
           )}
 
+          {card.benefits && card.benefits.length > 0 && (
+            <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
+              <SectionTitle eyebrow="Travel & perks" title="Card benefits" />
+              <ul className="mt-4 space-y-2.5">
+                {card.benefits.map((benefit) => (
+                  <li key={benefit.title} className="rounded-xl border border-border p-3.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-sm font-semibold text-foreground">{benefit.title}</h3>
+                      <Badge tone="neutral">{benefit.type.replaceAll("_", " ")}</Badge>
+                    </div>
+                    {benefit.details ? (
+                      <p className="mt-1 text-xs leading-4 text-muted-foreground">{benefit.details}</p>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {family.length > 0 && (
             <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
               <SectionTitle eyebrow="Same product" title="Related crypto cards" />

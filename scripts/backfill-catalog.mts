@@ -102,6 +102,14 @@ type AuditFile = {
   cards: AuditCard[];
 };
 
+type BenefitInput = {
+  benefit_type: string;
+  title: string;
+  value_json?: Record<string, unknown>;
+  details?: string;
+  source_url?: string;
+};
+
 type TierInput = {
   tier_name: string;
   tier_order: number;
@@ -147,7 +155,7 @@ for (const { card, applies } of planned) {
     throw new Error(`${card.slug}: duplicate field in audit changes`);
   }
   for (const change of applies) {
-    if (change.field !== "tiers" && !CARD_COLUMNS.has(change.field)) {
+    if (change.field !== "tiers" && change.field !== "benefits" && !CARD_COLUMNS.has(change.field)) {
       throw new Error(`${card.slug}: unknown column ${change.field}`);
     }
   }
@@ -176,7 +184,7 @@ try {
     const params: unknown[] = [];
 
     for (const change of applies) {
-      if (change.field === "tiers") continue;
+      if (change.field === "tiers" || change.field === "benefits") continue;
       params.push(
         ARRAY_COLUMNS.has(change.field)
           ? arrayLiteral((change.to as string[]).map(String))
@@ -236,6 +244,33 @@ try {
         );
       }
       console.log(`${card.slug}: replaced ${rows.length} tiers`);
+    }
+
+    const benefits = applies.find((change) => change.field === "benefits");
+    if (benefits) {
+      const cardId = updated.rows[0].id as string;
+      const rows = benefits.to as BenefitInput[];
+      await client.query(
+        "delete from card_benefits where card_id = $1 and tier_id is null",
+        [cardId],
+      );
+      for (const [index, benefit] of rows.entries()) {
+        await client.query(
+          `insert into card_benefits
+             (card_id, benefit_type, title, value_json, details, source_url, sort_order)
+           values ($1, $2, $3, $4::jsonb, $5, $6, $7)`,
+          [
+            cardId,
+            benefit.benefit_type,
+            benefit.title,
+            JSON.stringify(benefit.value_json ?? {}),
+            benefit.details ?? null,
+            benefit.source_url ?? card.source_url ?? null,
+            index,
+          ],
+        );
+      }
+      console.log(`${card.slug}: replaced ${rows.length} benefits`);
     }
   }
 

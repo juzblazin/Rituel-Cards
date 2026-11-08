@@ -446,6 +446,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "insurance",
+       "title": "Amex travel protections",
+       "value_json": {},
+       "details": "Travel/rental car insurance, trip interruption, roadside assistance, extended warranty",
+       "source_url": "https://coinbase.com/one"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -472,6 +489,26 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Priority Pass lounge access",
+       "value_json": {
+        "visitsPerYear": "unlimited",
+        "guests": true
+       },
+       "details": "Unlimited visits + guest privileges on Level Up Private",
+       "source_url": "https://crypto.com/cards"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -507,6 +544,26 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Priority Pass lounge access",
+       "value_json": {
+        "visitsPerYear": "unlimited",
+        "guests": true
+       },
+       "details": "Unlimited visits + guest privileges on Level Up Private; private jet partner benefits",
+       "source_url": "https://crypto.com/cards"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -578,6 +635,25 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Priority Pass lounge access",
+       "value_json": {
+        "visitsPerYear": 4
+       },
+       "details": "4 complimentary visits/yr on Level Up Pro (Jade Green & Royal Indigo)",
+       "source_url": "https://crypto.com/cards"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -649,6 +725,25 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Priority Pass lounge access",
+       "value_json": {
+        "visitsPerYear": 4
+       },
+       "details": "4 complimentary visits/yr on Level Up Pro",
+       "source_url": "https://crypto.com/cards"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -922,6 +1017,27 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "subscription_rebate",
+       "title": "Subscription rebates",
+       "value_json": {
+        "netflix": true,
+        "spotify": true,
+        "amazonPrime": true
+       },
+       "details": "100% monthly rebates on Netflix, Spotify and Amazon Prime",
+       "source_url": "https://bybit.com/card"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1523,6 +1639,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Visa Airport Companion (DragonPass)",
+       "value_json": {},
+       "details": "Luxe tier lounge access via Visa Airport Companion App",
+       "source_url": "https://ether.fi"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1619,6 +1752,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "cap correction from issuer fee schedule"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "concierge",
+       "title": "Private concierge",
+       "value_json": {},
+       "details": "Private concierge + executive travel privileges",
+       "source_url": "https://www.kast.xyz"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1671,6 +1821,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "cap correction from issuer fee schedule"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "insurance",
+       "title": "Visa Infinite travel insurance",
+       "value_json": {},
+       "details": "Travel insurance + purchase protections",
+       "source_url": "https://www.kast.xyz"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1714,6 +1881,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Visa Airport Companion (DragonPass)",
+       "value_json": {},
+       "details": "Lounge access on eligible plans",
+       "source_url": "https://avici.money"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1731,6 +1915,23 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Visa VIP Airport Lounges",
+       "value_json": {},
+       "details": "Complimentary access via Visa Signature tier",
+       "source_url": "https://exactly.app"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },
@@ -1974,6 +2175,41 @@
      "evidence_verified": true,
      "status": "apply",
      "reason": "official table value"
+    },
+    {
+     "field": "benefits",
+     "from": null,
+     "to": [
+      {
+       "benefit_type": "lounge",
+       "title": "Global Priority Pass + Visa Infinite lounges",
+       "value_json": {
+        "visitsPerYear": "unlimited"
+       },
+       "details": "Obsidian tier: unlimited lounges; Oxygen: standard Visa Platinum privileges",
+       "source_url": "https://dpt.xyz"
+      },
+      {
+       "benefit_type": "insurance",
+       "title": "Travel accident insurance",
+       "value_json": {
+        "coverageUsd": 1500000
+       },
+       "details": "$1.5M comprehensive cover on Obsidian; $500K on Oxygen",
+       "source_url": "https://dpt.xyz"
+      },
+      {
+       "benefit_type": "concierge",
+       "title": "Quintessentially membership",
+       "value_json": {},
+       "details": "Obsidian: Quintessentially luxury membership + 24/7 dedicated manager",
+       "source_url": "https://dpt.xyz"
+      }
+     ],
+     "evidence": "report deep-dive lounge/travel benefits",
+     "evidence_verified": true,
+     "status": "apply",
+     "reason": "official program perks"
     }
    ]
   },

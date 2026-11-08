@@ -141,7 +141,15 @@
     "cardImageUrl": "/card-art/ether-fi/ether-fi-luxe-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "etherfi-cash",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Visa Airport Companion (DragonPass)",
+        "value": {},
+        "details": "Luxe tier lounge access via Visa Airport Companion App",
+        "sourceUrl": "https://ether.fi"
+      }
+    ]
   },
   {
     "id": 2,
@@ -924,7 +932,15 @@
     "cardImageUrl": "/card-art/kast/kast-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "kast",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "concierge",
+        "title": "Private concierge",
+        "value": {},
+        "details": "Private concierge + executive travel privileges",
+        "sourceUrl": "https://www.kast.xyz"
+      }
+    ]
   },
   {
     "id": 7,
@@ -1209,7 +1225,15 @@
     "cardImageUrl": "/card-art/kast/kast-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "kast",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "insurance",
+        "title": "Visa Infinite travel insurance",
+        "value": {},
+        "details": "Travel insurance + purchase protections",
+        "sourceUrl": "https://www.kast.xyz"
+      }
+    ]
   },
   {
     "id": 9,
@@ -1500,7 +1524,19 @@
     "cardImageUrl": "",
     "affiliateNetwork": "",
     "parentSlug": "bybit-card",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "subscription_rebate",
+        "title": "Subscription rebates",
+        "value": {
+          "netflix": true,
+          "spotify": true,
+          "amazonPrime": true
+        },
+        "details": "100% monthly rebates on Netflix, Spotify and Amazon Prime",
+        "sourceUrl": "https://bybit.com/card"
+      }
+    ]
   },
   {
     "id": 11,
@@ -2756,7 +2792,18 @@
     "cardImageUrl": "/card-art/crypto-com/crypto-com-icy-white-rose-gold-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "crypto-com-visa",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Priority Pass lounge access",
+        "value": {
+          "guests": true,
+          "visitsPerYear": "unlimited"
+        },
+        "details": "Unlimited visits + guest privileges on Level Up Private",
+        "sourceUrl": "https://crypto.com/cards"
+      }
+    ]
   },
   {
     "id": 19,
@@ -2960,7 +3007,18 @@
     "cardImageUrl": "/card-art/crypto-com/crypto-com-obsidian-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "crypto-com-visa",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Priority Pass lounge access",
+        "value": {
+          "guests": true,
+          "visitsPerYear": "unlimited"
+        },
+        "details": "Unlimited visits + guest privileges on Level Up Private; private jet partner benefits",
+        "sourceUrl": "https://crypto.com/cards"
+      }
+    ]
   },
   {
     "id": 20,
@@ -3641,7 +3699,17 @@
     "cardImageUrl": "",
     "affiliateNetwork": "",
     "parentSlug": "crypto-com-visa",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Priority Pass lounge access",
+        "value": {
+          "visitsPerYear": 4
+        },
+        "details": "4 complimentary visits/yr on Level Up Pro (Jade Green & Royal Indigo)",
+        "sourceUrl": "https://crypto.com/cards"
+      }
+    ]
   },
   {
     "id": 24,
@@ -3845,7 +3913,17 @@
     "cardImageUrl": "/card-art/crypto-com/crypto-com-royal-indigo-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "crypto-com-visa",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Priority Pass lounge access",
+        "value": {
+          "visitsPerYear": 4
+        },
+        "details": "4 complimentary visits/yr on Level Up Pro",
+        "sourceUrl": "https://crypto.com/cards"
+      }
+    ]
   },
   {
     "id": 25,
@@ -6531,7 +6609,15 @@
     "cardImageUrl": "/card-art/avici/avici-signature-card.webp",
     "affiliateNetwork": "",
     "parentSlug": "",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Visa Airport Companion (DragonPass)",
+        "value": {},
+        "details": "Lounge access on eligible plans",
+        "sourceUrl": "https://avici.money"
+      }
+    ]
   },
   {
     "id": 44,
@@ -7249,7 +7335,15 @@
     "cardImageUrl": "",
     "affiliateNetwork": "",
     "parentSlug": "",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "insurance",
+        "title": "Amex travel protections",
+        "value": {},
+        "details": "Travel/rental car insurance, trip interruption, roadside assistance, extended warranty",
+        "sourceUrl": "https://coinbase.com/one"
+      }
+    ]
   },
   {
     "id": 49,
@@ -10397,7 +10491,33 @@
     "cardImageUrl": "",
     "affiliateNetwork": "",
     "parentSlug": "",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Global Priority Pass + Visa Infinite lounges",
+        "value": {
+          "visitsPerYear": "unlimited"
+        },
+        "details": "Obsidian tier: unlimited lounges; Oxygen: standard Visa Platinum privileges",
+        "sourceUrl": "https://dpt.xyz"
+      },
+      {
+        "type": "insurance",
+        "title": "Travel accident insurance",
+        "value": {
+          "coverageUsd": 1500000
+        },
+        "details": "$1.5M comprehensive cover on Obsidian; $500K on Oxygen",
+        "sourceUrl": "https://dpt.xyz"
+      },
+      {
+        "type": "concierge",
+        "title": "Quintessentially membership",
+        "value": {},
+        "details": "Obsidian: Quintessentially luxury membership + 24/7 dedicated manager",
+        "sourceUrl": "https://dpt.xyz"
+      }
+    ]
   },
   {
     "id": 71,
@@ -10535,7 +10655,15 @@
     "cardImageUrl": "",
     "affiliateNetwork": "",
     "parentSlug": "",
-    "benefits": []
+    "benefits": [
+      {
+        "type": "lounge",
+        "title": "Visa VIP Airport Lounges",
+        "value": {},
+        "details": "Complimentary access via Visa Signature tier",
+        "sourceUrl": "https://exactly.app"
+      }
+    ]
   },
   {
     "id": 72,
