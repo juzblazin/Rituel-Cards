@@ -258,6 +258,12 @@ export const cryptoPages: CryptoPage[] = [
   chainPage("tron", "Tron", "Tron is the cheapest route for USDT top-ups at many custodial card issuers, especially in Asia."),
   chainPage("gnosis", "Gnosis", "Gnosis Chain is the home of EURe and Gnosis Pay, and one of the cheapest places to settle card spend on-chain."),
   chainPage("bnb-chain", "BNB Chain", "BNB Chain support is common among exchange-issued cards, with low top-up fees for USDT and BUSD-era assets."),
+  chainPage("optimism", "Optimism", "Optimism is a low-fee L2 for stablecoin top-ups, commonly supported by exchange-issued cards."),
+  chainPage("cronos", "Cronos", "Cronos is Crypto.com's own chain — its cards support cheap CRO and stablecoin top-ups on the network."),
+  chainPage("stellar", "Stellar", "Stellar offers fast, low-cost settlement for the few card programmes that accept XLM-network assets."),
+  chainPage("xrp-ledger", "XRP Ledger", "XRP Ledger support is rare in the card market — these programmes accept XRP-network top-ups."),
+  chainPage("linea", "Linea", "Linea is Consensys' zkEVM, supported by MetaMask-adjacent card programmes for low-fee top-ups."),
+  chainPage("monad", "Monad", "Monad is a high-performance EVM chain that a small set of newer card programmes have added for top-ups."),
 ];
 
 export const cryptoBySlug = new Map(cryptoPages.map((page) => [page.slug, page]));

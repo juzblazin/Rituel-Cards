@@ -1,11 +1,17 @@
 import { cards } from "@/lib/data";
 import { plural } from "@/lib/format";
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og-image";
-import { useCaseBySlug } from "@/lib/taxonomy";
+import { useCaseBySlug, useCasePages } from "@/lib/taxonomy";
 
 export const alt = "Crypto cards by use case";
 export const size = ogSize;
 export const contentType = ogContentType;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return useCasePages.map((page) => ({ slug: page.slug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

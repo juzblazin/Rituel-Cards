@@ -26,25 +26,37 @@ const nextConfig: NextConfig = {
       ...["/card", "/cards", "/crypto-card", "/crypto-cards"].flatMap((prefix) => [
         ...bestSlugs.map((slug) => redirect(`${prefix}/${slug}`, `/best/${slug}`)),
         ...useCaseSlugs.map((slug) => redirect(`${prefix}/${slug}`, `/use-cases/${slug}`)),
+        ...bestSlugs.map((slug) => redirect(`${prefix}/${slug}/opengraph-image`, `/best/${slug}/opengraph-image`)),
+        ...useCaseSlugs.map((slug) => redirect(`${prefix}/${slug}/opengraph-image`, `/use-cases/${slug}/opengraph-image`)),
       ]),
       // Card review namespaces consolidate on /cards.
+      redirect("/card/:slug/opengraph-image", "/cards/:slug/opengraph-image"),
       redirect("/card/:slug", "/cards/:slug"),
       redirect("/crypto-card", "/cards"),
+      redirect("/crypto-card/:slug/opengraph-image", "/cards/:slug/opengraph-image"),
       redirect("/crypto-card/:slug", "/cards/:slug"),
       redirect("/crypto-cards", "/cards"),
+      redirect("/crypto-cards/:slug/opengraph-image", "/cards/:slug/opengraph-image"),
       redirect("/crypto-cards/:slug", "/cards/:slug"),
       // Best lists dropped the -crypto-cards suffix.
+      ...bestPages.map((page) => redirect(`/best/${page.slug}-crypto-cards/opengraph-image`, `/best/${page.slug}/opengraph-image`)),
       ...bestPages.map((page) => redirect(`/best/${page.slug}-crypto-cards`, `/best/${page.slug}`)),
       // The old apple-pay best list is now a use-case page.
       redirect("/best/apple-pay-crypto-cards", "/use-cases/apple-pay"),
       // /crypto split into /tokens and /chains.
+      redirect("/crypto/bitcoin/opengraph-image", "/tokens/btc/opengraph-image"),
       redirect("/crypto/bitcoin", "/tokens/btc"),
+      ...tokens.map((slug) => redirect(`/crypto/${slug}/opengraph-image`, `/tokens/${slug}/opengraph-image`)),
       ...tokens.map((slug) => redirect(`/crypto/${slug}`, `/tokens/${slug}`)),
+      ...chains.map((slug) => redirect(`/crypto/${slug}/opengraph-image`, `/chains/${slug}/opengraph-image`)),
       ...chains.map((slug) => redirect(`/crypto/${slug}`, `/chains/${slug}`)),
+      redirect("/crypto/:slug/opengraph-image", "/tokens/:slug/opengraph-image"),
       redirect("/crypto/:slug", "/tokens/:slug"),
       redirect("/crypto", "/tokens"),
       // Misc legacy.
+      redirect("/issuer/opengraph-image", "/brands/opengraph-image"),
       redirect("/issuer", "/brands"),
+      redirect("/issuer/:slug/opengraph-image", "/brands/:slug/opengraph-image"),
       redirect("/issuer/:slug", "/brands/:slug"),
     ];
   },

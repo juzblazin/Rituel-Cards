@@ -1,11 +1,17 @@
 import { cards } from "@/lib/data";
 import { plural } from "@/lib/format";
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og-image";
-import { attributeBySlug, bestBySlug } from "@/lib/taxonomy";
+import { attributeBySlug, bestBySlug, bestListPages } from "@/lib/taxonomy";
 
 export const alt = "Best crypto cards: fees, cashback and availability";
 export const size = ogSize;
 export const contentType = ogContentType;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return bestListPages.map((page) => ({ slug: page.slug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

@@ -107,22 +107,25 @@ export function Directory({
     if (!syncUrl) return;
     const query = filtersToQuery(filters);
     const params = new URLSearchParams(query);
+    // The path already encodes a fixed country — keep it out of the query so
+    // crawlers never discover a ?country= duplicate of the canonical URL.
+    if (fixedCountry) params.delete("country");
     if (view === "table") params.set("view", "table");
     const url = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}`;
     window.history.replaceState(null, "", url);
     setVisible(PAGE_SIZE);
-  }, [filters, view, syncUrl]);
+  }, [filters, view, syncUrl, fixedCountry]);
 
   useEffect(() => {
     if (!syncUrl) return;
     const onPop = () => {
       const params = Object.fromEntries(new URLSearchParams(window.location.search));
-      setFilters(parseFilters(params));
+      setFilters({ ...parseFilters(params), ...(fixedCountry ? { country: fixedCountry } : {}) });
       setView(params.view === "table" ? "table" : "grid");
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
-  }, [syncUrl]);
+  }, [syncUrl, fixedCountry]);
 
   useEffect(() => {
     setVisible(PAGE_SIZE);

@@ -1,11 +1,17 @@
 import { cards } from "@/lib/data";
 import { plural } from "@/lib/format";
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og-image";
-import { cryptoBySlug } from "@/lib/taxonomy";
+import { cryptoBySlug, cryptoPages } from "@/lib/taxonomy";
 
 export const alt = "Crypto cards by chain";
 export const size = ogSize;
 export const contentType = ogContentType;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return cryptoPages.filter((page) => page.kind === "chain").map((page) => ({ slug: page.slug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

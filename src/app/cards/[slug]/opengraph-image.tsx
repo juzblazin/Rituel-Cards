@@ -1,10 +1,16 @@
-import { cardBySlug } from "@/lib/data";
+import { cardBySlug, cards } from "@/lib/data";
 import { cashbackLabel, feeLabel, pct, shortCardName } from "@/lib/format";
 import { ogContentType, ogSize, renderOgImage } from "@/lib/og-image";
 
 export const alt = "Crypto card review: fees, cashback and availability";
 export const size = ogSize;
 export const contentType = ogContentType;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return cards.map((card) => ({ slug: card.slug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
